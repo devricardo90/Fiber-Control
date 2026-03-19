@@ -36,4 +36,39 @@ export class AuthRepository {
       }
     });
   }
+
+  async findManyUsers(): Promise<UserRecord[]> {
+    return prisma.user.findMany({
+      orderBy: [
+        {
+          createdAt: "asc"
+        }
+      ]
+    });
+  }
+
+  async updateUser(
+    userId: string,
+    input: {
+      fullName?: string;
+      role?: "ADMIN" | "OPERATOR";
+      isActive?: boolean;
+    }
+  ): Promise<UserRecord> {
+    return prisma.user.update({
+      where: {
+        id: userId
+      },
+      data: input
+    });
+  }
+
+  async countActiveAdmins(): Promise<number> {
+    return prisma.user.count({
+      where: {
+        role: "ADMIN",
+        isActive: true
+      }
+    });
+  }
 }

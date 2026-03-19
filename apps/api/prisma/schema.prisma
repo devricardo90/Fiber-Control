@@ -32,6 +32,17 @@ enum UserRole {
   OPERATOR @map("operator")
 }
 
+enum ReminderSeverity {
+  LOW    @map("low")
+  MEDIUM @map("medium")
+  HIGH   @map("high")
+}
+
+enum BankEntryStatus {
+  UNMATCHED @map("unmatched")
+  MATCHED   @map("matched")
+}
+
 model Region {
   id          String     @id @default(cuid())
   name        String
@@ -86,6 +97,7 @@ model Payment {
   status         PaymentStatus
   paidAt         DateTime?     @map("paid_at")
   notes          String?
+  bankEntries    BankEntry[]
   createdAt      DateTime      @default(now()) @map("created_at")
   updatedAt      DateTime      @updatedAt @map("updated_at")
 
@@ -109,4 +121,54 @@ model User {
   @@index([role], map: "users_role_idx")
   @@index([isActive], map: "users_is_active_idx")
   @@map("users")
+}
+
+model TaxConfig {
+  id            String   @id @default(cuid())
+  singletonKey  String   @unique @default("default") @map("singleton_key")
+  regimeLabel   String   @map("regime_label")
+  estimatedRate Decimal  @map("estimated_rate") @db.Decimal(5, 2)
+  dueDay        Int      @map("due_day")
+  notes         String?
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  @@index([dueDay], map: "tax_configs_due_day_idx")
+  @@map("tax_configs")
+}
+
+model FiscalReminder {
+  id           String           @id @default(cuid())
+  title        String
+  description  String?
+  dueDate      DateTime         @map("due_date") @db.Date
+  reminderDate DateTime         @map("reminder_date") @db.Date
+  severity     ReminderSeverity
+  resolvedAt   DateTime?        @map("resolved_at")
+  createdAt    DateTime         @default(now()) @map("created_at")
+  updatedAt    DateTime         @updatedAt @map("updated_at")
+
+  @@index([dueDate], map: "fiscal_reminders_due_date_idx")
+  @@index([reminderDate], map: "fiscal_reminders_reminder_date_idx")
+  @@index([severity], map: "fiscal_reminders_severity_idx")
+  @@map("fiscal_reminders")
+}
+
+model BankEntry {
+  id            String          @id @default(cuid())
+  amount        Decimal         @db.Decimal(10, 2)
+  occurredAt    DateTime        @map("occurred_at")
+  description   String?
+  referenceCode String?         @map("reference_code")
+  source        String?
+  status        BankEntryStatus @default(UNMATCHED)
+  paymentId     String?         @map("payment_id")
+  payment       Payment?        @relation(fields: [paymentId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  createdAt     DateTime        @default(now()) @map("created_at")
+  updatedAt     DateTime        @updatedAt @map("updated_at")
+
+  @@index([status], map: "bank_entries_status_idx")
+  @@index([occurredAt], map: "bank_entries_occurred_at_idx")
+  @@index([paymentId], map: "bank_entries_payment_id_idx")
+  @@map("bank_entries")
 }

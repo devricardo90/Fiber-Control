@@ -1,28 +1,40 @@
 # Continue
 
 ## Estado atual
-- documentacao central do projeto criada e consolidada
-- base tecnica de `apps/api` criada
-- Fastify, Swagger, Vitest e Prisma 7 configurados
-- PostgreSQL Docker local configurado e rodando na porta `5440`
-- `pnpm build` e `pnpm test` validados
-- commit inicial realizado e enviado para `origin/main`
+- backend do `apps/api` fechado para a primeira fase operacional
+- modulos ativos: `customers`, `payments`, `finance`, `alerts`, `tax-config`, `fiscal-reminders`, `regions`, `bank-entries`, `reconciliation`, `reports` e `auth`
+- autenticacao com bootstrap inicial, gestao de usuarios por admin e protecao do ultimo admin ativo
+- migrations Prisma aplicadas para a modelagem atual
+- seed de desenvolvimento disponivel em `apps/api/prisma/seed.ts`
+- validacao automatizada atual: `pnpm build`, `pnpm lint` e `pnpm test`
+
+## Bootstrap local
+1. executar `pnpm prisma:migrate:deploy`
+2. executar `pnpm prisma:seed`
+3. subir a API com `pnpm dev`
+
+Credenciais seed:
+- admin: `admin@fibercontrol.local` / `Admin@123456`
+- operator: `operator@fibercontrol.local` / `Operator@123456`
+
+## Base seed entregue
+- `3` regioes operacionais
+- `3` customers com cenarios `active`, `overdue` e `suspended`
+- pagamentos do mes corrente e historico do mes anterior
+- entradas bancarias conciliadas e nao conciliadas
+- configuracao fiscal padrao
+- lembretes fiscais iniciais
 
 ## Proximo passo recomendado
-Integrar o Scalar na API como UI complementar ao Swagger.
-
-Objetivo:
-- disponibilizar uma interface de referencia e teste da OpenAPI
-- validar `/health` no Swagger e no Scalar antes de avancar para modelagem do banco
-
-## Ordem sugerida de retomada
-1. integrar Scalar em `apps/api`
-2. subir a API com `pnpm dev`
-3. validar `/health`, `/docs` e a rota do Scalar
-4. criar o primeiro modelo Prisma
-5. gerar a primeira migration
+Iniciar `apps/web` com frontend em Next.js, consumindo primeiro:
+- `POST /auth/login`
+- `GET /auth/me`
+- `GET /finance/overview`
+- `GET /alerts/overview`
+- `GET /customers`
+- `GET /customers/:id`
 
 ## Observacoes importantes
-- a API esta configurada para `PORT=3000`
-- o banco local esta em `DATABASE_URL=postgresql://postgres:postgres@localhost:5440/fiber_control`
-- o repositorio remoto correto e `https://github.com/devricardo90/Fiber-Control.git`
+- a API continua configurada para `PORT=3000`
+- o banco local esperado permanece em `DATABASE_URL=postgresql://postgres:postgres@localhost:5440/fiber_control`
+- os logs locais `apps/api/dev.log` e `apps/api/dev.err.log` nao entram em commit

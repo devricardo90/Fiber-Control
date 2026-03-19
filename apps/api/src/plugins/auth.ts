@@ -36,3 +36,36 @@ export async function requireAuth(request: FastifyRequest): Promise<void> {
     role: payload.role
   };
 }
+
+export async function optionalAuth(request: FastifyRequest): Promise<void> {
+  const header = request.headers.authorization;
+
+  if (!header) {
+    request.currentUser = null;
+    return;
+  }
+
+  if (!header.startsWith("Bearer ")) {
+    throw new AppError(401, "UNAUTHORIZED", "Invalid authentication token");
+  }
+
+  const payload = verifyAccessToken(header.slice("Bearer ".length));
+
+  if (!payload) {
+    throw new AppError(401, "UNAUTHORIZED", "Invalid authentication token");
+  }
+
+  request.currentUser = {
+    id: payload.sub,
+    email: payload.email,
+    role: payload.role
+  };
+}
+
+export async function requireAdmin(request: FastifyRequest): Promise<void> {
+  await requireAuth(request);
+
+  if (request.currentUser?.role !== "admin") {
+    throw new AppError(403, "FORBIDDEN", "Admin access is required");
+  }
+}

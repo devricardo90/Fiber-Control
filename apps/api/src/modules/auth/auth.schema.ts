@@ -93,3 +93,56 @@ export const meSchema = {
     401: errorSchema
   }
 } as const;
+
+export const listUsersSchema = {
+  tags: ["Auth"],
+  security: [{ bearerAuth: [] }],
+  response: {
+    200: {
+      type: "object",
+      required: ["data"],
+      properties: {
+        data: {
+          type: "array",
+          items: userSchema
+        }
+      }
+    },
+    401: errorSchema,
+    403: errorSchema
+  }
+} as const;
+
+export const updateUserSchema = {
+  tags: ["Auth"],
+  security: [{ bearerAuth: [] }],
+  params: {
+    type: "object",
+    required: ["id"],
+    properties: {
+      id: { type: "string", minLength: 1 }
+    }
+  },
+  body: {
+    type: "object",
+    additionalProperties: false,
+    properties: {
+      fullName: { type: "string", minLength: 1 },
+      role: { type: "string", enum: ["admin", "operator"] },
+      isActive: { type: "boolean" }
+    }
+  },
+  response: {
+    200: {
+      type: "object",
+      required: ["data"],
+      properties: {
+        data: userSchema
+      }
+    },
+    400: errorSchema,
+    401: errorSchema,
+    403: errorSchema,
+    404: errorSchema
+  }
+} as const;

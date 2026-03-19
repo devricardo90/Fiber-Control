@@ -10,7 +10,10 @@ type UserRecord =
 export class AuthService {
   constructor(private readonly authRepository: AuthRepository) {}
 
-  async register(input: { fullName: string; email: string; password: string }) {
+  async register(
+    input: { fullName: string; email: string; password: string },
+    actor?: { id: string; role: "admin" | "operator" } | null
+  ) {
     const existingUser = await this.authRepository.findUserByEmail(input.email);
 
     if (existingUser) {
@@ -18,6 +21,11 @@ export class AuthService {
     }
 
     const userCount = await this.authRepository.countUsers();
+
+    if (userCount > 0 && actor?.role !== "admin") {
+      throw new AppError(403, "FORBIDDEN", "Admin access is required");
+    }
+
     const user = await this.authRepository.createUser({
       fullName: input.fullName,
       email: input.email,
@@ -61,6 +69,68 @@ export class AuthService {
 
     return mapUser(user);
   }
+
+  async listUsers() {
+    const users = await this.authRepository.findManyUsers();
+
+    return users.map(mapUser);
+  }
+
+  async updateUser(
+    userId: string,
+    input: {
+      fullName?: string;
+      role?: "admin" | "operator";
+      isActive?: boolean;
+    }
+  ) {
+    if (Object.keys(input).length === 0) {
+      throw new AppError(400, "EMPTY_UPDATE_PAYLOAD", "Update payload cannot be empty");
+    }
+
+    const existingUser = await this.authRepository.findUserById(userId);
+
+    if (!existingUser) {
+      throw new AppError(404, "USER_NOT_FOUND", "User was not found");
+    }
+
+    const nextRole = input.role ? mapRoleToEnum(input.role) : existingUser.role;
+    const nextIsActive = input.isActive ?? existingUser.isActive;
+
+    if (existingUser.role === "ADMIN" && (!nextIsActive || nextRole !== "ADMIN")) {
+      const activeAdminCount = await this.authRepository.countActiveAdmins();
+
+      if (activeAdminCount <= 1 && existingUser.isActive) {
+        throw new AppError(
+          400,
+          "LAST_ADMIN_PROTECTION",
+          "The last active admin cannot be deactivated or demoted"
+        );
+      }
+    }
+
+    const updateData: {
+      fullName?: string;
+      role?: "ADMIN" | "OPERATOR";
+      isActive?: boolean;
+    } = {};
+
+    if (input.fullName !== undefined) {
+      updateData.fullName = input.fullName;
+    }
+
+    if (input.role !== undefined) {
+      updateData.role = mapRoleToEnum(input.role);
+    }
+
+    if (input.isActive !== undefined) {
+      updateData.isActive = input.isActive;
+    }
+
+    const user = await this.authRepository.updateUser(userId, updateData);
+
+    return mapUser(user);
+  }
 }
 
 function mapUser(user: UserRecord) {
@@ -82,4 +152,8 @@ function mapUserRole(role: string) {
   };
 
   return roleMap[role] ?? "operator";
+}
+
+function mapRoleToEnum(role: "admin" | "operator") {
+  return role === "admin" ? "ADMIN" : "OPERATOR";
 }

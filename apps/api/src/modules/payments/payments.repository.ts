@@ -70,6 +70,46 @@ export class PaymentsRepository {
       ]
     });
   }
+
+  async findById(paymentId: string): Promise<PaymentWithCustomer | null> {
+    return prisma.payment.findUnique({
+      where: {
+        id: paymentId
+      },
+      include: {
+        customer: true
+      }
+    });
+  }
+
+  async updatePaymentAmounts(
+    paymentId: string,
+    input: {
+      receivedAmount: number;
+      status: "PENDING" | "PARTIAL" | "PAID";
+      paidAt: Date | null;
+    }
+  ): Promise<PaymentWithCustomer> {
+    await prisma.payment.update({
+      where: {
+        id: paymentId
+      },
+      data: {
+        receivedAmount: input.receivedAmount,
+        status: input.status,
+        paidAt: input.paidAt
+      }
+    });
+
+    return prisma.payment.findUniqueOrThrow({
+      where: {
+        id: paymentId
+      },
+      include: {
+        customer: true
+      }
+    });
+  }
 }
 
 function toPaymentCreateData(input: CreatePaymentRepositoryInput): Prisma.PaymentUncheckedCreateInput {
