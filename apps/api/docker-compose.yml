@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:17.9
+    container_name: fiber_control_pg
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: fiber_control
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5440:5432"
+    volumes:
+      - fiber_control_pg_data:/var/lib/postgresql/data
+
+volumes:
+  fiber_control_pg_data:
