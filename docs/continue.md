@@ -2,11 +2,12 @@
 
 ## Estado atual
 - backend do `apps/api` fechado para a primeira fase operacional
+- frontend `apps/web` iniciado com Next.js, shell autenticado e stack base ampliada com TanStack Query, React Hook Form, Zod, Lucide e Recharts
 - modulos ativos: `customers`, `payments`, `finance`, `alerts`, `tax-config`, `fiscal-reminders`, `regions`, `bank-entries`, `reconciliation`, `reports` e `auth`
 - autenticacao com bootstrap inicial, gestao de usuarios por admin e protecao do ultimo admin ativo
 - migrations Prisma aplicadas para a modelagem atual
 - seed de desenvolvimento disponivel em `apps/api/prisma/seed.ts`
-- validacao automatizada atual: `pnpm build`, `pnpm lint` e `pnpm test`
+- validacao automatizada atual: `apps/api` com `pnpm build`, `pnpm lint`, `pnpm test`; `apps/web` com `pnpm lint` e `pnpm build`
 
 ## Bootstrap local
 1. executar `pnpm prisma:migrate:deploy`
@@ -26,13 +27,17 @@ Credenciais seed:
 - lembretes fiscais iniciais
 
 ## Proximo passo recomendado
-Iniciar `apps/web` com frontend em Next.js, consumindo primeiro:
-- `POST /auth/login`
-- `GET /auth/me`
-- `GET /finance/overview`
-- `GET /alerts/overview`
-- `GET /customers`
-- `GET /customers/:id`
+Continuar o frontend tela por tela a partir do Figma, na ordem:
+- `Dashboard`
+- `Customers`
+- `Customer details`
+- `Create/Edit customer`
+- `Payments`
+- `Finance`
+- `Alerts`
+- `Regions`
+- `Reports`
+- `Settings`
 
 ## Observacoes importantes
 - a API continua configurada para `PORT=3000`
