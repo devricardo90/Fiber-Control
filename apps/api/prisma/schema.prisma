@@ -11,3 +11,102 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+enum CustomerStatus {
+  ACTIVE    @map("active")
+  DUE_TODAY @map("due_today")
+  OVERDUE   @map("overdue")
+  SUSPENDED @map("suspended")
+  INACTIVE  @map("inactive")
+}
+
+enum PaymentStatus {
+  PENDING @map("pending")
+  PAID    @map("paid")
+  PARTIAL @map("partial")
+  FAILED  @map("failed")
+}
+
+enum UserRole {
+  ADMIN    @map("admin")
+  OPERATOR @map("operator")
+}
+
+model Region {
+  id          String     @id @default(cuid())
+  name        String
+  code        String?    @unique
+  description String?
+  customers   Customer[]
+  createdAt   DateTime   @default(now()) @map("created_at")
+  updatedAt   DateTime   @updatedAt @map("updated_at")
+
+  @@unique([name])
+  @@map("regions")
+}
+
+model Customer {
+  id               String         @id @default(cuid())
+  fullName         String         @map("full_name")
+  documentId       String?        @unique @map("document_id")
+  phone            String?
+  email            String?
+  addressLine      String?        @map("address_line")
+  addressNumber    String?        @map("address_number")
+  neighborhood     String?
+  city             String?
+  state            String?
+  postalCode       String?        @map("postal_code")
+  notes            String?
+  status           CustomerStatus @default(ACTIVE)
+  monthlyFee       Decimal        @map("monthly_fee") @db.Decimal(10, 2)
+  dueDay           Int            @map("due_day")
+  graceDays        Int            @default(0) @map("grace_days")
+  cutoffDays       Int            @default(0) @map("cutoff_days")
+  serviceStartDate DateTime?      @map("service_start_date") @db.Date
+  regionId         String?        @map("region_id")
+  region           Region?        @relation(fields: [regionId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  payments         Payment[]
+  createdAt        DateTime       @default(now()) @map("created_at")
+  updatedAt        DateTime       @updatedAt @map("updated_at")
+
+  @@index([status], map: "customers_status_idx")
+  @@index([dueDay], map: "customers_due_day_idx")
+  @@index([regionId, status], map: "customers_region_id_status_idx")
+  @@map("customers")
+}
+
+model Payment {
+  id             String        @id @default(cuid())
+  customerId     String        @map("customer_id")
+  customer       Customer      @relation(fields: [customerId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  referenceMonth String        @map("reference_month")
+  expectedAmount Decimal       @map("expected_amount") @db.Decimal(10, 2)
+  receivedAmount Decimal       @map("received_amount") @db.Decimal(10, 2)
+  status         PaymentStatus
+  paidAt         DateTime?     @map("paid_at")
+  notes          String?
+  createdAt      DateTime      @default(now()) @map("created_at")
+  updatedAt      DateTime      @updatedAt @map("updated_at")
+
+  @@unique([customerId, referenceMonth], map: "payments_customer_id_reference_month_key")
+  @@index([status], map: "payments_status_idx")
+  @@index([referenceMonth], map: "payments_reference_month_idx")
+  @@index([customerId, status], map: "payments_customer_id_status_idx")
+  @@map("payments")
+}
+
+model User {
+  id           String   @id @default(cuid())
+  fullName     String   @map("full_name")
+  email        String   @unique
+  passwordHash String   @map("password_hash")
+  role         UserRole @default(OPERATOR)
+  isActive     Boolean  @default(true) @map("is_active")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  @@index([role], map: "users_role_idx")
+  @@index([isActive], map: "users_is_active_idx")
+  @@map("users")
+}

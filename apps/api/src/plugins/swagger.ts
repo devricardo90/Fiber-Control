@@ -12,6 +12,15 @@ export async function registerSwagger(app: FastifyInstance): Promise<void> {
         title: env.APP_NAME,
         description: "Fiber Control backend API",
         version: "0.1.0"
+      },
+      components: {
+        securitySchemes: {
+          bearerAuth: {
+            type: "http",
+            scheme: "bearer",
+            bearerFormat: "Bearer"
+          }
+        }
       }
     }
   });
