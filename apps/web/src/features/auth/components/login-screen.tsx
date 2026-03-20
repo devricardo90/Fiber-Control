@@ -89,6 +89,10 @@ export function LoginScreen() {
             <p>Enter your credentials to access the SaaS platform.</p>
           </header>
 
+          <div className="inline-error" style={{ marginBottom: 20 }}>
+            Local access: <strong>acesso@fibercontrol.local</strong> / <strong>Fiber@123456</strong>
+          </div>
+
           <form className="login-form" onSubmit={form.handleSubmit(handleSubmit)}>
             <div className="field-group">
               <label className="field-label" htmlFor="email">

@@ -62,6 +62,25 @@ async function main() {
     }
   });
 
+  const localAccessAdmin = await prisma.user.upsert({
+    where: {
+      email: "acesso@fibercontrol.local"
+    },
+    update: {
+      fullName: "Fiber Control Local Access",
+      passwordHash: hashPassword("Fiber@123456"),
+      role: "ADMIN",
+      isActive: true
+    },
+    create: {
+      fullName: "Fiber Control Local Access",
+      email: "acesso@fibercontrol.local",
+      passwordHash: hashPassword("Fiber@123456"),
+      role: "ADMIN",
+      isActive: true
+    }
+  });
+
   await prisma.taxConfig.upsert({
     where: {
       singletonKey: "default"
@@ -409,6 +428,7 @@ async function main() {
 
   console.log("Seed concluido com sucesso.");
   console.log(`Admin: ${admin.email} / Admin@123456`);
+  console.log(`Local access admin: ${localAccessAdmin.email} / Fiber@123456`);
   console.log("Operator: operator@fibercontrol.local / Operator@123456");
   console.log(`Reference month seeded: ${currentReferenceMonth}`);
 }
