@@ -19,7 +19,8 @@ export async function apiRequest<T>(
 
   const response = await fetch(`${appConfig.apiUrl}${path}`, {
     ...init,
-    headers
+    headers,
+    credentials: "include" // ✅ envia cookies automaticamente em toda requisição
   });
 
   if (!response.ok) {
