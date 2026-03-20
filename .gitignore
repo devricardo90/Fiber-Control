@@ -11,6 +11,7 @@ apps/api/node_modules/
 apps/api/.pnpm-store/
 apps/api/dist/
 apps/api/.env
+apps/api/logs/
 apps/api/*.log
 
 apps/web/.next/

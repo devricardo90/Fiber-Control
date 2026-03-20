@@ -19,8 +19,24 @@ import { registerScalar } from "./plugins/scalar.js";
 import { registerSwagger } from "./plugins/swagger.js";
 
 export async function buildApp(): Promise<FastifyInstance> {
+  const isDev = process.env.NODE_ENV === "development";
+  
   const app = Fastify({
-    logger: true
+    logger: {
+      level: "info",
+      transport: {
+        targets: [
+          {
+            target: "pino/file",
+            options: { destination: "./logs/app.log", mkdir: true },
+          },
+          ...(isDev ? [{
+            target: "pino-pretty",
+            options: { colorize: true }
+          }] : [])
+        ]
+      }
+    }
   });
 
   await registerCors(app);

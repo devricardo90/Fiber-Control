@@ -31,22 +31,22 @@ export default function AlertsPage() {
     switch(severity) {
       case 'high':
         return {
-          color: 'var(--color-error)',
-          bg: 'var(--color-error-container)',
+          color: '#d17c7c',
+          bg: '#5c3a3a',
           icon: 'warning',
           badge: 'Urgent'
         };
       case 'medium':
         return {
-          color: 'var(--color-secondary)',
-          bg: 'var(--color-secondary-container)',
+          color: '#c9995d',
+          bg: '#4a3f2a',
           icon: 'timer',
           badge: 'Critical'
         };
       default:
         return {
-          color: 'var(--color-primary)',
-          bg: 'var(--color-primary-container)',
+          color: '#2a4d8a',
+          bg: '#3d5070',
           icon: 'analytics',
           badge: 'Diagnostic'
         };
@@ -54,90 +54,11 @@ export default function AlertsPage() {
   };
 
   return (
-    <div className="bg-[var(--color-surface)] text-[var(--color-on-surface)] antialiased relative min-h-screen selection:bg-[var(--color-primary-container)] selection:text-white" style={{ fontFamily: "'Inter', sans-serif" }}>
-
-      {/* SideNavBar Shell */}
-      <aside className="flex flex-col h-full py-6 bg-slate-900 border-r-0 fixed left-0 top-0 w-64 z-50">
-        <div className="px-8 mb-10">
-          <span className="text-2xl font-black tracking-tight text-indigo-300 font-headline">FiberControl</span>
-          <p className="text-[10px] uppercase tracking-widest text-[var(--color-outline)] font-bold mt-1">SaaS Platform</p>
-        </div>
-        <nav className="flex-1 space-y-1">
-          <a href="/dashboard" className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-indigo-300 transition-colors duration-200">
-            <span className="material-symbols-outlined">dashboard</span>
-            <span className="text-sm">Dashboard</span>
-          </a>
-          <a href="#" className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-indigo-300 transition-colors duration-200">
-            <span className="material-symbols-outlined">group</span>
-            <span className="text-sm">Customers</span>
-          </a>
-          <a href="#" className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-indigo-300 transition-colors duration-200">
-            <span className="material-symbols-outlined">payments</span>
-            <span className="text-sm">Payments</span>
-          </a>
-          <a href="/finance" className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-indigo-300 transition-colors duration-200">
-            <span className="material-symbols-outlined">account_balance</span>
-            <span className="text-sm">Finance</span>
-          </a>
-          {/* Active State: Alerts */}
-          <div className="flex items-center gap-3 px-4 py-3 text-lime-400 font-bold bg-slate-800 rounded-l-full ml-4 shadow-sm">
-            <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>notifications_active</span>
-            <span className="text-sm">Alerts</span>
-          </div>
-          <a href="#" className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-indigo-300 transition-colors duration-200">
-            <span className="material-symbols-outlined">map</span>
-            <span className="text-sm">Regions</span>
-          </a>
-          <a href="#" className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-indigo-300 transition-colors duration-200">
-            <span className="material-symbols-outlined">route</span>
-            <span className="text-sm">Routes</span>
-          </a>
-          <a href="#" className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-indigo-300 transition-colors duration-200">
-            <span className="material-symbols-outlined">analytics</span>
-            <span className="text-sm">Reports</span>
-          </a>
-          <a href="#" className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-indigo-300 transition-colors duration-200">
-            <span className="material-symbols-outlined">settings</span>
-            <span className="text-sm">Settings</span>
-          </a>
-        </nav>
-        <div className="px-6 mt-auto">
-          <button className="w-full py-4 px-4 rounded-2xl bg-[var(--color-surface-container-high)] text-[var(--color-primary)] font-bold flex items-center justify-center gap-2 hover:bg-[var(--color-surface-container-highest)] transition-all scale-98 active:opacity-80">
-            <span className="material-symbols-outlined text-xl">help</span> Support
-          </button>
-        </div>
-      </aside>
-
-      {/* TopNavBar Shell */}
-      <header className="fixed top-0 right-0 w-[calc(100%-16rem)] z-40 bg-slate-900/80 backdrop-blur-xl flex justify-between items-center h-20 px-8 ml-64 shadow-sm shadow-indigo-900/5">
-        <div className="flex items-center gap-4 w-1/3">
-          <div className="relative w-full group">
-            <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-[var(--color-outline)] group-focus-within:text-[var(--color-primary)]">search</span>
-            <input className="w-full bg-[var(--color-surface-container-highest)] text-white border-none rounded-full py-2.5 pl-12 pr-4 focus:ring-2 focus:ring-[var(--color-secondary)] text-sm outline-none" placeholder="Search alerts or entities..." type="text" />
-          </div>
-        </div>
-        <div className="flex items-center gap-6">
-          <button className="flex items-center gap-2 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-container)] text-white px-6 py-2.5 rounded-full font-bold shadow-lg shadow-indigo-900/20 hover:scale-[1.02] active:scale-95 transition-all text-sm">
-            <span className="material-symbols-outlined text-xl">person_add</span>
-            Add Customer
-          </button>
-          <div className="flex items-center gap-4 border-l border-[#414753] pl-6">
-            <button className="text-[var(--color-outline)] hover:text-[var(--color-primary)] transition-colors">
-              <span className="material-symbols-outlined">notifications</span>
-            </button>
-            <div className="flex items-center gap-2">
-              <img className="w-10 h-10 rounded-full object-cover ring-2 ring-white" alt="Corporate professional user profile portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkMn8P3YLL_3NsF68kl00Tt1APzPLT4cgsWDi4CqYHEQrtxqIMIeXE3WFL9zrt5vnjSrgUtqPuMvqe5jqVElGl9AGtXBMQdcfSOO9X-SlaiSO3PlCfTBadiCBABBzrq5kBs3D2sX0M0UPxUxBL6RdXstCHruciI1lOyYra-xYNS5-oCs8wUTmzVY0rxPDAeg58z-ghz9tKeSYsybXWW68Hfaalt4faGPcV4mLv7AtFchCTUr3RkDAXNScreJdnp_2brfcRSgun-lg" />
-              <div className="hidden lg:block text-left">
-                <p className="text-sm font-bold leading-tight">Marcus Reed</p>
-                <p className="text-[10px] text-[var(--color-outline)] uppercase font-bold tracking-tighter">System Admin</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </header>
+    <div className="bg-transparent text-[var(--color-on-surface)]" style={{ fontFamily: "'Inter', sans-serif" }}>
+      {/* Main Content Canvas */}
+      <div className="px-8 pb-12 min-h-screen">
 
       {/* Main Content Canvas */}
-      <main className="ml-64 pt-28 px-10 pb-12 min-h-screen">
         <div className="flex flex-col gap-8">
           
           {/* Header Section */}
@@ -202,7 +123,7 @@ export default function AlertsPage() {
               {/* Informational Stub para preencher layout idêntico caso api retorne pouco */}
               {(alerts && alerts.alerts.length < 3) && (
                 <div className="group bg-[var(--color-surface-container-lowest)] p-8 rounded-lg shadow-sm hover:shadow-xl hover:shadow-[var(--color-primary)]/5 transition-all duration-300 relative overflow-hidden flex flex-col md:flex-row items-start md:items-center gap-6 opacity-60">
-                   <div className="absolute left-0 top-0 w-1.5 h-full bg-[#dfec60]"></div>
+                   <div className="absolute left-0 top-0 w-1.5 h-full bg-[#8d8a4d]"></div>
                    <div className="w-16 h-16 rounded-2xl bg-[var(--color-surface-container-high)] flex items-center justify-center flex-shrink-0">
                      <span className="material-symbols-outlined text-[var(--color-on-surface-variant)] text-3xl">account_balance_wallet</span>
                    </div>
@@ -226,7 +147,7 @@ export default function AlertsPage() {
             <div className="col-span-12 lg:col-span-4 space-y-8">
               
               {/* Insights Mini Card */}
-              <div className="bg-[var(--color-primary)] text-white p-8 rounded-lg shadow-2xl shadow-indigo-500/30 relative overflow-hidden">
+              <div className="bg-[var(--color-primary)] text-white p-8 rounded-lg shadow-2xl shadow-slate-900/30 relative overflow-hidden">
                 <div className="absolute -right-10 -bottom-10 w-48 h-48 bg-white/5 rounded-full blur-3xl"></div>
                 <h4 className="text-xs uppercase font-black tracking-[0.2em] opacity-60 mb-4">Total Efficiency</h4>
                 <div className="flex items-end gap-2 mb-2">
@@ -298,16 +219,10 @@ export default function AlertsPage() {
                 </div>
               </div>
 
-            </div>
           </div>
         </div>
-      </main>
-
-      {/* Contextual FAB - Alert Center Intent */}
-      <button className="fixed bottom-8 right-8 w-16 h-16 bg-[var(--color-primary)] text-[var(--color-on-primary)] rounded-full shadow-2xl shadow-indigo-500/40 flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50">
-        <span className="material-symbols-outlined text-3xl" style={{ fontVariationSettings: "'FILL' 1" }}>add_alert</span>
-      </button>
-
+      </div>
+      </div>
     </div>
   );
 }

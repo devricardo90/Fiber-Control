@@ -10,7 +10,9 @@ import type {
 type CreateCustomerInput = CreateCustomerRepositoryInput;
 type UpdateCustomerInput = UpdateCustomerRepositoryInput;
 
-type CustomerRecord = Awaited<ReturnType<CustomersRepository["create"]>>;
+type CustomerRecord = Awaited<ReturnType<CustomersRepository["create"]>> & {
+  payments?: any[];
+};
 
 export class CustomersService {
   constructor(
@@ -106,7 +108,7 @@ export class CustomersService {
   }
 
   async recalculateCustomerStatus(customerId: string, referenceDate?: string) {
-    const customer = await this.customersRepository.findByIdWithPayments(customerId);
+    const customer = await this.customersRepository.findByIdWithPayments(customerId) as any;
 
     if (!customer) {
       throw new AppError(404, "CUSTOMER_NOT_FOUND", "Customer was not found");
@@ -152,7 +154,16 @@ function mapCustomer(customer: CustomerRecord) {
         }
       : null,
     createdAt: customer.createdAt.toISOString(),
-    updatedAt: customer.updatedAt.toISOString()
+    updatedAt: customer.updatedAt.toISOString(),
+    payments: customer.payments ? customer.payments.map((p: any) => ({
+      id: p.id,
+      referenceMonth: p.referenceMonth,
+      expectedAmount: Number(p.expectedAmount),
+      receivedAmount: Number(p.receivedAmount),
+      status: p.status.toLowerCase(),
+      paidAt: p.paidAt?.toISOString() ?? null,
+      notes: p.notes
+    })) : []
   };
 }
 

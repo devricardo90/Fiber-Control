@@ -59,88 +59,12 @@ export default function FinancePage() {
                  : null;
 
   return (
-    <div className="bg-[var(--color-surface)] text-[var(--color-on-surface)] antialiased relative min-h-screen selection:bg-[var(--color-primary-container)] selection:text-white" style={{ fontFamily: "'Inter', sans-serif" }}>
-
-      {/* SideNavBar Shell */}
-      <aside className="flex flex-col h-full py-6 bg-slate-900 border-r-0 fixed left-0 top-0 w-64 z-50">
-        <div className="px-8 mb-10">
-          <span className="text-2xl font-black tracking-tight text-indigo-300">FiberControl</span>
-          <p className="text-[10px] uppercase tracking-widest text-[var(--color-outline)] font-bold mt-1">SaaS Platform</p>
-        </div>
-        <nav className="flex-1 space-y-1">
-          <a href="/dashboard" className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-indigo-300 transition-colors duration-200">
-            <span className="material-symbols-outlined">dashboard</span>
-            <span className="text-sm">Dashboard</span>
-          </a>
-          <a href="#" className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-indigo-300 transition-colors duration-200">
-            <span className="material-symbols-outlined">group</span>
-            <span className="text-sm">Customers</span>
-          </a>
-           <a href="#" className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-indigo-300 transition-colors duration-200">
-            <span className="material-symbols-outlined">payments</span>
-            <span className="text-sm">Payments</span>
-          </a>
-          {/* Finance Active */}
-          <div className="flex items-center gap-3 px-4 py-3 text-lime-400 font-bold bg-slate-800 rounded-l-full ml-4 shadow-sm">
-            <span className="material-symbols-outlined">account_balance</span>
-            <span className="text-sm">Finance</span>
-          </div>
-          <a href="/alerts" className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-indigo-300 transition-colors duration-200">
-            <span className="material-symbols-outlined">notifications_active</span>
-            <span className="text-sm">Alerts</span>
-          </a>
-          <a href="#" className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-indigo-300 transition-colors duration-200">
-            <span className="material-symbols-outlined">map</span>
-            <span className="text-sm">Regions</span>
-          </a>
-          <a href="#" className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-indigo-300 transition-colors duration-200">
-            <span className="material-symbols-outlined">route</span>
-            <span className="text-sm">Routes</span>
-          </a>
-          <a href="#" className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-indigo-300 transition-colors duration-200">
-            <span className="material-symbols-outlined">analytics</span>
-            <span className="text-sm">Reports</span>
-          </a>
-          <a href="#" className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-indigo-300 transition-colors duration-200">
-            <span className="material-symbols-outlined">settings</span>
-            <span className="text-sm">Settings</span>
-          </a>
-        </nav>
-        <div className="px-6 mt-auto">
-          <button className="w-full py-4 px-4 rounded-2xl bg-[var(--color-primary)] text-[var(--color-on-primary)] font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-all scale-98 active:opacity-80">
-            <span className="material-symbols-outlined text-xl">help</span> Support
-          </button>
-        </div>
-      </aside>
-
-      {/* TopNavBar Shell */}
-      <header className="fixed top-0 right-0 w-[calc(100%-16rem)] z-40 bg-slate-900/80 backdrop-blur-xl flex justify-between items-center h-20 px-8 ml-64 shadow-sm shadow-indigo-900/5">
-        <div className="flex items-center gap-4 w-96">
-           <div className="relative w-full group">
-             <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-[var(--color-outline)] group-focus-within:text-[var(--color-primary)]">search</span>
-             <input type="text" className="w-full bg-[var(--color-surface-container-highest)] border-none rounded-full py-2.5 pl-12 pr-4 focus:ring-2 focus:ring-[var(--color-secondary)] outline-none text-sm text-white" placeholder="Search transactions..." />
-           </div>
-        </div>
-        <div className="flex items-center gap-6">
-            <div className="flex items-center gap-4 border-r border-[#414753] pr-6">
-               <button className="p-2 text-slate-500 hover:text-[var(--color-primary)] transition-all">
-                 <span className="material-symbols-outlined">notifications</span>
-               </button>
-               <button className="p-2 text-slate-500 hover:text-[var(--color-primary)] transition-all">
-                  <span className="material-symbols-outlined">account_circle</span>
-               </button>
-            </div>
-            <button className="bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-container)] text-white px-6 py-2.5 rounded-full text-sm font-bold shadow-lg shadow-indigo-900/20 hover:scale-105 transition-all">
-                Add Customer
-            </button>
-        </div>
-      </header>
-
+    <div className="bg-transparent text-[var(--color-on-surface)]" style={{ fontFamily: "'Inter', sans-serif" }}>
       {/* Main Content Canvas */}
-      <main className="ml-64 pt-28 px-10 pb-12 min-h-screen">
+      <div className="px-8 pb-12 min-h-screen">
         
         {/* Header Section */}
-        <header className="mb-12">
+        <header className="mb-8">
           <h2 className="text-4xl font-black tracking-tight text-[var(--color-primary)] mb-2">Finance Overview</h2>
           <p className="text-[var(--color-outline)] font-medium">Fiscal Year {currentYear} • Q{(Math.floor((currentMonthNum - 1) / 3) + 1)} Diagnostic Report</p>
         </header>
@@ -196,7 +120,9 @@ export default function FinancePage() {
                     <p className="text-xs font-bold text-[var(--color-on-secondary-container)] uppercase tracking-widest">Est. Tax</p>
                     <span className="material-symbols-outlined text-[var(--color-on-secondary-container)] text-lg" style={{ fontVariationSettings: "'FILL' 1" }}>warning</span>
                   </div>
-                  <h3 className="text-2xl font-bold text-[var(--color-on-secondary-container)]">$1,200</h3>
+                  <h3 className="text-2xl font-bold text-[var(--color-on-secondary-container)]">
+                    {finance ? formatCurrency(finance.estimatedTax) : '—'}
+                  </h3>
                 </div>
                 <p className="text-[10px] font-bold text-[var(--color-on-secondary-container)] opacity-60 mt-2">AMBER ALERT: LOW RESERVE</p>
               </div>
@@ -211,15 +137,15 @@ export default function FinancePage() {
                   <span className="material-symbols-outlined text-[var(--color-outline)]">more_vert</span>
                 </div>
                 
-                <ExpectedVsReceivedChart data={annual} />
+                <ExpectedVsReceivedChart data={Array.isArray(annual) ? annual : []} />
 
                 <div className="mt-4 flex gap-6">
                   <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 rounded-full bg-[var(--color-primary)]"></div>
+                    <div className="w-3 h-3 rounded-full bg-[#6b9d7a]"></div>
                     <span className="text-xs font-medium text-[var(--color-outline)]">Expected</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 rounded-full bg-[var(--color-secondary)]"></div>
+                    <div className="w-3 h-3 rounded-full bg-[#9fa857]"></div>
                     <span className="text-xs font-medium text-[var(--color-outline)]">Received</span>
                   </div>
                 </div>
@@ -310,7 +236,7 @@ export default function FinancePage() {
           <aside className="col-span-12 lg:col-span-4 space-y-8">
             
             {/* Tax & Fiscal Summary */}
-            <div className="bg-[var(--color-primary)] text-white p-8 rounded-2xl shadow-xl shadow-indigo-900/10 relative overflow-hidden">
+            <div className="bg-[var(--color-primary)] text-white p-8 rounded-2xl shadow-xl shadow-slate-900/20 relative overflow-hidden">
               <div className="relative z-10">
                 <div className="flex justify-between items-start mb-8">
                   <h4 className="text-xl font-bold">Tax &amp; Fiscal</h4>
@@ -319,7 +245,9 @@ export default function FinancePage() {
                 <div className="space-y-6">
                   <div>
                     <p className="text-white/60 text-xs font-bold uppercase tracking-widest mb-1">Next Deadline</p>
-                    <p className="text-2xl font-extrabold text-[var(--color-primary-container)]">Oct 25, {currentYear}</p>
+                    <p className="text-2xl font-extrabold text-[var(--color-primary-container)]">
+                      {finance?.nextTaxDeadline ? new Date(finance.nextTaxDeadline).toLocaleDateString() : '—'}
+                    </p>
                     <p className="text-xs mt-1 text-white/80">Quarterly VAT Filing</p>
                   </div>
                   <div className="pt-6 border-t border-white/10">
@@ -378,7 +306,7 @@ export default function FinancePage() {
 
           </aside>
         </div>
-      </main>
+      </div>
     </div>
   );
 }

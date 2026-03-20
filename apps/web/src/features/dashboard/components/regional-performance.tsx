@@ -13,12 +13,14 @@ interface RegionalPerformanceProps {
   regions: any[];
 }
 
-const COLORS = ['#6366f1', '#84cc16', '#f59e0b', '#ec4899', '#06b6d4'];
+const COLORS = ['#2a4d8a', '#6b9d7a', '#9fa857', '#c9995d', '#8b9fc9'];
 
 export const RegionalPerformance = ({ regions }: RegionalPerformanceProps) => {
-  const chartData = regions.map((reg) => ({
-    name: reg.regionName,
-    value: reg.customerCount,
+  const safeRegions = Array.isArray(regions) ? regions : [];
+
+  const chartData = safeRegions.map((reg) => ({
+    name: reg.regionName || "Unknown",
+    value: reg.customerCount || 0,
   }));
 
   return (
@@ -48,7 +50,7 @@ export const RegionalPerformance = ({ regions }: RegionalPerformanceProps) => {
         </ResponsiveContainer>
       </div>
       <div className="space-y-4">
-         {regions.slice(0, 4).map((reg, idx) => (
+         {safeRegions.slice(0, 4).map((reg, idx) => (
            <div key={reg.regionId} className="flex justify-between items-center">
              <div className="flex items-center gap-3">
                <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: COLORS[idx % COLORS.length] }} />

@@ -30,4 +30,12 @@ export class RegionsRepository {
       }
     });
   }
+
+  async findAll() {
+    return prisma.region.findMany({
+      orderBy: {
+        name: "asc"
+      }
+    });
+  }
 }

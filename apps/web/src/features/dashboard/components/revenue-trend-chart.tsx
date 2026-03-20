@@ -17,8 +17,10 @@ interface RevenueTrendChartProps {
 }
 
 export const RevenueTrendChart = ({ data }: RevenueTrendChartProps) => {
-  const chartData = data.map((item) => ({
-    name: item.referenceMonth,
+  const safeData = Array.isArray(data) ? data : [];
+
+  const chartData = safeData.map((item) => ({
+    name: item.referenceMonth || "—",
     Expected: item.expectedAmount,
     Received: item.receivedAmount,
   }));
@@ -28,12 +30,12 @@ export const RevenueTrendChart = ({ data }: RevenueTrendChartProps) => {
       <div className="flex justify-between items-center mb-8">
         <h2 className="text-xl font-bold text-white">Revenue Trend</h2>
         <div className="flex gap-2">
-           <span className="flex items-center gap-1.5 text-xs font-bold text-indigo-300">
-             <div className="w-2 h-2 rounded-full bg-indigo-500" /> Expected
-           </span>
-           <span className="flex items-center gap-1.5 text-xs font-bold text-lime-400">
-             <div className="w-2 h-2 rounded-full bg-lime-500" /> Received
-           </span>
+           <span className="flex items-center gap-1.5 text-xs font-bold text-[#a8b8d8]">
+              <div className="w-2 h-2 rounded-full bg-[#2a4d8a]" /> Expected
+            </span>
+            <span className="flex items-center gap-1.5 text-xs font-bold text-[#b5c087]">
+              <div className="w-2 h-2 rounded-full bg-[#9fa857]" /> Received
+            </span>
         </div>
       </div>
       <ResponsiveContainer width="100%" height="100%">
@@ -55,8 +57,8 @@ export const RevenueTrendChart = ({ data }: RevenueTrendChartProps) => {
             contentStyle={{ backgroundColor: '#10131a', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.1)', color: '#fff' }}
             itemStyle={{ fontSize: '12px', fontWeight: 'bold' }}
           />
-          <Bar dataKey="Expected" fill="#6366f1" radius={[4, 4, 0, 0]} barSize={30} />
-          <Bar dataKey="Received" fill="#84cc16" radius={[4, 4, 0, 0]} barSize={30} />
+          <Bar dataKey="Expected" fill="#2a4d8a" radius={[4, 4, 0, 0]} barSize={30} />
+          <Bar dataKey="Received" fill="#9fa857" radius={[4, 4, 0, 0]} barSize={30} />
         </BarChart>
       </ResponsiveContainer>
     </div>

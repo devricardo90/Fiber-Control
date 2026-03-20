@@ -13,8 +13,14 @@ export async function apiRequest<T>(
   const headers = new Headers(init.headers);
   headers.set("Content-Type", "application/json");
 
-  if (init.token) {
-    headers.set("Authorization", `Bearer ${init.token}`);
+  // Busca o token se não foi passado via init
+  let token = init.token;
+  if (!token && typeof window !== "undefined") {
+    token = window.localStorage.getItem("fiber-control.access-token");
+  }
+
+  if (token) {
+    headers.set("Authorization", `Bearer ${token}`);
   }
 
   const response = await fetch(`${appConfig.apiUrl}${path}`, {
@@ -23,11 +29,17 @@ export async function apiRequest<T>(
     credentials: "include" // ✅ envia cookies automaticamente em toda requisição
   });
 
+  if (response.status === 204) {
+    return {} as T;
+  }
+
+  const text = await response.text();
+
   if (!response.ok) {
     let payload: Partial<ApiError> = {};
 
     try {
-      payload = (await response.json()) as Partial<ApiError>;
+      payload = text ? JSON.parse(text) : {};
     } catch {
       payload = {};
     }
@@ -39,5 +51,5 @@ export async function apiRequest<T>(
     } satisfies ApiError;
   }
 
-  return (await response.json()) as T;
+  return (text ? JSON.parse(text) : {}) as T;
 }

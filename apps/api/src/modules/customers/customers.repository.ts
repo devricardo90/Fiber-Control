@@ -83,9 +83,14 @@ export class CustomersRepository {
         id: customerId
       },
       include: {
-        region: true
+        region: true,
+        payments: {
+          orderBy: {
+            referenceMonth: "desc"
+          }
+        }
       }
-    });
+    }) as Promise<(CustomerWithRegion & { payments: any[] }) | null>;
   }
 
   async update(customerId: string, input: UpdateCustomerRepositoryInput): Promise<CustomerWithRegion> {

@@ -29,87 +29,14 @@ export default function RegionsPage() {
   const attentionRequired = [...regionsData].sort((a, b) => (b.overdueCustomers / b.customerCount) - (a.overdueCustomers / a.customerCount))[0];
 
   return (
-    <div className="bg-[var(--color-surface)] text-[var(--color-on-surface)] antialiased min-h-screen" style={{ fontFamily: "'Inter', sans-serif" }}>
-      
-      {/* SideNavBar Shell */}
-      <aside className="h-screen w-64 fixed left-0 top-0 border-r-0 bg-slate-900 flex flex-col py-6 z-50">
-        <div className="px-8 mb-10">
-          <span className="text-2xl font-black text-indigo-300 tracking-tight font-headline">FiberControl</span>
-          <p className="text-[10px] font-semibold text-[var(--color-outline)] tracking-widest uppercase mt-1">SaaS Platform</p>
-        </div>
-        <nav className="flex-1 space-y-1">
-          <a href="/dashboard" className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-indigo-300 transition-colors duration-200">
-            <span className="material-symbols-outlined">dashboard</span>
-            <span className="text-sm">Dashboard</span>
-          </a>
-          <a href="#" className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-indigo-300 transition-colors duration-200">
-            <span className="material-symbols-outlined">group</span>
-            <span className="text-sm">Customers</span>
-          </a>
-          <a href="/payments" className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-indigo-300 transition-colors duration-200">
-            <span className="material-symbols-outlined">payments</span>
-            <span className="text-sm">Payments</span>
-          </a>
-          <a href="/finance" className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-indigo-300 transition-colors duration-200">
-            <span className="material-symbols-outlined">account_balance</span>
-            <span className="text-sm">Finance</span>
-          </a>
-          <a href="/alerts" className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-indigo-300 transition-colors duration-200">
-            <span className="material-symbols-outlined">notifications_active</span>
-            <span className="text-sm">Alerts</span>
-          </a>
-          <div className="flex items-center gap-3 px-4 py-3 text-lime-400 font-bold bg-slate-800 rounded-l-full ml-4 shadow-sm">
-            <span className="material-symbols-outlined">map</span>
-            <span className="text-sm text-[var(--color-primary)]">Regions</span>
-          </div>
-          <a href="#" className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-indigo-300 transition-colors duration-200">
-            <span className="material-symbols-outlined">route</span>
-            <span className="text-sm">Routes</span>
-          </a>
-          <a href="#" className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-indigo-300 transition-colors duration-200">
-            <span className="material-symbols-outlined">analytics</span>
-            <span className="text-sm">Reports</span>
-          </a>
-          <a href="/settings" className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-indigo-300 transition-colors duration-200">
-            <span className="material-symbols-outlined">settings</span>
-            <span className="text-sm">Settings</span>
-          </a>
-        </nav>
-        <div className="px-6 mt-auto">
-          <button className="w-full py-3 px-4 rounded-full bg-[var(--color-surface-container-high)] text-[var(--color-primary)] font-bold transition-all hover:bg-[var(--color-surface-container-highest)]">
-            <span className="material-symbols-outlined text-sm inline-block align-middle mr-2">help</span>
-            Support
-          </button>
-        </div>
-      </aside>
-
-      {/* TopNavBar Shell */}
-      <header className="fixed top-0 right-0 w-[calc(100%-16rem)] z-40 bg-slate-900/80 backdrop-blur-xl flex justify-between items-center h-20 px-8">
-        <div className="flex items-center bg-[var(--color-surface-container-low)] px-4 py-2 rounded-full w-96 group focus-within:ring-2 focus-within:ring-[var(--color-secondary)] transition-all">
-          <span className="material-symbols-outlined text-[var(--color-outline)]">search</span>
-          <input className="bg-transparent border-none focus:ring-0 text-sm w-full placeholder:text-[var(--color-outline)] ml-2 text-white outline-none" placeholder="Search regions..." type="text" />
-        </div>
-        <div className="flex items-center gap-6">
-          <div className="flex items-center gap-4 border-r border-slate-800 pr-6 text-[var(--color-outline)]">
-            <button className="hover:text-[var(--color-primary)] transition-colors relative">
-              <span className="material-symbols-outlined">notifications</span>
-              <span className="absolute top-0 right-0 w-2 h-2 bg-[var(--color-secondary)] rounded-full"></span>
-            </button>
-            <button className="hover:text-[var(--color-primary)] transition-colors">
-              <span className="material-symbols-outlined">account_circle</span>
-            </button>
-          </div>
-          <button className="bg-[var(--color-primary)] text-[var(--color-on-primary)] px-6 py-2.5 rounded-full font-bold text-sm flex items-center gap-2 hover:opacity-90">
-            <span className="material-symbols-outlined text-sm">add</span> Add Region
-          </button>
-        </div>
-      </header>
+    <div className="bg-transparent text-[var(--color-on-surface)]" style={{ fontFamily: "'Inter', sans-serif" }}>
+      {/* Main Content */}
+      <div className="px-8 py-8 min-h-screen">
 
       {/* Main Content */}
-      <main className="ml-64 pt-20 p-8 min-h-screen">
         
         {/* Header Section */}
-        <section className="mb-10 flex justify-between items-end">
+        <section className="mb-8 flex justify-between items-end">
           <div>
             <nav className="flex items-center gap-2 text-[var(--color-outline)] text-xs font-semibold uppercase tracking-widest mb-2 font-label">
               <span>Performance</span>
@@ -128,7 +55,7 @@ export default function RegionsPage() {
         </section>
 
         {/* Bento Grid: Map & High-Level Metrics */}
-        <section className="grid grid-cols-12 gap-6 mb-12">
+        <section className="grid grid-cols-12 gap-6 mb-8">
           
           {/* Map Card */}
           <div className="col-span-8 bg-[var(--color-surface-container-lowest)] rounded-lg p-6 flex flex-col relative overflow-hidden shadow-sm border border-[var(--color-outline-variant)]/10">
@@ -231,9 +158,9 @@ export default function RegionsPage() {
                     <td className="px-6 py-6 w-1/4">
                        <div className="flex flex-col gap-1.5">
                          <div className="h-2 w-full flex rounded-full overflow-hidden bg-slate-800">
-                           <div className="h-full bg-[var(--color-secondary)]" style={{ width: `${activePerc}%` }}></div>
+                           <div className="h-full bg-[#6b9d7a]" style={{ width: `${activePerc}%` }}></div>
                            <div className="h-full bg-slate-600" style={{ width: `${otherPerc}%` }}></div>
-                           <div className="h-full bg-red-500" style={{ width: `${overduePerc}%` }}></div>
+                           <div className="h-full bg-[#c27070]" style={{ width: `${overduePerc}%` }}></div>
                          </div>
                          <div className="flex justify-between text-[10px] font-bold text-[var(--color-outline)]">
                            <span>Active ({activePerc}%)</span>
@@ -265,7 +192,7 @@ export default function RegionsPage() {
           </div>
         </section>
 
-      </main>
+      </div>
     </div>
   );
 }

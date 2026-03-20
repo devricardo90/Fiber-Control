@@ -29,8 +29,8 @@ export const IncomeTrendChart = ({ currentYearRevenue, lastYearRevenue }: Income
         <AreaChart data={data}>
           <defs>
             <linearGradient id="colorCurrent" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#6366f1" stopOpacity={0.3}/>
-              <stop offset="95%" stopColor="#6366f1" stopOpacity={0}/>
+              <stop offset="5%" stopColor="#2a4d8a" stopOpacity={0.3}/>
+              <stop offset="95%" stopColor="#2a4d8a" stopOpacity={0}/>
             </linearGradient>
           </defs>
           <Tooltip 
@@ -40,7 +40,7 @@ export const IncomeTrendChart = ({ currentYearRevenue, lastYearRevenue }: Income
           <Area 
             type="monotone" 
             dataKey="current" 
-            stroke="#6366f1" 
+            stroke="#2a4d8a" 
             fillOpacity={1} 
             fill="url(#colorCurrent)" 
             strokeWidth={3}

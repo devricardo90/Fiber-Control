@@ -62,7 +62,23 @@ const customerSchema = {
       anyOf: [{ type: "null" }, customerRegionSchema]
     },
     createdAt: { type: "string" },
-    updatedAt: { type: "string" }
+    updatedAt: { type: "string" },
+    payments: {
+      type: "array",
+      items: {
+        type: "object",
+        required: ["id", "referenceMonth", "expectedAmount", "receivedAmount", "status"],
+        properties: {
+          id: { type: "string" },
+          referenceMonth: { type: "string" },
+          expectedAmount: { type: "number" },
+          receivedAmount: { type: "number" },
+          status: { type: "string" },
+          paidAt: { type: ["string", "null"] },
+          notes: { type: ["string", "null"] }
+        }
+      }
+    }
   }
 } as const;
 

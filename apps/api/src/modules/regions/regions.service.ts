@@ -29,6 +29,10 @@ export class RegionsService {
       regions: items
     };
   }
+
+  async listRegions() {
+    return this.regionsRepository.findAll();
+  }
 }
 
 function mapRegionPerformance(region: RegionRecord, referenceMonth: string) {

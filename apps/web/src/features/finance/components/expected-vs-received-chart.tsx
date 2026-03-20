@@ -16,8 +16,10 @@ interface ExpectedVsReceivedChartProps {
 }
 
 export const ExpectedVsReceivedChart = ({ data }: ExpectedVsReceivedChartProps) => {
-  const chartData = (data || []).map((item) => ({
-    name: item.referenceMonth.split('-')[1], // Just the month number
+  const safeData = Array.isArray(data) ? data : [];
+
+  const chartData = safeData.map((item) => ({
+    name: item.referenceMonth?.split("-")[1] || "—", // Just the month number
     Expected: item.expectedAmount,
     Received: item.receivedAmount,
   }));
@@ -39,8 +41,8 @@ export const ExpectedVsReceivedChart = ({ data }: ExpectedVsReceivedChartProps) 
             itemStyle={{ fontSize: '12px', fontWeight: 'bold' }}
             cursor={{ fill: 'rgba(255,255,255,0.05)' }}
           />
-          <Bar dataKey="Expected" fill="#6366f1" radius={[4, 4, 0, 0]} barSize={20} />
-          <Bar dataKey="Received" fill="#84cc16" radius={[4, 4, 0, 0]} barSize={20} />
+          <Bar dataKey="Expected" fill="#2a4d8a" radius={[4, 4, 0, 0]} barSize={20} />
+          <Bar dataKey="Received" fill="#9fa857" radius={[4, 4, 0, 0]} barSize={20} />
         </BarChart>
       </ResponsiveContainer>
     </div>

@@ -92,3 +92,27 @@ export const regionsPerformanceSchema = {
     400: errorSchema
   }
 } as const;
+
+export const listRegionsSchema = {
+  tags: ["Regions"],
+  response: {
+    200: {
+      type: "object",
+      required: ["data"],
+      properties: {
+        data: {
+          type: "array",
+          items: {
+            type: "object",
+            required: ["id", "name"],
+            properties: {
+              id: { type: "string" },
+              name: { type: "string" },
+              code: { type: ["string", "null"] }
+            }
+          }
+        }
+      }
+    }
+  }
+} as const;

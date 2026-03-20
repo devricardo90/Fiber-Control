@@ -61,90 +61,15 @@ export default function SettingsPage() {
   };
 
   return (
-    <div className="bg-[var(--color-surface)] text-[var(--color-on-surface)] antialiased relative min-h-screen selection:bg-[var(--color-primary-container)] selection:text-white" style={{ fontFamily: "'Inter', sans-serif" }}>
-
-      {/* SideNavBar Shell */}
-      <aside className="flex flex-col h-full py-6 bg-slate-900 border-r-0 fixed left-0 top-0 w-64 z-50">
-        <div className="px-8 mb-10">
-          <span className="text-2xl font-black tracking-tight text-indigo-300 font-headline">FiberControl</span>
-          <p className="text-[10px] uppercase tracking-widest text-[var(--color-outline)] font-bold mt-1">SaaS Platform</p>
-        </div>
-        <nav className="flex-1 space-y-1">
-          <a href="/dashboard" className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-indigo-300 transition-colors duration-200">
-            <span className="material-symbols-outlined">dashboard</span>
-            <span className="text-sm">Dashboard</span>
-          </a>
-          <a href="#" className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-indigo-300 transition-colors duration-200">
-            <span className="material-symbols-outlined">group</span>
-            <span className="text-sm">Customers</span>
-          </a>
-          <a href="/payments" className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-indigo-300 transition-colors duration-200">
-            <span className="material-symbols-outlined">payments</span>
-            <span className="text-sm">Payments</span>
-          </a>
-          <a href="/finance" className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-indigo-300 transition-colors duration-200">
-            <span className="material-symbols-outlined">account_balance</span>
-            <span className="text-sm">Finance</span>
-          </a>
-          <a href="/alerts" className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-indigo-300 transition-colors duration-200">
-            <span className="material-symbols-outlined">notifications_active</span>
-            <span className="text-sm">Alerts</span>
-          </a>
-          <a href="#" className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-indigo-300 transition-colors duration-200">
-            <span className="material-symbols-outlined">map</span>
-            <span className="text-sm">Regions</span>
-          </a>
-          <a href="#" className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-indigo-300 transition-colors duration-200">
-            <span className="material-symbols-outlined">route</span>
-            <span className="text-sm">Routes</span>
-          </a>
-          <a href="#" className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-indigo-300 transition-colors duration-200">
-            <span className="material-symbols-outlined">analytics</span>
-            <span className="text-sm">Reports</span>
-          </a>
-          {/* Active State: Settings */}
-          <div className="flex items-center gap-3 px-4 py-3 text-lime-400 font-bold bg-slate-800 rounded-l-full ml-4 shadow-sm">
-            <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>settings</span>
-            <span className="text-sm text-[var(--color-primary)]">Settings</span>
-          </div>
-        </nav>
-        <div className="px-6 mt-auto">
-          <button className="w-full py-4 px-4 rounded-2xl bg-[var(--color-surface-container-high)] text-[var(--color-primary)] font-bold flex items-center justify-center gap-2 hover:bg-[var(--color-surface-container-highest)] transition-all scale-98 active:opacity-80">
-            <span className="material-symbols-outlined text-xl">help</span> Support
-          </button>
-        </div>
-      </aside>
-
-      {/* TopNavBar Shell */}
-      <header className="fixed top-0 right-0 w-[calc(100%-16rem)] z-40 bg-slate-900/80 backdrop-blur-xl flex justify-between items-center h-20 px-8 ml-64 shadow-sm shadow-indigo-900/5">
-        <div className="flex items-center gap-4 w-96">
-          <div className="relative w-full group">
-            <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-[var(--color-outline)] group-focus-within:text-[var(--color-primary)]">search</span>
-            <input className="w-full bg-[var(--color-surface-container-highest)] text-white border-none rounded-full py-2.5 pl-12 pr-4 focus:ring-2 focus:ring-[var(--color-secondary)] text-sm outline-none placeholder:text-[var(--color-outline)]" placeholder="Search settings..." type="text" />
-          </div>
-        </div>
-        <div className="flex items-center gap-6">
-          <div className="flex items-center gap-4 pl-6">
-            <button className="text-[var(--color-outline)] hover:text-[var(--color-primary)] transition-colors">
-              <span className="material-symbols-outlined">notifications</span>
-            </button>
-            <button className="text-[var(--color-outline)] hover:text-[var(--color-primary)] transition-colors">
-              <span className="material-symbols-outlined">account_circle</span>
-            </button>
-          </div>
-          <div className="h-8 w-[1px] bg-slate-700"></div>
-          <button className="flex items-center gap-2 bg-[var(--color-primary)] text-[var(--color-on-primary)] px-6 py-2.5 rounded-full font-bold shadow-lg hover:opacity-90 active:scale-95 transition-all text-sm">
-            Add Customer
-          </button>
-        </div>
-      </header>
+    <div className="bg-transparent text-[var(--color-on-surface)]" style={{ fontFamily: "'Inter', sans-serif" }}>
+      {/* Main Content Canvas */}
+      <div className="pb-32 min-h-screen">
 
       {/* Main Content Canvas */}
-      <main className="ml-64 pt-20 pb-32 min-h-screen">
-        <div className="max-w-6xl mx-auto px-12 py-12">
+        <div className="max-w-6xl mx-auto px-8 py-12">
           
           {/* Settings Header Section */}
-          <div className="mb-12">
+          <div className="mb-8">
             <h2 className="text-4xl font-black tracking-tight font-headline text-[var(--color-primary)] mb-2">Platform Settings</h2>
             <p className="text-[var(--color-on-surface-variant)] text-lg">Configure your organizational infrastructure and fiscal preferences.</p>
           </div>
@@ -285,7 +210,7 @@ export default function SettingsPage() {
             </div>
           </div>
         </div>
-      </main>
+      </div>
 
       {/* Sticky Save Footer */}
       <footer className="fixed bottom-0 right-0 w-[calc(100%-16rem)] bg-[#10131a]/95 backdrop-blur-md border-t border-[var(--color-surface-container-highest)] px-12 py-6 z-40 shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">

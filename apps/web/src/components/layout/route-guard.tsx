@@ -3,8 +3,8 @@
 import { usePathname, useRouter } from "next/navigation";
 import type { ReactNode } from "react";
 import { useEffect } from "react";
-
 import { useAuth } from "./auth-provider";
+import { LoadingScreen } from "../shared/loading-screen";
 
 export function RouteGuard({ children }: { children: ReactNode }) {
   const pathname = usePathname();
@@ -12,9 +12,7 @@ export function RouteGuard({ children }: { children: ReactNode }) {
   const { isAuthenticated, isLoading } = useAuth();
 
   useEffect(() => {
-    if (isLoading) {
-      return;
-    }
+    if (isLoading) return;
 
     if (!isAuthenticated && pathname !== "/login") {
       router.replace("/login");
@@ -26,20 +24,7 @@ export function RouteGuard({ children }: { children: ReactNode }) {
   }, [isAuthenticated, isLoading, pathname, router]);
 
   if (isLoading) {
-    return (
-      <div
-        style={{
-          display: "grid",
-          minHeight: "100vh",
-          placeItems: "center"
-        }}
-      >
-        <div className="card" style={{ minWidth: 320 }}>
-          <strong>Carregando sessão</strong>
-          <p>Verificando autenticação e preparando a interface.</p>
-        </div>
-      </div>
-    );
+    return <LoadingScreen />;
   }
 
   if (!isAuthenticated && pathname !== "/login") {
