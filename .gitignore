@@ -11,5 +11,10 @@ apps/api/node_modules/
 apps/api/.pnpm-store/
 apps/api/dist/
 apps/api/.env
+apps/api/*.log
+
+apps/web/.next/
+apps/web/node_modules/
 
 fiber-control/
+.tmp/
