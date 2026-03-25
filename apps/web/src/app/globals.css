@@ -424,6 +424,44 @@ button {
   color: #a6ceff;
 }
 
+.network-indicator {
+  padding: 4px 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.network-indicator.online {
+  border-color: rgba(133, 225, 176, 0.35);
+  background: rgba(133, 225, 176, 0.08);
+  color: #9ef2c8;
+}
+
+.network-indicator.offline {
+  border-color: rgba(209, 124, 124, 0.35);
+  background: rgba(209, 124, 124, 0.12);
+  color: #ff9ea4;
+}
+
+.app-status-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.status-dismiss {
+  margin-left: 12px;
+  border: none;
+  background: transparent;
+  color: inherit;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  font-size: 0.7rem;
+}
+
 .table {
   width: 100%;
   border-collapse: collapse;

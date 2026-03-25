@@ -2,6 +2,7 @@ import { createHmac, randomBytes, scryptSync, timingSafeEqual } from "node:crypt
 
 import { env } from "../config/env.js";
 
+export const ACCESS_TOKEN_TTL_SECONDS = 60 * 60 * 12;
 const PASSWORD_KEY_LENGTH = 64;
 
 type AccessTokenPayload = {
@@ -39,7 +40,7 @@ export function createAccessToken(input: {
     sub: input.userId,
     email: input.email,
     role: input.role,
-    exp: Math.floor(Date.now() / 1000) + 60 * 60 * 12
+    exp: Math.floor(Date.now() / 1000) + ACCESS_TOKEN_TTL_SECONDS
   };
   const encodedPayload = encodeBase64Url(JSON.stringify(payload));
   const signature = signValue(encodedPayload);

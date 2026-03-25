@@ -4,6 +4,10 @@ export type ApiError = {
   statusCode: number;
   code: string;
   message: string;
+  details?: unknown;
+  path?: string;
+  requestId?: string;
+  timestamp?: string;
 };
 
 export async function apiRequest<T>(
@@ -13,7 +17,6 @@ export async function apiRequest<T>(
   const headers = new Headers(init.headers);
   headers.set("Content-Type", "application/json");
 
-  // Busca o token se não foi passado via init
   let token = init.token;
   if (!token && typeof window !== "undefined") {
     token = window.localStorage.getItem("fiber-control.access-token");
@@ -26,7 +29,7 @@ export async function apiRequest<T>(
   const response = await fetch(`${appConfig.apiUrl}${path}`, {
     ...init,
     headers,
-    credentials: "include" // ✅ envia cookies automaticamente em toda requisição
+    credentials: "include" // ✓ envia cookies automaticamente em toda requisição
   });
 
   if (response.status === 204) {
@@ -39,15 +42,31 @@ export async function apiRequest<T>(
     let payload: Partial<ApiError> = {};
 
     try {
-      payload = text ? JSON.parse(text) : {};
+      const parsed = text ? JSON.parse(text) : {};
+
+      if (typeof parsed === "object" && parsed !== null) {
+        if ("error" in parsed && typeof parsed.error === "object" && parsed.error !== null) {
+          const errorSection = parsed.error as Partial<ApiError>;
+          payload = {
+            ...parsed,
+            ...errorSection
+          };
+        } else {
+          payload = parsed as Partial<ApiError>;
+        }
+      }
     } catch {
       payload = {};
     }
 
     throw {
-      statusCode: response.status,
+      statusCode: payload.statusCode ?? response.status,
       code: payload.code ?? "REQUEST_FAILED",
-      message: payload.message ?? "Request failed"
+      message: payload.message ?? "Request failed",
+      details: payload.details,
+      path: payload.path,
+      requestId: payload.requestId,
+      timestamp: payload.timestamp
     } satisfies ApiError;
   }
 

@@ -49,7 +49,7 @@ export default function SettingsPage() {
   const [companyInfo, setCompanyInfo] = useState({
     name: 'Fiber Control Systems Ltd.',
     businessId: '32.894.102/0001-99',
-    email: 'admin@fibercontrol.com',
+    email: 'admin@fibercontrol.local',
     address: 'Av. Paulista, 1000, 14th Floor, Bela Vista, São Paulo - SP, 01310-100',
     timezone: '(GMT-03:00) Brasilia Time',
     currency: 'BRL - Brazilian Real'

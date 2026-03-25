@@ -1,11 +1,22 @@
 import { AppError } from "../../lib/app-error.js";
-import { createAccessToken, hashPassword, verifyPassword } from "../../lib/auth.js";
+import {
+  ACCESS_TOKEN_TTL_SECONDS,
+  createAccessToken,
+  hashPassword,
+  verifyPassword
+} from "../../lib/auth.js";
 import type { AuthRepository } from "./auth.repository.js";
 
 type UserRecord =
   | Awaited<ReturnType<AuthRepository["createUser"]>>
   | NonNullable<Awaited<ReturnType<AuthRepository["findUserByEmail"]>>>
   | NonNullable<Awaited<ReturnType<AuthRepository["findUserById"]>>>;
+
+type SessionPayload = {
+  user: ReturnType<typeof mapUser>;
+  accessToken: string;
+  expiresAt: string;
+};
 
 export class AuthService {
   constructor(private readonly authRepository: AuthRepository) {}
@@ -33,14 +44,7 @@ export class AuthService {
       role: userCount === 0 ? "ADMIN" : "OPERATOR"
     });
 
-    return {
-      user: mapUser(user),
-      accessToken: createAccessToken({
-        userId: user.id,
-        email: user.email,
-        role: mapUserRole(user.role)
-      })
-    };
+    return this.buildSession(user);
   }
 
   async login(input: { email: string; password: string }) {
@@ -50,14 +54,7 @@ export class AuthService {
       throw new AppError(401, "INVALID_CREDENTIALS", "Invalid credentials");
     }
 
-    return {
-      user: mapUser(user),
-      accessToken: createAccessToken({
-        userId: user.id,
-        email: user.email,
-        role: mapUserRole(user.role)
-      })
-    };
+    return this.buildSession(user);
   }
 
   async getCurrentUser(userId: string) {
@@ -130,6 +127,23 @@ export class AuthService {
     const user = await this.authRepository.updateUser(userId, updateData);
 
     return mapUser(user);
+  }
+
+  private buildSession(user: UserRecord): SessionPayload {
+    const mappedUser = mapUser(user);
+    const mappedRole = mapUserRole(user.role);
+    const accessToken = createAccessToken({
+      userId: user.id,
+      email: user.email,
+      role: mappedRole
+    });
+    const expiresAt = new Date(Date.now() + ACCESS_TOKEN_TTL_SECONDS * 1000).toISOString();
+
+    return {
+      user: mappedUser,
+      accessToken,
+      expiresAt
+    };
   }
 }
 

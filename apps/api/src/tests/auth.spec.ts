@@ -38,6 +38,7 @@ describe("Auth routes", () => {
     expect(response.status).toBe(201);
     expect(response.body.data.user.role).toBe("admin");
     expect(response.body.data.accessToken).toEqual(expect.any(String));
+    expect(typeof response.body.data.expiresAt).toBe("string");
   });
 
   it("should login with valid credentials", async () => {
@@ -54,6 +55,8 @@ describe("Auth routes", () => {
 
     expect(response.status).toBe(200);
     expect(response.body.data.user.email).toBe("operator@fiber.dev");
+    expect(typeof response.body.data.expiresAt).toBe("string");
+    expect(new Date(response.body.data.expiresAt).toString()).not.toBe("Invalid Date");
   });
 
   it("should reject invalid credentials", async () => {
@@ -70,6 +73,12 @@ describe("Auth routes", () => {
 
     expect(response.status).toBe(401);
     expect(response.body.error.code).toBe("INVALID_CREDENTIALS");
+    expect(typeof response.body.requestId).toBe("string");
+    expect(response.headers["x-request-id"]).toBe(response.body.requestId);
+    expect(response.body.statusCode).toBe(401);
+    expect(response.body.path).toBe("/auth/login");
+    expect(new Date(response.body.timestamp).toString()).not.toBe("Invalid Date");
+    expect(response.body.error.details).toBeUndefined();
   });
 
   it("should return the authenticated user", async () => {
@@ -92,6 +101,12 @@ describe("Auth routes", () => {
 
     expect(response.status).toBe(401);
     expect(response.body.error.code).toBe("UNAUTHORIZED");
+    expect(typeof response.body.requestId).toBe("string");
+    expect(response.headers["x-request-id"]).toBe(response.body.requestId);
+    expect(response.body.statusCode).toBe(401);
+    expect(response.body.path).toBe("/auth/me");
+    expect(new Date(response.body.timestamp).toString()).not.toBe("Invalid Date");
+    expect(response.body.error.details).toBeUndefined();
   });
 
   it("should require admin to register another user after bootstrap", async () => {

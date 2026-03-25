@@ -1,4 +1,5 @@
 import Fastify, { type FastifyInstance } from "fastify";
+import { createRequire } from "node:module";
 
 import { alertsRoutes } from "./modules/alerts/alerts.route.js";
 import { authRoutes } from "./modules/auth/auth.route.js";
@@ -17,10 +18,14 @@ import { registerErrorHandler } from "./plugins/error-handler.js";
 import { registerCors } from "./plugins/cors.js";
 import { registerScalar } from "./plugins/scalar.js";
 import { registerSwagger } from "./plugins/swagger.js";
+import { registerRequestContext } from "./plugins/request-context.js";
+
+const require = createRequire(import.meta.url);
 
 export async function buildApp(): Promise<FastifyInstance> {
   const isDev = process.env.NODE_ENV === "development";
-  
+  const prettyTarget = resolvePinoPrettyTarget();
+
   const app = Fastify({
     logger: {
       level: "info",
@@ -30,15 +35,20 @@ export async function buildApp(): Promise<FastifyInstance> {
             target: "pino/file",
             options: { destination: "./logs/app.log", mkdir: true },
           },
-          ...(isDev ? [{
-            target: "pino-pretty",
-            options: { colorize: true }
-          }] : [])
+          ...(isDev && prettyTarget
+            ? [
+                {
+                  target: prettyTarget,
+                  options: { colorize: true }
+                }
+              ]
+            : [])
         ]
       }
     }
   });
 
+  await registerRequestContext(app);
   await registerCors(app);
   await registerSwagger(app);
   await registerScalar(app);
@@ -59,4 +69,13 @@ export async function buildApp(): Promise<FastifyInstance> {
   await app.register(taxConfigRoutes, { prefix: "/tax-config" });
 
   return app;
+}
+
+function resolvePinoPrettyTarget() {
+  try {
+    require.resolve("pino-pretty");
+    return "pino-pretty";
+  } catch {
+    return undefined;
+  }
 }

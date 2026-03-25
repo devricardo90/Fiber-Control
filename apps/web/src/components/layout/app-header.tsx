@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/api";
+import { useAppState } from "./app-state-provider";
 import { useAuth } from "./auth-provider";
 import {
   DropdownMenu,
@@ -19,6 +20,7 @@ export function AppHeader() {
   const { user, token, logout } = useAuth();
   const router = useRouter();
   const [search, setSearch] = useState("");
+  const { isOnline } = useAppState();
 
   const { data: alertsRes } = useQuery({
     queryKey: ["alerts", "header", token],
@@ -54,6 +56,9 @@ export function AppHeader() {
       </div>
       
       <div className="flex items-center gap-6">
+        <span className={`network-indicator ${isOnline ? "online" : "offline"}`}>
+          {isOnline ? "Online" : "Offline"}
+        </span>
         <div className="flex items-center gap-4 border-r border-[#414753] pr-6">
           {/* Notifications Dropdown */}
           <DropdownMenu>

@@ -21,9 +21,14 @@ const errorSchema = {
       required: ["code", "message"],
       properties: {
         code: { type: "string" },
-        message: { type: "string" }
+        message: { type: "string" },
+        details: { type: "object" }
       }
-    }
+    },
+    statusCode: { type: "number" },
+    requestId: { type: "string" },
+    path: { type: "string" },
+    timestamp: { type: "string" }
   }
 } as const;
 
@@ -33,10 +38,11 @@ const authResponseSchema = {
   properties: {
     data: {
       type: "object",
-      required: ["user", "accessToken"],
+      required: ["user", "accessToken", "expiresAt"],
       properties: {
         user: userSchema,
-        accessToken: { type: "string" }
+        accessToken: { type: "string" },
+        expiresAt: { type: "string", format: "date-time" }
       }
     }
   }
