@@ -5,25 +5,15 @@ import { AppProviders } from "@/components/layout/app-providers";
 import { appConfig } from "@/lib/config";
 
 import "./globals.css";
-import { Geist } from "next/font/google";
-import { cn } from "@/lib/utils";
-
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 export const metadata: Metadata = {
-  title: `${appConfig.appName} | Operations`,
-  description: "Operational control panel for recurring-service providers."
+  title: `${appConfig.appName} | Frontend Base`,
+  description: "Operational frontend foundation for Fiber Control."
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={cn("font-sans", geist.variable)}>
-      <head>
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
-        />
-      </head>
+    <html lang="en">
       <body>
         <AppProviders>{children}</AppProviders>
       </body>

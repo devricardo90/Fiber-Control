@@ -1,5 +1,9 @@
 import Link from "next/link";
 
+import { FoundationButton } from "@/components/foundation/button";
+import { Panel } from "@/components/foundation/panel";
+import { StatusChip } from "@/components/foundation/status-chip";
+
 import { PageHeader } from "./page-header";
 
 type PlaceholderPageProps = {
@@ -26,76 +30,74 @@ type PlaceholderPageProps = {
 };
 
 export function PlaceholderPage({
-  title,
-  description,
   badge,
+  description,
+  highlights,
   primaryAction,
   secondaryAction,
   summary,
-  highlights
+  title
 }: PlaceholderPageProps) {
   return (
-    <div className="page-shell">
+    <div className="space-y-5">
       <PageHeader
         title={title}
         description={description}
-        badge={badge}
+        badge={badge ? <StatusChip label={badge} tone="info" /> : null}
         actions={
-          <div className="cta-row">
+          <>
             {secondaryAction ? (
-              <Link href={secondaryAction.href} className="button-secondary">
-                {secondaryAction.label}
+              <Link href={secondaryAction.href}>
+                <FoundationButton variant="secondary">{secondaryAction.label}</FoundationButton>
               </Link>
             ) : null}
             {primaryAction ? (
-              <Link href={primaryAction.href} className="button-primary">
-                {primaryAction.label}
+              <Link href={primaryAction.href}>
+                <FoundationButton variant="primary">{primaryAction.label}</FoundationButton>
               </Link>
             ) : null}
-          </div>
+          </>
         }
       />
 
-      <section className="page-grid">
+      <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         {summary.map((item) => (
-          <article key={item.label} className="card metric-card" style={{ gridColumn: "span 3" }}>
-            <span className="metric-label">{item.label}</span>
-            <div className="metric-value">{item.value}</div>
-          </article>
+          <Panel key={item.label}>
+            <p className="text-xs font-medium uppercase tracking-[0.08em] text-[var(--fc-text-muted)]">
+              {item.label}
+            </p>
+            <p className="mt-3 text-2xl font-semibold text-[var(--fc-text)]">{item.value}</p>
+          </Panel>
         ))}
       </section>
 
-      <section className="page-grid">
-        <article className="card" style={{ gridColumn: "span 7" }}>
-          <h2>Frontend staging area</h2>
-          <p>
-            Esta página já está integrada ao shell real do produto. Quando você enviar o layout do
-            Figma correspondente, eu substituo esse conteúdo mantendo rota, autenticação e
-            navegação.
+      <section className="grid gap-4 xl:grid-cols-[2fr_1fr]">
+        <Panel
+          title="Frontend foundation only"
+          description="This route is intentionally held as a placeholder until the matching operational flow is explicitly opened in backlog."
+        >
+          <p className="text-sm leading-6 text-[var(--fc-text-soft)]">
+            FC-007 closes the shell, navigation, primitives and API boundary. Full business screens
+            remain outside scope and should only be opened by dedicated READY tasks.
           </p>
-          <div className="empty-state">
-            <span className="badge">Ready for Figma handoff</span>
-            <p>
-              O backend necessário para este módulo já existe. Falta agora encaixar a UI final,
-              filtros, tabelas e interações visuais.
-            </p>
-          </div>
-        </article>
+        </Panel>
 
-        <article className="card list-card" style={{ gridColumn: "span 5" }}>
-          <h2>Priority highlights</h2>
-          {highlights.map((item) => (
-            <div key={item.title} className="list-item">
-              <div>
-                <strong>{item.title}</strong>
-                <span>{item.description}</span>
+        <Panel title="Current status" description="Operational reading of this route.">
+          <div className="flex flex-col gap-2">
+            {highlights.map((item) => (
+              <div
+                key={item.title}
+                className="rounded-md border border-[var(--fc-border)] bg-[var(--fc-surface-muted)] p-3"
+              >
+                <div className="flex items-center justify-between gap-3">
+                  <strong className="text-sm text-[var(--fc-text)]">{item.title}</strong>
+                  <StatusChip label={item.tone} tone={item.tone} />
+                </div>
+                <p className="mt-2 text-sm text-[var(--fc-text-soft)]">{item.description}</p>
               </div>
-              <span className="status-pill" data-tone={item.tone}>
-                {item.tone}
-              </span>
-            </div>
-          ))}
-        </article>
+            ))}
+          </div>
+        </Panel>
       </section>
     </div>
   );

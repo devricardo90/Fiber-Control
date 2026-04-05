@@ -1,5 +1,5 @@
-import { OverdueReportScreen } from "@/features/reports";
+import { redirect } from "next/navigation";
 
-export default function OverdueReportPage() {
-  return <OverdueReportScreen />;
+export default function ReportsOverduePage() {
+  redirect("/workspace");
 }

@@ -1,5 +1,5 @@
-import { CustomersListScreen } from "@/features/customers";
+import { redirect } from "next/navigation";
 
 export default function CustomersPage() {
-  return <CustomersListScreen />;
+  redirect("/workspace");
 }

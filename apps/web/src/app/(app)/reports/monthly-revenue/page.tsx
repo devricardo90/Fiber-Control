@@ -1,5 +1,5 @@
-import { MonthlyRevenueReportScreen } from "@/features/reports";
+import { redirect } from "next/navigation";
 
-export default function MonthlyRevenueReportPage() {
-  return <MonthlyRevenueReportScreen />;
+export default function ReportsMonthlyRevenuePage() {
+  redirect("/workspace");
 }

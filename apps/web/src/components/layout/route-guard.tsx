@@ -3,8 +3,11 @@
 import { usePathname, useRouter } from "next/navigation";
 import type { ReactNode } from "react";
 import { useEffect } from "react";
-import { useAuth } from "./auth-provider";
+
 import { LoadingScreen } from "../shared/loading-screen";
+import { useAuth } from "./auth-provider";
+
+const FOUNDATION_ROUTES = ["/workspace", "/patterns", "/settings"];
 
 export function RouteGuard({ children }: { children: ReactNode }) {
   const pathname = usePathname();
@@ -12,14 +15,22 @@ export function RouteGuard({ children }: { children: ReactNode }) {
   const { isAuthenticated, isLoading } = useAuth();
 
   useEffect(() => {
-    if (isLoading) return;
+    if (isLoading) {
+      return;
+    }
 
     if (!isAuthenticated && pathname !== "/login") {
       router.replace("/login");
+      return;
     }
 
     if (isAuthenticated && pathname === "/login") {
-      router.replace("/dashboard");
+      router.replace("/workspace");
+      return;
+    }
+
+    if (isAuthenticated && !FOUNDATION_ROUTES.includes(pathname)) {
+      router.replace("/workspace");
     }
   }, [isAuthenticated, isLoading, pathname, router]);
 
@@ -32,6 +43,10 @@ export function RouteGuard({ children }: { children: ReactNode }) {
   }
 
   if (isAuthenticated && pathname === "/login") {
+    return null;
+  }
+
+  if (isAuthenticated && !FOUNDATION_ROUTES.includes(pathname)) {
     return null;
   }
 

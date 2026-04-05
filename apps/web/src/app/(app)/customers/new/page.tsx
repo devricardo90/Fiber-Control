@@ -1,5 +1,5 @@
-import { CustomerCreateScreen } from "@/features/customers";
+import { redirect } from "next/navigation";
 
 export default function NewCustomerPage() {
-  return <CustomerCreateScreen />;
+  redirect("/workspace");
 }

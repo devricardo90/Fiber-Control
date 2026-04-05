@@ -1,5 +1,5 @@
-import { RegisterPaymentScreen } from "@/features/payments";
+import { redirect } from "next/navigation";
 
-export default function RegisterPaymentPage() {
-  return <RegisterPaymentScreen />;
+export default function NewPaymentPage() {
+  redirect("/workspace");
 }

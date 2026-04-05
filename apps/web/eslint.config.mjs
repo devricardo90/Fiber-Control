@@ -12,7 +12,15 @@ const compat = new FlatCompat({
 const config = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
   {
-    ignores: [".next/**", "next-env.d.ts"]
+    ignores: [
+      ".next/**",
+      "next-env.d.ts",
+      "src/components/ui/**",
+      "src/features/customers/**",
+      "src/features/dashboard/**",
+      "src/features/finance/**",
+      "src/features/routes/**"
+    ]
   }
 ];
 

@@ -1,5 +1,5 @@
-import { RegionsReportScreen } from "@/features/reports";
+import { redirect } from "next/navigation";
 
-export default function RegionReportPage() {
-  return <RegionsReportScreen />;
+export default function ReportsRegionsPage() {
+  redirect("/workspace");
 }

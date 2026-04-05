@@ -2,29 +2,24 @@
 
 import { useMemo } from "react";
 
+import { StatusChip } from "@/components/foundation/status-chip";
+
 import { useAppState } from "./app-state-provider";
 import { useAuth } from "./auth-provider";
 
-const TONE_MAP: Record<string, "success" | "warning" | "danger"> = {
-  active: "success",
-  expiring: "warning",
-  expired: "danger",
-  idle: "info"
-};
-
 export function AppStatusBanner() {
-  const { isOnline, notification, clearNotification } = useAppState();
-  const { sessionState, sessionExpiresInMs } = useAuth();
+  const { clearNotification, isOnline, notification } = useAppState();
+  const { sessionExpiresInMs, sessionState } = useAuth();
 
   const sessionLabel = useMemo(() => {
     if (sessionState === "active" && sessionExpiresInMs) {
       const minutes = Math.max(Math.floor(sessionExpiresInMs / 60_000), 1);
-      return `Session active · ${minutes} min remaining`;
+      return `Session active - ${minutes} min remaining`;
     }
 
     if (sessionState === "expiring") {
-      const minutes = sessionExpiresInMs ? Math.max(Math.ceil(sessionExpiresInMs / 60_000), 1) : null;
-      return minutes ? `Expiring in ${minutes} min` : "Session expiring soon";
+      const minutes = sessionExpiresInMs ? Math.max(Math.ceil(sessionExpiresInMs / 60_000), 1) : 1;
+      return `Session expiring - ${minutes} min remaining`;
     }
 
     if (sessionState === "expired") {
@@ -34,31 +29,23 @@ export function AppStatusBanner() {
     return null;
   }, [sessionExpiresInMs, sessionState]);
 
-  const sessionTone = TONE_MAP[sessionState] ?? "info";
-
   return (
-    <div className="app-status-row">
-      <span className="status-pill" data-tone={isOnline ? "info" : "danger"}>
-        {isOnline ? "Connected" : "Offline mode"}
-      </span>
-      {sessionLabel && (
-        <span className="status-pill" data-tone={sessionTone}>
-          {sessionLabel}
-        </span>
-      )}
-      {notification && (
-        <span className="status-pill" data-tone={notification.tone}>
-          <span>{notification.message}</span>
-          <button
-            type="button"
-            aria-label="Dismiss notification"
-            className="status-dismiss"
-            onClick={clearNotification}
-          >
-            Dismiss
-          </button>
-        </span>
-      )}
+    <div className="mb-5 flex flex-wrap gap-2">
+      <StatusChip
+        label={isOnline ? "Browser connected" : "Offline mode"}
+        tone={isOnline ? "info" : "danger"}
+      />
+      {sessionLabel ? (
+        <StatusChip
+          label={sessionLabel}
+          tone={sessionState === "expiring" ? "warning" : sessionState === "expired" ? "danger" : "success"}
+        />
+      ) : null}
+      {notification ? (
+        <button type="button" onClick={clearNotification} className="text-left">
+          <StatusChip label={notification.message} tone={notification.tone} />
+        </button>
+      ) : null}
     </div>
   );
 }
