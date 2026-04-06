@@ -103,3 +103,11 @@ Formato recomendado de cada decisão:
 - **Decisao**: executar `FC-014` com intervencao minima, substituindo o placeholder por uma overview operacional baseada em `GET /regions` e `GET /regions/performance`, reabrindo somente `/regions` e mantendo route planning e regional report drilldown fora de escopo.
 - **Impacto**: o frontend reabre a sexta superficie de negocio sem expandir o escopo para operacao de campo. `Dashboard` passa a ser a proxima `READY` oficial por ter alto potencial de agregacao sobre contratos ja estabilizados e baixo risco de reabertura controlada.
 - **Relacionado a**: FC-014, FC-015, `apps/web/src/features/regions/components/*`, `apps/api/src/modules/regions/*`, `STATUS.md`, `backlog.md`
+
+## DEC-012 - Reabrir Dashboard apenas como overview operacional agregada
+- **Data**: 2026-04-06
+- **Contexto**: apos `FC-014`, a proxima superficie candidata era `Dashboard`. Nao havia contrato backend unico para dashboard, mas os modulos de `finance`, `alerts`, `reports` e `regions` ja sustentavam contratos estaveis suficientes para uma overview agregada.
+- **Opcoes consideradas**: criar um endpoint backend novo de dashboard; limitar `FC-015` a uma overview read-only agregando apenas os contratos ja estabilizados.
+- **Decisao**: executar `FC-015` com intervencao minima, substituindo a neutralizacao de `/dashboard` por uma overview operacional que agrega os contratos reais de `finance`, `alerts`, `reports` e `regions`, sem abrir route preview nem analytics avancado.
+- **Impacto**: o frontend reabre a setima superficie de negocio sem expandir o escopo para um backend novo ou analitica pesada. `Routes` passa a ser a proxima `READY` oficial por ser a ultima superficie legada relevante ainda nao auditada.
+- **Relacionado a**: FC-015, FC-016, `apps/web/src/features/dashboard/components/*`, `apps/web/src/services/dashboard.service.ts`, `STATUS.md`, `backlog.md`

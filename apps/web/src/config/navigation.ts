@@ -18,6 +18,12 @@ export const navigationItems: Array<{
   icon: LucideIcon;
 }> = [
   {
+    href: "/dashboard",
+    label: "Dashboard",
+    description: "Cross-module operational overview.",
+    icon: LayoutGrid
+  },
+  {
     href: "/workspace",
     label: "Workspace",
     description: "Operational shell and integration boundary.",

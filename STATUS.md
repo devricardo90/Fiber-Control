@@ -1,13 +1,13 @@
 # STATUS - Fiber Control
 
 ## Estado atual
-Projeto com governanca central estabelecida, arquitetura backend definida, trilha de auditoria transversal implementada, persistencia Prisma formalizada, suite integrada do backend em verde, autenticacao/autorizacao base formalmente encerradas, fundacao frontend operacional fechada, login local coerente com o ambiente real e seis superficies de negocio reabertas com consolidacao minima.
+Projeto com governanca central estabelecida, arquitetura backend definida, trilha de auditoria transversal implementada, persistencia Prisma formalizada, suite integrada do backend em verde, autenticacao/autorizacao base formalmente encerradas, fundacao frontend operacional fechada, login local coerente com o ambiente real e sete superficies de negocio reabertas com consolidacao minima.
 
-## Fotografia oficial apos FC-014
-- `FC-014` esta formalmente classificada como `DONE`.
-- `/regions` voltou a ser superficie ativa de negocio em `apps/web`.
-- `Regions` passou a usar a linguagem operacional da FC-007 sem redesign completo.
-- a overview regional foi consolidada em cima dos contratos reais `GET /regions` e `GET /regions/performance`.
+## Fotografia oficial apos FC-015
+- `FC-015` esta formalmente classificada como `DONE`.
+- `/dashboard` voltou a ser superficie ativa de negocio em `apps/web`.
+- `Dashboard` passou a usar a linguagem operacional da FC-007 sem redesign completo.
+- a overview do dashboard foi consolidada em cima dos contratos reais de `finance`, `alerts`, `reports` e `regions`.
 - `pnpm.cmd lint` passou em `apps/web` e `pnpm.cmd build` passou fora do sandbox apos bloqueio ambiental inicial de `spawn EPERM`.
 
 ## Tasks concluidas
@@ -26,6 +26,7 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - `FC-012` - consolidacao minima da superficie Finance com reabertura controlada da overview
 - `FC-013` - consolidacao minima da superficie Reports com reabertura controlada da overview
 - `FC-014` - consolidacao minima da superficie Regions com reabertura controlada da overview
+- `FC-015` - consolidacao minima da superficie Dashboard com reabertura controlada da overview
 
 ## Encadeamento formal
 - `FC-006` foi executada antes de `FC-003` a `FC-005` porque era a unica `READY` oficial e tratava um risco critico de dominio e auditoria.
@@ -40,9 +41,16 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - `FC-012` reabriu apenas a overview de `Finance` e manteve reports e fiscal settings fora de escopo.
 - `FC-013` reabriu apenas a overview de `Reports` e manteve rotas detalhadas e drilldown por cliente fora de escopo.
 - `FC-014` reabriu apenas a overview de `Regions` e manteve route planning e regional report drilldown fora de escopo.
-- `FC-015` passa a ser a proxima `READY` oficial para repetir o mesmo padrao de auditoria e consolidacao em `Dashboard`.
+- `FC-015` reabriu apenas a overview de `Dashboard` e manteve route preview e analytics avancado fora de escopo.
+- `FC-016` passa a ser a proxima `READY` oficial para repetir o mesmo padrao de auditoria e consolidacao em `Routes`.
 
 ## Validacoes mais recentes
+- `FC-015` - auditoria da superficie Dashboard existente antes de editar: PASS
+- `FC-015` - consolidacao de `dashboard-screen.tsx` sem redesign completo: PASS
+- `FC-015` - reabertura controlada de `/dashboard` com overview agregada dos contratos reais: PASS
+- `FC-015` - `pnpm.cmd lint` em `apps/web`: PASS
+- `FC-015` - `pnpm.cmd build` em `apps/web`: PASS fora do sandbox
+- `FC-015` - testes de `apps/web`: N/A, nao existe suite dedicada nesta fotografia
 - `FC-014` - auditoria da superficie Regions existente antes de editar: PASS
 - `FC-014` - consolidacao de `regions-screen.tsx` sem redesign completo: PASS
 - `FC-014` - reabertura controlada de `/regions` com overview agregada dos contratos reais: PASS
@@ -71,11 +79,12 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - reports detalhados e fiscal settings permanecem fora de escopo dentro do ciclo de `Finance`
 - relatorios detalhados e drilldown por cliente permanecem fora de escopo dentro do ciclo de `Reports`
 - route planning e operacao de campo permanecem fora de escopo dentro do ciclo de `Regions`
-- `dashboard` e `routes` seguem como legado controlado e exigem task propria para reabertura
+- route preview e analytics avancado permanecem fora de escopo dentro do ciclo de `Dashboard`
+- `routes` seguem como legado controlado e exigem task propria para reabertura
 
 ## Proxima READY oficial
-`FC-015` - Auditar e consolidar a superficie `Dashboard` existente
+`FC-016` - Auditar e consolidar a superficie `Routes` existente
 
 ## Justificativa da proxima READY
-- a estrategia validada em `FC-009`, `FC-010`, `FC-011`, `FC-012`, `FC-013` e `FC-014` foi consolidar superficies existentes com ajuste minimo, sem recriacao ampla
-- `Dashboard` e a proxima overview/index com alto reaproveitamento potencial via contratos ja estabilizados e baixo risco de reabertura controlada
+- a estrategia validada em `FC-009`, `FC-010`, `FC-011`, `FC-012`, `FC-013`, `FC-014` e `FC-015` foi consolidar superficies existentes com ajuste minimo, sem recriacao ampla
+- `Routes` e a proxima superficie restante do frontend legado e exige auditoria propria antes de qualquer reabertura controlada

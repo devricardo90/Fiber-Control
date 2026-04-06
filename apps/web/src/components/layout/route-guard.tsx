@@ -8,6 +8,7 @@ import { LoadingScreen } from "../shared/loading-screen";
 import { useAuth } from "./auth-provider";
 
 const FOUNDATION_ROUTES = [
+  "/dashboard",
   "/workspace",
   "/patterns",
   "/settings",

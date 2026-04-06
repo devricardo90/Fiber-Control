@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation";
+import { DashboardScreen } from "@/features/dashboard";
 
 export default function DashboardPage() {
-  redirect("/workspace");
+  return <DashboardScreen />;
 }
