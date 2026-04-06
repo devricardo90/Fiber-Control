@@ -1,14 +1,14 @@
 # STATUS - Fiber Control
 
 ## Estado atual
-Projeto com governanca central estabelecida, arquitetura backend definida, trilha de auditoria transversal implementada, persistencia Prisma formalizada, suite integrada do backend em verde, autenticacao/autorizacao base formalmente encerradas, fundacao frontend operacional fechada, login local coerente com o ambiente real e oito superficies de negocio reabertas com consolidacao minima.
+Projeto com governanca central estabelecida, arquitetura backend definida, trilha de auditoria transversal implementada, persistencia Prisma formalizada, suite integrada do backend em verde, autenticacao/autorizacao base formalmente encerradas, fundacao frontend operacional fechada, login local coerente com o ambiente real, oito superficies de negocio reabertas com consolidacao minima e `main` novamente limpo para a proxima rodada apos saneamento do worktree residual.
 
-## Fotografia oficial apos FC-016
-- `FC-016` esta formalmente classificada como `DONE`.
-- `/routes` voltou a ser superficie ativa de negocio em `apps/web`.
-- `Routes` passou a usar a linguagem operacional da FC-007 sem redesign completo.
-- a overview de routes foi consolidada como fila operacional de despacho, sem planning, live map ou operacao de campo.
-- `pnpm.cmd lint` passou em `apps/web` e `pnpm.cmd build` passou fora do sandbox apos bloqueio ambiental inicial de `spawn EPERM`.
+## Fotografia oficial apos FC-017
+- `FC-017` esta formalmente classificada como `DONE`.
+- a publicacao de `FC-015` e `FC-016` em `main` foi reconciliada com `backlog.md`, `STATUS.md`, `AGENTS.md`, `docs/rules/protocol-rick.md` e `docs/ops/decisions.md`.
+- a Named Localhost Convention permaneceu registrada de forma enxuta e governavel, sem abrir infraestrutura nova.
+- o worktree remanescente pos-`FC-016` foi preservado em snapshot seguro fora da arvore ativa para evitar contaminacao da proxima execucao.
+- nenhuma nova `READY` oficial foi aberta nesta rodada.
 
 ## Tasks concluidas
 - `FC-001` - governanca operacional no padrao Protocolo Rick
@@ -28,6 +28,7 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - `FC-014` - consolidacao minima da superficie Regions com reabertura controlada da overview
 - `FC-015` - consolidacao minima da superficie Dashboard com reabertura controlada da overview
 - `FC-016` - consolidacao minima da superficie Routes com reabertura controlada da overview
+- `FC-017` - checkpoint de governanca e saneamento do worktree pos-FC-016
 
 ## Encadeamento formal
 - `FC-006` foi executada antes de `FC-003` a `FC-005` porque era a unica `READY` oficial e tratava um risco critico de dominio e auditoria.
@@ -44,9 +45,14 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - `FC-014` reabriu apenas a overview de `Regions` e manteve route planning e regional report drilldown fora de escopo.
 - `FC-015` reabriu apenas a overview de `Dashboard` e manteve route preview e analytics avancado fora de escopo.
 - `FC-016` reabriu apenas a overview de `Routes` e manteve route planning, live map e operacao de campo fora de escopo.
+- `FC-017` confirmou a coerencia do estado publicado e removeu o risco operacional de seguir trabalhando sobre worktree contaminado.
 
 ## Validacoes mais recentes
-## Validacoes mais recentes
+- `FC-017` - checkpoint de governanca em `backlog.md`, `STATUS.md`, `AGENTS.md`, `docs/rules/protocol-rick.md` e `docs/ops/decisions.md`: PASS
+- `FC-017` - `FC-015` e `FC-016` refletidas corretamente na governanca publicada: PASS
+- `FC-017` - Named Localhost Convention registrada de forma enxuta e correta: PASS
+- `FC-017` - worktree remanescente preservado em snapshot seguro antes da limpeza: PASS
+- `FC-017` - arvore ativa saneada para proxima execucao: PASS
 - `FC-016` - auditoria da superficie Routes existente antes de editar: PASS
 - `FC-016` - consolidacao de `routes-screen.tsx` sem redesign completo: PASS
 - `FC-016` - reabertura controlada de `/routes` com overview operacional minima: PASS
@@ -89,10 +95,11 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - route planning e operacao de campo permanecem fora de escopo dentro do ciclo de `Regions`
 - route preview e analytics avancado permanecem fora de escopo dentro do ciclo de `Dashboard`
 - route planning, live maps e operacao de campo permanecem fora de escopo dentro do ciclo de `Routes`
+- o material residual de `apps/api`, `Customers`, `Alerts` e docs correlatas foi retirado da arvore ativa e preservado para classificacao posterior em task propria
 
 ## Proxima READY oficial
 nenhuma `READY` oficial no momento
 
 ## Justificativa da proxima READY
 - `FC-009` a `FC-016` encerraram a rodada de reabertura controlada das superficies legadas prioritarias do frontend
-- a proxima frente deve ser definida por nova rodada de governanca antes de abrir qualquer escopo adicional
+- a proxima frente deve ser definida por nova rodada de governanca em cima de uma arvore limpa, sem reintroduzir mudancas soltas na task seguinte
