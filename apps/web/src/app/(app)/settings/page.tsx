@@ -3,9 +3,10 @@ import { Panel } from "@/components/foundation/panel";
 import { StatusChip } from "@/components/foundation/status-chip";
 import { PageHeader } from "@/components/shared/page-header";
 import { apiBoundary } from "@/lib/api-boundary";
+import { appConfig } from "@/lib/config";
 
 const environmentRows = [
-  ["APP", "http://localhost:3000", "Local frontend"],
+  ["APP", appConfig.appUrl, "Local frontend"],
   ["API", apiBoundary.baseUrl, "Backend boundary"],
   ["AUTH", apiBoundary.authStorageKey, "Browser token key"]
 ];

@@ -1,14 +1,14 @@
 # STATUS - Fiber Control
 
 ## Estado atual
-Projeto com governanca central estabelecida, arquitetura backend definida, trilha de auditoria transversal implementada, persistencia Prisma formalizada, suite integrada do backend em verde, autenticacao/autorizacao base formalmente encerradas, fundacao frontend operacional fechada, login local coerente com o ambiente real, oito superficies de negocio reabertas com consolidacao minima, `main` limpo e snapshot residual classificado para triagem dirigida na proxima rodada.
+Projeto com governanca central estabelecida, arquitetura backend definida, trilha de auditoria transversal implementada, persistencia Prisma formalizada, suite integrada do backend em verde, autenticacao/autorizacao base formalmente encerradas, fundacao frontend operacional fechada, login local coerente com o ambiente real, oito superficies de negocio reabertas com consolidacao minima, `main` limpo e ambiente local validado com `web.fiber-control.localhost` e `api.fiber-control.localhost`.
 
-## Fotografia oficial apos FC-018
-- `FC-018` esta formalmente classificada como `DONE`.
-- o snapshot residual pos-`FC-017` foi auditado sem reaplicacao na arvore ativa.
-- o bloco residual de `apps/api` foi classificado como mudanca futura relevante e passa a sustentar a proxima `READY` oficial.
-- a deriva local de `Customers` e `Alerts` foi classificada para descarte ou task propria, sem reintroducao automatica.
-- `main` permaneceu limpo e o snapshot seguro foi mantido para consulta posterior.
+## Fotografia oficial apos FC-019
+- `FC-019` esta formalmente classificada como `DONE`.
+- o ambiente local do Fiber Control opera com `web.fiber-control.localhost` e `api.fiber-control.localhost` como padrao recomendado validado.
+- `APP_URL`, `NEXT_PUBLIC_APP_URL`, `NEXT_PUBLIC_API_URL` e `CORS_ORIGIN` foram alinhados ao host nomeado.
+- boot local, CORS, login e leitura de `auth/me` foram validados com host nomeado.
+- o fallback para `localhost:porta` permaneceu documentado sem ser removido.
 
 ## Tasks concluidas
 - `FC-001` - governanca operacional no padrao Protocolo Rick
@@ -30,6 +30,7 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - `FC-016` - consolidacao minima da superficie Routes com reabertura controlada da overview
 - `FC-017` - checkpoint de governanca e saneamento do worktree pos-FC-016
 - `FC-018` - auditoria e classificacao do snapshot residual pos-FC-017
+- `FC-019` - operacionalizacao minima da Named Localhost Convention no ambiente local
 
 ## Encadeamento formal
 - `FC-006` foi executada antes de `FC-003` a `FC-005` porque era a unica `READY` oficial e tratava um risco critico de dominio e auditoria.
@@ -48,8 +49,21 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - `FC-016` reabriu apenas a overview de `Routes` e manteve route planning, live map e operacao de campo fora de escopo.
 - `FC-017` confirmou a coerencia do estado publicado e removeu o risco operacional de seguir trabalhando sobre worktree contaminado.
 - `FC-018` classificou o snapshot residual sem reintroduzir mudancas soltas na arvore ativa.
+- `FC-019` fechou a lacuna entre o protocolo e o runtime local, validando web e api em host nomeado.
 
 ## Validacoes mais recentes
+- `FC-019` - env local de `apps/web` e `apps/api` alinhado a `web.fiber-control.localhost` e `api.fiber-control.localhost`: PASS
+- `FC-019` - `APP_URL`, `NEXT_PUBLIC_APP_URL`, `NEXT_PUBLIC_API_URL` e `CORS_ORIGIN` coerentes entre si: PASS
+- `FC-019` - `pnpm.cmd lint` em `apps/web`: PASS
+- `FC-019` - `pnpm.cmd build` em `apps/web`: PASS fora do sandbox
+- `FC-019` - `pnpm.cmd lint` em `apps/api`: PASS
+- `FC-019` - `pnpm.cmd build` em `apps/api`: PASS
+- `FC-019` - abertura de `http://web.fiber-control.localhost:3000/login`: PASS
+- `FC-019` - `GET http://api.fiber-control.localhost:3001/health`: PASS
+- `FC-019` - preflight CORS em `api.fiber-control.localhost:3001`: PASS
+- `FC-019` - `POST /auth/login` em host nomeado: PASS
+- `FC-019` - `GET /auth/me` em host nomeado com token valido: PASS
+- `FC-019` - testes de `apps/web`: N/A, nao existe suite dedicada nesta fotografia
 - `FC-018` - auditoria do snapshot residual `stash@{0}`: PASS
 - `FC-018` - bloco de `apps/api` classificado como mudanca futura relevante: PASS
 - `FC-018` - deriva local de `Customers` e `Alerts` classificada para descarte ou task propria: PASS
@@ -104,11 +118,12 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - route planning, live maps e operacao de campo permanecem fora de escopo dentro do ciclo de `Routes`
 - o material residual de `apps/api`, `Customers`, `Alerts` e docs correlatas foi retirado da arvore ativa e preservado para classificacao posterior em task propria
 - a proxima triagem deve partir apenas do bloco residual de `apps/api`, sem reaplicar automaticamente deriva local antiga de frontend ou ruido documental
+- o fallback para `localhost:porta` permanece permitido e documentado quando host nomeado nao for viavel no ambiente atual
 
 ## Proxima READY oficial
-`FC-019` - Auditar e formalizar o bloco residual de `apps/api` preservado no snapshot pos-`FC-017`
+nenhuma `READY` oficial no momento
 
 ## Justificativa da proxima READY
 - `FC-009` a `FC-016` encerraram a rodada de reabertura controlada das superficies legadas prioritarias do frontend
-- a triagem de `FC-018` mostrou que o unico bloco com valor tecnico claro no snapshot residual esta em `apps/api` e docs correlatas
-- a deriva local de `Customers` e `Alerts` nao deve voltar para a arvore ativa sem task propria ou descarte explicito
+- `FC-018` mostrou que existe valor tecnico residual em `apps/api`, e `FC-019` fechou a lacuna imediata entre protocolo e runtime local
+- a proxima frente funcional deve ser definida por nova rodada curta de governanca sobre arvore limpa

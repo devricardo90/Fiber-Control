@@ -28,7 +28,7 @@ export async function registerErrorHandler(app: FastifyInstance): Promise<void> 
         code: error instanceof AppError ? error.code : undefined,
         details: error instanceof AppError ? error.details : undefined
       },
-      error
+      error instanceof Error ? error.message : "Unhandled error"
     );
 
     if (error instanceof AppError) {

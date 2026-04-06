@@ -1,4 +1,4 @@
-import type { CustomerStatus, Prisma, Region } from "../../generated/prisma/client.js";
+import type { CustomerStatus, Payment, Prisma, Region } from "../../generated/prisma/client.js";
 import { prisma } from "../../lib/prisma.js";
 
 type CustomerWithRegion = Prisma.CustomerGetPayload<{
@@ -90,7 +90,7 @@ export class CustomersRepository {
           }
         }
       }
-    }) as Promise<(CustomerWithRegion & { payments: any[] }) | null>;
+    }) as Promise<(CustomerWithRegion & { payments: Payment[] }) | null>;
   }
 
   async update(customerId: string, input: UpdateCustomerRepositoryInput): Promise<CustomerWithRegion> {

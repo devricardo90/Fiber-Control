@@ -19,7 +19,7 @@ export async function registerRequestContext(app: FastifyInstance): Promise<void
   });
 
   app.addHook("onResponse", (request, reply, done) => {
-    const path = request.routerPath ?? request.url;
+    const path = request.routeOptions.url ?? request.url;
 
     request.log.info(
       {

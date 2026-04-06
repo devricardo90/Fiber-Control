@@ -1,4 +1,5 @@
 import { Prisma } from "../../generated/prisma/client.js";
+import type { Payment } from "../../generated/prisma/client.js";
 import { AppError } from "../../lib/app-error.js";
 import { CustomerStatusService } from "./customer-status.service.js";
 import type {
@@ -10,8 +11,13 @@ import type {
 type CreateCustomerInput = CreateCustomerRepositoryInput;
 type UpdateCustomerInput = UpdateCustomerRepositoryInput;
 
+type CustomerPaymentRecord = Pick<
+  Payment,
+  "id" | "referenceMonth" | "expectedAmount" | "receivedAmount" | "status" | "paidAt" | "notes"
+>;
+
 type CustomerRecord = Awaited<ReturnType<CustomersRepository["create"]>> & {
-  payments?: any[];
+  payments?: CustomerPaymentRecord[];
 };
 
 export class CustomersService {
@@ -108,7 +114,7 @@ export class CustomersService {
   }
 
   async recalculateCustomerStatus(customerId: string, referenceDate?: string) {
-    const customer = await this.customersRepository.findByIdWithPayments(customerId) as any;
+    const customer = await this.customersRepository.findByIdWithPayments(customerId);
 
     if (!customer) {
       throw new AppError(404, "CUSTOMER_NOT_FOUND", "Customer was not found");
@@ -155,14 +161,14 @@ function mapCustomer(customer: CustomerRecord) {
       : null,
     createdAt: customer.createdAt.toISOString(),
     updatedAt: customer.updatedAt.toISOString(),
-    payments: customer.payments ? customer.payments.map((p: any) => ({
-      id: p.id,
-      referenceMonth: p.referenceMonth,
-      expectedAmount: Number(p.expectedAmount),
-      receivedAmount: Number(p.receivedAmount),
-      status: p.status.toLowerCase(),
-      paidAt: p.paidAt?.toISOString() ?? null,
-      notes: p.notes
+    payments: customer.payments ? customer.payments.map((payment) => ({
+      id: payment.id,
+      referenceMonth: payment.referenceMonth,
+      expectedAmount: Number(payment.expectedAmount),
+      receivedAmount: Number(payment.receivedAmount),
+      status: payment.status.toLowerCase(),
+      paidAt: payment.paidAt?.toISOString() ?? null,
+      notes: payment.notes
     })) : []
   };
 }

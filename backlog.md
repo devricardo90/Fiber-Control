@@ -23,7 +23,7 @@
 ---
 
 ## READY
-- `FC-019` - READY para auditar e formalizar o bloco residual de `apps/api` preservado no snapshot pos-`FC-017`, separando o que vira task oficial de backend/auditoria do que deve ser descartado ou reescrito
+- *(vazio no momento)*
 
 ## DOING
 - *(vazio no momento)*
@@ -51,6 +51,7 @@
 - `FC-016` - DONE com consolidacao minima da superficie `Routes`: `routes-screen.tsx` alinhada a linguagem operacional da FC-007, `/routes` reaberta, `lint` em PASS e `build` em PASS fora do sandbox; route planning, live maps e operacao de campo mantidos fora de escopo
 - `FC-017` - DONE com checkpoint de governanca e saneamento do worktree: publicacao de `FC-015` e `FC-016` validada em `main`, Named Localhost Convention confirmada como governanca enxuta e worktree remanescente preservado em snapshot seguro fora da arvore ativa; nenhuma nova `READY` foi aberta
 - `FC-018` - DONE com auditoria do snapshot residual pos-`FC-017`: bloco de `apps/api` classificado como mudanca futura relevante, deriva local de `Customers`/`Alerts` classificada para descarte ou task propria e ruido documental isolado; `main` permaneceu limpo e o snapshot seguro foi mantido sem reaplicacao
+- `FC-019` - DONE com operacionalizacao minima da Named Localhost Convention no ambiente local: `web.fiber-control.localhost` e `api.fiber-control.localhost` validados com boot local, `APP_URL`, `NEXT_PUBLIC_APP_URL`, `NEXT_PUBLIC_API_URL` e `CORS_ORIGIN` alinhados, login e CORS confirmados em host nomeado e fallback documentado para `localhost:porta`
 
 ---
 
@@ -58,6 +59,7 @@
 - seguir a consolidacao modulo a modulo em cima do frontend existente, sem recriacao ampla nem substituicao estetica
 - definir a proxima frente oficial apos o encerramento das superficies legadas reabertas em `Customers`, `Payments`, `Alerts`, `Finance`, `Reports`, `Regions`, `Dashboard` e `Routes`
 - auditar o bloco residual de backend/auditoria preservado no snapshot antes de qualquer reintroducao ou descarte definitivo
+- validar a proxima `READY` oficial sobre arvore limpa apos o ajuste minimo de ambiente local da FC-019
 
 ## Riscos atuais
 - `127.0.0.1:5440` agora voltou a refletir o baseline local de desenvolvimento com seed e migration atuais, mas continua sendo ambiente de dev e nao pode ser usado como base de testes
@@ -72,4 +74,4 @@
 - route planning, live maps e operacao de campo permanecem fora de escopo dentro do ciclo de `Routes`
 
 ## Proxima task oficial
-`FC-019` - Auditar e formalizar o bloco residual de `apps/api` preservado no snapshot pos-`FC-017`
+nenhuma `READY` oficial no momento
