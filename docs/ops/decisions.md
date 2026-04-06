@@ -71,3 +71,19 @@ Formato recomendado de cada decisão:
 - **Decisao**: executar `FC-010` com intervencao minima, consolidando apenas `payments-list-screen.tsx` e `register-payment-screen.tsx`, reabrindo somente `/payments` e `/payments/new`, e mantendo reconciliacao explicitamente fora de escopo.
 - **Impacto**: o frontend reabre a segunda superficie de negocio sem reintroduzir deriva de escopo. `Alerts` passa a ser a proxima `READY` oficial por ter menor acoplamento e boa chance de reaproveitamento controlado.
 - **Relacionado a**: FC-010, FC-011, `apps/web/src/features/payments/components/*`, `apps/api/src/modules/payments/*`, `STATUS.md`, `backlog.md`
+
+## DEC-008 - Reabrir Alerts apenas como overview operacional
+- **Data**: 2026-04-06
+- **Contexto**: apos `FC-010`, a proxima superficie candidata era `Alerts`. O backend ja sustentava `GET /alerts/overview`, mas o modulo tambem traz lifecycle actions (`acknowledge`, `silence`, `resolve`) que ampliariam a task.
+- **Opcoes consideradas**: reabrir `Alerts` junto com lifecycle actions; limitar `FC-011` a overview read-only usando apenas o contrato ja estabilizado.
+- **Decisao**: executar `FC-011` com intervencao minima, substituindo o placeholder por uma overview operacional baseada em `GET /alerts/overview`, reabrindo somente `/alerts` e mantendo lifecycle actions e relatorio de overdue fora de escopo.
+- **Impacto**: o frontend reabre a terceira superficie de negocio sem expandir o escopo de acoes sensiveis. `Finance` passa a ser a proxima `READY` oficial por ter perfil semelhante de overview e baixo risco de reabertura controlada.
+- **Relacionado a**: FC-011, FC-012, `apps/web/src/features/alerts/components/*`, `apps/api/src/modules/alerts/*`, `STATUS.md`, `backlog.md`
+
+## DEC-009 - Reabrir Finance apenas como overview operacional
+- **Data**: 2026-04-06
+- **Contexto**: apos `FC-011`, a proxima superficie candidata era `Finance`. O backend ja sustentava `GET /finance/overview`, mas o modulo tangencia reports e configuracoes fiscais, que ampliariam a task.
+- **Opcoes consideradas**: reabrir `Finance` junto com reports e widgets fiscais; limitar `FC-012` a uma overview read-only usando apenas o contrato ja estabilizado.
+- **Decisao**: executar `FC-012` com intervencao minima, substituindo o placeholder por uma overview operacional baseada em `GET /finance/overview`, reabrindo somente `/finance` e mantendo reports detalhados e fiscal settings fora de escopo.
+- **Impacto**: o frontend reabre a quarta superficie de negocio sem expandir o escopo para relatórios ou configuracoes. `Reports` passa a ser a proxima `READY` oficial por ter alto reaproveitamento potencial e baixo risco de reabertura controlada.
+- **Relacionado a**: FC-012, FC-013, `apps/web/src/features/finance/components/*`, `apps/api/src/modules/finance/*`, `STATUS.md`, `backlog.md`

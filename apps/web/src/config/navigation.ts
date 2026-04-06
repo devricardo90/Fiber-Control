@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { CreditCard, LayoutGrid, Settings2, TableProperties, Users } from "lucide-react";
+import { Bell, ChartColumn, CreditCard, LayoutGrid, Settings2, TableProperties, Users } from "lucide-react";
 
 export const navigationItems: Array<{
   href: string;
@@ -30,6 +30,18 @@ export const navigationItems: Array<{
     label: "Payments",
     description: "Second reopened business surface.",
     icon: CreditCard
+  },
+  {
+    href: "/alerts",
+    label: "Alerts",
+    description: "Read-only operational alert overview.",
+    icon: Bell
+  },
+  {
+    href: "/finance",
+    label: "Finance",
+    description: "Read-only financial overview.",
+    icon: ChartColumn
   },
   {
     href: "/settings",

@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation";
+import { FinanceOverviewScreen } from "@/features/finance";
 
 export default function FinancePage() {
-  redirect("/workspace");
+  return <FinanceOverviewScreen />;
 }
