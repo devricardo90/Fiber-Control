@@ -111,3 +111,19 @@ Formato recomendado de cada decisão:
 - **Decisao**: executar `FC-015` com intervencao minima, substituindo a neutralizacao de `/dashboard` por uma overview operacional que agrega os contratos reais de `finance`, `alerts`, `reports` e `regions`, sem abrir route preview nem analytics avancado.
 - **Impacto**: o frontend reabre a setima superficie de negocio sem expandir o escopo para um backend novo ou analitica pesada. `Routes` passa a ser a proxima `READY` oficial por ser a ultima superficie legada relevante ainda nao auditada.
 - **Relacionado a**: FC-015, FC-016, `apps/web/src/features/dashboard/components/*`, `apps/web/src/services/dashboard.service.ts`, `STATUS.md`, `backlog.md`
+
+## DEC-013 - Reabrir Routes apenas como overview operacional minima
+- **Data**: 2026-04-06
+- **Contexto**: apos `FC-015`, a ultima superficie legada relevante ainda neutralizada era `Routes`. O frontend existente trazia mapa mockado, blur, filtros decorativos e acoes de planning sem suporte real de backend, em conflito direto com a `frontend-operational-rule`.
+- **Opcoes consideradas**: reabrir `Routes` preservando o mock visual com pequenos ajustes; reimplementar toda a feature de routes; limitar `FC-016` a uma overview operacional minima com fila, status e bloqueios.
+- **Decisao**: executar `FC-016` com consolidacao minima, substituindo o redirect e o mock visual inflado por uma leitura operacional compacta de fila e despacho, reabrindo somente `/routes` e mantendo route planning, live maps e operacao de campo fora de escopo.
+- **Impacto**: o frontend reabre a oitava superficie de negocio sem simular capacidades inexistentes. A rodada de reabertura controlada das superficies legadas prioritarias fica encerrada e a proxima frente volta a depender de nova definicao de governanca.
+- **Relacionado a**: FC-016, `apps/web/src/features/routes/components/*`, `apps/web/src/app/(app)/routes/page.tsx`, `STATUS.md`, `backlog.md`
+
+## DEC-014 - Named Localhost Convention
+- **Data**: 2026-04-06
+- **Contexto**: o projeto precisa reduzir conflitos manuais de porta entre execucoes locais simultaneas e estabilizar URLs de desenvolvimento para auth, CORS, callbacks e documentacao.
+- **Opcoes consideradas**: manter `localhost:<porta>` como identidade principal de cada projeto; adotar localhost nomeado por projeto como padrao recomendado, com fallback pratico para porta explicita.
+- **Decisao**: adotar como padrao recomendado localhost nomeado por projeto, priorizando `web.<project>.localhost`, `api.<project>.localhost` e `admin.<project>.localhost`. A identidade local principal passa a ser o nome do projeto, nao a porta.
+- **Impacto**: multiplos projetos podem coexistir com menos colisao de porta, menos troca de env e URLs locais mais previsiveis. Quando Portless ou localhost nomeado nao forem viaveis, `localhost:<porta>` continua permitido de forma explicita e documentada.
+- **Relacionado a**: `AGENTS.md`, `docs/rules/protocol-rick.md`

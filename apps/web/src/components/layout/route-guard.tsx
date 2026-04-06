@@ -19,7 +19,8 @@ const FOUNDATION_ROUTES = [
   "/alerts",
   "/finance",
   "/reports",
-  "/regions"
+  "/regions",
+  "/routes"
 ];
 
 export function RouteGuard({ children }: { children: ReactNode }) {

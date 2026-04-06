@@ -23,7 +23,7 @@
 ---
 
 ## READY
-- `FC-016` - READY para auditar e consolidar a superficie `Routes` existente, reabrindo apenas a overview se a auditoria confirmar reaproveitamento limpo na linguagem operacional da FC-007
+- *(vazio no momento)*
 
 ## DOING
 - *(vazio no momento)*
@@ -48,12 +48,13 @@
 - `FC-013` - DONE com consolidacao minima da superficie `Reports`: `reports-screen.tsx` alinhada aos contratos reais `GET /reports/monthly-revenue`, `GET /reports/annual-summary`, `GET /reports/overdue` e `GET /reports/regions`, `/reports` reaberta, `lint` em PASS e `build` em PASS fora do sandbox; rotas detalhadas mantidas fora de escopo
 - `FC-014` - DONE com consolidacao minima da superficie `Regions`: `regions-screen.tsx` alinhada aos contratos reais `GET /regions` e `GET /regions/performance`, `/regions` reaberta, `lint` em PASS e `build` em PASS fora do sandbox; route planning e regional report drilldown mantidos fora de escopo
 - `FC-015` - DONE com consolidacao minima da superficie `Dashboard`: `dashboard-screen.tsx` alinhada aos contratos reais de `finance`, `alerts`, `reports` e `regions`, `/dashboard` reaberta, `lint` em PASS e `build` em PASS fora do sandbox; route preview e analytics avancado mantidos fora de escopo
+- `FC-016` - DONE com consolidacao minima da superficie `Routes`: `routes-screen.tsx` alinhada a linguagem operacional da FC-007, `/routes` reaberta, `lint` em PASS e `build` em PASS fora do sandbox; route planning, live maps e operacao de campo mantidos fora de escopo
 
 ---
 
 ## O que falta no ciclo atual
 - seguir a consolidacao modulo a modulo em cima do frontend existente, sem recriacao ampla nem substituicao estetica
-- validar a proxima frente operacional de `Routes` antes de reabrir qualquer outra superficie alem de `Customers`, `Payments`, `Alerts`, `Finance`, `Reports`, `Regions` e `Dashboard`
+- definir a proxima frente oficial apos o encerramento das superficies legadas reabertas em `Customers`, `Payments`, `Alerts`, `Finance`, `Reports`, `Regions`, `Dashboard` e `Routes`
 
 ## Riscos atuais
 - `127.0.0.1:5440` agora voltou a refletir o baseline local de desenvolvimento com seed e migration atuais, mas continua sendo ambiente de dev e nao pode ser usado como base de testes
@@ -65,6 +66,7 @@
 - relatorios detalhados e drilldown por cliente permanecem fora de escopo dentro do ciclo de `Reports`
 - route planning e operacao de campo permanecem fora de escopo dentro do ciclo de `Regions`
 - route preview e analytics avancado permanecem fora de escopo dentro do ciclo de `Dashboard`
+- route planning, live maps e operacao de campo permanecem fora de escopo dentro do ciclo de `Routes`
 
 ## Proxima task oficial
-`FC-016` - Auditar e consolidar a superficie `Routes` existente
+nenhuma `READY` oficial no momento

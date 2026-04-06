@@ -72,6 +72,12 @@ export const navigationItems: Array<{
     icon: MapPinned
   },
   {
+    href: "/routes",
+    label: "Routes",
+    description: "Dispatch readiness and blocked route follow-up overview.",
+    icon: MapPinned
+  },
+  {
     href: "/settings",
     label: "Settings",
     description: "Environment and session baseline.",

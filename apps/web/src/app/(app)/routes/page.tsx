@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation";
+import { RoutesScreen } from "@/features/routes";
 
 export default function RoutesPage() {
-  redirect("/workspace");
+  return <RoutesScreen />;
 }

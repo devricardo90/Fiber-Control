@@ -113,6 +113,26 @@ os agentes devem:
 2. só então implementar código;  
 3. registrar a decisão em `docs/ops/decisions.md`.  
 
+## 8.1 ConvenÃ§Ã£o de localhost nomeado
+
+Sempre que viÃ¡vel, os agentes devem preferir localhost nomeado como padrÃ£o recomendado de desenvolvimento local.
+
+PadrÃ£o recomendado:
+- `web.<project>.localhost`
+- `api.<project>.localhost`
+- `admin.<project>.localhost`
+
+Regra:
+- a identidade local principal do projeto deve ser o nome do projeto, nÃ£o a porta
+
+BenefÃ­cios:
+- reduzir colisÃ£o de portas entre projetos simultÃ¢neos
+- diminuir trocas de env para URLs locais
+- aumentar previsibilidade para auth, CORS, callbacks e documentaÃ§Ã£o
+
+Fallback:
+- quando localhost nomeado ou Portless nÃ£o for viÃ¡vel no ambiente atual, `localhost:<porta>` continua permitido de forma explÃ­cita e documentada
+
 ## 9. Regras de commit e fechamento de task
 
 ### 9.1 Commit somente após execução de READY

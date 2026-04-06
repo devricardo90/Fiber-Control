@@ -1,52 +1,81 @@
-export const routesSummary = [
-  { label: "Total Stops", value: "12", trend: "+2 vs yesterday" },
-  { label: "Est. Time", value: "4h 30m", trend: "Optimized" },
+export type RouteSummaryItem = {
+  label: string;
+  value: string;
+};
+
+export type RouteQueueItem = {
+  id: string;
+  customer: string;
+  region: string;
+  issue: string;
+  scheduledWindow: string;
+  technician: string;
+  status: "Ready" | "Attention" | "Blocked";
+};
+
+export type RouteAttentionItem = {
+  title: string;
+  description: string;
+  tone: "warning" | "success";
+};
+
+export const routeSummary: RouteSummaryItem[] = [
+  { label: "Scheduled visits", value: "6" },
+  { label: "Ready dispatches", value: "4" },
+  { label: "Attention points", value: "2" },
+  { label: "Blocked plans", value: "1" }
 ];
 
-export const todayRoutes = [
+export const routeQueue: RouteQueueItem[] = [
   {
-    group: "METROPOLITAN",
-    visits: 4,
-    items: [
-      {
-        id: "1",
-        title: "Starlight Apartments",
-        subtitle: "Unit 402 - Signal Degradation",
-        time: "09:15 AM",
-        priority: "HIGH",
-        status: "ACTIVE",
-        statusColor: "emerald"
-      },
-      {
-        id: "2",
-        title: "Apex Financial Hub",
-        subtitle: "Server Room 2 - Expansion",
-        time: "10:45 AM",
-        priority: "MED",
-        status: "PENDING",
-        statusColor: "indigo"
-      }
-    ]
+    id: "R-201",
+    customer: "Starlight Apartments",
+    region: "Metro North",
+    issue: "Signal degradation follow-up",
+    scheduledWindow: "08:30 - 09:30",
+    technician: "Team Alpha",
+    status: "Ready"
   },
   {
-    group: "SUBURBAN EAST",
-    visits: 2,
-    items: [
-      {
-        id: "3",
-        title: "Miller Residence",
-        subtitle: "Cable Cut - Outage",
-        time: "01:30 PM",
-        priority: "CRITICAL",
-        status: "URGENT",
-        statusColor: "rose"
-      }
-    ]
+    id: "R-204",
+    customer: "Apex Financial Hub",
+    region: "Central Core",
+    issue: "Expansion activation visit",
+    scheduledWindow: "10:00 - 11:30",
+    technician: "Team Beta",
+    status: "Ready"
+  },
+  {
+    id: "R-208",
+    customer: "Miller Residence",
+    region: "Suburban East",
+    issue: "Outage escalation",
+    scheduledWindow: "13:00 - 14:00",
+    technician: "Team Field 3",
+    status: "Attention"
+  },
+  {
+    id: "R-211",
+    customer: "Coastal Market",
+    region: "Coastal Line",
+    issue: "Install pending stock confirmation",
+    scheduledWindow: "15:00 - 16:00",
+    technician: "Unassigned",
+    status: "Blocked"
   }
 ];
 
-export const mapMarkers = [
-  { id: "1", x: 70, y: 30, label: "1" },
-  { id: "2", x: 85, y: 60, label: "2" },
-  { id: "H", x: 45, y: 55, label: "H" },
+export const routeAttention: RouteAttentionItem[] = [
+  {
+    title: "Blocked planning remains out of scope",
+    description:
+      "FC-016 reopens only the overview. Planning, optimization and field operation stay closed until a dedicated backend-backed task exists.",
+    tone: "warning"
+  },
+  {
+    title: "Current queue is ready for operational review",
+    description:
+      "The screen now supports reading route load, dispatch status and next follow-up without simulating map interaction or live tracking.",
+    tone: "success"
+  }
 ];
