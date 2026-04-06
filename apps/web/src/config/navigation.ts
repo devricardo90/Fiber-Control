@@ -1,5 +1,14 @@
 import type { LucideIcon } from "lucide-react";
-import { Bell, ChartColumn, CreditCard, LayoutGrid, Settings2, TableProperties, Users } from "lucide-react";
+import {
+  Bell,
+  ChartColumn,
+  CreditCard,
+  FileText,
+  LayoutGrid,
+  Settings2,
+  TableProperties,
+  Users
+} from "lucide-react";
 
 export const navigationItems: Array<{
   href: string;
@@ -42,6 +51,12 @@ export const navigationItems: Array<{
     label: "Finance",
     description: "Read-only financial overview.",
     icon: ChartColumn
+  },
+  {
+    href: "/reports",
+    label: "Reports",
+    description: "Operational overview across revenue, overdue and regions.",
+    icon: FileText
   },
   {
     href: "/settings",

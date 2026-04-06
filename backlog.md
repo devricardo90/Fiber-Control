@@ -23,7 +23,7 @@
 ---
 
 ## READY
-- `FC-013` - READY para auditar e consolidar a superficie `Reports` existente, reabrindo apenas a overview se a auditoria confirmar reaproveitamento limpo na linguagem operacional da FC-007
+- `FC-014` - READY para auditar e consolidar a superficie `Regions` existente, reabrindo apenas a overview se a auditoria confirmar reaproveitamento limpo na linguagem operacional da FC-007
 
 ## DOING
 - *(vazio no momento)*
@@ -45,12 +45,13 @@
 - `FC-010` - DONE com consolidacao minima da superficie `Payments`: `payments-list-screen.tsx` e `register-payment-screen.tsx` alinhados as primitives da fundacao ativa, `/payments` e `/payments/new` reabertos, `lint` em PASS e `build` em PASS fora do sandbox; reconciliacao mantida fora de escopo
 - `FC-011` - DONE com consolidacao minima da superficie `Alerts`: `alerts-screen.tsx` alinhada ao contrato real `GET /alerts/overview`, `/alerts` reaberta, `lint` em PASS e `build` em PASS fora do sandbox; lifecycle actions mantidas fora de escopo
 - `FC-012` - DONE com consolidacao minima da superficie `Finance`: `finance-overview-screen.tsx` alinhada ao contrato real `GET /finance/overview`, `/finance` reaberta, `lint` em PASS e `build` em PASS fora do sandbox; reports e fiscal settings mantidos fora de escopo
+- `FC-013` - DONE com consolidacao minima da superficie `Reports`: `reports-screen.tsx` alinhada aos contratos reais `GET /reports/monthly-revenue`, `GET /reports/annual-summary`, `GET /reports/overdue` e `GET /reports/regions`, `/reports` reaberta, `lint` em PASS e `build` em PASS fora do sandbox; rotas detalhadas mantidas fora de escopo
 
 ---
 
 ## O que falta no ciclo atual
 - seguir a consolidacao modulo a modulo em cima do frontend existente, sem recriacao ampla nem substituicao estetica
-- validar a proxima frente operacional de `Reports` antes de reabrir qualquer outra superficie alem de `Customers`, `Payments`, `Alerts` e `Finance`
+- validar a proxima frente operacional de `Regions` antes de reabrir qualquer outra superficie alem de `Customers`, `Payments`, `Alerts`, `Finance` e `Reports`
 
 ## Riscos atuais
 - `127.0.0.1:5440` agora voltou a refletir o baseline local de desenvolvimento com seed e migration atuais, mas continua sendo ambiente de dev e nao pode ser usado como base de testes
@@ -59,6 +60,7 @@
 - a reconciliacao permanece fora de escopo dentro do ciclo de `Payments` e nao deve vazar para a task seguinte sem `READY` propria
 - lifecycle de `Alerts` permanece fora de escopo dentro do ciclo atual e nao deve ser reaberto sem task propria
 - relatorios detalhados e configuracoes fiscais permanecem fora de escopo dentro do ciclo de `Finance`
+- relatorios detalhados e drilldown por cliente permanecem fora de escopo dentro do ciclo de `Reports`
 
 ## Proxima task oficial
-`FC-013` - Auditar e consolidar a superficie `Reports` existente
+`FC-014` - Auditar e consolidar a superficie `Regions` existente

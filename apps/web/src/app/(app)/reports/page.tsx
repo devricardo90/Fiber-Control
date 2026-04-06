@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation";
+import { ReportsScreen } from "@/features/reports";
 
 export default function ReportsPage() {
-  redirect("/workspace");
+  return <ReportsScreen />;
 }

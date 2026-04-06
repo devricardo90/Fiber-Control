@@ -87,3 +87,11 @@ Formato recomendado de cada decisão:
 - **Decisao**: executar `FC-012` com intervencao minima, substituindo o placeholder por uma overview operacional baseada em `GET /finance/overview`, reabrindo somente `/finance` e mantendo reports detalhados e fiscal settings fora de escopo.
 - **Impacto**: o frontend reabre a quarta superficie de negocio sem expandir o escopo para relatórios ou configuracoes. `Reports` passa a ser a proxima `READY` oficial por ter alto reaproveitamento potencial e baixo risco de reabertura controlada.
 - **Relacionado a**: FC-012, FC-013, `apps/web/src/features/finance/components/*`, `apps/api/src/modules/finance/*`, `STATUS.md`, `backlog.md`
+
+## DEC-010 - Reabrir Reports apenas como overview operacional agregada
+- **Data**: 2026-04-06
+- **Contexto**: apos `FC-012`, a proxima superficie candidata era `Reports`. O backend ja sustentava contratos estaveis em `GET /reports/monthly-revenue`, `GET /reports/annual-summary`, `GET /reports/overdue` e `GET /reports/regions`, mas as rotas detalhadas e o drilldown por cliente ampliariam a task.
+- **Opcoes consideradas**: reabrir `/reports` junto com as rotas detalhadas; limitar `FC-013` a uma overview read-only agregando apenas os contratos ja estabilizados.
+- **Decisao**: executar `FC-013` com intervencao minima, substituindo o placeholder por uma overview operacional que agrega os contratos reais do modulo `Reports`, reabrindo somente `/reports` e mantendo rotas detalhadas e drilldown por cliente fora de escopo.
+- **Impacto**: o frontend reabre a quinta superficie de negocio sem expandir o escopo para relatorios dedicados. `Regions` passa a ser a proxima `READY` oficial por ter perfil semelhante de overview e baixo risco de reabertura controlada.
+- **Relacionado a**: FC-013, FC-014, `apps/web/src/features/reports/components/*`, `apps/api/src/modules/reports/*`, `STATUS.md`, `backlog.md`
