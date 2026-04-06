@@ -7,7 +7,15 @@ import { useEffect } from "react";
 import { LoadingScreen } from "../shared/loading-screen";
 import { useAuth } from "./auth-provider";
 
-const FOUNDATION_ROUTES = ["/workspace", "/patterns", "/settings"];
+const FOUNDATION_ROUTES = [
+  "/workspace",
+  "/patterns",
+  "/settings",
+  "/customers",
+  "/customers/new",
+  "/payments",
+  "/payments/new"
+];
 
 export function RouteGuard({ children }: { children: ReactNode }) {
   const pathname = usePathname();

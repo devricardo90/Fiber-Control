@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { LayoutGrid, Settings2, TableProperties } from "lucide-react";
+import { CreditCard, LayoutGrid, Settings2, TableProperties, Users } from "lucide-react";
 
 export const navigationItems: Array<{
   href: string;
@@ -18,6 +18,18 @@ export const navigationItems: Array<{
     label: "Patterns",
     description: "Tables, filters and form primitives.",
     icon: TableProperties
+  },
+  {
+    href: "/customers",
+    label: "Customers",
+    description: "First reopened business surface.",
+    icon: Users
+  },
+  {
+    href: "/payments",
+    label: "Payments",
+    description: "Second reopened business surface.",
+    icon: CreditCard
   },
   {
     href: "/settings",

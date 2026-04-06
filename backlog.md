@@ -23,7 +23,7 @@
 ---
 
 ## READY
-- *(vazio no momento)*
+- `FC-011` - READY para auditar e consolidar a superficie `Alerts` existente, reabrindo apenas a overview se a auditoria confirmar reaproveitamento limpo na linguagem operacional da FC-007
 
 ## DOING
 - *(vazio no momento)*
@@ -40,15 +40,21 @@
 - `FC-005` - DONE com autenticacao/autorizacao base formalizadas: `prisma generate`, `lint`, `build`, `auth.spec.ts` e `test` em PASS
 - `FC-006` - DONE com limitacao ambiental documentada: `pnpm.cmd test` bloqueado por PostgreSQL indisponivel em `127.0.0.1:5440`
 - `FC-007` - DONE com fundacao frontend operacional formalizada: `pnpm.cmd install`, `lint` e `build` em PASS; shell ativo reduzido a `workspace`, `patterns` e `settings`, com rotas legadas de negocio neutralizadas por redirect
+- `FC-008` - DONE com alinhamento do login local ao ambiente real: `prisma generate`, `prisma migrate deploy`, `prisma seed`, `lint`, `build` e `test` em PASS; `acesso@fibercontrol.local` validado no banco ativo `127.0.0.1:5440` e login operacional confirmado em `http://localhost:3001/auth/login`
+- `FC-009` - DONE com consolidacao minima da superficie `Customers`: `customers-list-screen.tsx` e `customer-create-screen.tsx` migrados para as primitives da fundacao ativa, `/customers` e `/customers/new` reabertos, `lint` e `build` em PASS; detail/edit mantidos neutralizados
+- `FC-010` - DONE com consolidacao minima da superficie `Payments`: `payments-list-screen.tsx` e `register-payment-screen.tsx` alinhados as primitives da fundacao ativa, `/payments` e `/payments/new` reabertos, `lint` em PASS e `build` em PASS fora do sandbox; reconciliacao mantida fora de escopo
 
 ---
 
 ## O que falta no ciclo atual
-- definir, por nova decisao de governanca, qual primeira frente de UI operacional deve ser aberta apos a fundacao de frontend
+- seguir a consolidacao modulo a modulo em cima do frontend existente, sem recriacao ampla nem substituicao estetica
+- validar a proxima frente operacional de `Alerts` antes de reabrir qualquer outra superficie alem de `Customers` e `Payments`
 
 ## Riscos atuais
-- `127.0.0.1:5440` ainda existe como ambiente local legado de desenvolvimento e nao pode voltar a ser usado como base de testes
+- `127.0.0.1:5440` agora voltou a refletir o baseline local de desenvolvimento com seed e migration atuais, mas continua sendo ambiente de dev e nao pode ser usado como base de testes
 - sem task dedicada por modulo, qualquer reabertura de tela de negocio em `apps/web` pode reintroduzir deriva visual e estrutural fora da fundacao operacional
+- `customers/[id]` e `customers/[id]/edit` continuam scaffold-only e permanecem neutralizados ate task propria
+- a reconciliacao permanece fora de escopo dentro do ciclo de `Payments` e nao deve vazar para a task seguinte sem `READY` propria
 
 ## Proxima task oficial
-nenhuma `READY` automatica definida nesta fotografia
+`FC-011` - Auditar e consolidar a superficie `Alerts` existente

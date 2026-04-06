@@ -1,13 +1,14 @@
 # STATUS - Fiber Control
 
 ## Estado atual
-Projeto com governanca central estabelecida, arquitetura backend definida, trilha de auditoria transversal implementada, persistencia Prisma formalizada, suite integrada do backend em verde, autenticacao/autorizacao base formalmente encerradas e fundacao frontend operacional fechada.
+Projeto com governanca central estabelecida, arquitetura backend definida, trilha de auditoria transversal implementada, persistencia Prisma formalizada, suite integrada do backend em verde, autenticacao/autorizacao base formalmente encerradas, fundacao frontend operacional fechada, login local coerente com o ambiente real e duas superficies de negocio reabertas com consolidacao minima.
 
-## Fotografia oficial apos FC-007
-- `FC-007` esta formalmente classificada como `DONE`.
-- `apps/web` passou a expor apenas a superficie de fundacao: `workspace`, `patterns` e `settings`.
-- o login foi rebaixado para acesso operacional interno, sem hero, landing blocks ou UI marketing-first.
-- `pnpm.cmd install`, `pnpm.cmd lint` e `pnpm.cmd build` passaram na fotografia atual de frontend.
+## Fotografia oficial apos FC-010
+- `FC-010` esta formalmente classificada como `DONE`.
+- `/payments` e `/payments/new` voltaram a ser superficie ativa de negocio em `apps/web`.
+- `Payments` passou a usar a linguagem operacional da FC-007 sem redesign completo.
+- a criacao de pagamento foi consolidada em cima do contrato real `POST /payments` e da listagem `GET /payments`.
+- `pnpm.cmd lint` passou em `apps/web` e `pnpm.cmd build` passou fora do sandbox apos bloqueio ambiental inicial de `spawn EPERM`.
 
 ## Tasks concluidas
 - `FC-001` - governanca operacional no padrao Protocolo Rick
@@ -18,6 +19,9 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - `FC-005` - autenticacao e autorizacao base formalmente encerradas com gates em PASS
 - `FC-006` - trilha de auditoria transversal com limitacao ambiental registrada no gate de testes
 - `FC-007` - fundacao frontend operacional formalizada com shell, navegacao e primitives proprios simples
+- `FC-008` - alinhamento minimo do login local ao ambiente real com migrate deploy, seed e validacao ponta a ponta no banco ativo
+- `FC-009` - consolidacao minima da superficie Customers com reabertura controlada de listagem e criacao
+- `FC-010` - consolidacao minima da superficie Payments com reabertura controlada de listagem e criacao
 
 ## Encadeamento formal
 - `FC-006` foi executada antes de `FC-003` a `FC-005` porque era a unica `READY` oficial e tratava um risco critico de dominio e auditoria.
@@ -25,22 +29,29 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - `FC-004A` fechou a estabilizacao funcional residual apos `FC-004`.
 - `FC-005` fechou o encerramento formal de autenticacao e autorizacao base com a suite integrada verde.
 - `FC-007` fechou a fundacao frontend e neutralizou a superficie legada de negocio ate que novas tasks a reabram formalmente.
-- nao existe nova `READY` automatica apos `FC-007`; a proxima abertura de UI exige nova decisao de governanca.
+- `FC-008` corrigiu a deriva entre o ambiente local em `127.0.0.1:5440` e o card `Local access` sem expandir o escopo de auth ou frontend.
+- `FC-009` reabriu apenas `Customers` list/create e consolidou o que ja estava bom sem recriacao ampla.
+- `FC-010` reabriu apenas `Payments` list/create e consolidou o que ja era reaproveitavel sem desviar para reconciliacao.
+- `FC-011` passa a ser a proxima `READY` oficial para repetir o mesmo padrao de auditoria e consolidacao em `Alerts`.
 
 ## Validacoes mais recentes
-- `FC-007` - `pnpm.cmd install`: PASS
-- `FC-007` - `pnpm.cmd lint`: PASS
-- `FC-007` - `pnpm.cmd build`: PASS
+- `FC-010` - auditoria da superficie Payments existente antes de editar: PASS
+- `FC-010` - consolidacao de `payments-list-screen.tsx` e `register-payment-screen.tsx` sem redesign completo: PASS
+- `FC-010` - `pnpm.cmd lint` em `apps/web`: PASS
+- `FC-010` - `pnpm.cmd build` em `apps/web`: PASS fora do sandbox
+- `FC-010` - testes de `apps/web`: N/A, nao existe suite dedicada nesta fotografia
 
 ## Limites e bloqueios reais
-- o banco de teste oficial agora e `127.0.0.1:5442`; `127.0.0.1:5440` permanece como desenvolvimento local e nao deve ser usado para testes
+- o banco de teste oficial segue em `127.0.0.1:5442`; `127.0.0.1:5440` foi saneado apenas como desenvolvimento local e nao deve ser usado para testes
 - nenhum bloqueio funcional remanescente identificado na suite integrada do backend nesta fotografia
 - nao existe suite automatizada dedicada de `apps/web` nesta fotografia
-- rotas legadas de negocio continuam presentes no codigo como superficie neutralizada e exigem task propria para reabertura
+- `customers/[id]` e `customers/[id]/edit` continuam presentes como scaffold e exigem task propria para reabertura
+- reconciliacao permanece fora de escopo dentro do ciclo de `Payments` e exige task propria
+- `alerts`, `reports`, `finance`, `regions`, `dashboard` e `routes` seguem como legado controlado e exigem task propria para reabertura
 
 ## Proxima READY oficial
-nenhuma `READY` automatica definida nesta fotografia
+`FC-011` - Auditar e consolidar a superficie `Alerts` existente
 
 ## Justificativa da proxima READY
-- a fundacao backend e a fundacao frontend ja foram encerradas
-- a abertura da proxima frente de UI precisa ser definida por nova decisao de governanca, com `READY` unica, pequena e rastreavel
+- a estrategia validada em `FC-009` e `FC-010` foi consolidar superficies existentes com ajuste minimo, sem recriacao ampla
+- `Alerts` e a proxima superficie com valor operacional direto e baixo risco de reabertura controlada

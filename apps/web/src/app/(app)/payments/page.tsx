@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation";
+import { PaymentsListScreen } from "@/features/payments";
 
 export default function PaymentsPage() {
-  redirect("/workspace");
+  return <PaymentsListScreen />;
 }
