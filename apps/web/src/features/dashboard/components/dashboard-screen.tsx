@@ -207,7 +207,7 @@ export function DashboardScreen() {
               <div className="mt-2 space-y-2">
                 {topAlerts.map((alert) => (
                   <div
-                    key={alert.code}
+                    key={`${alert.code}-${alert.customer.id}-${alert.payment.referenceMonth}`}
                     className="rounded-md border border-[var(--fc-border)] bg-[var(--fc-surface)] p-3"
                   >
                     <div className="flex items-center justify-between gap-3">
