@@ -5,6 +5,7 @@ import {
   CreditCard,
   FileText,
   LayoutGrid,
+  MapPinned,
   Settings2,
   TableProperties,
   Users
@@ -57,6 +58,12 @@ export const navigationItems: Array<{
     label: "Reports",
     description: "Operational overview across revenue, overdue and regions.",
     icon: FileText
+  },
+  {
+    href: "/regions",
+    label: "Regions",
+    description: "Regional performance and collection overview.",
+    icon: MapPinned
   },
   {
     href: "/settings",

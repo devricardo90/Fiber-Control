@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation";
+import { RegionsScreen } from "@/features/regions";
 
 export default function RegionsPage() {
-  redirect("/workspace");
+  return <RegionsScreen />;
 }

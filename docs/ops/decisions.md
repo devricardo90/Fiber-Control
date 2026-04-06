@@ -95,3 +95,11 @@ Formato recomendado de cada decisão:
 - **Decisao**: executar `FC-013` com intervencao minima, substituindo o placeholder por uma overview operacional que agrega os contratos reais do modulo `Reports`, reabrindo somente `/reports` e mantendo rotas detalhadas e drilldown por cliente fora de escopo.
 - **Impacto**: o frontend reabre a quinta superficie de negocio sem expandir o escopo para relatorios dedicados. `Regions` passa a ser a proxima `READY` oficial por ter perfil semelhante de overview e baixo risco de reabertura controlada.
 - **Relacionado a**: FC-013, FC-014, `apps/web/src/features/reports/components/*`, `apps/api/src/modules/reports/*`, `STATUS.md`, `backlog.md`
+
+## DEC-011 - Reabrir Regions apenas como overview operacional
+- **Data**: 2026-04-06
+- **Contexto**: apos `FC-013`, a proxima superficie candidata era `Regions`. O backend ja sustentava `GET /regions` e `GET /regions/performance`, mas o modulo tangencia route planning e operacao de campo, que ampliariam a task.
+- **Opcoes consideradas**: reabrir `Regions` junto com route planning e drilldown regional; limitar `FC-014` a uma overview read-only usando apenas os contratos ja estabilizados.
+- **Decisao**: executar `FC-014` com intervencao minima, substituindo o placeholder por uma overview operacional baseada em `GET /regions` e `GET /regions/performance`, reabrindo somente `/regions` e mantendo route planning e regional report drilldown fora de escopo.
+- **Impacto**: o frontend reabre a sexta superficie de negocio sem expandir o escopo para operacao de campo. `Dashboard` passa a ser a proxima `READY` oficial por ter alto potencial de agregacao sobre contratos ja estabilizados e baixo risco de reabertura controlada.
+- **Relacionado a**: FC-014, FC-015, `apps/web/src/features/regions/components/*`, `apps/api/src/modules/regions/*`, `STATUS.md`, `backlog.md`
