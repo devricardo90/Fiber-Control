@@ -1,14 +1,14 @@
 # STATUS - Fiber Control
 
 ## Estado atual
-Projeto com governanca central estabelecida, arquitetura backend definida, trilha de auditoria transversal implementada, persistencia Prisma formalizada, suite integrada do backend em verde, autenticacao/autorizacao base formalmente encerradas, fundacao frontend operacional fechada, login local coerente com o ambiente real, oito superficies de negocio reabertas com consolidacao minima e `main` novamente limpo para a proxima rodada apos saneamento do worktree residual.
+Projeto com governanca central estabelecida, arquitetura backend definida, trilha de auditoria transversal implementada, persistencia Prisma formalizada, suite integrada do backend em verde, autenticacao/autorizacao base formalmente encerradas, fundacao frontend operacional fechada, login local coerente com o ambiente real, oito superficies de negocio reabertas com consolidacao minima, `main` limpo e snapshot residual classificado para triagem dirigida na proxima rodada.
 
-## Fotografia oficial apos FC-017
-- `FC-017` esta formalmente classificada como `DONE`.
-- a publicacao de `FC-015` e `FC-016` em `main` foi reconciliada com `backlog.md`, `STATUS.md`, `AGENTS.md`, `docs/rules/protocol-rick.md` e `docs/ops/decisions.md`.
-- a Named Localhost Convention permaneceu registrada de forma enxuta e governavel, sem abrir infraestrutura nova.
-- o worktree remanescente pos-`FC-016` foi preservado em snapshot seguro fora da arvore ativa para evitar contaminacao da proxima execucao.
-- nenhuma nova `READY` oficial foi aberta nesta rodada.
+## Fotografia oficial apos FC-018
+- `FC-018` esta formalmente classificada como `DONE`.
+- o snapshot residual pos-`FC-017` foi auditado sem reaplicacao na arvore ativa.
+- o bloco residual de `apps/api` foi classificado como mudanca futura relevante e passa a sustentar a proxima `READY` oficial.
+- a deriva local de `Customers` e `Alerts` foi classificada para descarte ou task propria, sem reintroducao automatica.
+- `main` permaneceu limpo e o snapshot seguro foi mantido para consulta posterior.
 
 ## Tasks concluidas
 - `FC-001` - governanca operacional no padrao Protocolo Rick
@@ -29,6 +29,7 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - `FC-015` - consolidacao minima da superficie Dashboard com reabertura controlada da overview
 - `FC-016` - consolidacao minima da superficie Routes com reabertura controlada da overview
 - `FC-017` - checkpoint de governanca e saneamento do worktree pos-FC-016
+- `FC-018` - auditoria e classificacao do snapshot residual pos-FC-017
 
 ## Encadeamento formal
 - `FC-006` foi executada antes de `FC-003` a `FC-005` porque era a unica `READY` oficial e tratava um risco critico de dominio e auditoria.
@@ -46,8 +47,14 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - `FC-015` reabriu apenas a overview de `Dashboard` e manteve route preview e analytics avancado fora de escopo.
 - `FC-016` reabriu apenas a overview de `Routes` e manteve route planning, live map e operacao de campo fora de escopo.
 - `FC-017` confirmou a coerencia do estado publicado e removeu o risco operacional de seguir trabalhando sobre worktree contaminado.
+- `FC-018` classificou o snapshot residual sem reintroduzir mudancas soltas na arvore ativa.
 
 ## Validacoes mais recentes
+- `FC-018` - auditoria do snapshot residual `stash@{0}`: PASS
+- `FC-018` - bloco de `apps/api` classificado como mudanca futura relevante: PASS
+- `FC-018` - deriva local de `Customers` e `Alerts` classificada para descarte ou task propria: PASS
+- `FC-018` - ruido documental e material retroativo isolados para nao contaminar a proxima task: PASS
+- `FC-018` - `main` mantido limpo apos a triagem: PASS
 - `FC-017` - checkpoint de governanca em `backlog.md`, `STATUS.md`, `AGENTS.md`, `docs/rules/protocol-rick.md` e `docs/ops/decisions.md`: PASS
 - `FC-017` - `FC-015` e `FC-016` refletidas corretamente na governanca publicada: PASS
 - `FC-017` - Named Localhost Convention registrada de forma enxuta e correta: PASS
@@ -96,10 +103,12 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - route preview e analytics avancado permanecem fora de escopo dentro do ciclo de `Dashboard`
 - route planning, live maps e operacao de campo permanecem fora de escopo dentro do ciclo de `Routes`
 - o material residual de `apps/api`, `Customers`, `Alerts` e docs correlatas foi retirado da arvore ativa e preservado para classificacao posterior em task propria
+- a proxima triagem deve partir apenas do bloco residual de `apps/api`, sem reaplicar automaticamente deriva local antiga de frontend ou ruido documental
 
 ## Proxima READY oficial
-nenhuma `READY` oficial no momento
+`FC-019` - Auditar e formalizar o bloco residual de `apps/api` preservado no snapshot pos-`FC-017`
 
 ## Justificativa da proxima READY
 - `FC-009` a `FC-016` encerraram a rodada de reabertura controlada das superficies legadas prioritarias do frontend
-- a proxima frente deve ser definida por nova rodada de governanca em cima de uma arvore limpa, sem reintroduzir mudancas soltas na task seguinte
+- a triagem de `FC-018` mostrou que o unico bloco com valor tecnico claro no snapshot residual esta em `apps/api` e docs correlatas
+- a deriva local de `Customers` e `Alerts` nao deve voltar para a arvore ativa sem task propria ou descarte explicito
