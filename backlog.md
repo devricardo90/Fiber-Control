@@ -85,6 +85,32 @@
     - `docs/ops/session-handoff.md`
     - `docs/ops/execution-log.md`
   - **Observacao**: concluida em 2026-04-24 com `README.md` polido incrementalmente para refletir problema de produto, staging publico real, demo flow, arquitetura, split API/Web, deployment Neon -> Render -> Vercel, auth flow, disciplina operacional, smoke validado, limitacoes e roadmap, sem registrar secrets e sem inflar o MVP.
+- `FC-029` - GitHub Portfolio Polish and Screenshots - `READY`
+  - **Tipo**: Documentation / Portfolio
+  - **Prioridade**: P1
+  - **Objetivo**: preparar o projeto para apresentacao visual no GitHub e portfolio, adicionando estrutura de screenshots, orientacao visual e checklist de polish do repositorio sem inventar evidencias inexistentes.
+  - **Escopo**: criar ou organizar uma estrutura para screenshots, definir as telas a capturar, preparar secoes visuais como `Product Preview`, `Screenshots`, `Live Demo` e `Demo Evidence`, atualizar `README.md` e `docs/project/recruiter-evidence-pack.md` se necessario, criar checklist de GitHub polish com descricao curta, topics sugeridos, social preview image, screenshots necessarios e links publicos, e documentar placeholders/checklist quando a captura real depender de acao manual do usuario.
+  - **Fora de escopo**: alterar codigo funcional, UI/UX de produto, providers, env vars, deploy, banco, novas features, registro de secrets ou reabertura da `FC-025`.
+  - **Criterios de aceite**:
+    - estrutura documental clara para screenshots criada ou organizada
+    - telas prioritarias de captura definidas com checklist objetivo
+    - `README.md` preparado para imagens e evidencias visuais sem inventar screenshots
+    - orientacao de GitHub polish registrada com links publicos reais
+    - dependencia de captura manual explicitada quando aplicavel
+    - nenhum secret real no diff
+  - **Validacao obrigatoria**:
+    - revisao manual do diff documental
+    - `git diff --check`
+    - busca por padroes sensiveis para confirmar ausencia de secrets reais
+  - **Impacto documental**:
+    - `README.md`
+    - `docs/project/recruiter-evidence-pack.md`
+    - `docs/project/github-polish-checklist.md`
+    - `docs/assets/screenshots/` ou estrutura equivalente
+    - `backlog.md`
+    - `STATUS.md`
+    - `docs/ops/session-handoff.md`
+    - `docs/ops/execution-log.md`
 - `FC-025` - Production Growth Backlog - `PARKED`
   - **Tipo**: Product / Growth
   - **Prioridade**: P2
@@ -102,7 +128,31 @@
 ---
 
 ## READY
-- *(vazio no momento)*
+- `FC-029` - GitHub Portfolio Polish and Screenshots
+  - **Tipo**: Documentation / Portfolio
+  - **Prioridade**: P1
+  - **Objetivo**: preparar o projeto para apresentacao visual no GitHub e portfolio, adicionando estrutura de screenshots, orientacao visual e checklist de polish do repositorio.
+  - **Escopo**: organizar a base documental para screenshots e polish de apresentacao, com secoes visuais, checklist de captura e orientacao de GitHub polish sem inventar imagens inexistentes.
+  - **Fora de escopo**: codigo funcional, UI/UX, providers, env vars, deploy, banco, novas features e reabertura da `FC-025`.
+  - **Criterios de aceite**:
+    - estrutura e checklist de screenshots definidos
+    - README preparado para evidencia visual
+    - links publicos reais preservados
+    - dependencia de captura manual explicitada quando necessario
+    - nenhum secret real no diff
+  - **Validacao obrigatoria**:
+    - revisao manual do diff
+    - `git diff --check`
+    - busca por padroes sensiveis
+  - **Impacto documental**:
+    - `README.md`
+    - `docs/project/recruiter-evidence-pack.md`
+    - `docs/project/github-polish-checklist.md`
+    - `docs/assets/screenshots/` ou estrutura equivalente
+    - `backlog.md`
+    - `STATUS.md`
+    - `docs/ops/session-handoff.md`
+    - `docs/ops/execution-log.md`
 ## TODO
 - `FC-025` - Production Growth Backlog
   - **Status de planejamento**: `PARKED`
@@ -195,3 +245,4 @@ nenhuma `READY` oficial no momento
 - `FC-025A` foi encerrada como `DONE` apos publicar staging real com Neon, Render e Vercel, preservando `FC-025` como backlog `PARKED`
 - `FC-027` foi encerrada como `DONE` apos consolidar o runbook versionado do staging real sem reabrir deploy nem alterar providers
 - `FC-028` foi encerrada como `DONE` apos polir a apresentacao publica do projeto em ingles, reforcando README, links de staging, demo flow, arquitetura, baseline de deploy e disciplina operacional sem abrir nova feature
+- `FC-029` foi aberta como a proxima `READY` oficial para estruturar screenshots, polish visual de GitHub e checklist de evidencia visual sem inventar assets inexistentes

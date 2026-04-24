@@ -14,6 +14,7 @@
 - `FC-025A` foi encerrada como `DONE`
 - `FC-027` foi encerrada como `DONE`
 - `FC-028` foi encerrada como `DONE`
+- `FC-029` foi aberta como a proxima `READY` oficial
 - Neon permaneceu como banco oficial de staging
 - a API foi publicada em `https://app-fiber-control-api-staging.onrender.com`
 - a web foi publicada em `https://app-fiber-control-web-staging.vercel.app`
@@ -22,8 +23,8 @@
 - `CORS_ORIGIN` foi alinhado a `https://app-fiber-control-web-staging.vercel.app`
 - `NEXT_PUBLIC_API_URL` foi alinhado a `https://app-fiber-control-api-staging.onrender.com`
 - `NEXT_PUBLIC_APP_URL` foi alinhado a `https://app-fiber-control-web-staging.vercel.app`
-- nenhuma feature nova foi aberta e nenhum codigo funcional foi alterado; houve polish documental da apresentacao publica com base no staging real ja validado
-- o README publico agora reflete melhor problema de produto, staging real, demo flow, arquitetura e disciplina operacional
+- nenhuma feature nova foi aberta e nenhum codigo funcional foi alterado; o projeto segue em ciclo de polish documental e de portfolio
+- a proxima frente aprovada e estruturar screenshots e polish visual de GitHub sem inventar assets inexistentes
 
 ## Arquivos alterados
 - `README.md`
@@ -35,13 +36,14 @@
 - `docs/ops/done/FC-028.done.md`
 
 ## Decisao tomada
-- encerrar `FC-028` como `DONE`
-- manter `FC-027` como `DONE`
-- fortalecer a narrativa publica do projeto sem reabrir escopo funcional
+- manter `FC-028` como `DONE`
+- abrir `FC-029` como a unica `READY` oficial
+- usar o staging real ja publicado como base para evidencia visual e polish de portfolio
 - manter `FC-025` isolada como backlog `PARKED`
 
 ## Proximas opcoes apos o saneamento
+- executar `FC-029` para estruturar screenshots, checklist de captura e polish visual do repositorio
 - manter `FC-025` isolada como backlog de crescimento pos-MVP
 
 ## Recomendacao
-- nao abrir nova task automaticamente; manter `FC-025` como `PARKED` ate decisao explicita do proximo ciclo
+- executar `FC-029` sem inventar screenshots; quando a captura depender de navegador/manual, registrar placeholders e checklist claro em vez de fabricar evidencia
