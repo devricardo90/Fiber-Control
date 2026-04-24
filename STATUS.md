@@ -1,19 +1,20 @@
 # STATUS - Fiber Control
 
 ## Estado atual
-Projeto com governanca central estabelecida, arquitetura backend definida, trilha de auditoria transversal implementada, persistencia Prisma formalizada, suite integrada do backend em verde, autenticacao/autorizacao base formalmente encerradas, fundacao frontend operacional fechada, login local coerente com o ambiente real, oito superficies de negocio reabertas com consolidacao minima, `main` limpo, ambiente local validado com `web.fiber-control.localhost` e `api.fiber-control.localhost`, reconciliacao documental de `DONE` fechada pela `FC-020` e nova direcao estrategica definida para MVP minimo deployavel e demonstravel para GitHub/recrutadores.
+Projeto com governanca central estabelecida, arquitetura backend definida, trilha de auditoria transversal implementada, persistencia Prisma formalizada, suite integrada do backend em verde, autenticacao/autorizacao base formalmente encerradas, fundacao frontend operacional fechada, login local coerente com o ambiente real, oito superficies de negocio reabertas com consolidacao minima, `main` limpo, ambiente local validado com `web.fiber-control.localhost` e `api.fiber-control.localhost`, reconciliacao documental de `DONE` fechada pela `FC-020` e escopo MVP publico formalizado pela `FC-021`.
 
 ## Fotografia oficial apos FC-020
 - `FC-020` esta formalmente classificada como `DONE`.
 - todas as tasks previamente marcadas como `DONE` e sem arquivo formal agora possuem registro em `docs/ops/done/`.
 - a reconciliacao foi documental; nenhuma feature nova foi aberta e nenhum codigo de produto foi alterado.
-- a estrategia seguinte foi reorganizada para MVP minimo deployavel, com `FC-021` como proxima `READY` oficial.
+- a estrategia seguinte foi reorganizada para MVP minimo deployavel, preparando o fechamento documental da `FC-021`.
 
 ## Direcao estrategica MVP
 - o objetivo atual do projeto e entregar um MVP minimo, funcional, demonstravel e deployavel.
 - esse MVP deve ser publicavel no GitHub como evidencia profissional de engenharia, governanca, deploy real e evolucao planejada.
 - o projeto nao deve ser empurrado para backlog enterprise neste ciclo.
 - backlog de crescimento de producao fica explicitamente separado do MVP.
+- o recorte MVP publico agora esta formalizado em `docs/product/mvp-scope.md`.
 
 ## Fotografia oficial apos FC-019
 - `FC-019` esta formalmente classificada como `DONE`.
@@ -44,9 +45,9 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - `FC-018` - auditoria e classificacao do snapshot residual pos-FC-017
 - `FC-019` - operacionalizacao minima da Named Localhost Convention no ambiente local
 - `FC-020` - reconciliacao documental das evidencias formais de `DONE`
+- `FC-021` - definicao formal do escopo MVP publico para deploy e portfolio
 
 ## Proximas tasks planejadas
-- `FC-021` - `READY` - MVP Scope Definition for Deploy
 - `FC-022` - `NEXT` - MVP Deploy Readiness Hardening
 - `FC-023` - `NEXT` - Staging Deployment Baseline
 - `FC-024` - `NEXT` - Public GitHub README and Recruiter Evidence Pack
@@ -72,9 +73,14 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - `FC-019` fechou a lacuna entre o protocolo e o runtime local, validando web e api em host nomeado.
 
 ## Validacoes mais recentes
+- `FC-021` - documento `docs/product/mvp-scope.md` criado com MVP IN/OUT: PASS documental
+- `FC-021` - fluxos minimos de demonstracao definidos: PASS documental
+- `FC-021` - evidencias requeridas antes de `FC-022` registradas: PASS documental
+- `FC-021` - riscos pre-`FC-022` registrados: PASS documental
+- `FC-021` - backlog, `STATUS.md`, `docs/ops/execution-log.md`, `docs/ops/session-handoff.md` e `docs/ops/done/FC-021.done.md` alinhados: PASS documental
 - reorganizacao estrategica do backlog para MVP deployavel e portfolio profissional: PASS documental
 - preservacao de `FC-020` como `DONE` sem regressao artificial de historico: PASS documental
-- `FC-021` definida como nova `READY` oficial apos saneamento: PASS documental
+- `FC-021` foi aberta como `READY` apos o saneamento e encerrada documentalmente nesta execucao: PASS documental
 - `FC-020` - divergencia entre `backlog.md`, `STATUS.md`, `docs/ops/execution-log.md` e `docs/ops/done/*` validada: PASS
 - `FC-020` - arquivos ausentes de `docs/ops/done/` criados para `FC-001`, `FC-002`, `FC-003`, `FC-004`, `FC-004A`, `FC-005`, `FC-006`, `FC-008`, `FC-009` e `FC-011`: PASS
 - `FC-020` - `backlog.md`, `STATUS.md`, `docs/ops/execution-log.md` e `docs/ops/session-handoff.md` alinhados apos reconciliacao: PASS
@@ -147,11 +153,13 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - a proxima triagem deve partir apenas do bloco residual de `apps/api`, sem reaplicar automaticamente deriva local antiga de frontend ou ruido documental
 - o fallback para `localhost:porta` permanece permitido e documentado quando host nomeado nao for viavel no ambiente atual
 - `FC-001`, `FC-002`, `FC-003`, `FC-004`, `FC-004A`, `FC-005`, `FC-006`, `FC-008`, `FC-009` e `FC-011` tiveram fechamento formal reconstruido documentalmente em `FC-020`; parte do detalhe fino de encerramento permanece derivada dos artefatos existentes, sem evidencias novas
+- readiness alem de `GET /health` ainda nao esta comprovada documentalmente nesta fotografia
+- `FC-022` segue planejada, mas ainda nao foi liberada como `READY`
 
 ## Proxima READY oficial
-`FC-021` - MVP Scope Definition for Deploy
+nenhuma `READY` oficial no momento
 
 ## Justificativa da proxima READY
-- `FC-020` ja saneou a contradicao documental de `DONE`, entao nao pode ser regressada honestamente para `READY`
-- o proximo passo correto agora e definir o escopo real do MVP antes de endurecimento tecnico de deploy
-- `FC-021` protege o projeto contra deriva para backlog enterprise e ancora a publicacao no GitHub como portfolio profissional
+- `FC-021` ja fechou o escopo real do MVP publico
+- `FC-022` e a proxima task planejada, mas permanece fora de `READY` por decisao desta execucao
+- o projeto segue sem nova execucao tecnica ate nova liberacao formal de backlog

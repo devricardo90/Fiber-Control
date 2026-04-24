@@ -127,3 +127,11 @@ Formato recomendado de cada decisão:
 - **Decisao**: adotar como padrao recomendado localhost nomeado por projeto, priorizando `web.<project>.localhost`, `api.<project>.localhost` e `admin.<project>.localhost`. A identidade local principal passa a ser o nome do projeto, nao a porta.
 - **Impacto**: multiplos projetos podem coexistir com menos colisao de porta, menos troca de env e URLs locais mais previsiveis. Quando Portless ou localhost nomeado nao forem viaveis, `localhost:<porta>` continua permitido de forma explicita e documentada.
 - **Relacionado a**: `AGENTS.md`, `docs/rules/protocol-rick.md`
+
+## DEC-015 - Public MVP scope bounded for deployable portfolio release
+- **Data**: 2026-04-24
+- **Contexto**: apos `FC-020`, o projeto ficou documentalmente coerente, mas ainda precisava travar o que realmente entra no MVP publico para GitHub e recrutadores. O risco principal era contaminar o ciclo atual com backlog enterprise, modulos parcialmente neutralizados ou ambicoes de producao fora do minimo vital.
+- **Opcoes consideradas**: seguir expandindo backlog funcional antes de fixar o MVP; empurrar o MVP para uma leitura mais ampla de plataforma enterprise; travar o MVP como o menor slice operacional ja estabilizado e documentado.
+- **Decisao**: definir o MVP publico como o slice operacional minimo ja estabilizado no repositorio: auth/login funcional, dashboard overview, customers list/create, payments list/create, alerts overview, finance overview, reports overview, regions overview, routes overview, auditoria basica existente, `GET /health` e baseline de localhost nomeado documentada. Customer detail/edit, reconciliation, alert lifecycle completo, route planning, live maps, analytics avancado e demais expansoes ficam fora do MVP.
+- **Impacto**: `FC-022` passa a endurecer deploy readiness apenas para esse recorte. `FC-023` e `FC-024` passam a operar sobre um MVP explicitamente limitado e demonstravel. Crescimento pos-MVP permanece isolado em backlog proprio.
+- **Relacionado a**: FC-021, FC-022, FC-023, FC-024, FC-025, `docs/product/mvp-scope.md`, `backlog.md`, `STATUS.md`

@@ -31,7 +31,7 @@
 - `FC-020` - Governance / Documentation - `DONE`
   - **Objetivo**: regularizar a divergencia entre `backlog.md`, `STATUS.md`, `execution-log.md` e `docs/ops/done/*`.
   - **Observacao**: concluida em 2026-04-24 e preservada como `DONE` para nao falsificar o historico.
-- `FC-021` - MVP Scope Definition for Deploy - `READY`
+- `FC-021` - MVP Scope Definition for Deploy - `DONE`
   - **Tipo**: Product / Planning
   - **Prioridade**: P0
   - **Objetivo**: definir o escopo minimo vital do MVP publico, separando claramente o que entra no MVP deployavel, o que fica fora do MVP e o que sera backlog de crescimento pos-producao.
@@ -126,28 +126,7 @@
 ---
 
 ## READY
-- `FC-021` - MVP Scope Definition for Deploy
-  - **Tipo**: Product / Planning
-  - **Prioridade**: P0
-  - **Objetivo**: definir o escopo minimo vital do MVP publico, separando claramente:
-    - o que entra no MVP deployavel
-    - o que fica fora do MVP
-    - o que sera backlog de crescimento pos-producao
-  - **Escopo**: consolidar a estrategia do projeto como MVP minimo deployavel para GitHub e recrutadores, em cima do estado real ja entregue.
-  - **Fora de escopo**: implementar features novas, iniciar deploy, expandir o projeto para escopo enterprise.
-  - **Criterios de aceite**:
-    - lista objetiva do que entra no MVP deployavel
-    - lista objetiva do que fica explicitamente fora do MVP
-    - backlog de crescimento separado do MVP
-    - proxima frente tecnica de deploy derivada do escopo MVP, sem ambiguidade relevante
-  - **Validacao obrigatoria**:
-    - coerencia entre `backlog.md`, `STATUS.md`, `docs/ops/session-handoff.md` e documentacao de produto
-    - nenhuma feature nova aberta nesta task
-  - **Impacto documental**:
-    - `backlog.md`
-    - `STATUS.md`
-    - `docs/ops/execution-log.md`
-    - `docs/ops/session-handoff.md`
+- *(vazio no momento)*
 
 ## DOING
 - *(vazio no momento)*
@@ -177,6 +156,7 @@
 - `FC-018` - DONE com auditoria do snapshot residual pos-`FC-017`: bloco de `apps/api` classificado como mudanca futura relevante, deriva local de `Customers`/`Alerts` classificada para descarte ou task propria e ruido documental isolado; `main` permaneceu limpo e o snapshot seguro foi mantido sem reaplicacao
 - `FC-019` - DONE com operacionalizacao minima da Named Localhost Convention no ambiente local: `web.fiber-control.localhost` e `api.fiber-control.localhost` validados com boot local, `APP_URL`, `NEXT_PUBLIC_APP_URL`, `NEXT_PUBLIC_API_URL` e `CORS_ORIGIN` alinhados, login e CORS confirmados em host nomeado e fallback documentado para `localhost:porta`
 - `FC-020` - DONE com reconciliacao documental das evidencias de `DONE`: arquivos ausentes em `docs/ops/done/` criados para `FC-001`, `FC-002`, `FC-003`, `FC-004`, `FC-004A`, `FC-005`, `FC-006`, `FC-008`, `FC-009` e `FC-011`; backlog, `STATUS.md`, `execution-log.md` e `session-handoff.md` alinhados sem abrir nova feature
+- `FC-021` - DONE com escopo MVP publico formalizado em `docs/product/mvp-scope.md`: MVP IN/OUT definido, fluxos minimos de demonstracao registrados, evidencias requeridas para `FC-022` listadas, riscos de pre-deploy documentados e backlog pos-MVP isolado sem promover `FC-022` a `READY`
 
 ---
 
@@ -200,10 +180,11 @@
 - route planning, live maps e operacao de campo permanecem fora de escopo dentro do ciclo de `Routes`
 - sem reconciliacao documental, o projeto corria risco de tratar `DONE` como encerramento sem arquivo formal; esse risco foi saneado pela `FC-020`, mas a proxima frente continua dependente de decisao de governanca
 - sem escopo MVP formal, o projeto corre risco de derivar para backlog enterprise e contaminar o objetivo de portfolio/deploy minimo
+- `FC-021` fechou o escopo MVP, mas `FC-022` ainda nao esta liberada; o projeto continua sem `READY` oficial nesta fotografia
 
 ## Proxima task oficial
-`FC-021` - MVP Scope Definition for Deploy
+nenhuma `READY` oficial no momento
 
 ## Saneamento documental
 - `FC-020` abriu e fechou no mesmo ciclo para reconciliar a evidencia formal de `DONE`
-- apos o saneamento, a nova `READY` oficial passou a ser `FC-021`
+- `FC-021` fechou o recorte MVP publico sem abrir deploy nem promover a etapa seguinte
