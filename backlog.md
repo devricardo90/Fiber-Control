@@ -45,10 +45,11 @@
   - **Prioridade**: P0
   - **Objetivo**: publicar web, API e banco em ambiente acessivel para validacao real.
   - **Observacao**: `FC-023A` concluiu a baseline documental e `FC-023B` fechou a validacao operacional/documental. O banco Neon foi criado manualmente, o `Manual External Operations Gate` foi validado pelo humano, a divergencia de Node foi resolvida em `v24.15.0`, Prisma `7` ficou consolidado com `DIRECT_URL` via `apps/api/prisma.config.ts` e o runtime permaneceu em `DATABASE_URL` pooled do Neon. Nenhum secret real foi registrado no repositorio e nenhum codigo de produto precisou ser alterado para este fechamento.
-- `FC-024` - Public GitHub README and Recruiter Evidence Pack - `READY`
+- `FC-024` - Public GitHub README and Recruiter Evidence Pack - `DONE`
   - **Tipo**: Documentation / Portfolio
   - **Prioridade**: P1
   - **Objetivo**: criar README profissional em ingles, demo flow, arquitetura, status do projeto, roadmap e evidencia para recrutadores.
+  - **Observacao**: concluida em 2026-04-24 com `README.md` reescrito em ingles, evidence pack criado em `docs/project/recruiter-evidence-pack.md` e narrativa publica alinhada ao MVP real, sem alegar deploy publico inexistente.
 - `FC-025` - Production Growth Backlog - `PARKED`
   - **Tipo**: Product / Growth
   - **Prioridade**: P2
@@ -66,24 +67,7 @@
 ---
 
 ## READY
-- `FC-024` - Public GitHub README and Recruiter Evidence Pack
-  - **Status de planejamento**: `READY`
-  - **Tipo**: Documentation / Portfolio
-  - **Prioridade**: P1
-  - **Objetivo**: criar README profissional em ingles, demo flow, arquitetura, status do projeto, roadmap e evidencia para recrutadores.
-  - **Escopo**: documentacao publica de portfolio apoiada no MVP ja definido e validado.
-  - **Fora de escopo**: novas features e crescimento enterprise.
-  - **Criterios de aceite**:
-    - README e pacote de evidencia alinhados ao MVP real
-    - narrativa publica coerente com o estado do projeto
-  - **Validacao obrigatoria**:
-    - depende de `FC-021` e preferencialmente de `FC-023`
-  - **Impacto documental**:
-    - `README.md`
-    - `backlog.md`
-    - `STATUS.md`
-    - `docs/ops/execution-log.md`
-    - `docs/ops/session-handoff.md`
+- *(vazio no momento)*
 ## TODO
 - `FC-025` - Production Growth Backlog
   - **Status de planejamento**: `PARKED`
@@ -110,6 +94,7 @@
 - *(vazio no momento)*
 
 ## DONE
+- `FC-024` - DONE com `README.md` reescrito em ingles e `docs/project/recruiter-evidence-pack.md` criado para refletir o MVP real, a baseline tecnica validada, os limites deliberados do projeto e a trilha de evidencias para GitHub e recrutadores, sem inflar escopo nem alegar deploy publico inexistente
 - `FC-023` - DONE com baseline de staging fechada documentalmente e validacoes manuais confirmadas pelo humano: Node `v24.15.0`, npm `11.12.1`, pnpm `10.33.0`, `pnpm.cmd install`, `pnpm.cmd prisma generate`, `pnpm.cmd prisma migrate deploy`, `pnpm.cmd build`, `docker compose up -d` e `pnpm.cmd test` em PASS; `Manual External Operations Gate` do Neon validado; Prisma `7` consolidado com `DIRECT_URL` via `apps/api/prisma.config.ts` e runtime mantido em `DATABASE_URL` pooled do Neon, sem registrar secrets reais
 - `FC-022` - DONE com reexecucao formal da validacao local do MVP: `prisma:generate`, `lint`, `build`, `prisma:migrate:deploy` e `test` em `apps/api` ficaram em PASS no banco oficial de testes `127.0.0.1:5442`, o banco dev `127.0.0.1:5440` permaneceu intacto apos a suite, o login seed `acesso@fibercontrol.local` voltou a passar junto com `GET /auth/me`, CORS e as rotas/pontos minimos do MVP responderam corretamente, e `FC-023` foi liberada para `READY`
 - `FC-001`
@@ -160,7 +145,7 @@
 - sem reconciliacao documental, o projeto corria risco de tratar `DONE` como encerramento sem arquivo formal; esse risco foi saneado pela `FC-020`, mas a proxima frente continua dependente de decisao de governanca
 - sem escopo MVP formal, o projeto corre risco de derivar para backlog enterprise e contaminar o objetivo de portfolio/deploy minimo
 ## Proxima task oficial
-`FC-024` - Public GitHub README and Recruiter Evidence Pack
+nenhuma `READY` oficial no momento
 
 ## Saneamento documental
 - `FC-020` abriu e fechou no mesmo ciclo para reconciliar a evidencia formal de `DONE`
@@ -168,3 +153,4 @@
 - `FC-022` foi reexecutada sobre o baseline corrigido pela `FC-026`, consolidou a evidencia local do MVP e liberou `FC-023` para `READY`
 - `FC-026` removeu o bloqueio tecnico que impedia a conclusao da `FC-022`
 - `FC-023` fechou a baseline de staging com evidencia manual completa e liberou `FC-024` como `READY`
+- `FC-024` fechou o pacote publico de portfolio e nao deixou nova `READY` aberta automaticamente

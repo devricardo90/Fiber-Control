@@ -1,7 +1,7 @@
 # STATUS - Fiber Control
 
 ## Estado atual
-Projeto com governanca central estabelecida, arquitetura backend definida, trilha de auditoria transversal implementada, persistencia Prisma formalizada, autenticacao/autorizacao base formalmente encerradas, fundacao frontend operacional fechada, oito superficies de negocio reabertas com consolidacao minima, reconciliacao documental de `DONE` fechada pela `FC-020`, escopo MVP publico formalizado pela `FC-021`, bloqueio tecnico da validacao local removido pela `FC-026`, reexecucao formal da `FC-022` encerrada com baseline local do MVP validado e `FC-023` formalmente encerrada como `DONE`. O `Manual External Operations Gate` do Neon foi validado manualmente pelo humano com Node `v24.15.0`, `pnpm.cmd install`, `pnpm.cmd prisma generate`, `pnpm.cmd prisma migrate deploy`, `pnpm.cmd build`, `docker compose up -d` e `pnpm.cmd test` em `PASS`. O contrato operacional fica consolidado com Prisma `7` usando `DIRECT_URL` via `apps/api/prisma.config.ts` para CLI/migrations e runtime usando `DATABASE_URL` pooled do Neon.
+Projeto com governanca central estabelecida, arquitetura backend definida, trilha de auditoria transversal implementada, persistencia Prisma formalizada, autenticacao/autorizacao base formalmente encerradas, fundacao frontend operacional fechada, oito superficies de negocio reabertas com consolidacao minima, reconciliacao documental de `DONE` fechada pela `FC-020`, escopo MVP publico formalizado pela `FC-021`, bloqueio tecnico da validacao local removido pela `FC-026`, reexecucao formal da `FC-022` encerrada com baseline local do MVP validado, `FC-023` formalmente encerrada como `DONE` e `FC-024` fechada como pacote publico de portfolio. O repositorio agora possui README em ingles coerente com o MVP real, evidence pack para recrutadores e narrativa publica alinhada ao estado tecnico validado sem inflar escopo nem alegar deploy publico inexistente.
 
 ## Fotografia oficial apos FC-020
 - `FC-020` esta formalmente classificada como `DONE`.
@@ -46,15 +46,15 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - `FC-019` - operacionalizacao minima da Named Localhost Convention no ambiente local
 - `FC-020` - reconciliacao documental das evidencias formais de `DONE`
 - `FC-021` - definicao formal do escopo MVP publico para deploy e portfolio
+- `FC-023` - baseline de staging fechada com gate manual do Neon validado e contrato Prisma/Neon consolidado
+- `FC-024` - README publico em ingles e recruiter evidence pack alinhados ao MVP real
 - `FC-022` - validacao local/manual do MVP reexecutada com baseline corrigido e readiness de staging liberada
 - `FC-026` - isolamento da suite da API no banco oficial de testes e recuperacao do baseline local
 
 ## Tasks em aberto
-- `FC-024` - `READY` - Public GitHub README and Recruiter Evidence Pack
 - `FC-025` - `PARKED` - Production Growth Backlog
 
 ## Proximas tasks planejadas
-- `FC-024` - `READY` - Public GitHub README and Recruiter Evidence Pack
 - `FC-025` - `PARKED` - Production Growth Backlog
 
 ## Encadeamento formal
@@ -77,6 +77,10 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - `FC-019` fechou a lacuna entre o protocolo e o runtime local, validando web e api em host nomeado.
 
 ## Validacoes mais recentes
+- `FC-024` - `README.md` reescrito em ingles para refletir portfolio MVP, stack, instrucoes locais, estado validado e limites reais do projeto: PASS documental
+- `FC-024` - `docs/project/recruiter-evidence-pack.md` criado com leitura executiva, escopo MVP, sinais de engenharia e trilha de evidencia para recrutadores: PASS documental
+- `FC-024` - narrativa publica mantida coerente com `docs/product/mvp-scope.md`, `docs/quality/fc-022-local-validation.md` e `docs/ops/done/FC-023.done.md`: PASS documental
+- `FC-024` - nenhum deploy publico alegado, nenhum secret registrado e nenhuma feature nova aberta: PASS documental
 - `FC-023B` - ambiente corrigido manualmente para Node `v24.15.0`, npm `11.12.1` e pnpm `10.33.0`: PASS
 - `FC-023B` - `pnpm.cmd install`: PASS
 - `FC-023B` - `pnpm.cmd prisma generate` em `apps/api`: PASS com Prisma Client `7.5.0` gerado sob Node `v24.15.0`
@@ -207,9 +211,9 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - o gate manual do Neon depende de operacao externa humana por desenho, mas a evidencia requerida foi registrada e validada nesta execucao
 
 ## Proxima READY oficial
-`FC-024` - Public GitHub README and Recruiter Evidence Pack
+nenhuma `READY` oficial no momento
 
 ## Justificativa da proxima READY
-- `FC-023` fechou a baseline de staging com evidencia operacional suficiente para sair de `DOING`
-- o proximo passo de maior valor agora e transformar o estado tecnico validado em README publico, narrativa de portfolio e pacote de evidencia para recrutadores
-- `FC-025` continua isolada como backlog de crescimento pos-MVP
+- `FC-024` fechou a narrativa publica minima sem contradizer o MVP real
+- `FC-025` continua isolada como backlog de crescimento pos-MVP e permanece `PARKED`, nao `READY`
+- a proxima liberacao depende de nova decisao de governanca sobre deploy publico, manifests de provedor ou backlog pos-MVP
