@@ -1,7 +1,7 @@
 # STATUS - Fiber Control
 
 ## Estado atual
-Projeto com governanca central estabelecida, arquitetura backend definida, trilha de auditoria transversal implementada, persistencia Prisma formalizada, autenticacao/autorizacao base formalmente encerradas, fundacao frontend operacional fechada, oito superficies de negocio reabertas com consolidacao minima, reconciliacao documental de `DONE` fechada pela `FC-020`, escopo MVP publico formalizado pela `FC-021`, bloqueio tecnico da validacao local removido pela `FC-026` e reexecucao formal da `FC-022` encerrada com baseline local do MVP validado. A `FC-023` esta em `DOING` e sua subfatia `FC-023A` foi concluida como baseline documental completa em `docs/ops/fc-023-staging-baseline.md`. Nenhum deploy foi iniciado, e os riscos de runtime Node e ausencia de suite dedicada na web permanecem explicitos antes da publicacao real.
+Projeto com governanca central estabelecida, arquitetura backend definida, trilha de auditoria transversal implementada, persistencia Prisma formalizada, autenticacao/autorizacao base formalmente encerradas, fundacao frontend operacional fechada, oito superficies de negocio reabertas com consolidacao minima, reconciliacao documental de `DONE` fechada pela `FC-020`, escopo MVP publico formalizado pela `FC-021`, bloqueio tecnico da validacao local removido pela `FC-026`, reexecucao formal da `FC-022` encerrada com baseline local do MVP validado e `FC-023` formalmente encerrada como `DONE`. O `Manual External Operations Gate` do Neon foi validado manualmente pelo humano com Node `v24.15.0`, `pnpm.cmd install`, `pnpm.cmd prisma generate`, `pnpm.cmd prisma migrate deploy`, `pnpm.cmd build`, `docker compose up -d` e `pnpm.cmd test` em `PASS`. O contrato operacional fica consolidado com Prisma `7` usando `DIRECT_URL` via `apps/api/prisma.config.ts` para CLI/migrations e runtime usando `DATABASE_URL` pooled do Neon.
 
 ## Fotografia oficial apos FC-020
 - `FC-020` esta formalmente classificada como `DONE`.
@@ -50,13 +50,11 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - `FC-026` - isolamento da suite da API no banco oficial de testes e recuperacao do baseline local
 
 ## Tasks em aberto
-- `FC-023` - `DOING` - Staging Deployment Baseline
-- `FC-024` - `NEXT` - Public GitHub README and Recruiter Evidence Pack
+- `FC-024` - `READY` - Public GitHub README and Recruiter Evidence Pack
 - `FC-025` - `PARKED` - Production Growth Backlog
 
 ## Proximas tasks planejadas
-- `FC-023` - `DOING` - Staging Deployment Baseline
-- `FC-024` - `NEXT` - Public GitHub README and Recruiter Evidence Pack
+- `FC-024` - `READY` - Public GitHub README and Recruiter Evidence Pack
 - `FC-025` - `PARKED` - Production Growth Backlog
 
 ## Encadeamento formal
@@ -79,6 +77,24 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - `FC-019` fechou a lacuna entre o protocolo e o runtime local, validando web e api em host nomeado.
 
 ## Validacoes mais recentes
+- `FC-023B` - ambiente corrigido manualmente para Node `v24.15.0`, npm `11.12.1` e pnpm `10.33.0`: PASS
+- `FC-023B` - `pnpm.cmd install`: PASS
+- `FC-023B` - `pnpm.cmd prisma generate` em `apps/api`: PASS com Prisma Client `7.5.0` gerado sob Node `v24.15.0`
+- `FC-023B` - `pnpm.cmd prisma migrate deploy` em `apps/api`: PASS com `DIRECT_URL` resolvida via `apps/api/prisma.config.ts`
+- `FC-023B` - `pnpm.cmd build`: PASS
+- `FC-023B` - `docker compose up -d`: PASS
+- `FC-023B` - `pnpm.cmd test`: PASS
+- `FC-023B` - causa do `P1012` registrada: Prisma ORM `7.5.0` nao suporta `datasource.url` nem `datasource.directUrl` no `schema.prisma`: PASS documental
+- `FC-023B` - `apps/api/prisma/schema.prisma` corrigido para manter apenas `provider = "postgresql"` no datasource: PASS documental
+- `FC-023B` - `apps/api/prisma.config.ts` corrigido para usar `env("DIRECT_URL")` na Prisma CLI e nas migrations: PASS documental
+- `FC-023B` - `apps/api/.env.example` ajustado para placeholders Neon sem segredo real, com `DATABASE_URL` pooled e `DIRECT_URL` direct: PASS documental
+- `FC-023B` - gate manual externo do Neon registrado em `docs/ops/fc-023-staging-baseline.md`: `VALIDATED` com evidencias manuais completas
+- `FC-023B` - mapeamento de env vars obrigatorias de API e web revisado contra `apps/api/.env.example`, `apps/web/.env.example` e `docs/ops/fc-023-staging-baseline.md`: PASS documental
+- `FC-023B` - ausencia de manifesto especifico de provedor no repositorio identificada explicitamente para Render e Vercel: PASS documental
+- `FC-023B` - `pnpm.cmd -C apps/api lint`: PASS com warning de engine Node `24.x` vs ambiente `v22.21.1`
+- `FC-023B` - `pnpm.cmd -C apps/api build`: PASS com warning de engine Node `24.x` vs ambiente `v22.21.1`
+- `FC-023B` - `pnpm.cmd -C apps/web lint`: PASS
+- `FC-023B` - `pnpm.cmd -C apps/web build`: PASS fora do sandbox; no sandbox houve `spawn EPERM`, classificado como limitacao ambiental e nao como falha do projeto
 - `FC-023A` - `docs/ops/fc-023-staging-baseline.md` consolidado com objetivo, baseline local, topologia Vercel/Render, runtime, banco, env vars, segredos, comandos e smoke pos-publicacao: PASS documental
 - `FC-023A` - backlog, `STATUS.md`, `docs/ops/decisions.md`, `docs/ops/execution-log.md` e `docs/ops/session-handoff.md` alinhados para refletir a fatia documental sem iniciar deploy: PASS documental
 - `FC-022` - `pnpm.cmd prisma:generate` em `apps/api`: PASS com warning de engine Node `24.x` vs ambiente `v22.21.1`
@@ -172,7 +188,7 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 ## Limites e bloqueios reais
 - o banco de teste oficial segue em `127.0.0.1:5442`; `127.0.0.1:5440` foi saneado apenas como desenvolvimento local e nao deve ser usado para testes
 - nao existe suite automatizada dedicada de `apps/web` nesta fotografia
-- `apps/api` declara Node `24.x`, mas o ambiente validado nesta execucao estava em `v22.21.1`
+- Node `v24.15.0` passou a fechar o baseline validado desta execucao e removeu a divergencia anterior com o runtime `24.x` declarado em `apps/api`
 - `customers/[id]` e `customers/[id]/edit` continuam presentes como scaffold e exigem task propria para reabertura
 - reconciliacao permanece fora de escopo dentro do ciclo de `Payments` e exige task propria
 - lifecycle actions de `Alerts` permanecem fora de escopo e exigem task propria
@@ -186,13 +202,14 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - o fallback para `localhost:porta` permanece permitido e documentado quando host nomeado nao for viavel no ambiente atual
 - `FC-001`, `FC-002`, `FC-003`, `FC-004`, `FC-004A`, `FC-005`, `FC-006`, `FC-008`, `FC-009` e `FC-011` tiveram fechamento formal reconstruido documentalmente em `FC-020`; parte do detalhe fino de encerramento permanece derivada dos artefatos existentes, sem evidencias novas
 - readiness local alem de `GET /health` agora esta consolidada em `docs/quality/fc-022-local-validation.md`
-- `FC-023` saiu de `READY` para `DOING` apenas na fatia documental `FC-023A`; deploy continua nao iniciado e dependente dos riscos residuais explicitados nesta fotografia
+- `FC-023` foi encerrada sem iniciar deploy automatico pelo agente; a baseline de staging ficou fechada documentalmente e os gates manuais foram confirmados pelo humano
+- o repositorio continua sem manifesto especifico de provedor para Render e Vercel; isso permanece lacuna operacional conhecida, nao impedimento para o encerramento documental da baseline
+- o gate manual do Neon depende de operacao externa humana por desenho, mas a evidencia requerida foi registrada e validada nesta execucao
 
 ## Proxima READY oficial
-nenhuma `READY` paralela enquanto `FC-023` permanece em `DOING`
+`FC-024` - Public GitHub README and Recruiter Evidence Pack
 
 ## Justificativa da proxima READY
-- `FC-021` ja fechou o escopo real do MVP publico
-- `FC-026` removeu o bloqueio tecnico da suite da API e restaurou a seed local
-- a reexecucao formal da `FC-022` consolidou readiness local suficiente para abrir o baseline de staging controlado
-- `FC-023A` reduziu a ambiguidade de runtime, banco, env vars e smoke antes da publicacao real
+- `FC-023` fechou a baseline de staging com evidencia operacional suficiente para sair de `DOING`
+- o proximo passo de maior valor agora e transformar o estado tecnico validado em README publico, narrativa de portfolio e pacote de evidencia para recrutadores
+- `FC-025` continua isolada como backlog de crescimento pos-MVP

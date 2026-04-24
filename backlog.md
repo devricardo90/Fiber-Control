@@ -40,12 +40,12 @@
   - **Prioridade**: P0
   - **Objetivo**: validar localmente build, testes, env vars, CORS, auth, health checks e fluxos minimos do MVP antes de qualquer deploy.
   - **Observacao**: reexecutada com sucesso em 2026-04-24 apos a `FC-026`; baseline local validado e `FC-023` liberada para `READY`.
-- `FC-023` - Staging Deployment Baseline - `DOING`
+- `FC-023` - Staging Deployment Baseline - `DONE`
   - **Tipo**: Deploy / Infrastructure
   - **Prioridade**: P0
   - **Objetivo**: publicar web, API e banco em ambiente acessivel para validacao real.
-  - **Observacao**: `FC-023A` foi concluida em 2026-04-24 como baseline documental completa em `docs/ops/fc-023-staging-baseline.md`; nenhum deploy foi iniciado nesta fatia.
-- `FC-024` - Public GitHub README and Recruiter Evidence Pack - `NEXT`
+  - **Observacao**: `FC-023A` concluiu a baseline documental e `FC-023B` fechou a validacao operacional/documental. O banco Neon foi criado manualmente, o `Manual External Operations Gate` foi validado pelo humano, a divergencia de Node foi resolvida em `v24.15.0`, Prisma `7` ficou consolidado com `DIRECT_URL` via `apps/api/prisma.config.ts` e o runtime permaneceu em `DATABASE_URL` pooled do Neon. Nenhum secret real foi registrado no repositorio e nenhum codigo de produto precisou ser alterado para este fechamento.
+- `FC-024` - Public GitHub README and Recruiter Evidence Pack - `READY`
   - **Tipo**: Documentation / Portfolio
   - **Prioridade**: P1
   - **Objetivo**: criar README profissional em ingles, demo flow, arquitetura, status do projeto, roadmap e evidencia para recrutadores.
@@ -65,9 +65,9 @@
 
 ---
 
-## TODO
+## READY
 - `FC-024` - Public GitHub README and Recruiter Evidence Pack
-  - **Status de planejamento**: `NEXT`
+  - **Status de planejamento**: `READY`
   - **Tipo**: Documentation / Portfolio
   - **Prioridade**: P1
   - **Objetivo**: criar README profissional em ingles, demo flow, arquitetura, status do projeto, roadmap e evidencia para recrutadores.
@@ -84,6 +84,7 @@
     - `STATUS.md`
     - `docs/ops/execution-log.md`
     - `docs/ops/session-handoff.md`
+## TODO
 - `FC-025` - Production Growth Backlog
   - **Status de planejamento**: `PARKED`
   - **Tipo**: Product / Growth
@@ -103,40 +104,13 @@
 ---
 
 ## DOING
-- `FC-023` - Staging Deployment Baseline
-  - **Tipo**: Deploy / Infrastructure
-  - **Prioridade**: P0
-  - **Objetivo**: publicar web, API e banco em ambiente acessivel para validacao real.
-  - **Escopo**:
-    - definir o baseline minimo de staging para web, API e banco
-    - preparar env vars e runtime de staging coerentes com o MVP validado
-    - publicar um ambiente acessivel para validacao externa controlada
-    - registrar smoke minimo apos publicacao
-  - **Fatia documental concluida**: `FC-023A - Staging Baseline Contract`
-  - **Fora de escopo**:
-    - dominio customizado
-    - hardening enterprise
-    - crescimento de produto fora do MVP
-    - qualquer deploy nesta fatia documental
-  - **Criterios de aceite da fatia atual**:
-    - contrato minimo de staging documentado no repositorio
-    - runtime, banco, env vars e smoke pos-publicacao definidos sem ambiguidade relevante
-    - riscos residuais mantidos explicitos antes de qualquer deploy
-  - **Validacao obrigatoria**:
-    - leitura e alinhamento com `AGENTS.md`, `backlog.md`, `STATUS.md` e `docs/ops/*`
-    - nenhum deploy iniciado nesta fatia
-  - **Impacto documental**:
-    - `backlog.md`
-    - `STATUS.md`
-    - `docs/ops/decisions.md`
-    - `docs/ops/execution-log.md`
-    - `docs/ops/session-handoff.md`
-    - `docs/ops/fc-023-staging-baseline.md`
+- *(vazio no momento)*
 
 ## BLOCKED
 - *(vazio no momento)*
 
 ## DONE
+- `FC-023` - DONE com baseline de staging fechada documentalmente e validacoes manuais confirmadas pelo humano: Node `v24.15.0`, npm `11.12.1`, pnpm `10.33.0`, `pnpm.cmd install`, `pnpm.cmd prisma generate`, `pnpm.cmd prisma migrate deploy`, `pnpm.cmd build`, `docker compose up -d` e `pnpm.cmd test` em PASS; `Manual External Operations Gate` do Neon validado; Prisma `7` consolidado com `DIRECT_URL` via `apps/api/prisma.config.ts` e runtime mantido em `DATABASE_URL` pooled do Neon, sem registrar secrets reais
 - `FC-022` - DONE com reexecucao formal da validacao local do MVP: `prisma:generate`, `lint`, `build`, `prisma:migrate:deploy` e `test` em `apps/api` ficaram em PASS no banco oficial de testes `127.0.0.1:5442`, o banco dev `127.0.0.1:5440` permaneceu intacto apos a suite, o login seed `acesso@fibercontrol.local` voltou a passar junto com `GET /auth/me`, CORS e as rotas/pontos minimos do MVP responderam corretamente, e `FC-023` foi liberada para `READY`
 - `FC-001`
 - `FC-002`
@@ -172,7 +146,7 @@
 
 ## Riscos atuais
 - `127.0.0.1:5440` agora voltou a refletir o baseline local de desenvolvimento com seed e migration atuais, mas continua sendo ambiente de dev e nao pode ser usado como base de testes
-- `apps/api` declara Node `24.x`, mas a validacao local atual ocorreu em Node `v22.21.1`; esse desalinhamento precisa ficar explicito antes de staging
+- a divergencia anterior entre Node `24.x` declarado e Node `v22.21.1` validado foi resolvida no baseline manual de `FC-023` com Node `v24.15.0`
 - `apps/web` ainda nao possui suite automatizada dedicada; staging continua dependente de smoke manual mais build/lint
 - sem task dedicada por modulo, qualquer reabertura de tela de negocio em `apps/web` pode reintroduzir deriva visual e estrutural fora da fundacao operacional
 - `customers/[id]` e `customers/[id]/edit` continuam scaffold-only e permanecem neutralizados ate task propria
@@ -186,10 +160,11 @@
 - sem reconciliacao documental, o projeto corria risco de tratar `DONE` como encerramento sem arquivo formal; esse risco foi saneado pela `FC-020`, mas a proxima frente continua dependente de decisao de governanca
 - sem escopo MVP formal, o projeto corre risco de derivar para backlog enterprise e contaminar o objetivo de portfolio/deploy minimo
 ## Proxima task oficial
-`FC-023` - Staging Deployment Baseline
+`FC-024` - Public GitHub README and Recruiter Evidence Pack
 
 ## Saneamento documental
 - `FC-020` abriu e fechou no mesmo ciclo para reconciliar a evidencia formal de `DONE`
 - `FC-021` fechou o recorte MVP publico sem abrir deploy nem promover a etapa seguinte
 - `FC-022` foi reexecutada sobre o baseline corrigido pela `FC-026`, consolidou a evidencia local do MVP e liberou `FC-023` para `READY`
 - `FC-026` removeu o bloqueio tecnico que impedia a conclusao da `FC-022`
+- `FC-023` fechou a baseline de staging com evidencia manual completa e liberou `FC-024` como `READY`
