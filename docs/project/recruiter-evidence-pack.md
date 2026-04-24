@@ -27,6 +27,11 @@ The project emphasizes bounded scope, real backend behavior, documented architec
 - API docs: `https://app-fiber-control-api-staging.onrender.com/docs`
 - API health: `https://app-fiber-control-api-staging.onrender.com/health`
 
+### Visual evidence status
+- screenshot checklist prepared in [docs/project/github-polish-checklist.md](./github-polish-checklist.md)
+- screenshot folder prepared under `docs/assets/screenshots/`
+- real screenshots still depend on manual browser capture from the live staging environment
+
 ## MVP Features Included
 
 - login and authenticated access
@@ -91,6 +96,7 @@ This repository demonstrates:
 3. [docs/architecture/backend-architecture.md](./../architecture/backend-architecture.md)
 4. [docs/quality/fc-022-local-validation.md](./../quality/fc-022-local-validation.md)
 5. [docs/ops/done/FC-023.done.md](./../ops/done/FC-023.done.md)
+6. [docs/project/github-polish-checklist.md](./github-polish-checklist.md)
 
 ## Honest Positioning
 

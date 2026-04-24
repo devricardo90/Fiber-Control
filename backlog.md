@@ -85,7 +85,7 @@
     - `docs/ops/session-handoff.md`
     - `docs/ops/execution-log.md`
   - **Observacao**: concluida em 2026-04-24 com `README.md` polido incrementalmente para refletir problema de produto, staging publico real, demo flow, arquitetura, split API/Web, deployment Neon -> Render -> Vercel, auth flow, disciplina operacional, smoke validado, limitacoes e roadmap, sem registrar secrets e sem inflar o MVP.
-- `FC-029` - GitHub Portfolio Polish and Screenshots - `READY`
+- `FC-029` - GitHub Portfolio Polish and Screenshots - `DONE`
   - **Tipo**: Documentation / Portfolio
   - **Prioridade**: P1
   - **Objetivo**: preparar o projeto para apresentacao visual no GitHub e portfolio, adicionando estrutura de screenshots, orientacao visual e checklist de polish do repositorio sem inventar evidencias inexistentes.
@@ -111,6 +111,7 @@
     - `STATUS.md`
     - `docs/ops/session-handoff.md`
     - `docs/ops/execution-log.md`
+  - **Observacao**: concluida em 2026-04-24 com checklist visual criado em `docs/project/github-polish-checklist.md`, estrutura `docs/assets/screenshots/` preparada, `README.md` ajustado para evidencias visuais sem inventar screenshots e dependencia de captura manual registrada explicitamente.
 - `FC-025` - Production Growth Backlog - `PARKED`
   - **Tipo**: Product / Growth
   - **Prioridade**: P2
@@ -128,31 +129,7 @@
 ---
 
 ## READY
-- `FC-029` - GitHub Portfolio Polish and Screenshots
-  - **Tipo**: Documentation / Portfolio
-  - **Prioridade**: P1
-  - **Objetivo**: preparar o projeto para apresentacao visual no GitHub e portfolio, adicionando estrutura de screenshots, orientacao visual e checklist de polish do repositorio.
-  - **Escopo**: organizar a base documental para screenshots e polish de apresentacao, com secoes visuais, checklist de captura e orientacao de GitHub polish sem inventar imagens inexistentes.
-  - **Fora de escopo**: codigo funcional, UI/UX, providers, env vars, deploy, banco, novas features e reabertura da `FC-025`.
-  - **Criterios de aceite**:
-    - estrutura e checklist de screenshots definidos
-    - README preparado para evidencia visual
-    - links publicos reais preservados
-    - dependencia de captura manual explicitada quando necessario
-    - nenhum secret real no diff
-  - **Validacao obrigatoria**:
-    - revisao manual do diff
-    - `git diff --check`
-    - busca por padroes sensiveis
-  - **Impacto documental**:
-    - `README.md`
-    - `docs/project/recruiter-evidence-pack.md`
-    - `docs/project/github-polish-checklist.md`
-    - `docs/assets/screenshots/` ou estrutura equivalente
-    - `backlog.md`
-    - `STATUS.md`
-    - `docs/ops/session-handoff.md`
-    - `docs/ops/execution-log.md`
+- *(vazio no momento)*
 ## TODO
 - `FC-025` - Production Growth Backlog
   - **Status de planejamento**: `PARKED`
@@ -179,6 +156,7 @@
 - *(vazio no momento)*
 
 ## DONE
+- `FC-029` - DONE com checklist visual criado em `docs/project/github-polish-checklist.md`, estrutura `docs/assets/screenshots/` preparada, `README.md` ajustado para `Product Preview` e `Demo Evidence` sem inventar screenshots, `docs/project/recruiter-evidence-pack.md` alinhado ao fluxo visual e dependencia de captura manual explicitada sem registrar secrets
 - `FC-028` - DONE com `README.md` polido incrementalmente em ingles para refletir problema de produto, escopo MVP, staging publico real, demo flow, arquitetura, split API/Web, deployment Neon -> Render -> Vercel, auth flow, disciplina operacional, smoke validado, limitacoes reais e roadmap, com `docs/project/recruiter-evidence-pack.md` alinhado e sem registrar secrets reais
 - `FC-027` - DONE com `docs/ops/staging-runbook.md` criado e completo para reprodutibilidade do staging atual em Neon, Render API e Vercel Web, incluindo URLs publicas, contrato de env vars por nomes/placeholders, diferenca entre `DATABASE_URL` pooled e `DIRECT_URL` direct, configuracao esperada de provider, smoke manual oficial, troubleshooting e criterio de staging saudavel, sem registrar secrets reais
 - `FC-025A` - DONE com staging minimo publicado seguindo a baseline oficial Neon -> Render API -> Vercel Web: API em `https://app-fiber-control-api-staging.onrender.com`, web em `https://app-fiber-control-web-staging.vercel.app`, `GET /health`, `/docs`, `/openapi.json`, `POST /auth/register`, `POST /auth/login` e `GET /auth/me` em PASS, `CORS_ORIGIN` alinhado a URL real da web e sem criacao de Render PostgreSQL
@@ -245,4 +223,4 @@ nenhuma `READY` oficial no momento
 - `FC-025A` foi encerrada como `DONE` apos publicar staging real com Neon, Render e Vercel, preservando `FC-025` como backlog `PARKED`
 - `FC-027` foi encerrada como `DONE` apos consolidar o runbook versionado do staging real sem reabrir deploy nem alterar providers
 - `FC-028` foi encerrada como `DONE` apos polir a apresentacao publica do projeto em ingles, reforcando README, links de staging, demo flow, arquitetura, baseline de deploy e disciplina operacional sem abrir nova feature
-- `FC-029` foi aberta como a proxima `READY` oficial para estruturar screenshots, polish visual de GitHub e checklist de evidencia visual sem inventar assets inexistentes
+- `FC-029` foi encerrada como `DONE` apos estruturar screenshots, polish visual de GitHub e checklist de evidencia visual sem inventar assets inexistentes

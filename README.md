@@ -35,6 +35,18 @@ Deployment baseline:
 - Render API
 - Vercel Web
 
+## Product Preview
+
+Visual product preview is prepared but intentionally not fabricated.
+
+Current status:
+- live public staging exists
+- screenshot structure exists under `docs/assets/screenshots/`
+- GitHub polish guidance exists in [docs/project/github-polish-checklist.md](./docs/project/github-polish-checklist.md)
+- real screenshots still need to be captured manually from the live staging environment
+
+Until those captures exist, this README keeps text-first evidence instead of fake image placeholders.
+
 ## Product Problem
 
 The product problem is not "build every ISP feature at once." The real problem is to create a coherent operational baseline that can support:
@@ -86,6 +98,26 @@ The current demo flow is intentionally simple and verifiable:
 7. Register a payment and return to the list.
 
 This flow is aligned with the public staging validation already recorded in project operations docs.
+
+## Demo Evidence
+
+Documented evidence already available:
+- live public web staging
+- live API docs
+- live API health endpoint
+- authenticated smoke validation recorded in project operations docs
+- versioned runbook for staging reproduction
+
+Planned visual evidence:
+- login or register screen
+- authenticated dashboard
+- one representative MVP business screen
+- API docs screenshot
+
+Capture guidance:
+- use the real public staging environment
+- do not simulate screenshots
+- do not publish images with tokens, personal emails, passwords, or browser-private data visible
 
 ## Authentication Flow
 
@@ -178,6 +210,7 @@ Related evidence:
 - [docs/ops/done/FC-025A.done.md](./docs/ops/done/FC-025A.done.md)
 - [docs/ops/staging-runbook.md](./docs/ops/staging-runbook.md)
 - [docs/ops/execution-log.md](./docs/ops/execution-log.md)
+- [docs/project/github-polish-checklist.md](./docs/project/github-polish-checklist.md)
 
 ## Technical Highlights
 

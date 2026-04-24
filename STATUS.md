@@ -1,7 +1,7 @@
 # STATUS - Fiber Control
 
 ## Estado atual
-Projeto com governanca central estabelecida, arquitetura backend definida, trilha de auditoria transversal implementada, persistencia Prisma formalizada, autenticacao/autorizacao base formalmente encerradas, fundacao frontend operacional fechada, oito superficies de negocio reabertas com consolidacao minima, reconciliacao documental de `DONE` fechada pela `FC-020`, escopo MVP publico formalizado pela `FC-021`, bloqueio tecnico da validacao local removido pela `FC-026`, reexecucao formal da `FC-022` encerrada com baseline local do MVP validado, `FC-023` formalmente encerrada como `DONE`, `FC-024` fechada como pacote publico de portfolio, `FC-025A` formalmente encerrada como `DONE` com staging publicado em Neon + Render + Vercel, `FC-027` formalmente encerrada como `DONE` com runbook versionado de reprodutibilidade do staging atual e `FC-028` formalmente encerrada como `DONE` com polish incremental do README publico e do demo flow do projeto. A baseline oficial de staging permanece em Neon para banco, Render para API e Vercel para web. Nenhum PostgreSQL foi criado no Render e nenhum secret real foi registrado no repositorio. A proxima frente aprovada passa a ser visual/documental: estruturar screenshots e polish de apresentacao no GitHub sem inventar assets inexistentes.
+Projeto com governanca central estabelecida, arquitetura backend definida, trilha de auditoria transversal implementada, persistencia Prisma formalizada, autenticacao/autorizacao base formalmente encerradas, fundacao frontend operacional fechada, oito superficies de negocio reabertas com consolidacao minima, reconciliacao documental de `DONE` fechada pela `FC-020`, escopo MVP publico formalizado pela `FC-021`, bloqueio tecnico da validacao local removido pela `FC-026`, reexecucao formal da `FC-022` encerrada com baseline local do MVP validado, `FC-023` formalmente encerrada como `DONE`, `FC-024` fechada como pacote publico de portfolio, `FC-025A` formalmente encerrada como `DONE` com staging publicado em Neon + Render + Vercel, `FC-027` formalmente encerrada como `DONE` com runbook versionado de reprodutibilidade do staging atual, `FC-028` formalmente encerrada como `DONE` com polish incremental do README publico e do demo flow do projeto, e `FC-029` formalmente encerrada como `DONE` com checklist visual de GitHub, estrutura de screenshots e preparo documental para evidencias visuais reais. A baseline oficial de staging permanece em Neon para banco, Render para API e Vercel para web. Nenhum PostgreSQL foi criado no Render e nenhum secret real foi registrado no repositorio.
 
 ## Fotografia oficial apos FC-020
 - `FC-020` esta formalmente classificada como `DONE`.
@@ -52,15 +52,14 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - `FC-027` - runbook versionado de staging criado com arquitetura, env vars, smoke oficial e troubleshooting do baseline real
 - `FC-028` - README publico polido incrementalmente com links reais de staging, demo flow, arquitetura, disciplina operacional e limitacoes atuais
 - `FC-029` - abertura oficial da proxima frente de portfolio visual para screenshots, polish de README visual e checklist de GitHub
+- `FC-029` - checklist visual e estrutura de screenshots preparados sem inventar evidencias visuais
 - `FC-022` - validacao local/manual do MVP reexecutada com baseline corrigido e readiness de staging liberada
 - `FC-026` - isolamento da suite da API no banco oficial de testes e recuperacao do baseline local
 
 ## Tasks em aberto
-- `FC-029` - `READY` - GitHub Portfolio Polish and Screenshots
 - `FC-025` - `PARKED` - Production Growth Backlog
 
 ## Proximas tasks planejadas
-- `FC-029` - `READY` - GitHub Portfolio Polish and Screenshots
 - `FC-025` - `PARKED` - Production Growth Backlog
 
 ## Encadeamento formal
@@ -83,6 +82,12 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - `FC-019` fechou a lacuna entre o protocolo e o runtime local, validando web e api em host nomeado.
 
 ## Validacoes mais recentes
+- `FC-029` - `docs/project/github-polish-checklist.md` criado com screenshots necessarios, ordem sugerida, descricao curta do repositorio, topics, social preview image, links publicos, evidencias recomendadas e cuidados com dados sensiveis: PASS documental
+- `FC-029` - estrutura `docs/assets/screenshots/` criada para receber capturas reais posteriormente: PASS documental
+- `FC-029` - `README.md` preparado para evidencia visual real com `Product Preview` e `Demo Evidence`, sem inventar screenshots: PASS documental
+- `FC-029` - `docs/project/recruiter-evidence-pack.md` alinhado ao checklist visual e a dependencia de captura manual: PASS documental
+- `FC-029` - backlog, `STATUS.md`, `docs/ops/session-handoff.md`, `docs/ops/execution-log.md` e `docs/ops/done/FC-029.done.md` alinhados para encerramento formal: PASS documental
+- `FC-029` - revisao documental sem tokens, `DATABASE_URL`, `DIRECT_URL`, `AUTH_SECRET`, senhas, credenciais ou emails pessoais reais no diff: PASS documental
 - `FC-029` - task aberta como proxima `READY` oficial para estruturar screenshots, polish visual do README e checklist de GitHub sem alterar codigo funcional: PASS documental
 - `FC-029` - escopo restringido a evidencia visual, placeholders/checklists de captura manual, links publicos e polish de portfolio sem reabrir `FC-025`: PASS documental
 - `FC-028` - `README.md` melhorado em ingles com project overview, product problem, MVP scope, live staging links, demo flow, architecture, API/Web split, deployment Neon -> Render -> Vercel, auth flow, operational discipline, smoke validation, current limitations e roadmap: PASS documental
@@ -244,10 +249,11 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - o gate manual do Neon depende de operacao externa humana por desenho, mas a evidencia requerida foi registrada e validada nesta execucao
 
 ## Proxima READY oficial
-`FC-029` - GitHub Portfolio Polish and Screenshots
+nenhuma `READY` oficial no momento
 
 ## Justificativa da proxima READY
 - `FC-027` fechou o gap operacional/documental mais imediato do staging atual
 - `FC-028` fechou o polish de apresentacao publica necessario para aproveitar o staging real e o runbook versionado no material publico do projeto
-- `FC-029` concentra o proximo ganho de portfolio sem abrir feature, preparando estrutura de screenshots, evidencia visual e polish de GitHub com dependencia manual explicitada quando necessario
+- `FC-029` fechou o polish visual/documental necessario para preparar capturas reais sem fabricar evidencias
+- nenhuma nova task foi formalmente promovida para `READY` nesta execucao
 - `FC-025` continua isolada como backlog de crescimento pos-MVP e permanece `PARKED`, nao `READY`
