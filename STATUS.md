@@ -1,7 +1,7 @@
 # STATUS - Fiber Control
 
 ## Estado atual
-Projeto com governanca central estabelecida, arquitetura backend definida, trilha de auditoria transversal implementada, persistencia Prisma formalizada, autenticacao/autorizacao base formalmente encerradas, fundacao frontend operacional fechada, oito superficies de negocio reabertas com consolidacao minima, reconciliacao documental de `DONE` fechada pela `FC-020`, escopo MVP publico formalizado pela `FC-021`, bloqueio tecnico da validacao local removido pela `FC-026`, reexecucao formal da `FC-022` encerrada com baseline local do MVP validado, `FC-023` formalmente encerrada como `DONE`, `FC-024` fechada como pacote publico de portfolio, `FC-025A` formalmente encerrada como `DONE` com staging publicado em Neon + Render + Vercel e `FC-027` formalmente encerrada como `DONE` com runbook versionado de reprodutibilidade do staging atual. A baseline oficial de staging permanece em Neon para banco, Render para API e Vercel para web. Nenhum PostgreSQL foi criado no Render e nenhum secret real foi registrado no repositorio.
+Projeto com governanca central estabelecida, arquitetura backend definida, trilha de auditoria transversal implementada, persistencia Prisma formalizada, autenticacao/autorizacao base formalmente encerradas, fundacao frontend operacional fechada, oito superficies de negocio reabertas com consolidacao minima, reconciliacao documental de `DONE` fechada pela `FC-020`, escopo MVP publico formalizado pela `FC-021`, bloqueio tecnico da validacao local removido pela `FC-026`, reexecucao formal da `FC-022` encerrada com baseline local do MVP validado, `FC-023` formalmente encerrada como `DONE`, `FC-024` fechada como pacote publico de portfolio, `FC-025A` formalmente encerrada como `DONE` com staging publicado em Neon + Render + Vercel, `FC-027` formalmente encerrada como `DONE` com runbook versionado de reprodutibilidade do staging atual e `FC-028` formalmente encerrada como `DONE` com polish incremental do README publico e do demo flow do projeto. A baseline oficial de staging permanece em Neon para banco, Render para API e Vercel para web. Nenhum PostgreSQL foi criado no Render e nenhum secret real foi registrado no repositorio.
 
 ## Fotografia oficial apos FC-020
 - `FC-020` esta formalmente classificada como `DONE`.
@@ -50,15 +50,14 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - `FC-024` - README publico em ingles e recruiter evidence pack alinhados ao MVP real
 - `FC-025A` - provisionamento manual de staging concluido com Neon como banco oficial, API publicada em Render, web publicada em Vercel e smoke manual aprovado
 - `FC-027` - runbook versionado de staging criado com arquitetura, env vars, smoke oficial e troubleshooting do baseline real
+- `FC-028` - README publico polido incrementalmente com links reais de staging, demo flow, arquitetura, disciplina operacional e limitacoes atuais
 - `FC-022` - validacao local/manual do MVP reexecutada com baseline corrigido e readiness de staging liberada
 - `FC-026` - isolamento da suite da API no banco oficial de testes e recuperacao do baseline local
 
 ## Tasks em aberto
-- `FC-028` - `READY` - Public README and Demo Presentation Polish
 - `FC-025` - `PARKED` - Production Growth Backlog
 
 ## Proximas tasks planejadas
-- `FC-028` - `READY` - Public README and Demo Presentation Polish
 - `FC-025` - `PARKED` - Production Growth Backlog
 
 ## Encadeamento formal
@@ -81,6 +80,10 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - `FC-019` fechou a lacuna entre o protocolo e o runtime local, validando web e api em host nomeado.
 
 ## Validacoes mais recentes
+- `FC-028` - `README.md` melhorado em ingles com project overview, product problem, MVP scope, live staging links, demo flow, architecture, API/Web split, deployment Neon -> Render -> Vercel, auth flow, operational discipline, smoke validation, current limitations e roadmap: PASS documental
+- `FC-028` - `docs/project/recruiter-evidence-pack.md` alinhado ao staging publico real, links publicos e runbook versionado: PASS documental
+- `FC-028` - backlog, `STATUS.md`, `docs/ops/session-handoff.md`, `docs/ops/execution-log.md` e `docs/ops/done/FC-028.done.md` alinhados para encerramento formal: PASS documental
+- `FC-028` - revisao documental sem `DATABASE_URL`, `DIRECT_URL`, `AUTH_SECRET`, tokens, senhas ou credenciais reais: PASS documental
 - `FC-028` - task aberta como proxima `READY` oficial para polimento da apresentacao publica em ingles, sem reabrir escopo funcional nem alterar providers: PASS documental
 - `FC-028` - escopo da task restringido a README, demo flow, narrativa publica, URLs, highlights tecnicos e disciplina operacional, com `docs/project/recruiter-evidence-pack.md` opcional apenas se aumentar a coerencia: PASS documental
 - `FC-027` - `docs/ops/staging-runbook.md` criado com arquitetura, URLs publicas, Neon pooled/direct, configuracao esperada de Render API, configuracao esperada de Vercel Web, smoke oficial e troubleshooting: PASS documental
@@ -236,10 +239,10 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - o gate manual do Neon depende de operacao externa humana por desenho, mas a evidencia requerida foi registrada e validada nesta execucao
 
 ## Proxima READY oficial
-`FC-028` - Public README and Demo Presentation Polish
+nenhuma `READY` oficial no momento
 
 ## Justificativa da proxima READY
 - `FC-027` fechou o gap operacional/documental mais imediato do staging atual
-- o README atual ja e funcional, mas ainda comporta polish de apresentacao publica agora que o staging real e o runbook versionado estao fechados
-- `FC-028` concentra o proximo ganho de portfolio sem abrir feature, sem mexer em provider e sem contaminar o MVP com backlog enterprise
+- `FC-028` fechou o polish de apresentacao publica necessario para aproveitar o staging real e o runbook versionado no material publico do projeto
+- nenhuma nova task foi formalmente promovida para `READY` nesta execucao
 - `FC-025` continua isolada como backlog de crescimento pos-MVP e permanece `PARKED`, nao `READY`

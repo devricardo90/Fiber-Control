@@ -60,7 +60,7 @@
   - **Prioridade**: P0
   - **Objetivo**: consolidar um runbook versionado para recriar, operar, redeployar e validar o staging atual sem depender de memoria tacita.
   - **Observacao**: concluida em 2026-04-24 com `docs/ops/staging-runbook.md` criado para consolidar Neon, Render API, Vercel Web, contrato de env vars por nomes/placeholders, diferenca entre `DATABASE_URL` pooled e `DIRECT_URL` direct, smoke manual oficial e troubleshooting. Nenhum secret real foi registrado.
-- `FC-028` - Public README and Demo Presentation Polish - `READY`
+- `FC-028` - Public README and Demo Presentation Polish - `DONE`
   - **Tipo**: Documentation / Portfolio
   - **Prioridade**: P1
   - **Objetivo**: fortalecer a apresentacao publica do App Fiber Control em ingles para GitHub, portfolio, LinkedIn e avaliacao tecnica, sem inflar escopo nem prometer capacidades inexistentes.
@@ -84,6 +84,7 @@
     - `STATUS.md`
     - `docs/ops/session-handoff.md`
     - `docs/ops/execution-log.md`
+  - **Observacao**: concluida em 2026-04-24 com `README.md` polido incrementalmente para refletir problema de produto, staging publico real, demo flow, arquitetura, split API/Web, deployment Neon -> Render -> Vercel, auth flow, disciplina operacional, smoke validado, limitacoes e roadmap, sem registrar secrets e sem inflar o MVP.
 - `FC-025` - Production Growth Backlog - `PARKED`
   - **Tipo**: Product / Growth
   - **Prioridade**: P2
@@ -101,28 +102,7 @@
 ---
 
 ## READY
-- `FC-028` - Public README and Demo Presentation Polish
-  - **Tipo**: Documentation / Portfolio
-  - **Prioridade**: P1
-  - **Objetivo**: fortalecer a apresentacao publica do App Fiber Control em ingles para GitHub, portfolio, LinkedIn e avaliacao tecnica.
-  - **Escopo**: revisar e melhorar `README.md`, registrar URLs publicas, demo flow, arquitetura, split API/Web, baseline Neon -> Render -> Vercel, auth flow, limitacoes reais, roadmap e highlights tecnicos; atualizar `docs/project/recruiter-evidence-pack.md` somente se isso aumentar a coerencia da narrativa publica.
-  - **Fora de escopo**: codigo funcional, UI, providers, env vars, banco e promessas falsas.
-  - **Criterios de aceite**:
-    - README profissional em ingles coerente com o MVP real
-    - URLs publicas e demo flow registrados
-    - limitacoes reais e roadmap documentados
-    - nenhum secret real no diff
-  - **Validacao obrigatoria**:
-    - revisao manual do diff
-    - `git diff --check`
-    - busca por padroes sensiveis
-  - **Impacto documental**:
-    - `README.md`
-    - `docs/project/recruiter-evidence-pack.md` se aplicavel
-    - `backlog.md`
-    - `STATUS.md`
-    - `docs/ops/session-handoff.md`
-    - `docs/ops/execution-log.md`
+- *(vazio no momento)*
 ## TODO
 - `FC-025` - Production Growth Backlog
   - **Status de planejamento**: `PARKED`
@@ -149,6 +129,7 @@
 - *(vazio no momento)*
 
 ## DONE
+- `FC-028` - DONE com `README.md` polido incrementalmente em ingles para refletir problema de produto, escopo MVP, staging publico real, demo flow, arquitetura, split API/Web, deployment Neon -> Render -> Vercel, auth flow, disciplina operacional, smoke validado, limitacoes reais e roadmap, com `docs/project/recruiter-evidence-pack.md` alinhado e sem registrar secrets reais
 - `FC-027` - DONE com `docs/ops/staging-runbook.md` criado e completo para reprodutibilidade do staging atual em Neon, Render API e Vercel Web, incluindo URLs publicas, contrato de env vars por nomes/placeholders, diferenca entre `DATABASE_URL` pooled e `DIRECT_URL` direct, configuracao esperada de provider, smoke manual oficial, troubleshooting e criterio de staging saudavel, sem registrar secrets reais
 - `FC-025A` - DONE com staging minimo publicado seguindo a baseline oficial Neon -> Render API -> Vercel Web: API em `https://app-fiber-control-api-staging.onrender.com`, web em `https://app-fiber-control-web-staging.vercel.app`, `GET /health`, `/docs`, `/openapi.json`, `POST /auth/register`, `POST /auth/login` e `GET /auth/me` em PASS, `CORS_ORIGIN` alinhado a URL real da web e sem criacao de Render PostgreSQL
 - `FC-024` - DONE com `README.md` reescrito em ingles e `docs/project/recruiter-evidence-pack.md` criado para refletir o MVP real, a baseline tecnica validada, os limites deliberados do projeto e a trilha de evidencias para GitHub e recrutadores, sem inflar escopo nem alegar deploy publico inexistente
@@ -213,4 +194,4 @@ nenhuma `READY` oficial no momento
 - `FC-024` fechou o pacote publico de portfolio e nao deixou nova `READY` aberta automaticamente
 - `FC-025A` foi encerrada como `DONE` apos publicar staging real com Neon, Render e Vercel, preservando `FC-025` como backlog `PARKED`
 - `FC-027` foi encerrada como `DONE` apos consolidar o runbook versionado do staging real sem reabrir deploy nem alterar providers
-- `FC-028` foi aberta como a proxima `READY` oficial para polir a apresentacao publica do projeto em ingles, reforcando README, demo flow, arquitetura, staging publico e disciplina operacional sem abrir nova feature
+- `FC-028` foi encerrada como `DONE` apos polir a apresentacao publica do projeto em ingles, reforcando README, links de staging, demo flow, arquitetura, baseline de deploy e disciplina operacional sem abrir nova feature

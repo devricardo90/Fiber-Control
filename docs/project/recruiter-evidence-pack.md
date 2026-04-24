@@ -19,7 +19,13 @@ The project emphasizes bounded scope, real backend behavior, documented architec
 - MVP scope is explicitly bounded in [docs/product/mvp-scope.md](./../product/mvp-scope.md)
 - local MVP validation was formally executed in [docs/quality/fc-022-local-validation.md](./../quality/fc-022-local-validation.md)
 - staging preparation was formally closed in [docs/ops/done/FC-023.done.md](./../ops/done/FC-023.done.md)
+- public staging is live on Vercel and Render, with reproducibility documented in [docs/ops/staging-runbook.md](./../ops/staging-runbook.md)
 - governance and operational decision trail are preserved in [docs/ops/execution-log.md](./../ops/execution-log.md) and [docs/ops/decisions.md](./../ops/decisions.md)
+
+### Public links
+- Web staging: `https://app-fiber-control-web-staging.vercel.app`
+- API docs: `https://app-fiber-control-api-staging.onrender.com/docs`
+- API health: `https://app-fiber-control-api-staging.onrender.com/health`
 
 ## MVP Features Included
 
@@ -66,6 +72,8 @@ Related evidence:
 - [docs/quality/fc-022-local-validation.md](./../quality/fc-022-local-validation.md)
 - [docs/ops/fc-023-staging-baseline.md](./../ops/fc-023-staging-baseline.md)
 - [docs/ops/done/FC-023.done.md](./../ops/done/FC-023.done.md)
+- [docs/ops/done/FC-025A.done.md](./../ops/done/FC-025A.done.md)
+- [docs/ops/staging-runbook.md](./../ops/staging-runbook.md)
 
 ## Why This Repository Matters
 

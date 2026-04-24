@@ -2,33 +2,50 @@
 
 Fiber Control is a portfolio-grade MVP for ISP operational and financial management.
 
-This repository is intentionally scoped to demonstrate engineering judgment, documented architecture, real backend contracts, authentication, persistence, and an operational frontend shell without pretending to be a full enterprise platform.
+The project is intentionally scoped to show real software delivery discipline: backend-first execution, documented API contracts, authenticated flows, PostgreSQL persistence, public staging validation, and explicit operational governance. It is not presented as a finished enterprise SaaS.
 
-## Current Status
+## Project Overview
 
-- public MVP scope defined and bounded
-- local MVP validation completed
-- staging baseline documented and operationally validated
-- public project narrative prepared for GitHub and recruiter review
-- next work after this repository state is post-MVP growth, not scope inflation inside the MVP
+Fiber Control addresses a practical operational problem: small and mid-sized ISPs often need one place to handle customers, payments, alerts, finance visibility, regional performance, and route-oriented operations without depending on disconnected spreadsheets and ad hoc workflows.
+
+This repository demonstrates the minimum viable version of that idea:
+- a real API
+- a real authenticated web shell
+- documented MVP boundaries
+- live staging deployment
+- evidence-based execution records
 
 Operational source of truth:
 - [STATUS.md](./STATUS.md)
 - [backlog.md](./backlog.md)
 - [MVP scope](./docs/product/mvp-scope.md)
 - [Recruiter evidence pack](./docs/project/recruiter-evidence-pack.md)
+- [Staging runbook](./docs/ops/staging-runbook.md)
 
-## What This Project Demonstrates
+## Live Staging
 
-- Fastify API with documented route structure
-- Prisma 7 persistence on PostgreSQL
-- working authentication flow with protected access
-- audit baseline already implemented in the backend
-- operational web shell built with Next.js
-- disciplined governance through Protocolo Rick
-- explicit MVP boundaries and controlled roadmap after MVP
+Public staging currently runs on a real provider chain:
+- Web staging: `https://app-fiber-control-web-staging.vercel.app`
+- API docs: `https://app-fiber-control-api-staging.onrender.com/docs`
+- API health: `https://app-fiber-control-api-staging.onrender.com/health`
+- API OpenAPI document: `https://app-fiber-control-api-staging.onrender.com/openapi.json`
 
-## Public MVP Scope
+Deployment baseline:
+- Neon Postgres
+- Render API
+- Vercel Web
+
+## Product Problem
+
+The product problem is not "build every ISP feature at once." The real problem is to create a coherent operational baseline that can support:
+- authenticated access
+- customer and payment handling
+- operational visibility across alerts, finance, reports, regions, and routes
+- a deployment and documentation trail that can be reviewed technically
+
+This MVP deliberately solves the first credible layer of that problem instead of pretending to be production-complete.
+
+## MVP Scope
 
 Included in the current public MVP:
 - login and authenticated access
@@ -51,12 +68,39 @@ Explicitly out of scope for the public MVP:
 - route planning and field operations
 - live maps
 - advanced analytics
-- enterprise hardening beyond the current baseline
+- enterprise hardening beyond the documented baseline
 
 Full scope reference:
 - [docs/product/mvp-scope.md](./docs/product/mvp-scope.md)
 
-## Architecture Snapshot
+## Demo Flow
+
+The current demo flow is intentionally simple and verifiable:
+
+1. Open the public web staging URL.
+2. Register a user through the staging auth flow.
+3. Log in and reach the protected application shell.
+4. Confirm authenticated API access through `GET /auth/me`.
+5. Navigate the MVP surfaces: dashboard, customers, payments, alerts, finance, reports, regions, and routes.
+6. Create a customer and return to the list.
+7. Register a payment and return to the list.
+
+This flow is aligned with the public staging validation already recorded in project operations docs.
+
+## Authentication Flow
+
+The current auth baseline covers:
+- user registration
+- user login
+- token-based authenticated API access
+- protected access to the operational web shell
+
+Validated public staging auth checks:
+- `POST /auth/register`: PASS
+- `POST /auth/login`: PASS
+- `GET /auth/me`: PASS `200`
+
+## Architecture
 
 Monorepo structure:
 
@@ -76,23 +120,74 @@ docs/
 ```
 
 Core stack:
-- API: Fastify, Prisma, PostgreSQL, Zod, Vitest
+- API: Fastify, Prisma 7, PostgreSQL, Zod, Vitest
 - Web: Next.js 15, React 19, TypeScript, TanStack Query
 - Tooling: pnpm, ESLint, TypeScript
 
-## Operational Flows Covered
+## API / Web Split
 
-The repository currently supports these minimum demonstrable flows:
+The repository is intentionally split into two applications:
+- `apps/api`: backend contracts, auth, persistence, validation, and runtime behavior
+- `apps/web`: authenticated operational frontend that consumes the API
 
-1. Sign in with a valid user and reach the protected application shell.
-2. Navigate across dashboard, customers, payments, alerts, finance, reports, regions, and routes.
-3. Create a customer and return to the list.
-4. Register a payment and return to the list.
-5. Validate API runtime through `/health` and authenticated user retrieval through `/auth/me`.
+This separation matters because the project is not a frontend mock. The web exists on top of a real backend contract and a real database-backed runtime.
 
-Validation evidence is documented in:
-- [docs/quality/fc-022-local-validation.md](./docs/quality/fc-022-local-validation.md)
-- [docs/ops/done/FC-023.done.md](./docs/ops/done/FC-023.done.md)
+## Deployment Baseline
+
+The current staging deployment follows this simple provider chain:
+- Neon Postgres for the managed staging database
+- Render for the public API service
+- Vercel for the public web application
+
+Operational notes:
+- application runtime uses Neon pooled `DATABASE_URL`
+- Prisma CLI and migrations use Neon direct `DIRECT_URL` through `apps/api/prisma.config.ts`
+- real secrets stay outside the repository
+
+Related references:
+- [docs/ops/staging-runbook.md](./docs/ops/staging-runbook.md)
+- [docs/ops/fc-023-staging-baseline.md](./docs/ops/fc-023-staging-baseline.md)
+
+## Operational Discipline
+
+Fiber Control is governed by Protocolo Rick. In practice, that means:
+- tasks move through explicit backlog states
+- `DONE` requires evidence, not intention
+- staging validation is recorded instead of assumed
+- documentation is treated as part of delivery
+- secrets are not committed
+
+Project discipline visible in the repository:
+- evidence-based `DONE`
+- public staging validation
+- smoke-tested auth flow
+- versioned runbook for staging reproducibility
+- tracked execution log and session handoff
+
+## Smoke Validation
+
+The current public staging baseline has already passed:
+- `GET /health`
+- `/docs`
+- `/openapi.json`
+- `POST /auth/register`
+- `POST /auth/login`
+- `GET /auth/me`
+
+Related evidence:
+- [docs/ops/done/FC-025A.done.md](./docs/ops/done/FC-025A.done.md)
+- [docs/ops/staging-runbook.md](./docs/ops/staging-runbook.md)
+- [docs/ops/execution-log.md](./docs/ops/execution-log.md)
+
+## Technical Highlights
+
+- TypeScript across API and web
+- Fastify API with documented routes
+- Prisma-backed PostgreSQL persistence
+- Next.js operational frontend shell
+- public staging deployed on Neon, Render, and Vercel
+- controlled MVP scope instead of inflated claims
+- runbook-backed operations and smoke validation
 
 ## Local Development
 
@@ -126,29 +221,25 @@ pnpm -C apps/api test
 pnpm -C apps/web lint
 ```
 
-## Database and Environment Notes
+## Current Limitations
 
-- Prisma 7 CLI and migrations use `DIRECT_URL` through `apps/api/prisma.config.ts`
-- application runtime uses `DATABASE_URL`
-- staging baseline uses Neon pooled `DATABASE_URL` for runtime and Neon direct `DIRECT_URL` for Prisma operations
-- real secrets are not committed to the repository
+The project is intentionally honest about what is not finished yet:
+- `apps/web` still has no dedicated automated test suite
+- some business modules remain overview-only by design
+- customer detail/edit and deeper operational flows are still outside the MVP
+- provider-specific manifests are still limited
+- this is staging, not production
 
-See:
-- [apps/api/.env.example](./apps/api/.env.example)
-- [docs/ops/fc-023-staging-baseline.md](./docs/ops/fc-023-staging-baseline.md)
+These are controlled limitations, not hidden gaps.
 
-## Validation Baseline
+## Roadmap / Next Steps
 
-The most recent documented baseline includes:
-- Node `v24.15.0`
-- `pnpm.cmd install`: PASS
-- `pnpm.cmd prisma generate`: PASS
-- `pnpm.cmd prisma migrate deploy`: PASS
-- `pnpm.cmd build`: PASS
-- `docker compose up -d`: PASS
-- `pnpm.cmd test`: PASS
-
-This baseline closed the staging preparation task without claiming that a public staging deployment is already live.
+Near-term follow-up should remain disciplined:
+- tighten the public README and presentation layer
+- continue selective hardening of the deployed MVP
+- add dedicated automated coverage for `apps/web`
+- reopen intentionally excluded flows only through explicit `READY` tasks
+- keep post-MVP production growth isolated from the current MVP baseline
 
 ## Documentation Map
 
@@ -163,25 +254,16 @@ This baseline closed the staging preparation task without claiming that a public
 - Operations:
   - [docs/ops/execution-log.md](./docs/ops/execution-log.md)
   - [docs/ops/session-handoff.md](./docs/ops/session-handoff.md)
-  - [docs/ops/fc-023-staging-baseline.md](./docs/ops/fc-023-staging-baseline.md)
-
-## Roadmap
-
-Near-term follow-up is deliberately controlled:
-- post-MVP publication hardening when needed
-- controlled provider manifests and deployment execution
-- dedicated automated test suite for `apps/web`
-- selective reopening of modules that are intentionally out of scope today
-- production growth backlog only after MVP communication and deployment work stay coherent
+  - [docs/ops/staging-runbook.md](./docs/ops/staging-runbook.md)
 
 ## Portfolio Positioning
 
 Fiber Control should be read as:
 - a serious MVP, not a fake demo
-- a repository that values scope discipline over feature inflation
-- evidence of backend, persistence, auth, operational UX, validation, and project governance
+- a project with real backend behavior and public staging
+- evidence of technical judgment, documentation discipline, and delivery rigor
 
 It should not be read as:
 - a finished production SaaS
-- a fully hardened enterprise system
-- a project claiming live production maturity that is not documented here
+- a fully hardened enterprise platform
+- a project claiming maturity that is not supported by repository evidence
