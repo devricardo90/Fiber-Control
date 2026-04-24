@@ -35,10 +35,11 @@
   - **Tipo**: Product / Planning
   - **Prioridade**: P0
   - **Objetivo**: definir o escopo minimo vital do MVP publico, separando claramente o que entra no MVP deployavel, o que fica fora do MVP e o que sera backlog de crescimento pos-producao.
-- `FC-022` - MVP Deploy Readiness Hardening - `NEXT`
+- `FC-022` - MVP Local Validation and Deploy Readiness - `BLOCKED`
   - **Tipo**: Engineering / Validation
   - **Prioridade**: P0
-  - **Objetivo**: preparar o projeto para deploy controlado, validando build, testes, env vars, CORS, auth, health checks e fluxos minimos.
+  - **Objetivo**: validar localmente build, testes, env vars, CORS, auth, health checks e fluxos minimos do MVP antes de qualquer deploy.
+  - **Observacao**: execucao aberta em 2026-04-24 encontrou regressao real na suite da API e contaminacao do banco de desenvolvimento pela rotina de testes; ficou bloqueada e nao pode ser encerrada.
 - `FC-023` - Staging Deployment Baseline - `NEXT`
   - **Tipo**: Deploy / Infrastructure
   - **Prioridade**: P0
@@ -51,27 +52,19 @@
   - **Tipo**: Product / Growth
   - **Prioridade**: P2
   - **Objetivo**: registrar evolucao futura pos-MVP, sem contaminar o escopo minimo atual.
+- `FC-026` - API Test Isolation and Local MVP Recovery - `READY`
+  - **Tipo**: Engineering / Quality
+  - **Prioridade**: P0
+  - **Objetivo**: isolar a suite da API no banco oficial de testes, restaurar a previsibilidade da seed local e corrigir as regresses reais de `payments` e `fiscal-reminders` que bloquearam a `FC-022`.
+  - **Observacao**: task corretiva aberta a partir da evidencia objetiva registrada em `docs/quality/fc-022-local-validation.md`.
+
+## Corretivo aberto apos FC-022
+- `FC-026` foi inserida como correcao minima obrigatoria antes de `FC-023`.
+- a abertura de `FC-026` nao altera a estrategia MVP; apenas remove o bloqueio tecnico que impede staging/deploy com baseline profissional.
 
 ---
 
 ## TODO
-- `FC-022` - MVP Deploy Readiness Hardening
-  - **Status de planejamento**: `NEXT`
-  - **Tipo**: Engineering / Validation
-  - **Prioridade**: P0
-  - **Objetivo**: preparar o projeto para deploy controlado, validando build, testes, env vars, CORS, auth, health checks e fluxos minimos.
-  - **Escopo**: endurecer a prontidao tecnica minima para deploy apos definicao formal do MVP.
-  - **Fora de escopo**: deploy publico, novas features de produto e backlog de crescimento.
-  - **Criterios de aceite**:
-    - baseline de validacao minima de deploy documentada
-    - validacoes realmente executadas registradas sem inventar evidencias
-  - **Validacao obrigatoria**:
-    - a definir em `FC-021` e consolidar em `FC-022`
-  - **Impacto documental**:
-    - `backlog.md`
-    - `STATUS.md`
-    - `docs/ops/execution-log.md`
-    - `docs/ops/session-handoff.md`
 - `FC-023` - Staging Deployment Baseline
   - **Status de planejamento**: `NEXT`
   - **Tipo**: Deploy / Infrastructure
@@ -126,13 +119,44 @@
 ---
 
 ## READY
-- *(vazio no momento)*
+- `FC-026` - API Test Isolation and Local MVP Recovery
+  - **Tipo**: Engineering / Quality
+  - **Prioridade**: P0
+  - **Objetivo**: corrigir o bloqueio aberto na `FC-022`, garantindo que a suite da API rode no banco oficial de testes, que a seed local nao seja destruida e que as regresses reais de `payments` e `fiscal-reminders` sejam tratadas.
+  - **Escopo**:
+    - revisar o uso de env/test env em `apps/api`
+    - isolar a suite do banco de desenvolvimento
+    - restabelecer a previsibilidade do login seed local
+    - tratar as 3 falhas reais observadas em `payments` e `fiscal-reminders`
+  - **Fora de escopo**:
+    - deploy
+    - provider de infraestrutura
+    - expansao de produto
+    - novos modulos alem do corretivo minimo
+  - **Criterios de aceite**:
+    - `pnpm.cmd test` em `apps/api` sem contaminar o banco de desenvolvimento
+    - seed/local access previsivel apos o ciclo de validacao
+    - regresses de `payments` e `fiscal-reminders` tratadas ou justificadas com nova decisao formal
+  - **Validacao obrigatoria**:
+    - `pnpm.cmd prisma:generate`
+    - `pnpm.cmd lint`
+    - `pnpm.cmd build`
+    - `pnpm.cmd test`
+    - verificacao explicita do banco local e do login seed apos os testes
+  - **Impacto documental**:
+    - `backlog.md`
+    - `STATUS.md`
+    - `docs/ops/execution-log.md`
+    - `docs/ops/session-handoff.md`
+    - `docs/ops/done/FC-026.done.md`
 
 ## DOING
 - *(vazio no momento)*
 
 ## BLOCKED
-- *(vazio no momento)*
+- `FC-022` - MVP Local Validation and Deploy Readiness
+  - **Motivo**: gates tecnicos da API falharam em `payments` e `fiscal-reminders`, e a evidencia de runtime mostrou que a suite limpa o banco de desenvolvimento e remove o login seed local, inviabilizando classificar o projeto como pronto para deploy.
+  - **Evidencia**: `docs/quality/fc-022-local-validation.md`
 
 ## DONE
 - `FC-001`
@@ -161,7 +185,7 @@
 ---
 
 ## O que falta no ciclo atual
-- definir o escopo MVP real e publico antes de qualquer endurecimento de deploy
+- remover o bloqueio tecnico da `FC-022` antes de qualquer endurecimento de deploy
 - preparar o deploy minimo com base no MVP definido, sem abrir backlog enterprise
 - publicar uma baseline funcional em ambiente acessivel
 - produzir documentacao profissional de portfolio para GitHub e recrutadores
@@ -169,6 +193,9 @@
 
 ## Riscos atuais
 - `127.0.0.1:5440` agora voltou a refletir o baseline local de desenvolvimento com seed e migration atuais, mas continua sendo ambiente de dev e nao pode ser usado como base de testes
+- a execucao da `FC-022` mostrou que a suite da API ainda esta contaminando o banco de desenvolvimento; enquanto isso nao for isolado, o login seed local e a validacao de readiness permanecem instaveis
+- a suite integrada da API voltou a falhar em `payments` e `fiscal-reminders`; `FC-023` nao pode ser promovida enquanto esse gate permanecer vermelho
+- `apps/api` declara Node `24.x`, mas a validacao local atual ocorreu em Node `v22.21.1`; esse desalinhamento precisa ficar explicito antes de staging
 - sem task dedicada por modulo, qualquer reabertura de tela de negocio em `apps/web` pode reintroduzir deriva visual e estrutural fora da fundacao operacional
 - `customers/[id]` e `customers/[id]/edit` continuam scaffold-only e permanecem neutralizados ate task propria
 - a reconciliacao permanece fora de escopo dentro do ciclo de `Payments` e nao deve vazar para a task seguinte sem `READY` propria
@@ -180,11 +207,12 @@
 - route planning, live maps e operacao de campo permanecem fora de escopo dentro do ciclo de `Routes`
 - sem reconciliacao documental, o projeto corria risco de tratar `DONE` como encerramento sem arquivo formal; esse risco foi saneado pela `FC-020`, mas a proxima frente continua dependente de decisao de governanca
 - sem escopo MVP formal, o projeto corre risco de derivar para backlog enterprise e contaminar o objetivo de portfolio/deploy minimo
-- `FC-021` fechou o escopo MVP, mas `FC-022` ainda nao esta liberada; o projeto continua sem `READY` oficial nesta fotografia
+- `FC-021` fechou o escopo MVP, mas a `FC-022` foi bloqueada; a proxima `READY` oficial passa a ser a task corretiva `FC-026`
 
 ## Proxima task oficial
-nenhuma `READY` oficial no momento
+`FC-026` - API Test Isolation and Local MVP Recovery
 
 ## Saneamento documental
 - `FC-020` abriu e fechou no mesmo ciclo para reconciliar a evidencia formal de `DONE`
 - `FC-021` fechou o recorte MVP publico sem abrir deploy nem promover a etapa seguinte
+- `FC-022` executou a validacao local do MVP, mas ficou `BLOCKED`; a evidencia foi registrada em `docs/quality/fc-022-local-validation.md`

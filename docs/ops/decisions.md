@@ -135,3 +135,11 @@ Formato recomendado de cada decisão:
 - **Decisao**: definir o MVP publico como o slice operacional minimo ja estabilizado no repositorio: auth/login funcional, dashboard overview, customers list/create, payments list/create, alerts overview, finance overview, reports overview, regions overview, routes overview, auditoria basica existente, `GET /health` e baseline de localhost nomeado documentada. Customer detail/edit, reconciliation, alert lifecycle completo, route planning, live maps, analytics avancado e demais expansoes ficam fora do MVP.
 - **Impacto**: `FC-022` passa a endurecer deploy readiness apenas para esse recorte. `FC-023` e `FC-024` passam a operar sobre um MVP explicitamente limitado e demonstravel. Crescimento pos-MVP permanece isolado em backlog proprio.
 - **Relacionado a**: FC-021, FC-022, FC-023, FC-024, FC-025, `docs/product/mvp-scope.md`, `backlog.md`, `STATUS.md`
+
+## DEC-016 - Block staging until API test isolation and local seed stability are restored
+- **Data**: 2026-04-24
+- **Contexto**: a `FC-022` executou a validacao local do MVP e confirmou que API e web sobem, auth bootstrap funciona, CORS responde corretamente e as superficies minimas do MVP carregam. Mesmo assim, a suite da API falhou em `payments` e `fiscal-reminders`, e a evidencia de runtime mostrou que o banco de desenvolvimento ficou vazio apos `pnpm.cmd test`, derrubando o login seed local.
+- **Opcoes consideradas**: marcar `FC-022` como `DONE` apoiando-se apenas no smoke manual; promover `FC-023` para `READY` mesmo com a suite backend em FAIL; bloquear a trilha de deploy e abrir uma task corretiva especifica para isolar testes e recuperar a previsibilidade local.
+- **Decisao**: bloquear `FC-022`, impedir a promocao de `FC-023` e abrir `FC-026` como unica `READY` oficial para corrigir o uso de banco na suite da API, restaurar a seed local e tratar as 3 regressoes reais observadas.
+- **Impacto**: o projeto preserva a narrativa de baseline profissional antes de staging. Nenhum deploy deve comecar antes de `FC-026` remover o bloqueio e permitir retomar a `FC-022` ou reexecutar sua validacao final.
+- **Relacionado a**: FC-022, FC-023, FC-026, `docs/quality/fc-022-local-validation.md`, `backlog.md`, `STATUS.md`

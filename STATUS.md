@@ -1,7 +1,7 @@
 # STATUS - Fiber Control
 
 ## Estado atual
-Projeto com governanca central estabelecida, arquitetura backend definida, trilha de auditoria transversal implementada, persistencia Prisma formalizada, suite integrada do backend em verde, autenticacao/autorizacao base formalmente encerradas, fundacao frontend operacional fechada, login local coerente com o ambiente real, oito superficies de negocio reabertas com consolidacao minima, `main` limpo, ambiente local validado com `web.fiber-control.localhost` e `api.fiber-control.localhost`, reconciliacao documental de `DONE` fechada pela `FC-020` e escopo MVP publico formalizado pela `FC-021`.
+Projeto com governanca central estabelecida, arquitetura backend definida, trilha de auditoria transversal implementada, persistencia Prisma formalizada, autenticacao/autorizacao base formalmente encerradas, fundacao frontend operacional fechada, oito superficies de negocio reabertas com consolidacao minima, reconciliacao documental de `DONE` fechada pela `FC-020`, escopo MVP publico formalizado pela `FC-021` e validacao local do MVP executada pela `FC-022`. A `FC-022` ficou `BLOCKED`: API e web sobem localmente, auth bootstrap/CORS/smoke das superficies minimas passam, mas a suite da API falha e contamina o banco de desenvolvimento.
 
 ## Fotografia oficial apos FC-020
 - `FC-020` esta formalmente classificada como `DONE`.
@@ -47,8 +47,14 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - `FC-020` - reconciliacao documental das evidencias formais de `DONE`
 - `FC-021` - definicao formal do escopo MVP publico para deploy e portfolio
 
+## Tasks em aberto
+- `FC-022` - `BLOCKED` - MVP Local Validation and Deploy Readiness
+- `FC-023` - `NEXT` - Staging Deployment Baseline
+- `FC-024` - `NEXT` - Public GitHub README and Recruiter Evidence Pack
+- `FC-025` - `PARKED` - Production Growth Backlog
+- `FC-026` - `READY` - API Test Isolation and Local MVP Recovery
+
 ## Proximas tasks planejadas
-- `FC-022` - `NEXT` - MVP Deploy Readiness Hardening
 - `FC-023` - `NEXT` - Staging Deployment Baseline
 - `FC-024` - `NEXT` - Public GitHub README and Recruiter Evidence Pack
 - `FC-025` - `PARKED` - Production Growth Backlog
@@ -73,6 +79,26 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - `FC-019` fechou a lacuna entre o protocolo e o runtime local, validando web e api em host nomeado.
 
 ## Validacoes mais recentes
+- `FC-022` - `docs/quality/fc-022-local-validation.md` criado com baseline objetiva de readiness local: PASS documental
+- `FC-022` - `pnpm.cmd install` em `apps/api`: PASS
+- `FC-022` - `pnpm.cmd prisma:generate` em `apps/api`: PASS com warning de engine Node `24.x` vs ambiente `v22.21.1`
+- `FC-022` - `pnpm.cmd lint` em `apps/api`: PASS
+- `FC-022` - `pnpm.cmd build` em `apps/api`: PASS
+- `FC-022` - `pnpm.cmd prisma:migrate:deploy` em `apps/api`: PASS
+- `FC-022` - `pnpm.cmd prisma:seed` em `apps/api`: PASS
+- `FC-022` - `pnpm.cmd test` em `apps/api`: FAIL com 3 regresses reais em `payments` e `fiscal-reminders`
+- `FC-022` - `CI=true pnpm.cmd install` em `apps/web`: PASS
+- `FC-022` - `pnpm.cmd lint` em `apps/web`: PASS
+- `FC-022` - `pnpm.cmd build` em `apps/web`: PASS
+- `FC-022` - suite automatizada dedicada de `apps/web`: N/A nesta fotografia
+- `FC-022` - `GET /health`: PASS
+- `FC-022` - `POST /auth/login` com credencial seed local: FAIL `401` apos o banco de desenvolvimento ficar vazio
+- `FC-022` - leitura direta do banco ativo apos a suite da API: `users = 0`, `customers = 0`, `payments = 0`, `regions = 0`
+- `FC-022` - bootstrap manual via `POST /auth/register`, `POST /auth/login` e `GET /auth/me`: PASS
+- `FC-022` - preflight CORS com `Origin: http://web.fiber-control.localhost:3000`: PASS
+- `FC-022` - smoke web de `/login`, `/dashboard`, `/customers`, `/customers/new`, `/payments`, `/payments/new`, `/alerts`, `/finance`, `/reports`, `/regions` e `/routes`: PASS `200`
+- `FC-022` - smoke API de `customers`, `payments`, `alerts`, `finance`, `reports` e `regions`: PASS funcional minimo
+- `FC-022` - decisao final: `BLOCKED`; `FC-023` nao pode virar `READY`
 - `FC-021` - documento `docs/product/mvp-scope.md` criado com MVP IN/OUT: PASS documental
 - `FC-021` - fluxos minimos de demonstracao definidos: PASS documental
 - `FC-021` - evidencias requeridas antes de `FC-022` registradas: PASS documental
@@ -139,8 +165,10 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 
 ## Limites e bloqueios reais
 - o banco de teste oficial segue em `127.0.0.1:5442`; `127.0.0.1:5440` foi saneado apenas como desenvolvimento local e nao deve ser usado para testes
-- nenhum bloqueio funcional remanescente identificado na suite integrada do backend nesta fotografia
+- a `FC-022` confirmou bloqueio funcional real na suite integrada do backend: 3 falhas em `payments` e `fiscal-reminders`
+- a evidência atual indica que a suite da API esta usando o banco de desenvolvimento em vez do banco oficial de testes; apos `pnpm.cmd test`, o banco ativo ficou vazio e o login seed local deixou de existir
 - nao existe suite automatizada dedicada de `apps/web` nesta fotografia
+- `apps/api` declara Node `24.x`, mas o ambiente validado nesta execucao estava em `v22.21.1`
 - `customers/[id]` e `customers/[id]/edit` continuam presentes como scaffold e exigem task propria para reabertura
 - reconciliacao permanece fora de escopo dentro do ciclo de `Payments` e exige task propria
 - lifecycle actions de `Alerts` permanecem fora de escopo e exigem task propria
@@ -153,13 +181,13 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - a proxima triagem deve partir apenas do bloco residual de `apps/api`, sem reaplicar automaticamente deriva local antiga de frontend ou ruido documental
 - o fallback para `localhost:porta` permanece permitido e documentado quando host nomeado nao for viavel no ambiente atual
 - `FC-001`, `FC-002`, `FC-003`, `FC-004`, `FC-004A`, `FC-005`, `FC-006`, `FC-008`, `FC-009` e `FC-011` tiveram fechamento formal reconstruido documentalmente em `FC-020`; parte do detalhe fino de encerramento permanece derivada dos artefatos existentes, sem evidencias novas
-- readiness alem de `GET /health` ainda nao esta comprovada documentalmente nesta fotografia
-- `FC-022` segue planejada, mas ainda nao foi liberada como `READY`
+- readiness local alem de `GET /health` agora esta parcialmente comprovada por smoke manual de auth, CORS e superficies do MVP, mas nao fecha deploy readiness por causa do bloqueio tecnico da suite/backend
+- `FC-023` permanece fora de `READY` ate a remocao do bloqueio aberto na `FC-022`
 
 ## Proxima READY oficial
-nenhuma `READY` oficial no momento
+`FC-026` - API Test Isolation and Local MVP Recovery
 
 ## Justificativa da proxima READY
 - `FC-021` ja fechou o escopo real do MVP publico
-- `FC-022` e a proxima task planejada, mas permanece fora de `READY` por decisao desta execucao
-- o projeto segue sem nova execucao tecnica ate nova liberacao formal de backlog
+- `FC-022` foi executada e bloqueada com evidencia objetiva
+- `FC-026` e a menor correcao coerente antes de qualquer staging ou deploy
