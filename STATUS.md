@@ -1,7 +1,7 @@
 # STATUS - Fiber Control
 
 ## Estado atual
-Projeto com governanca central estabelecida, arquitetura backend definida, trilha de auditoria transversal implementada, persistencia Prisma formalizada, autenticacao/autorizacao base formalmente encerradas, fundacao frontend operacional fechada, oito superficies de negocio reabertas com consolidacao minima, reconciliacao documental de `DONE` fechada pela `FC-020`, escopo MVP publico formalizado pela `FC-021`, bloqueio tecnico da validacao local removido pela `FC-026` e reexecucao formal da `FC-022` encerrada com baseline local do MVP validado. API e web sobem localmente, a suite da API roda apenas no banco oficial de testes, o banco dev permaneceu intacto apos os testes, o login seed local segue valido e a `FC-023` passa a ser a proxima `READY` oficial antes de qualquer staging real.
+Projeto com governanca central estabelecida, arquitetura backend definida, trilha de auditoria transversal implementada, persistencia Prisma formalizada, autenticacao/autorizacao base formalmente encerradas, fundacao frontend operacional fechada, oito superficies de negocio reabertas com consolidacao minima, reconciliacao documental de `DONE` fechada pela `FC-020`, escopo MVP publico formalizado pela `FC-021`, bloqueio tecnico da validacao local removido pela `FC-026` e reexecucao formal da `FC-022` encerrada com baseline local do MVP validado. A `FC-023` esta em `DOING` e sua subfatia `FC-023A` foi concluida como baseline documental completa em `docs/ops/fc-023-staging-baseline.md`. Nenhum deploy foi iniciado, e os riscos de runtime Node e ausencia de suite dedicada na web permanecem explicitos antes da publicacao real.
 
 ## Fotografia oficial apos FC-020
 - `FC-020` esta formalmente classificada como `DONE`.
@@ -50,12 +50,12 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - `FC-026` - isolamento da suite da API no banco oficial de testes e recuperacao do baseline local
 
 ## Tasks em aberto
-- `FC-023` - `READY` - Staging Deployment Baseline
+- `FC-023` - `DOING` - Staging Deployment Baseline
 - `FC-024` - `NEXT` - Public GitHub README and Recruiter Evidence Pack
 - `FC-025` - `PARKED` - Production Growth Backlog
 
 ## Proximas tasks planejadas
-- `FC-023` - `READY` - Staging Deployment Baseline
+- `FC-023` - `DOING` - Staging Deployment Baseline
 - `FC-024` - `NEXT` - Public GitHub README and Recruiter Evidence Pack
 - `FC-025` - `PARKED` - Production Growth Backlog
 
@@ -79,6 +79,8 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - `FC-019` fechou a lacuna entre o protocolo e o runtime local, validando web e api em host nomeado.
 
 ## Validacoes mais recentes
+- `FC-023A` - `docs/ops/fc-023-staging-baseline.md` consolidado com objetivo, baseline local, topologia Vercel/Render, runtime, banco, env vars, segredos, comandos e smoke pos-publicacao: PASS documental
+- `FC-023A` - backlog, `STATUS.md`, `docs/ops/decisions.md`, `docs/ops/execution-log.md` e `docs/ops/session-handoff.md` alinhados para refletir a fatia documental sem iniciar deploy: PASS documental
 - `FC-022` - `pnpm.cmd prisma:generate` em `apps/api`: PASS com warning de engine Node `24.x` vs ambiente `v22.21.1`
 - `FC-022` - `pnpm.cmd lint` em `apps/api`: PASS
 - `FC-022` - `pnpm.cmd build` em `apps/api`: PASS
@@ -184,12 +186,13 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - o fallback para `localhost:porta` permanece permitido e documentado quando host nomeado nao for viavel no ambiente atual
 - `FC-001`, `FC-002`, `FC-003`, `FC-004`, `FC-004A`, `FC-005`, `FC-006`, `FC-008`, `FC-009` e `FC-011` tiveram fechamento formal reconstruido documentalmente em `FC-020`; parte do detalhe fino de encerramento permanece derivada dos artefatos existentes, sem evidencias novas
 - readiness local alem de `GET /health` agora esta consolidada em `docs/quality/fc-022-local-validation.md`
-- `FC-023` foi promovida para `READY`, mas staging continua dependente dos riscos residuais explicitados nesta fotografia
+- `FC-023` saiu de `READY` para `DOING` apenas na fatia documental `FC-023A`; deploy continua nao iniciado e dependente dos riscos residuais explicitados nesta fotografia
 
 ## Proxima READY oficial
-`FC-023` - Staging Deployment Baseline
+nenhuma `READY` paralela enquanto `FC-023` permanece em `DOING`
 
 ## Justificativa da proxima READY
 - `FC-021` ja fechou o escopo real do MVP publico
 - `FC-026` removeu o bloqueio tecnico da suite da API e restaurou a seed local
 - a reexecucao formal da `FC-022` consolidou readiness local suficiente para abrir o baseline de staging controlado
+- `FC-023A` reduziu a ambiguidade de runtime, banco, env vars e smoke antes da publicacao real

@@ -159,3 +159,11 @@ Formato recomendado de cada decisão:
 - **Decisao**: encerrar `FC-022` como `DONE` e promover `FC-023` para `READY`, mantendo dois riscos explicitos para staging controlado: `apps/api` ainda declara Node `24.x` enquanto o ambiente validado estava em `v22.21.1`, e `apps/web` continua sem suite automatizada dedicada.
 - **Impacto**: o projeto ganha baseline local comprovadamente demonstravel e pode iniciar o planejamento/execucao de staging sem mascarar limitacoes. A narrativa tecnica permanece coerente: MVP validado localmente, deploy ainda nao iniciado e riscos residuais documentados antes da infra.
 - **Relacionado a**: FC-022, FC-023, FC-026, `docs/quality/fc-022-local-validation.md`, `docs/ops/done/FC-022.done.md`, `backlog.md`, `STATUS.md`
+
+## DEC-019 - Start FC-023 with a documented staging contract before any real publication
+- **Data**: 2026-04-24
+- **Contexto**: apos a promocao da `FC-023` para `READY`, o repositorio ainda nao fixava um contrato minimo de staging para runtime, banco, env vars e smoke pos-publicacao. Iniciar deploy nessa condicao introduziria escolha arbitraria de infra e risco de expandir escopo fora do MVP.
+- **Opcoes consideradas**: partir direto para a publicacao real e decidir detalhes de staging durante o deploy; adiar a `FC-023` ate existir um provedor escolhido; iniciar a `FC-023` pela menor fatia coerente, documentando primeiro o baseline de staging no repositorio; adotar uma baseline simples de portfolio com web em Vercel e API+banco em um provedor compativel.
+- **Decisao**: executar `FC-023A` como primeira fatia da `FC-023`, criando `docs/ops/fc-023-staging-baseline.md` para formalizar topologia minima, escolhendo web em Vercel, API em Render e banco em Render managed PostgreSQL, com runtime alvo em Node `24.x`, isolamento obrigatorio do banco de staging, env vars minimas e smoke pos-publicacao, sem iniciar deploy nesta etapa.
+- **Impacto**: a `FC-023` sai de `READY` para `DOING` com uma frente documental controlada. A execucao futura do staging passa a ter contrato objetivo de provedor, runtime e validacao sem abrir `FC-024`, sem tocar em codigo funcional de produto e sem mascarar os riscos de Node `24.x` vs `v22.21.1` e ausencia de suite dedicada em `apps/web`.
+- **Relacionado a**: FC-023, `docs/ops/fc-023-staging-baseline.md`, `backlog.md`, `STATUS.md`, `docs/ops/session-handoff.md`

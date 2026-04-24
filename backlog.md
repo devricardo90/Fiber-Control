@@ -40,10 +40,11 @@
   - **Prioridade**: P0
   - **Objetivo**: validar localmente build, testes, env vars, CORS, auth, health checks e fluxos minimos do MVP antes de qualquer deploy.
   - **Observacao**: reexecutada com sucesso em 2026-04-24 apos a `FC-026`; baseline local validado e `FC-023` liberada para `READY`.
-- `FC-023` - Staging Deployment Baseline - `READY`
+- `FC-023` - Staging Deployment Baseline - `DOING`
   - **Tipo**: Deploy / Infrastructure
   - **Prioridade**: P0
   - **Objetivo**: publicar web, API e banco em ambiente acessivel para validacao real.
+  - **Observacao**: `FC-023A` foi concluida em 2026-04-24 como baseline documental completa em `docs/ops/fc-023-staging-baseline.md`; nenhum deploy foi iniciado nesta fatia.
 - `FC-024` - Public GitHub README and Recruiter Evidence Pack - `NEXT`
   - **Tipo**: Documentation / Portfolio
   - **Prioridade**: P1
@@ -101,7 +102,7 @@
 
 ---
 
-## READY
+## DOING
 - `FC-023` - Staging Deployment Baseline
   - **Tipo**: Deploy / Infrastructure
   - **Prioridade**: P0
@@ -111,24 +112,26 @@
     - preparar env vars e runtime de staging coerentes com o MVP validado
     - publicar um ambiente acessivel para validacao externa controlada
     - registrar smoke minimo apos publicacao
+  - **Fatia documental concluida**: `FC-023A - Staging Baseline Contract`
   - **Fora de escopo**:
     - dominio customizado
     - hardening enterprise
     - crescimento de produto fora do MVP
-  - **Criterios de aceite**:
-    - ambiente de staging acessivel documentado
-    - web, API e banco publicados de forma coerente com o MVP atual
-    - smoke minimo do ambiente publicado registrado
+    - qualquer deploy nesta fatia documental
+  - **Criterios de aceite da fatia atual**:
+    - contrato minimo de staging documentado no repositorio
+    - runtime, banco, env vars e smoke pos-publicacao definidos sem ambiguidade relevante
+    - riscos residuais mantidos explicitos antes de qualquer deploy
   - **Validacao obrigatoria**:
-    - depende da `FC-022` encerrada como `DONE`
+    - leitura e alinhamento com `AGENTS.md`, `backlog.md`, `STATUS.md` e `docs/ops/*`
+    - nenhum deploy iniciado nesta fatia
   - **Impacto documental**:
     - `backlog.md`
     - `STATUS.md`
+    - `docs/ops/decisions.md`
     - `docs/ops/execution-log.md`
     - `docs/ops/session-handoff.md`
-
-## DOING
-- *(vazio no momento)*
+    - `docs/ops/fc-023-staging-baseline.md`
 
 ## BLOCKED
 - *(vazio no momento)*
