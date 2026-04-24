@@ -1,7 +1,19 @@
 # STATUS - Fiber Control
 
 ## Estado atual
-Projeto com governanca central estabelecida, arquitetura backend definida, trilha de auditoria transversal implementada, persistencia Prisma formalizada, suite integrada do backend em verde, autenticacao/autorizacao base formalmente encerradas, fundacao frontend operacional fechada, login local coerente com o ambiente real, oito superficies de negocio reabertas com consolidacao minima, `main` limpo e ambiente local validado com `web.fiber-control.localhost` e `api.fiber-control.localhost`.
+Projeto com governanca central estabelecida, arquitetura backend definida, trilha de auditoria transversal implementada, persistencia Prisma formalizada, suite integrada do backend em verde, autenticacao/autorizacao base formalmente encerradas, fundacao frontend operacional fechada, login local coerente com o ambiente real, oito superficies de negocio reabertas com consolidacao minima, `main` limpo, ambiente local validado com `web.fiber-control.localhost` e `api.fiber-control.localhost`, reconciliacao documental de `DONE` fechada pela `FC-020` e nova direcao estrategica definida para MVP minimo deployavel e demonstravel para GitHub/recrutadores.
+
+## Fotografia oficial apos FC-020
+- `FC-020` esta formalmente classificada como `DONE`.
+- todas as tasks previamente marcadas como `DONE` e sem arquivo formal agora possuem registro em `docs/ops/done/`.
+- a reconciliacao foi documental; nenhuma feature nova foi aberta e nenhum codigo de produto foi alterado.
+- a estrategia seguinte foi reorganizada para MVP minimo deployavel, com `FC-021` como proxima `READY` oficial.
+
+## Direcao estrategica MVP
+- o objetivo atual do projeto e entregar um MVP minimo, funcional, demonstravel e deployavel.
+- esse MVP deve ser publicavel no GitHub como evidencia profissional de engenharia, governanca, deploy real e evolucao planejada.
+- o projeto nao deve ser empurrado para backlog enterprise neste ciclo.
+- backlog de crescimento de producao fica explicitamente separado do MVP.
 
 ## Fotografia oficial apos FC-019
 - `FC-019` esta formalmente classificada como `DONE`.
@@ -31,6 +43,14 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - `FC-017` - checkpoint de governanca e saneamento do worktree pos-FC-016
 - `FC-018` - auditoria e classificacao do snapshot residual pos-FC-017
 - `FC-019` - operacionalizacao minima da Named Localhost Convention no ambiente local
+- `FC-020` - reconciliacao documental das evidencias formais de `DONE`
+
+## Proximas tasks planejadas
+- `FC-021` - `READY` - MVP Scope Definition for Deploy
+- `FC-022` - `NEXT` - MVP Deploy Readiness Hardening
+- `FC-023` - `NEXT` - Staging Deployment Baseline
+- `FC-024` - `NEXT` - Public GitHub README and Recruiter Evidence Pack
+- `FC-025` - `PARKED` - Production Growth Backlog
 
 ## Encadeamento formal
 - `FC-006` foi executada antes de `FC-003` a `FC-005` porque era a unica `READY` oficial e tratava um risco critico de dominio e auditoria.
@@ -52,6 +72,13 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - `FC-019` fechou a lacuna entre o protocolo e o runtime local, validando web e api em host nomeado.
 
 ## Validacoes mais recentes
+- reorganizacao estrategica do backlog para MVP deployavel e portfolio profissional: PASS documental
+- preservacao de `FC-020` como `DONE` sem regressao artificial de historico: PASS documental
+- `FC-021` definida como nova `READY` oficial apos saneamento: PASS documental
+- `FC-020` - divergencia entre `backlog.md`, `STATUS.md`, `docs/ops/execution-log.md` e `docs/ops/done/*` validada: PASS
+- `FC-020` - arquivos ausentes de `docs/ops/done/` criados para `FC-001`, `FC-002`, `FC-003`, `FC-004`, `FC-004A`, `FC-005`, `FC-006`, `FC-008`, `FC-009` e `FC-011`: PASS
+- `FC-020` - `backlog.md`, `STATUS.md`, `docs/ops/execution-log.md` e `docs/ops/session-handoff.md` alinhados apos reconciliacao: PASS
+- `FC-020` - codigo de produto preservado sem nova feature: PASS
 - `FC-019` - env local de `apps/web` e `apps/api` alinhado a `web.fiber-control.localhost` e `api.fiber-control.localhost`: PASS
 - `FC-019` - `APP_URL`, `NEXT_PUBLIC_APP_URL`, `NEXT_PUBLIC_API_URL` e `CORS_ORIGIN` coerentes entre si: PASS
 - `FC-019` - `pnpm.cmd lint` em `apps/web`: PASS
@@ -119,11 +146,12 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - o material residual de `apps/api`, `Customers`, `Alerts` e docs correlatas foi retirado da arvore ativa e preservado para classificacao posterior em task propria
 - a proxima triagem deve partir apenas do bloco residual de `apps/api`, sem reaplicar automaticamente deriva local antiga de frontend ou ruido documental
 - o fallback para `localhost:porta` permanece permitido e documentado quando host nomeado nao for viavel no ambiente atual
+- `FC-001`, `FC-002`, `FC-003`, `FC-004`, `FC-004A`, `FC-005`, `FC-006`, `FC-008`, `FC-009` e `FC-011` tiveram fechamento formal reconstruido documentalmente em `FC-020`; parte do detalhe fino de encerramento permanece derivada dos artefatos existentes, sem evidencias novas
 
 ## Proxima READY oficial
-nenhuma `READY` oficial no momento
+`FC-021` - MVP Scope Definition for Deploy
 
 ## Justificativa da proxima READY
-- `FC-009` a `FC-016` encerraram a rodada de reabertura controlada das superficies legadas prioritarias do frontend
-- `FC-018` mostrou que existe valor tecnico residual em `apps/api`, e `FC-019` fechou a lacuna imediata entre protocolo e runtime local
-- a proxima frente funcional deve ser definida por nova rodada curta de governanca sobre arvore limpa
+- `FC-020` ja saneou a contradicao documental de `DONE`, entao nao pode ser regressada honestamente para `READY`
+- o proximo passo correto agora e definir o escopo real do MVP antes de endurecimento tecnico de deploy
+- `FC-021` protege o projeto contra deriva para backlog enterprise e ancora a publicacao no GitHub como portfolio profissional
