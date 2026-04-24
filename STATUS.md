@@ -1,7 +1,7 @@
 # STATUS - Fiber Control
 
 ## Estado atual
-Projeto com governanca central estabelecida, arquitetura backend definida, trilha de auditoria transversal implementada, persistencia Prisma formalizada, autenticacao/autorizacao base formalmente encerradas, fundacao frontend operacional fechada, oito superficies de negocio reabertas com consolidacao minima, reconciliacao documental de `DONE` fechada pela `FC-020`, escopo MVP publico formalizado pela `FC-021`, bloqueio tecnico da validacao local removido pela `FC-026`, reexecucao formal da `FC-022` encerrada com baseline local do MVP validado, `FC-023` formalmente encerrada como `DONE` e `FC-024` fechada como pacote publico de portfolio. O repositorio agora possui README em ingles coerente com o MVP real, evidence pack para recrutadores e narrativa publica alinhada ao estado tecnico validado sem inflar escopo nem alegar deploy publico inexistente.
+Projeto com governanca central estabelecida, arquitetura backend definida, trilha de auditoria transversal implementada, persistencia Prisma formalizada, autenticacao/autorizacao base formalmente encerradas, fundacao frontend operacional fechada, oito superficies de negocio reabertas com consolidacao minima, reconciliacao documental de `DONE` fechada pela `FC-020`, escopo MVP publico formalizado pela `FC-021`, bloqueio tecnico da validacao local removido pela `FC-026`, reexecucao formal da `FC-022` encerrada com baseline local do MVP validado, `FC-023` formalmente encerrada como `DONE`, `FC-024` fechada como pacote publico de portfolio e `FC-025A` aberta como nova task operacional `READY`. A baseline oficial de staging permanece em Neon para banco, Render para API e Vercel para web. A proxima decisao explicita do projeto passa a ser validar ou provisionar Neon, configurar `DATABASE_URL` pooled e `DIRECT_URL` direct, depois provisionar Render API, depois Vercel Web e por fim executar smoke real, sem alterar codigo funcional, sem registrar segredos reais e sem declarar staging como `DONE` antes de smoke real.
 
 ## Fotografia oficial apos FC-020
 - `FC-020` esta formalmente classificada como `DONE`.
@@ -52,9 +52,11 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - `FC-026` - isolamento da suite da API no banco oficial de testes e recuperacao do baseline local
 
 ## Tasks em aberto
+- `FC-025A` - `READY` - Manual Staging Provisioning
 - `FC-025` - `PARKED` - Production Growth Backlog
 
 ## Proximas tasks planejadas
+- `FC-025A` - `READY` - Manual Staging Provisioning
 - `FC-025` - `PARKED` - Production Growth Backlog
 
 ## Encadeamento formal
@@ -77,6 +79,8 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - `FC-019` fechou a lacuna entre o protocolo e o runtime local, validando web e api em host nomeado.
 
 ## Validacoes mais recentes
+- `FC-025A` - task operacional corrigida para seguir a baseline oficial Neon -> Render API -> Vercel Web -> smoke real: PASS documental
+- `FC-025A` - escopo, fora de escopo e criterio de conclusao registrados sem abrir nova alegacao de deploy real: PASS documental
 - `FC-024` - `README.md` reescrito em ingles para refletir portfolio MVP, stack, instrucoes locais, estado validado e limites reais do projeto: PASS documental
 - `FC-024` - `docs/project/recruiter-evidence-pack.md` criado com leitura executiva, escopo MVP, sinais de engenharia e trilha de evidencia para recrutadores: PASS documental
 - `FC-024` - narrativa publica mantida coerente com `docs/product/mvp-scope.md`, `docs/quality/fc-022-local-validation.md` e `docs/ops/done/FC-023.done.md`: PASS documental
@@ -211,9 +215,10 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - o gate manual do Neon depende de operacao externa humana por desenho, mas a evidencia requerida foi registrada e validada nesta execucao
 
 ## Proxima READY oficial
-nenhuma `READY` oficial no momento
+`FC-025A` - Manual Staging Provisioning
 
 ## Justificativa da proxima READY
 - `FC-024` fechou a narrativa publica minima sem contradizer o MVP real
+- a proxima decisao explicita do ciclo passou a ser provisionar staging real nos provedores externos
+- a baseline oficial de banco em staging ja esta consolidada em Neon, portanto Render PostgreSQL nao deve ser criado como instrucao ativa
 - `FC-025` continua isolada como backlog de crescimento pos-MVP e permanece `PARKED`, nao `READY`
-- a proxima liberacao depende de nova decisao de governanca sobre deploy publico, manifests de provedor ou backlog pos-MVP

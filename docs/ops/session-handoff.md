@@ -11,6 +11,7 @@
 - o projeto continua orientado a MVP minimo deployavel e demonstravel
 - `FC-023` foi encerrada como `DONE`
 - `FC-024` foi encerrada como `DONE`
+- `FC-025A` foi aberta como `READY`
 - `FC-023A` concluiu a baseline documental minima de staging
 - `FC-023B` validou comandos, env vars e lacunas de provedor
 - `FC-023B` corrigiu a configuracao do Prisma para o padrao do Prisma ORM `7.5.0`, movendo `DIRECT_URL` para `apps/api/prisma.config.ts` e removendo `url`/`directUrl` do `schema.prisma`
@@ -48,12 +49,17 @@
 - registrar que o gate manual do Neon foi validado manualmente no ambiente corrigido
 - registrar que a divergencia de Node foi resolvida com Node `v24.15.0`
 - fechar o README publico e o recruiter evidence pack sem inflar escopo ou alegar deploy inexistente
+- abrir `FC-025A` como nova fatia operacional para provisionamento manual de staging
 
 ## Proximas opcoes apos o saneamento
-- provisionar manualmente Render API, Neon Postgres e Vercel web com base no contrato ja documentado em `docs/ops/fc-023-staging-baseline.md`
-- decidir se a proxima governanca vai liberar manifests de provedor, deploy publico real ou backlog pos-MVP
+- validar ou provisionar Neon staging database com base no contrato ja documentado em `docs/ops/fc-023-staging-baseline.md`
+- configurar `DATABASE_URL` pooled para runtime e `DIRECT_URL` direct para Prisma CLI e migrations
+- provisionar Render API
+- provisionar Vercel Web
+- executar smoke real pos-publicacao antes de qualquer fechamento como `DONE`
+- registrar recursos criados, URLs publicas, env vars e bloqueios reais dentro de `FC-025A`
 - manter `FC-025` isolada como backlog de crescimento pos-MVP
 - decidir se o repositorio vai ganhar manifests de provedor em task propria ou manter a operacao autenticada fora do repo
 
 ## Recomendacao
-- nao abrir nova `READY` automaticamente; a proxima movimentacao deve partir de decisao explicita de governanca, com `FC-025` ainda `PARKED`
+- iniciar `FC-025A` pela validacao ou provisionamento do banco Neon de staging, mantendo `FC-025` apenas como backlog `PARKED`

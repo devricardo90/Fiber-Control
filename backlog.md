@@ -50,6 +50,10 @@
   - **Prioridade**: P1
   - **Objetivo**: criar README profissional em ingles, demo flow, arquitetura, status do projeto, roadmap e evidencia para recrutadores.
   - **Observacao**: concluida em 2026-04-24 com `README.md` reescrito em ingles, evidence pack criado em `docs/project/recruiter-evidence-pack.md` e narrativa publica alinhada ao MVP real, sem alegar deploy publico inexistente.
+- `FC-025A` - Manual Staging Provisioning - `READY`
+  - **Tipo**: Deploy / Operations
+  - **Prioridade**: P0
+  - **Objetivo**: provisionar manualmente os recursos minimos de staging em provedores externos, seguindo a baseline oficial com Neon como banco de staging, depois API no Render e depois web na Vercel.
 - `FC-025` - Production Growth Backlog - `PARKED`
   - **Tipo**: Product / Growth
   - **Prioridade**: P2
@@ -67,7 +71,38 @@
 ---
 
 ## READY
-- *(vazio no momento)*
+- `FC-025A` - Manual Staging Provisioning
+  - **Status de planejamento**: `READY`
+  - **Tipo**: Deploy / Operations
+  - **Prioridade**: P0
+  - **Objetivo**: provisionar manualmente os recursos minimos de staging em provedores externos.
+  - **Escopo**:
+    - validar ou provisionar Neon como banco oficial de staging
+    - configurar `DATABASE_URL` pooled do Neon para runtime
+    - configurar `DIRECT_URL` direct do Neon para Prisma CLI e migrations
+    - criar API no Render
+    - criar web na Vercel
+    - configurar env vars necessarias
+    - registrar nomes dos recursos, URLs publicas e decisoes operacionais
+    - documentar bloqueio real caso a criacao externa nao possa ser concluida
+  - **Fora de escopo**:
+    - alterar codigo funcional
+    - marcar deploy como `DONE` sem smoke real
+    - registrar segredo real em arquivo versionado
+    - criar seed ou credencial de staging sem decisao explicita
+    - declarar producao ou ambiente live se a entrega for apenas staging
+  - **Criterios de aceite**:
+    - recursos criados ou bloqueio real documentado
+    - variaveis obrigatorias mapeadas
+    - proximo passo claro para deploy e smoke
+  - **Validacao obrigatoria**:
+    - depende de `FC-023` e `FC-024`
+    - registrar a sequencia operacional Neon -> Render API -> Vercel Web -> smoke real
+  - **Impacto documental**:
+    - `backlog.md`
+    - `STATUS.md`
+    - `docs/ops/execution-log.md`
+    - `docs/ops/session-handoff.md`
 ## TODO
 - `FC-025` - Production Growth Backlog
   - **Status de planejamento**: `PARKED`
@@ -145,7 +180,7 @@
 - sem reconciliacao documental, o projeto corria risco de tratar `DONE` como encerramento sem arquivo formal; esse risco foi saneado pela `FC-020`, mas a proxima frente continua dependente de decisao de governanca
 - sem escopo MVP formal, o projeto corre risco de derivar para backlog enterprise e contaminar o objetivo de portfolio/deploy minimo
 ## Proxima task oficial
-nenhuma `READY` oficial no momento
+`FC-025A` - Manual Staging Provisioning
 
 ## Saneamento documental
 - `FC-020` abriu e fechou no mesmo ciclo para reconciliar a evidencia formal de `DONE`
@@ -154,3 +189,4 @@ nenhuma `READY` oficial no momento
 - `FC-026` removeu o bloqueio tecnico que impedia a conclusao da `FC-022`
 - `FC-023` fechou a baseline de staging com evidencia manual completa e liberou `FC-024` como `READY`
 - `FC-024` fechou o pacote publico de portfolio e nao deixou nova `READY` aberta automaticamente
+- `FC-025A` foi aberta como nova fatia operacional `READY` para provisionamento manual de staging, preservando `FC-025` como backlog `PARKED`

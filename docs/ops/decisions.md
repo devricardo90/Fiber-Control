@@ -191,3 +191,11 @@ Formato recomendado de cada decisão:
 - **Decisao**: encerrar `FC-023` como `DONE`. O baseline oficial passa a registrar Node `v24.15.0` como ambiente validado, Prisma `7` consumindo `DIRECT_URL` via `apps/api/prisma.config.ts` para CLI/migrations, runtime usando `DATABASE_URL` pooled do Neon e o `Manual External Operations Gate` como `VALIDATED`, sem registrar secrets reais.
 - **Impacto**: a divergencia de Node fica resolvida, o gate manual do Neon deixa de bloquear a task e `FC-024` passa a ser a proxima `READY` oficial. O fechamento continua documental/operacional, sem alterar codigo de produto.
 - **Relacionado a**: FC-023, FC-024, `docs/ops/fc-023-staging-baseline.md`, `docs/ops/execution-log.md`, `docs/ops/session-handoff.md`, `docs/ops/done/FC-023.done.md`, `STATUS.md`, `backlog.md`
+
+## DEC-023 - Keep FC-025A aligned with Neon and treat Render PostgreSQL as a superseded path
+- **Data**: 2026-04-24
+- **Contexto**: apos a abertura da `FC-025A`, a task passou a mandar criar PostgreSQL no Render, mas a baseline oficial de staging fechada na `FC-023` ja havia consolidado Neon Postgres como banco de staging e registrado `DATABASE_URL` pooled e `DIRECT_URL` direct como contrato oficial.
+- **Opcoes consideradas**: seguir com Render PostgreSQL apesar da baseline oficial em Neon; trocar novamente o provider de banco sem decisao formal; corrigir a `FC-025A` para seguir Neon e tratar Render PostgreSQL apenas como decisao antiga superada.
+- **Decisao**: manter Neon como banco oficial de staging para a `FC-025A`. A ordem operacional correta passa a ser Neon -> Render API -> Vercel Web -> smoke real. Render PostgreSQL nao deve ser criado como instrucao ativa sem nova decisao formal.
+- **Impacto**: evita duplicacao de infraestrutura de banco, preserva coerencia com a `FC-023` e reduz risco operacional antes do provisionamento manual real.
+- **Relacionado a**: FC-023, FC-025A, `docs/ops/fc-023-staging-baseline.md`, `docs/ops/session-handoff.md`, `STATUS.md`, `backlog.md`
