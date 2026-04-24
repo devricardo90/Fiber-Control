@@ -3,65 +3,74 @@
 ## Data
 2026-04-24
 
+## Contexto desta reexecucao
+- a execucao original da `FC-022` terminou em `BLOCKED` porque `pnpm.cmd test` em `apps/api` usava o banco errado, limpava o baseline de desenvolvimento e derrubava o login seed local
+- a `FC-026` corrigiu esse bloqueio ao carregar `.env.test` em `vitest.config.ts`, tornar `payments.spec.ts` e `fiscal-reminders.spec.ts` deterministicas e restaurar a seed do banco dev
+- esta reexecucao valida novamente a prontidao local do MVP sobre o baseline corrigido, sem iniciar deploy e sem abrir novo escopo de produto
+
 ## Escopo validado
 - revisao do recorte MVP definido em `docs/product/mvp-scope.md`
-- revisao de `backlog.md`, `STATUS.md`, `docs/ops/session-handoff.md` e `docs/ops/execution-log.md`
-- levantamento dos scripts oficiais em `apps/api/package.json` e `apps/web/package.json`
+- revisao de `backlog.md`, `STATUS.md`, `docs/ops/session-handoff.md`, `docs/ops/decisions.md` e `docs/ops/execution-log.md`
+- confirmacao dos scripts oficiais em `apps/api/package.json` e `apps/web/package.json`
 - gates tecnicos locais de API e web
+- verificacao explicita de isolamento entre:
+  - dev database: `127.0.0.1:5440`
+  - test database: `127.0.0.1:5442`
 - smoke manual local de auth, CORS e superficies minimas do MVP
-- verificacao do estado real do banco/local env
+- verificacao do estado real do banco/local env apos a suite da API
 
 ## Comandos executados
 
+### Inspecao inicial
+- `node -v`
+- `Get-Content apps/api/package.json`
+- `Get-Content apps/web/package.json`
+- `Get-Content apps/web/.env.local`
+- `Get-Content apps/api/.env`
+
 ### API
-- `pnpm.cmd install`
 - `pnpm.cmd prisma:generate`
 - `pnpm.cmd lint`
 - `pnpm.cmd build`
-- `pnpm.cmd prisma:migrate:deploy`
-- `pnpm.cmd prisma:seed`
-- `pnpm.cmd test`
+- `pnpm.cmd prisma:migrate:deploy` com variaveis carregadas de `.env.test`
+- `pnpm.cmd test` com variaveis carregadas de `.env.test`
+- consulta direta ao banco de desenvolvimento apos a suite da API
 
 ### Web
-- `CI=true pnpm.cmd install`
 - `pnpm.cmd lint`
 - `pnpm.cmd build`
 
 ### Runtime manual
 - boot local da API com `node dist/server.js`
-- boot local da web com `node node_modules/next/dist/bin/next start --hostname 127.0.0.1 --port 3000`
-- `GET http://127.0.0.1:3001/health`
+- boot local da web com `node node_modules/next/dist/bin/next start --hostname web.fiber-control.localhost --port 3000`
+- `GET http://api.fiber-control.localhost:3001/health`
 - `POST /auth/login`
-- `POST /auth/register`
 - `GET /auth/me`
 - preflight `OPTIONS /auth/me` com `Origin: http://web.fiber-control.localhost:3000`
-- smoke das rotas web do MVP em `127.0.0.1:3000`
+- smoke das rotas web do MVP em `http://web.fiber-control.localhost:3000`
 - smoke dos endpoints de `customers`, `payments`, `alerts`, `finance`, `reports` e `regions`
 
 ## Resultado dos gates tecnicos
 
 ### API
-- `pnpm.cmd install`: PASS
-- `pnpm.cmd prisma:generate`: PASS com warning de engine; `apps/api/package.json` exige Node `24.x`, ambiente atual estava em `v22.21.1`
+- `pnpm.cmd prisma:generate`: PASS com warning de engine; `apps/api/package.json` continua exigindo Node `24.x`, enquanto o ambiente validado segue em `v22.21.1`
 - `pnpm.cmd lint`: PASS
 - `pnpm.cmd build`: PASS
-- `pnpm.cmd prisma:migrate:deploy`: PASS
-- `pnpm.cmd prisma:seed`: PASS
-- `pnpm.cmd test`: FAIL
+- `pnpm.cmd prisma:migrate:deploy` no banco de teste `127.0.0.1:5442`: PASS
+- `pnpm.cmd test` no banco de teste `127.0.0.1:5442`: PASS com `13` arquivos e `71` testes verdes
 
-### Falhas reais observadas em `pnpm.cmd test`
-- `src/tests/fiscal-reminders.spec.ts` -> `should create a fiscal reminder`
-  - esperado: `upcoming`
-  - obtido: `overdue`
-- `src/tests/payments.spec.ts` -> `should create a paid payment and recalculate the customer to active`
-  - esperado: `ACTIVE`
-  - obtido: `SUSPENDED`
-- `src/tests/payments.spec.ts` -> `should keep customer as due today when payment remains pending on due date`
-  - esperado: `DUE_TODAY`
-  - obtido: `OVERDUE`
+### Evidencia de isolamento de banco
+- o `dotenv` do `vitest` carregou `.env.test` explicitamente durante `pnpm.cmd test`
+- a migration da suite apontou para `fiber_control_test` em `127.0.0.1:5442`
+- consulta direta ao banco de desenvolvimento apos a suite:
+  - `users = 4`
+  - `customers = 4`
+  - `payments = 5`
+  - `regions = 3`
+  - `acesso@fibercontrol.local` permaneceu presente
+- conclusao: a suite da API nao contaminou o banco de desenvolvimento nesta reexecucao
 
 ### Web
-- `CI=true pnpm.cmd install`: PASS
 - `pnpm.cmd lint`: PASS
 - `pnpm.cmd build`: PASS
 - `pnpm.cmd test`: not directly available
@@ -71,14 +80,7 @@
 
 ### API
 - `GET /health`: PASS
-- `POST /auth/login` com `acesso@fibercontrol.local / Fiber@123456`: FAIL `401 Unauthorized`
-- consulta direta ao banco de desenvolvimento apos a suite da API:
-  - `users = 0`
-  - `customers = 0`
-  - `payments = 0`
-  - `regions = 0`
-- `POST /auth/register` para bootstrap manual local: PASS
-- `POST /auth/login` com usuario bootstrap `fc022-admin@fiber.dev`: PASS
+- `POST /auth/login` com `acesso@fibercontrol.local / Fiber@123456`: PASS
 - `GET /auth/me` com token valido: PASS
 - preflight CORS para `http://web.fiber-control.localhost:3000`: PASS
 
@@ -108,40 +110,31 @@
 - `GET /reports/regions`: PASS com auth
 - `GET /regions`: PASS
 - `GET /regions/performance`: PASS
-- `Routes`: not directly available no backend; validacao feita apenas pela pagina web `200`
+- `Routes`: continua sem backend dedicado; validacao feita pela pagina web `200`, coerente com o MVP definido
 
 ## Diagnostico objetivo
-- o baseline de boot local existe: API e web sobem e respondem
-- auth funciona no bootstrap manual local
-- CORS local esta coerente com `web.fiber-control.localhost`
+- o baseline de boot local existe e permaneceu estavel nesta reexecucao
+- API e web sobem localmente no host nomeado documentado
+- o login seed local funciona depois da suite da API
+- CORS local permanece coerente com `web.fiber-control.localhost`
 - o recorte minimo do MVP navega localmente no frontend e os principais contratos da API respondem
-- a prontidao para deploy ainda nao esta fechada porque os gates obrigatorios da API nao passaram
+- a `FC-026` removeu de fato o bloqueio estrutural que impedia readiness local
 
-## Bloqueios reais
-- a suite integrada da API falha em `payments` e `fiscal-reminders`
-- apos `pnpm.cmd test`, o banco de desenvolvimento ativo ficou vazio e o login seed documentado deixou de existir
-- a evidencia atual indica que os testes estao usando o banco de desenvolvimento em vez do banco de teste isolado
-  - `vitest.config.ts` nao aponta para `.env.test`
-  - `src/config/env.ts` carrega `dotenv/config`
-  - varios testes executam `deleteMany()` em `users`, `customers`, `payments` e `regions`
+## Riscos remanescentes antes da FC-023
 - `apps/web` ainda nao possui suite automatizada dedicada
 - `apps/api` continua com warning de engine porque exige Node `24.x` e o ambiente validado estava em `v22.21.1`
-- Docker local nao estava operacional nesta execucao; o daemon nao respondeu ao `docker compose`
-
-## Riscos antes da FC-023
-- promover staging sem isolar o banco de testes arrisca repetir limpeza indevida de dados locais
-- promover staging com a suite da API em FAIL quebraria a narrativa de baseline profissional para deploy
-- promover staging sem baseline automatizada de web manteria o MVP dependente apenas de smoke manual
-- o login seed documentado nao e confiavel enquanto a rotina de testes continuar apagando o banco de desenvolvimento
+- `Routes` permanece apenas como superficie web de overview; nao existe backend especifico para planning/live maps, o que continua fora do MVP
+- os modulos explicitamente fora do MVP continuam neutralizados e nao devem contaminar staging ou narrativa publica
 
 ## Decisao da FC-022
-- `FC-022` nao pode ser marcada como `DONE`
-- classificacao final desta execucao: `BLOCKED`
-- `FC-023` nao pode virar `READY`
-- antes de retomar a FC-022, o projeto precisa de uma task corretiva dedicada para:
-  - isolar a suite da API no banco de teste oficial
-  - restaurar a previsibilidade da seed local
-  - corrigir as 3 falhas reais de `payments` e `fiscal-reminders`
+- `FC-022` pode ser marcada como `DONE`
+- classificacao final desta reexecucao: `DONE`
+- a validacao local/manual do MVP ficou consolidada com evidencia atualizada
+- `FC-023` pode ser promovida para `READY`
+- nenhum deploy foi iniciado nesta task
 
 ## Proxima acao recomendada
-- abrir e executar task corretiva de bloqueio antes de qualquer staging/deploy
+- promover e executar `FC-023 - Staging Deployment Baseline`
+- manter explicito em staging que:
+  - Node `24.x` segue como expectativa declarada da API
+  - `apps/web` ainda depende de smoke manual e build/lint, nao de suite dedicada

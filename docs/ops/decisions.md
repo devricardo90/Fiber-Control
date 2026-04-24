@@ -143,3 +143,19 @@ Formato recomendado de cada decisão:
 - **Decisao**: bloquear `FC-022`, impedir a promocao de `FC-023` e abrir `FC-026` como unica `READY` oficial para corrigir o uso de banco na suite da API, restaurar a seed local e tratar as 3 regressoes reais observadas.
 - **Impacto**: o projeto preserva a narrativa de baseline profissional antes de staging. Nenhum deploy deve comecar antes de `FC-026` remover o bloqueio e permitir retomar a `FC-022` ou reexecutar sua validacao final.
 - **Relacionado a**: FC-022, FC-023, FC-026, `docs/quality/fc-022-local-validation.md`, `backlog.md`, `STATUS.md`
+
+## DEC-017 - Run the API test suite only against the isolated test database and freeze date-sensitive specs
+- **Data**: 2026-04-24
+- **Contexto**: a `FC-026` confirmou que a suite da API estava contaminando o banco de desenvolvimento porque `vitest` nao carregava `.env.test`. Alem disso, `payments.spec.ts` e `fiscal-reminders.spec.ts` dependiam do relogio real, o que fazia a regressao reaparecer conforme a data corrente.
+- **Opcoes consideradas**: corrigir a regra de negocio de `payments` e `fiscal-reminders` para acomodar o relogio atual; manter os testes acoplados ao relogio real; garantir que `vitest` rode com `.env.test` e tornar os testes sensiveis a data deterministas.
+- **Decisao**: carregar `.env.test` diretamente em `vitest.config.ts` com `NODE_ENV=test` e congelar a data apenas nos suites de `payments` e `fiscal-reminders`, preservando o comportamento de producao e removendo a flutuação do teste.
+- **Impacto**: `pnpm.cmd test` em `apps/api` volta a ser previsivel, nao contamina o banco de desenvolvimento e permite restaurar a seed/local access como baseline local confiavel. A `FC-022` pode ser reexecutada sobre um ambiente estabilizado.
+- **Relacionado a**: FC-026, FC-022, `apps/api/vitest.config.ts`, `apps/api/src/tests/payments.spec.ts`, `apps/api/src/tests/fiscal-reminders.spec.ts`, `docs/quality/fc-022-local-validation.md`
+
+## DEC-018 - Promote staging baseline only after FC-022 revalidation passes on the corrected local environment
+- **Data**: 2026-04-24
+- **Contexto**: apos a `FC-026`, a `FC-022` foi reexecutada para confirmar se a validacao local do MVP ficava realmente pronta para staging. A reexecucao mostrou `prisma:generate`, `lint`, `build`, `prisma:migrate:deploy` e `test` em PASS na API, `lint` e `build` em PASS na web, login seed local preservado apos a suite, CORS coerente e smoke manual do MVP em PASS.
+- **Opcoes consideradas**: manter `FC-023` fora de `READY` mesmo com a revalidacao em PASS; promover `FC-023` para `READY` aceitando os riscos residuais explicitamente documentados; abrir mais uma task corretiva antes de staging apesar de nao existir bloqueio tecnico atual.
+- **Decisao**: encerrar `FC-022` como `DONE` e promover `FC-023` para `READY`, mantendo dois riscos explicitos para staging controlado: `apps/api` ainda declara Node `24.x` enquanto o ambiente validado estava em `v22.21.1`, e `apps/web` continua sem suite automatizada dedicada.
+- **Impacto**: o projeto ganha baseline local comprovadamente demonstravel e pode iniciar o planejamento/execucao de staging sem mascarar limitacoes. A narrativa tecnica permanece coerente: MVP validado localmente, deploy ainda nao iniciado e riscos residuais documentados antes da infra.
+- **Relacionado a**: FC-022, FC-023, FC-026, `docs/quality/fc-022-local-validation.md`, `docs/ops/done/FC-022.done.md`, `backlog.md`, `STATUS.md`

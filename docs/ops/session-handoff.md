@@ -6,31 +6,35 @@
 ## Estado atual
 - `FC-020` reconciliou a evidencia formal de `DONE` que estava ausente em `docs/ops/done/`
 - `FC-021` formalizou o escopo MVP publico em `docs/product/mvp-scope.md`
-- `FC-022` executou a validacao local do MVP e ficou `BLOCKED`
+- `FC-022` foi reexecutada sobre o baseline corrigido e agora esta `DONE`
+- `FC-026` foi concluida e removeu o bloqueio tecnico da suite da API
 - o projeto continua orientado a MVP minimo deployavel e demonstravel
-- `FC-026` passa a ser a unica `READY` oficial aberta ao final desta execucao
-- nenhuma feature nova foi aberta, nenhum codigo de produto foi alterado e nenhum deploy foi iniciado
+- `FC-023` passa a ser a unica `READY` oficial aberta ao final desta execucao
+- nenhuma feature nova foi aberta e nenhum deploy foi iniciado; houve apenas validacao e documentacao
 
 ## Arquivos alterados
+- `apps/api/vitest.config.ts`
+- `apps/api/src/tests/payments.spec.ts`
+- `apps/api/src/tests/fiscal-reminders.spec.ts`
 - `backlog.md`
 - `STATUS.md`
-- `docs/quality/fc-022-local-validation.md`
 - `docs/ops/decisions.md`
 - `docs/ops/execution-log.md`
 - `docs/ops/session-handoff.md`
+- `docs/quality/fc-022-local-validation.md`
+- `docs/ops/done/FC-022.done.md`
+- `docs/ops/done/FC-026.done.md`
 
 ## Decisao tomada
-- preservar a `FC-022` como validacao real, sem maquiar `DONE`
-- bloquear a `FC-022` por falha real da suite da API e por contaminacao do banco de desenvolvimento apos os testes
-- impedir a promocao de `FC-023` para `READY`
-- abrir `FC-026` como task corretiva minima antes de qualquer staging/deploy
+- consolidar a reexecucao formal da `FC-022` sobre o baseline corrigido pela `FC-026`
+- encerrar a `FC-022` como `DONE`
+- promover a `FC-023` para `READY`
+- manter explicitos os riscos residuais de Node `24.x` vs `v22.21.1` e ausencia de suite automatizada dedicada em `apps/web`
 
 ## Proximas opcoes apos o saneamento
-- executar `FC-026` para isolar a suite da API no banco oficial de testes, restaurar a seed local e tratar as regressoes reais de `payments` e `fiscal-reminders`
-- depois reexecutar ou destravar a `FC-022` com o ambiente estabilizado
-- so entao decidir se `FC-023` pode virar `READY`
+- executar a `FC-023` com baseline local do MVP ja comprovado
 - seguir com `FC-024` para pacote publico de portfolio apenas depois da baseline tecnica minimamente confiavel
 - manter `FC-025` isolada como backlog de crescimento pos-MVP
 
 ## Recomendacao
-- nao iniciar deploy, staging ou nova feature de produto antes de executar `FC-026` e remover o bloqueio formal da `FC-022`
+- iniciar a `FC-023` sem expandir escopo de produto, tratando staging apenas para o MVP atual e preservando os riscos residuais explicitados em `STATUS.md` e `docs/quality/fc-022-local-validation.md`

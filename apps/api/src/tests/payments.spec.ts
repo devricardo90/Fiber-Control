@@ -1,5 +1,5 @@
 import request from "supertest";
-import { afterAll, beforeAll, beforeEach, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 import type { FastifyInstance } from "fastify";
 
 import { buildApp } from "../app.js";
@@ -9,6 +9,8 @@ describe("Payments routes", () => {
   let app: FastifyInstance;
 
   beforeAll(async () => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date("2026-03-19T00:00:00.000Z"));
     app = await buildApp();
     await app.ready();
   });
@@ -24,6 +26,7 @@ describe("Payments routes", () => {
     await prisma.customer.deleteMany();
     await prisma.region.deleteMany();
     await app.close();
+    vi.useRealTimers();
   });
 
   it("should create a paid payment and recalculate the customer to active", async () => {

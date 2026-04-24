@@ -1,6 +1,6 @@
 import type { FiscalReminder } from "../generated/prisma/client.js";
 import request from "supertest";
-import { afterAll, beforeAll, beforeEach, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 import type { FastifyInstance } from "fastify";
 
 import { buildApp } from "../app.js";
@@ -20,6 +20,8 @@ describe("Fiscal reminders routes", () => {
   let app: FastifyInstance;
 
   beforeAll(async () => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date("2026-03-19T00:00:00.000Z"));
     app = await buildApp();
     await app.ready();
   });
@@ -41,6 +43,7 @@ describe("Fiscal reminders routes", () => {
     await prisma.customer.deleteMany();
     await prisma.region.deleteMany();
     await app.close();
+    vi.useRealTimers();
   });
 
   it("should create a fiscal reminder", async () => {
