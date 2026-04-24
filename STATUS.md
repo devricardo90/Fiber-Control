@@ -54,9 +54,11 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - `FC-026` - isolamento da suite da API no banco oficial de testes e recuperacao do baseline local
 
 ## Tasks em aberto
+- `FC-028` - `READY` - Public README and Demo Presentation Polish
 - `FC-025` - `PARKED` - Production Growth Backlog
 
 ## Proximas tasks planejadas
+- `FC-028` - `READY` - Public README and Demo Presentation Polish
 - `FC-025` - `PARKED` - Production Growth Backlog
 
 ## Encadeamento formal
@@ -79,6 +81,8 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - `FC-019` fechou a lacuna entre o protocolo e o runtime local, validando web e api em host nomeado.
 
 ## Validacoes mais recentes
+- `FC-028` - task aberta como proxima `READY` oficial para polimento da apresentacao publica em ingles, sem reabrir escopo funcional nem alterar providers: PASS documental
+- `FC-028` - escopo da task restringido a README, demo flow, narrativa publica, URLs, highlights tecnicos e disciplina operacional, com `docs/project/recruiter-evidence-pack.md` opcional apenas se aumentar a coerencia: PASS documental
 - `FC-027` - `docs/ops/staging-runbook.md` criado com arquitetura, URLs publicas, Neon pooled/direct, configuracao esperada de Render API, configuracao esperada de Vercel Web, smoke oficial e troubleshooting: PASS documental
 - `FC-027` - contrato de env vars mantido apenas por nomes e placeholders, sem `DATABASE_URL`, `DIRECT_URL`, `AUTH_SECRET`, tokens ou senhas reais: PASS documental
 - `FC-027` - backlog, `STATUS.md`, `docs/ops/session-handoff.md` e `docs/ops/execution-log.md` alinhados para encerramento formal: PASS documental
@@ -232,9 +236,10 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - o gate manual do Neon depende de operacao externa humana por desenho, mas a evidencia requerida foi registrada e validada nesta execucao
 
 ## Proxima READY oficial
-nenhuma `READY` oficial no momento
+`FC-028` - Public README and Demo Presentation Polish
 
 ## Justificativa da proxima READY
 - `FC-027` fechou o gap operacional/documental mais imediato do staging atual
-- nenhuma nova task foi formalmente promovida para `READY` nesta execucao
+- o README atual ja e funcional, mas ainda comporta polish de apresentacao publica agora que o staging real e o runbook versionado estao fechados
+- `FC-028` concentra o proximo ganho de portfolio sem abrir feature, sem mexer em provider e sem contaminar o MVP com backlog enterprise
 - `FC-025` continua isolada como backlog de crescimento pos-MVP e permanece `PARKED`, nao `READY`
