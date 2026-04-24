@@ -50,10 +50,11 @@
   - **Prioridade**: P1
   - **Objetivo**: criar README profissional em ingles, demo flow, arquitetura, status do projeto, roadmap e evidencia para recrutadores.
   - **Observacao**: concluida em 2026-04-24 com `README.md` reescrito em ingles, evidence pack criado em `docs/project/recruiter-evidence-pack.md` e narrativa publica alinhada ao MVP real, sem alegar deploy publico inexistente.
-- `FC-025A` - Manual Staging Provisioning - `READY`
+- `FC-025A` - Manual Staging Provisioning - `DONE`
   - **Tipo**: Deploy / Operations
   - **Prioridade**: P0
   - **Objetivo**: provisionar manualmente os recursos minimos de staging em provedores externos, seguindo a baseline oficial com Neon como banco de staging, depois API no Render e depois web na Vercel.
+  - **Observacao**: concluida em 2026-04-24 com Neon mantido como banco oficial, API publicada em `https://app-fiber-control-api-staging.onrender.com`, web publicada em `https://app-fiber-control-web-staging.vercel.app`, `CORS_ORIGIN` alinhado a URL real da web, `NEXT_PUBLIC_API_URL` e `NEXT_PUBLIC_APP_URL` apontando para as URLs publicas corretas e smoke manual completo em PASS. Render PostgreSQL nao foi criado.
 - `FC-025` - Production Growth Backlog - `PARKED`
   - **Tipo**: Product / Growth
   - **Prioridade**: P2
@@ -71,38 +72,7 @@
 ---
 
 ## READY
-- `FC-025A` - Manual Staging Provisioning
-  - **Status de planejamento**: `READY`
-  - **Tipo**: Deploy / Operations
-  - **Prioridade**: P0
-  - **Objetivo**: provisionar manualmente os recursos minimos de staging em provedores externos.
-  - **Escopo**:
-    - validar ou provisionar Neon como banco oficial de staging
-    - configurar `DATABASE_URL` pooled do Neon para runtime
-    - configurar `DIRECT_URL` direct do Neon para Prisma CLI e migrations
-    - criar API no Render
-    - criar web na Vercel
-    - configurar env vars necessarias
-    - registrar nomes dos recursos, URLs publicas e decisoes operacionais
-    - documentar bloqueio real caso a criacao externa nao possa ser concluida
-  - **Fora de escopo**:
-    - alterar codigo funcional
-    - marcar deploy como `DONE` sem smoke real
-    - registrar segredo real em arquivo versionado
-    - criar seed ou credencial de staging sem decisao explicita
-    - declarar producao ou ambiente live se a entrega for apenas staging
-  - **Criterios de aceite**:
-    - recursos criados ou bloqueio real documentado
-    - variaveis obrigatorias mapeadas
-    - proximo passo claro para deploy e smoke
-  - **Validacao obrigatoria**:
-    - depende de `FC-023` e `FC-024`
-    - registrar a sequencia operacional Neon -> Render API -> Vercel Web -> smoke real
-  - **Impacto documental**:
-    - `backlog.md`
-    - `STATUS.md`
-    - `docs/ops/execution-log.md`
-    - `docs/ops/session-handoff.md`
+- *(vazio no momento)*
 ## TODO
 - `FC-025` - Production Growth Backlog
   - **Status de planejamento**: `PARKED`
@@ -129,6 +99,7 @@
 - *(vazio no momento)*
 
 ## DONE
+- `FC-025A` - DONE com staging minimo publicado seguindo a baseline oficial Neon -> Render API -> Vercel Web: API em `https://app-fiber-control-api-staging.onrender.com`, web em `https://app-fiber-control-web-staging.vercel.app`, `GET /health`, `/docs`, `/openapi.json`, `POST /auth/register`, `POST /auth/login` e `GET /auth/me` em PASS, `CORS_ORIGIN` alinhado a URL real da web e sem criacao de Render PostgreSQL
 - `FC-024` - DONE com `README.md` reescrito em ingles e `docs/project/recruiter-evidence-pack.md` criado para refletir o MVP real, a baseline tecnica validada, os limites deliberados do projeto e a trilha de evidencias para GitHub e recrutadores, sem inflar escopo nem alegar deploy publico inexistente
 - `FC-023` - DONE com baseline de staging fechada documentalmente e validacoes manuais confirmadas pelo humano: Node `v24.15.0`, npm `11.12.1`, pnpm `10.33.0`, `pnpm.cmd install`, `pnpm.cmd prisma generate`, `pnpm.cmd prisma migrate deploy`, `pnpm.cmd build`, `docker compose up -d` e `pnpm.cmd test` em PASS; `Manual External Operations Gate` do Neon validado; Prisma `7` consolidado com `DIRECT_URL` via `apps/api/prisma.config.ts` e runtime mantido em `DATABASE_URL` pooled do Neon, sem registrar secrets reais
 - `FC-022` - DONE com reexecucao formal da validacao local do MVP: `prisma:generate`, `lint`, `build`, `prisma:migrate:deploy` e `test` em `apps/api` ficaram em PASS no banco oficial de testes `127.0.0.1:5442`, o banco dev `127.0.0.1:5440` permaneceu intacto apos a suite, o login seed `acesso@fibercontrol.local` voltou a passar junto com `GET /auth/me`, CORS e as rotas/pontos minimos do MVP responderam corretamente, e `FC-023` foi liberada para `READY`
@@ -180,7 +151,7 @@
 - sem reconciliacao documental, o projeto corria risco de tratar `DONE` como encerramento sem arquivo formal; esse risco foi saneado pela `FC-020`, mas a proxima frente continua dependente de decisao de governanca
 - sem escopo MVP formal, o projeto corre risco de derivar para backlog enterprise e contaminar o objetivo de portfolio/deploy minimo
 ## Proxima task oficial
-`FC-025A` - Manual Staging Provisioning
+nenhuma `READY` oficial no momento
 
 ## Saneamento documental
 - `FC-020` abriu e fechou no mesmo ciclo para reconciliar a evidencia formal de `DONE`
@@ -189,4 +160,4 @@
 - `FC-026` removeu o bloqueio tecnico que impedia a conclusao da `FC-022`
 - `FC-023` fechou a baseline de staging com evidencia manual completa e liberou `FC-024` como `READY`
 - `FC-024` fechou o pacote publico de portfolio e nao deixou nova `READY` aberta automaticamente
-- `FC-025A` foi aberta como nova fatia operacional `READY` para provisionamento manual de staging, preservando `FC-025` como backlog `PARKED`
+- `FC-025A` foi encerrada como `DONE` apos publicar staging real com Neon, Render e Vercel, preservando `FC-025` como backlog `PARKED`
