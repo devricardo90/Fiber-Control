@@ -12,6 +12,7 @@
 - `FC-023` foi encerrada como `DONE`
 - `FC-024` foi encerrada como `DONE`
 - `FC-025A` foi encerrada como `DONE`
+- `FC-027` foi encerrada como `DONE`
 - Neon permaneceu como banco oficial de staging
 - a API foi publicada em `https://app-fiber-control-api-staging.onrender.com`
 - a web foi publicada em `https://app-fiber-control-web-staging.vercel.app`
@@ -20,27 +21,23 @@
 - `CORS_ORIGIN` foi alinhado a `https://app-fiber-control-web-staging.vercel.app`
 - `NEXT_PUBLIC_API_URL` foi alinhado a `https://app-fiber-control-api-staging.onrender.com`
 - `NEXT_PUBLIC_APP_URL` foi alinhado a `https://app-fiber-control-web-staging.vercel.app`
-- nenhuma feature nova foi aberta e nenhum codigo de produto foi alterado; houve apenas fechamento operacional/documental do staging real e alinhamento final de Git com `origin/main`
+- nenhuma feature nova foi aberta e nenhum codigo de produto foi alterado; houve fechamento operacional/documental do staging real e consolidacao do runbook versionado correspondente
 
 ## Arquivos alterados
+- `docs/ops/staging-runbook.md`
 - `backlog.md`
 - `STATUS.md`
 - `docs/ops/execution-log.md`
 - `docs/ops/session-handoff.md`
-- `docs/ops/done/FC-025A.done.md`
 
 ## Decisao tomada
-- alinhar `origin/main` com o commit documental `10f6b9b`
-- encerrar `FC-025A` como `DONE` apos publicacao real de staging
-- registrar Neon como banco oficial efetivamente usado
-- registrar a API publicada em Render e a web publicada em Vercel
-- registrar o smoke manual real em PASS sem expor tokens ou secrets
+- manter `FC-025A` como `DONE`
+- encerrar `FC-027` como `DONE`
+- consolidar o gap de reprodutibilidade operacional em um runbook versionado
 - manter Render PostgreSQL como caminho superado, nao como instrucao ativa
 
 ## Proximas opcoes apos o saneamento
 - manter `FC-025` isolada como backlog de crescimento pos-MVP
-- decidir se o repositorio vai ganhar manifests de provedor em task propria ou se a operacao autenticada continua fora do repo
-- abrir uma nova task `READY` apenas se houver decisao explicita de proximo ciclo
 
 ## Recomendacao
 - nao abrir nova task automaticamente; manter `FC-025` como `PARKED` e decidir explicitamente o proximo ciclo operacional

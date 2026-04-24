@@ -55,6 +55,11 @@
   - **Prioridade**: P0
   - **Objetivo**: provisionar manualmente os recursos minimos de staging em provedores externos, seguindo a baseline oficial com Neon como banco de staging, depois API no Render e depois web na Vercel.
   - **Observacao**: concluida em 2026-04-24 com Neon mantido como banco oficial, API publicada em `https://app-fiber-control-api-staging.onrender.com`, web publicada em `https://app-fiber-control-web-staging.vercel.app`, `CORS_ORIGIN` alinhado a URL real da web, `NEXT_PUBLIC_API_URL` e `NEXT_PUBLIC_APP_URL` apontando para as URLs publicas corretas e smoke manual completo em PASS. Render PostgreSQL nao foi criado.
+- `FC-027` - Staging Reproducibility and Provider Runbook - `DONE`
+  - **Tipo**: Operations / Documentation
+  - **Prioridade**: P0
+  - **Objetivo**: consolidar um runbook versionado para recriar, operar, redeployar e validar o staging atual sem depender de memoria tacita.
+  - **Observacao**: concluida em 2026-04-24 com `docs/ops/staging-runbook.md` criado para consolidar Neon, Render API, Vercel Web, contrato de env vars por nomes/placeholders, diferenca entre `DATABASE_URL` pooled e `DIRECT_URL` direct, smoke manual oficial e troubleshooting. Nenhum secret real foi registrado.
 - `FC-025` - Production Growth Backlog - `PARKED`
   - **Tipo**: Product / Growth
   - **Prioridade**: P2
@@ -99,6 +104,7 @@
 - *(vazio no momento)*
 
 ## DONE
+- `FC-027` - DONE com `docs/ops/staging-runbook.md` criado e completo para reprodutibilidade do staging atual em Neon, Render API e Vercel Web, incluindo URLs publicas, contrato de env vars por nomes/placeholders, diferenca entre `DATABASE_URL` pooled e `DIRECT_URL` direct, configuracao esperada de provider, smoke manual oficial, troubleshooting e criterio de staging saudavel, sem registrar secrets reais
 - `FC-025A` - DONE com staging minimo publicado seguindo a baseline oficial Neon -> Render API -> Vercel Web: API em `https://app-fiber-control-api-staging.onrender.com`, web em `https://app-fiber-control-web-staging.vercel.app`, `GET /health`, `/docs`, `/openapi.json`, `POST /auth/register`, `POST /auth/login` e `GET /auth/me` em PASS, `CORS_ORIGIN` alinhado a URL real da web e sem criacao de Render PostgreSQL
 - `FC-024` - DONE com `README.md` reescrito em ingles e `docs/project/recruiter-evidence-pack.md` criado para refletir o MVP real, a baseline tecnica validada, os limites deliberados do projeto e a trilha de evidencias para GitHub e recrutadores, sem inflar escopo nem alegar deploy publico inexistente
 - `FC-023` - DONE com baseline de staging fechada documentalmente e validacoes manuais confirmadas pelo humano: Node `v24.15.0`, npm `11.12.1`, pnpm `10.33.0`, `pnpm.cmd install`, `pnpm.cmd prisma generate`, `pnpm.cmd prisma migrate deploy`, `pnpm.cmd build`, `docker compose up -d` e `pnpm.cmd test` em PASS; `Manual External Operations Gate` do Neon validado; Prisma `7` consolidado com `DIRECT_URL` via `apps/api/prisma.config.ts` e runtime mantido em `DATABASE_URL` pooled do Neon, sem registrar secrets reais
@@ -161,3 +167,4 @@ nenhuma `READY` oficial no momento
 - `FC-023` fechou a baseline de staging com evidencia manual completa e liberou `FC-024` como `READY`
 - `FC-024` fechou o pacote publico de portfolio e nao deixou nova `READY` aberta automaticamente
 - `FC-025A` foi encerrada como `DONE` apos publicar staging real com Neon, Render e Vercel, preservando `FC-025` como backlog `PARKED`
+- `FC-027` foi encerrada como `DONE` apos consolidar o runbook versionado do staging real sem reabrir deploy nem alterar providers
