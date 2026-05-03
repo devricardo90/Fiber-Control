@@ -69,6 +69,7 @@
 - *(vazio no momento)*
 
 ## DONE
+- `FC-036` - DONE em 2026-05-03: diagnóstico de falso positivo no erro 500 de staging; endpoints de auth e alerts operacionais; evidência de comportamento consistente com FC-035.
 - `FC-035` - DONE em 2026-05-03: alinhamento da regra de dominio de inadimplencia; backend como unica fonte de verdade; union rule no alerts.service.ts; overdueFromAlerts removido do frontend; regressao adicionada em alerts.spec.ts.
 - `FC-034A` - DONE em 2026-05-03: smoke de staging pos-FC-034 registrado; Dashboard Overdue customers = 1 PASS; Alerts surface operacional sem placeholder PASS; Maria Oliveira com alerta de saldo em aberto PASS; Customers e Payments preservados.
 - `FC-034` - DONE em 2026-05-03: metrica overdueFromAlerts aplicada em Dashboard e AlertsScreen; PlaceholderPage de Alerts substituida por surface operacional real com dados ao vivo; commit 479cdc1 em origin/main.
