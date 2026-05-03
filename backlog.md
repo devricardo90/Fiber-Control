@@ -27,7 +27,7 @@
 
 ---
 
-## Sequencia estrategica FC-020 a FC-033A
+## Sequencia estrategica FC-020 a FC-034A
 - `FC-020` - Governance / Documentation - `DONE`
 - `FC-021` - MVP Scope Definition for Deploy - `DONE`
 - `FC-022` - MVP Local Validation and Deploy Readiness - `DONE`
@@ -41,6 +41,8 @@
 - `FC-031` - Staging Demo Data and Business Narrative Alignment - `DONE`
 - `FC-033` - Fix Staging Navigation for Customers and Alerts - `DONE`
 - `FC-033A` - Record FC-033 Staging Smoke Evidence - `DONE`
+- `FC-034` - Align Dashboard Metrics and Operational Alerts Screen - `DONE`
+- `FC-034A` - Record FC-034 Staging Smoke Evidence - `DONE`
 
 ---
 
@@ -67,6 +69,8 @@
 - *(vazio no momento)*
 
 ## DONE
+- `FC-034A` - DONE em 2026-05-03: smoke de staging pos-FC-034 registrado; Dashboard Overdue customers = 1 PASS; Alerts surface operacional sem placeholder PASS; Maria Oliveira com alerta de saldo em aberto PASS; Customers e Payments preservados.
+- `FC-034` - DONE em 2026-05-03: metrica overdueFromAlerts aplicada em Dashboard e AlertsScreen; PlaceholderPage de Alerts substituida por surface operacional real com dados ao vivo; commit 479cdc1 em origin/main.
 - `FC-033A` - DONE em 2026-05-03: smoke de staging pos-FC-033 registrado; Customers e Alerts confirmados com PASS no staging; caveat do placeholder de Alerts documentado como melhoria futura.
 - `FC-033` - DONE em 2026-05-03: rotas de Customers e Alerts corrigidas no frontend; redirect("/workspace") substituido por CustomersListScreen e AlertsScreen; commit 0ad7bf8 em origin/main.
 - `FC-031` - DONE em 2026-05-03: seed atualizado com Joao Silva e Maria Oliveira; narrativa de negocio alinhada; Dashboard, Customers, Payments e Alerts com dados coerentes de staging.
