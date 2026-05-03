@@ -129,7 +129,46 @@
 ---
 
 ## READY
-- *(vazio no momento)*
+- `FC-030A` - Manual Staging Web Smoke & Portfolio Evidence Readiness
+  - **Tipo**: Operations / Validation
+  - **Prioridade**: P0
+  - **Objetivo**: Validar manualmente o Staging Web publicado e decidir se o projeto ja pode gerar evidencia visual real para portfolio.
+  - **Escopo**:
+    - confirmar URL publica do Web staging
+    - confirmar URL publica da API staging, se necessario
+    - acessar Web staging
+    - testar register ou login
+    - validar carregamento do dashboard
+    - testar o fluxo principal disponivel no MVP
+    - registrar bugs funcionais ou visuais encontrados
+    - capturar screenshots somente se o fluxo principal passar
+    - documentar se o projeto esta pronto ou nao para evidencia visual de portfolio
+  - **Fora de escopo**:
+    - nao corrigir bug
+    - nao fazer UI/UX polish
+    - nao alterar layout
+    - nao alterar backend
+    - nao alterar autenticacao
+    - nao alterar banco
+    - nao criar funcionalidade
+    - nao executar deploy
+    - nao criar proxima task automaticamente
+    - nao marcar FC-030A como DONE sem smoke real
+  - **Criterios de aceite**:
+    - smoke manual Web executado
+    - evidencia documentada em docs/ops
+    - resultado classificado como PASS, PASS WITH NOTES ou BLOCKED
+    - screenshots reais adicionadas somente se o fluxo passar
+    - bugs encontrados viram backlog candidato
+    - nenhum polish ou correcao fora do escopo
+    - commit autorizado
+    - working tree limpo apos commit
+    - nenhuma nova task READY automatica
+  - **Impacto documental**:
+    - `backlog.md`
+    - `STATUS.md`
+    - `docs/ops/session-handoff.md`
+    - `docs/ops/execution-log.md`
 ## TODO
 - `FC-025` - Production Growth Backlog
   - **Status de planejamento**: `PARKED`

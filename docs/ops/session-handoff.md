@@ -4,48 +4,27 @@
 2026-04-24
 
 ## Estado atual
-- `FC-020` reconciliou a evidencia formal de `DONE` que estava ausente em `docs/ops/done/`
-- `FC-021` formalizou o escopo MVP publico em `docs/product/mvp-scope.md`
-- `FC-022` foi reexecutada sobre o baseline corrigido e agora esta `DONE`
-- `FC-026` foi concluida e removeu o bloqueio tecnico da suite da API
-- o projeto continua orientado a MVP minimo deployavel e demonstravel
-- `FC-023` foi encerrada como `DONE`
-- `FC-024` foi encerrada como `DONE`
-- `FC-025A` foi encerrada como `DONE`
-- `FC-027` foi encerrada como `DONE`
-- `FC-028` foi encerrada como `DONE`
-- `FC-029` foi encerrada como `DONE`
-- Neon permaneceu como banco oficial de staging
-- a API foi publicada em `https://app-fiber-control-api-staging.onrender.com`
-- a web foi publicada em `https://app-fiber-control-web-staging.vercel.app`
-- o redeploy final ficou verde
-- o smoke manual de staging passou em `GET /health`, `/docs`, `/openapi.json`, `POST /auth/register`, `POST /auth/login` e `GET /auth/me`
-- `CORS_ORIGIN` foi alinhado a `https://app-fiber-control-web-staging.vercel.app`
-- `NEXT_PUBLIC_API_URL` foi alinhado a `https://app-fiber-control-api-staging.onrender.com`
-- `NEXT_PUBLIC_APP_URL` foi alinhado a `https://app-fiber-control-web-staging.vercel.app`
-- nenhuma feature nova foi aberta e nenhum codigo funcional foi alterado; houve apenas polish documental/visual de portfolio
-- o repositorio agora esta preparado para receber screenshots reais sem inventar evidencias
+- `FC-029` preparou a estrutura para screenshots e o checklist de polish do GitHub.
+- o projeto saiu do estado `IDLE` e agora possui a `FC-030A` em `READY`.
+- o objetivo da `FC-030A` e a validacao manual (smoke) do Staging Web publicado.
+- capturas de screenshots finais e qualquer polimento de UI/UX estao suspensos ate que a `FC-030A` seja executada.
+- Neon, Render e Vercel continuam sendo a baseline oficial de staging.
 
 ## Arquivos alterados
-- `README.md`
-- `docs/project/recruiter-evidence-pack.md`
-- `docs/project/github-polish-checklist.md`
-- `docs/assets/screenshots/.gitkeep`
 - `backlog.md`
 - `STATUS.md`
 - `docs/ops/execution-log.md`
 - `docs/ops/session-handoff.md`
-- `docs/ops/done/FC-028.done.md`
-- `docs/ops/done/FC-029.done.md`
 
 ## Decisao tomada
-- manter `FC-028` como `DONE`
-- encerrar `FC-029` como `DONE`
-- preparar a base documental para screenshots reais sem fabricar assets
-- manter `FC-025` isolada como backlog `PARKED`
+- abrir `FC-030A` como unica task `READY`.
+- manter `FC-025` como `PARKED`.
+- bloquear evidencias visuais e polish ate validacao real do Staging Web.
 
 ## Proximas opcoes apos o saneamento
-- manter `FC-025` isolada como backlog de crescimento pos-MVP
+- executar o smoke manual da `FC-030A` seguindo o checklist definido no backlog.
 
 ## Recomendacao
-- nao abrir nova task automaticamente; quando houver disponibilidade para captura manual no navegador, usar o checklist de GitHub polish para produzir as screenshots reais sem expor dados sensiveis
+- o proximo executor deve focar exclusivamente na validacao manual do Staging Web conforme o escopo da `FC-030A`.
+- nao realizar correcoes ou melhorias de UI/UX durante esta task; bugs encontrados devem ser apenas registrados.
+- prosseguir para a captura de screenshots reais apenas se o fluxo principal do MVP passar.
