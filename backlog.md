@@ -63,7 +63,7 @@
 ---
 
 ## DOING
-- *(vazio no momento)*
+- `FC-037` - Create portfolio README with one product image
 
 ## BLOCKED
 - *(vazio no momento)*

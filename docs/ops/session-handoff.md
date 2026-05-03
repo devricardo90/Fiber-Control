@@ -4,27 +4,27 @@
 2026-05-03
 
 ## Estado atual
-- `FC-035` e `FC-036` concluídas documentalmente; `FC-035` é `Remote DONE`.
-- `FC-036` confirmou que o staging está operacional e respondendo corretamente (auth e alertas).
-- falha de auth relatada anteriormente era um falso positivo (erro de invocação local).
-- regra de domínio da `FC-035` confirmada em staging via endpoint de alertas.
-- nenhum commit, push, seed, migration ou deploy foi executado nesta sessão de fechamento.
+- `FC-037` está em execução: criação de README de portfólio.
+- `FC-035` e `FC-036` Remote DONE; ambiente de staging saudável e validado via API.
+- lógica de inadimplência alinhada (backend como fonte única).
+- registros operacionais alinhados com a nova tarefa de documentação.
+- diretório `docs/assets/readme` preparado para receber a imagem do produto.
 
-## Arquivos alterados (FC-036 closure)
+## Arquivos alterados (FC-037 preparation)
+- `README.md`
 - `STATUS.md`
 - `backlog.md`
 - `docs/ops/execution-log.md`
 - `docs/ops/session-handoff.md`
 
 ## Decisão tomada
-- FC-036 encerrada como DONE (diagnóstico concluído).
-- nenhuma nova task promovida para READY.
+- FC-037 aberta como tarefa ativa de portfólio.
+- foco em apresentação do produto para visitantes externos.
 
 ## Próximas opções
-- Novo Discussion Gate para alinhar próximos passos.
-- Recomendação de tarefa futura (não READY):
-  - `FC-037` — Capture staging visual smoke evidence (captura de evidências visuais do staging saudável).
+- completar o README com a imagem fornecida.
+- após FC-037, avaliar evolução funcional (ex: workflows de pagamento).
 
 ## Recomendação
-- manter a disciplina de não registrar secrets ou URLs reais no repositório.
-- ambiente de staging está saudável para testes de interface.
+- salvar a imagem fornecida como `docs/assets/readme/app-fiber-control-overview.png`.
+- manter tom profissional e preciso, sem prometer maturidade inexistente.
