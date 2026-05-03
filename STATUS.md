@@ -1,7 +1,14 @@
 # STATUS - Fiber Control
 
 ## Estado atual
-Projeto com governanca central estabelecida, arquitetura backend definida, trilha de auditoria transversal implementada, persistencia Prisma formalizada, autenticacao/autorizacao base formalmente encerradas, fundacao frontend operacional fechada, oito superficies de negocio reabertas com consolidacao minima, reconciliacao documental de `DONE` fechada pela `FC-020`, escopo MVP publico formalizado pela `FC-021`, bloqueio tecnico da validacao local removido pela `FC-026`, reexecucao formal della `FC-022` encerrada com baseline local do MVP validado, `FC-023` formalmente encerrada como `DONE`, `FC-024` fechada como pacote publico de portfolio, `FC-025A` formalmente encerrada como `DONE` com staging publicado em Neon + Render + Vercel, `FC-027` formalmente encerrada como `DONE` com runbook versionado de reprodutibilidade do staging atual, `FC-028` formalmente encerrada como `DONE` com polish incremental do README publico e do demo flow do projeto, `FC-029` formalmente encerrada como `DONE` com checklist visual de GitHub, estrutura de screenshots e preparo documental para evidencias visuais reais, e `FC-030A` formalmente encerrada como `DONE` apos smoke tecnico do Staging Web. O projeto saiu do estado `IDLE` e entrou em `READY` para a `FC-031`, focada no alinhamento da narrativa de negócio e dados de demonstração. A baseline oficial de staging permanece em Neon para banco, Render para API e Vercel para web. Nenhum PostgreSQL foi criado no Render e nenhum secret real foi registrado no repositorio.
+Projeto com governanca central estabelecida, arquitetura backend definida, trilha de auditoria transversal implementada, persistencia Prisma formalizada, autenticacao/autorizacao base formalmente encerradas, fundacao frontend operacional fechada, oito superficies de negocio reabertas com consolidacao minima, reconciliacao documental de `DONE` fechada pela `FC-020`, escopo MVP publico formalizado pela `FC-021`, bloqueio tecnico da validacao local removido pela `FC-026`, reexecucao formal della `FC-022` encerrada com baseline local do MVP validado, `FC-023` formalmente encerrada como `DONE`, `FC-024` fechada como pacote publico de portfolio, `FC-025A` formalmente encerrada como `DONE` com staging publicado em Neon + Render + Vercel, `FC-027` formalmente encerrada como `DONE` com runbook versionado de reprodutibilidade do staging atual, `FC-028` formalmente encerrada como `DONE` com polish incremental do README publico e do demo flow do projeto, `FC-029` formalmente encerrada como `DONE` com checklist visual de GitHub, estrutura de screenshots e preparo documental para evidencias visuais reais, `FC-030A` formalmente encerrada como `DONE` apos smoke tecnico do Staging Web, `FC-031` formalmente encerrada como `DONE` com seed de narrativa de negocio alinhado (Joao Silva e Maria Oliveira) e dados coerentes em Dashboard/Customers/Payments/Alerts, `FC-033` formalmente encerrada como `DONE` com correcao do bug de navegacao que redirecionava Customers e Alerts para Workspace, e `FC-033A` formalmente encerrada como `DONE` com smoke de staging pos-FC-033 registrado e caveat do placeholder de Alerts documentado. A baseline oficial de staging permanece em Neon para banco, Render para API e Vercel para web. Nenhum PostgreSQL foi criado no Render e nenhum secret real foi registrado no repositorio.
+
+## Fotografia oficial apos FC-033A
+- `FC-033A` esta em `DONE`.
+- `FC-033` corrigiu o bug de navegacao: Customers e Alerts paravam em `redirect("/workspace")`; agora abrem `CustomersListScreen` e `AlertsScreen` respectivamente.
+- smoke de staging pos-FC-033 confirmado: Customers (PASS) exibe Joao Silva Telecom e Maria Oliveira; Alerts (PASS) abre /alerts sem redirecionamento; Workspace preservado.
+- caveat registrado: a pagina de Alerts ainda exibe linguagem de placeholder ("Frontend foundation only") — melhoria futura, fora do escopo de FC-033.
+- commit 0ad7bf8 esta em origin/main; nenhum deploy manual foi executado.
 
 ## Fotografia oficial apos FC-030A
 - `FC-030A` esta em `DONE` (Status: PASS WITH NOTES).
@@ -62,10 +69,12 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - `FC-022` - validacao local/manual do MVP reexecutada com baseline corrigido e readiness de staging liberada
 - `FC-026` - isolamento da suite da API no banco oficial de testes e recuperacao do baseline local
 - `FC-030A` - smoke técnico do Staging Web e prontidão de evidência técnica.
+- `FC-031` - alinhamento da narrativa de negocio e dados de demonstracao no staging.
+- `FC-033` - correcao do bug de navegacao que redirecionava Customers e Alerts para Workspace.
+- `FC-033A` - registro do smoke de staging pos-FC-033 com evidencias de Customers e Alerts.
 
 ## Tasks em aberto
 - `FC-025` - `PARKED` - Production Growth Backlog
-- `FC-031` - `READY` - Staging Demo Data and Business Narrative Alignment
 
 ## Proximas tasks planejadas
 - `FC-032` - Portfolio Visual Polish & Final Screenshots Capture
@@ -91,6 +100,9 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - `FC-030A` validou tecnicamente a integração Web -> API -> Neon em Staging.
 
 ## Validacoes mais recentes
+- `FC-033A` - smoke de staging pos-FC-033 registrado; Customers PASS (exibe Joao Silva Telecom e Maria Oliveira); Alerts PASS (abre /alerts sem redirect); Workspace preservado; caveat de placeholder de Alerts documentado como melhoria futura: PASS documental.
+- `FC-033` - Customers e Alerts corrigidos; redirect("/workspace") removido; CustomersListScreen e AlertsScreen renderizados; tsc, lint e build locais em PASS; commit 0ad7bf8 em origin/main: PASS.
+- `FC-031` - seed atualizado com Joao Silva (em dia) e Maria Oliveira (inadimplente); Dashboard, Customers, Payments e Alerts com dados narrativos coerentes em staging: PASS.
 - `FC-030A` - smoke tecnico validado; integracao Neon/Render/Vercel OK; fluxo visual bloqueado por credenciais: PASS WITH NOTES.
 - `FC-029` - `docs/project/github-polish-checklist.md` criado com screenshots necessarios, ordem sugerida, descricao curta do repositorio, topics, social preview image, links publicos, evidencias recomendadas e cuidados com dados sensiveis: PASS documental
 - `FC-029` - estrutura `docs/assets/screenshots/` criada para receber capturas reais posteriormente: PASS documental
@@ -185,6 +197,7 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - `customers/[id]` e `customers/[id]/edit` continuam presentes como scaffold e exigem task propria para reabertura
 - reconciliacao permanece fora de escopo dentro do ciclo de `Payments` e exige task propria
 - lifecycle actions de `Alerts` permanecem fora de escopo e exigem task propria
+- a pagina de `Alerts` exibe linguagem de placeholder ("Frontend foundation only") e cards de resumo estaticos; o roteamento foi corrigido pelo FC-033 mas o conteudo da pagina e candidato a melhoria futura em task propria
 - reports detalhados e fiscal settings permanecem fora de escopo dentro do ciclo de `Finance`
 - relatorios detalhados e drilldown por cliente permanecem fora de escopo dentro do ciclo de `Reports`
 - route planning e operacao de campo permanecem fora de escopo dentro do ciclo de `Regions`
@@ -201,9 +214,9 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - o gate manual do Neon depende de operacao externa humana por desenho, mas a evidencia requerida foi registrada e validada nesta execucao
 
 ## Proxima READY oficial
-`FC-031` - Staging Demo Data and Business Narrative Alignment
+A ser determinada formalmente. Candidata natural: `FC-032` - Portfolio Visual Polish & Final Screenshots Capture.
 
 ## Justificativa da proxima READY
-- `FC-030A` validou a integracao tecnica do staging.
-- `FC-031` desbloqueará o valor visual do projeto, alinhando os dados do banco com uma narrativa de negócio real para screenshots de portfólio.
+- `FC-033A` fechou o ciclo de correcao e smoke de navegacao.
+- `FC-032` esta desbloqueada: narrativa de negocio alinhada (FC-031), rotas corrigidas (FC-033), staging operacional.
 - `FC-025` continua isolada como backlog de crescimento pos-MVP e permanece `PARKED`.

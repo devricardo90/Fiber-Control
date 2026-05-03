@@ -27,7 +27,7 @@
 
 ---
 
-## Sequencia estrategica FC-020 a FC-031
+## Sequencia estrategica FC-020 a FC-033A
 - `FC-020` - Governance / Documentation - `DONE`
 - `FC-021` - MVP Scope Definition for Deploy - `DONE`
 - `FC-022` - MVP Local Validation and Deploy Readiness - `DONE`
@@ -38,31 +38,14 @@
 - `FC-028` - Public README and Demo Presentation Polish - `DONE`
 - `FC-029` - GitHub Portfolio Polish and Screenshots - `DONE`
 - `FC-030A` - Manual Staging Web Smoke & Portfolio Evidence Readiness - `DONE`
-- `FC-031` - Staging Demo Data and Business Narrative Alignment - `READY`
-  - **Tipo**: Product / Engineering
-  - **Prioridade**: P0
-  - **Objetivo**: Transformar o staging de uma prova tecnica em uma demonstracao compreensivel de valor de negocio para gestao de empresa de fibra.
-  - **Escopo**:
-    - Atualizar seed.ts com João Silva (em dia) e Maria Oliveira (inadimplente)
-    - Criar pagamentos e alertas coerentes
-    - Garantir seed idempotente
-    - Ajustar agregadores do Dashboard se necessario
-    - Verificar Dashboard, Customers, Payments, Alerts e Finance
-    - Remover linguage de mock/placeholder visivel
-  - **Fora de escopo**:
-    - novas funcionalidades, novo schema, migrations, alteracao de auth, deploy ou gate de pagamento real.
-  - **Criterios de aceite**:
-    - Seed demo realista e idempotente.
-    - Dashboard mostra narrativa clara de negócio.
-    - Customers/Payments/Alerts mostram registros coerentes.
-    - Experiencia principal sem "mock" ou "placeholder".
-  - **Validacao obrigatoria**:
-    - git status, git diff, lint/build local, evidencia visual dos dados.
+- `FC-031` - Staging Demo Data and Business Narrative Alignment - `DONE`
+- `FC-033` - Fix Staging Navigation for Customers and Alerts - `DONE`
+- `FC-033A` - Record FC-033 Staging Smoke Evidence - `DONE`
 
 ---
 
 ## READY
-- `FC-031` - Staging Demo Data and Business Narrative Alignment
+- *(vazio no momento — proxima READY a ser determinada formalmente)*
 
 ## TODO
 - `FC-025` - Production Growth Backlog
@@ -73,7 +56,7 @@
 - `FC-032` - Portfolio Visual Polish & Final Screenshots Capture
   - **Status de planejamento**: `PLANNED`
   - **Prioridade**: P1
-  - **Objetivo**: Capturar evidencias visuais reais apos o alinhamento da narrativa na FC-031.
+  - **Objetivo**: Capturar evidencias visuais reais apos a narrativa de negocio alinhada pelo FC-031 e rotas corrigidas pelo FC-033.
 
 ---
 
@@ -84,6 +67,9 @@
 - *(vazio no momento)*
 
 ## DONE
+- `FC-033A` - DONE em 2026-05-03: smoke de staging pos-FC-033 registrado; Customers e Alerts confirmados com PASS no staging; caveat do placeholder de Alerts documentado como melhoria futura.
+- `FC-033` - DONE em 2026-05-03: rotas de Customers e Alerts corrigidas no frontend; redirect("/workspace") substituido por CustomersListScreen e AlertsScreen; commit 0ad7bf8 em origin/main.
+- `FC-031` - DONE em 2026-05-03: seed atualizado com Joao Silva e Maria Oliveira; narrativa de negocio alinhada; Dashboard, Customers, Payments e Alerts com dados coerentes de staging.
 - `FC-030A` - DONE em 2026-05-03: smoke técnico validado; Web e API integradas via CORS e conectadas ao Neon; fluxo visual de Dashboard bloqueado por falta de credenciais validas no Staging; projeto pronto para evidência visual apenas após criação manual de usuário no Neon.
 - `FC-029` - DONE com checklist visual criado em `docs/project/github-polish-checklist.md`
 - `FC-028` - DONE com `README.md` polido incrementalmente em ingles

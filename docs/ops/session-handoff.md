@@ -4,27 +4,30 @@
 2026-05-03
 
 ## Estado atual
-- `FC-030A` foi concluida com `PASS WITH NOTES`, confirmando que o staging esta operacional e integrado tecnicamente.
-- o projeto saiu do estado `IDLE` e agora possui a `FC-031` em `READY`.
-- o objetivo da `FC-031` e alinhar os dados de demonstração (seed) com uma narrativa de negócio real (João e Maria) para permitir screenshots de portfólio.
-- a infraestrutura Vercel -> Render -> Neon continua sendo a baseline oficial de staging.
+- `FC-033A` foi concluida como `DONE`, encerrando o ciclo de correcao e smoke de navegacao pos-FC-033.
+- `FC-033` corrigiu o bug que redirecionava Customers e Alerts para Workspace; commit 0ad7bf8 esta em origin/main.
+- `FC-031` foi concluida como `DONE` com seed de narrativa de negocio alinhado (Joao Silva Telecom e Maria Oliveira).
+- staging operacional: Customers e Alerts abrem suas paginas proprias com dados de negocio reais.
+- caveat registrado: a pagina de Alerts ainda contem linguagem de placeholder ("Frontend foundation only") — melhoria futura, fora do escopo de FC-033.
+- nenhum seed, migration, DB, env ou deploy foi executado nesta sessao.
 
-## Arquivos alterados
+## Arquivos alterados (FC-033A)
 - `STATUS.md`
 - `backlog.md`
 - `docs/ops/execution-log.md`
 - `docs/ops/session-handoff.md`
 
 ## Decisao tomada
-- abrir `FC-031` como unica task `READY`.
-- manter `FC-025` como `PARKED`.
-- preparar o terreno para a captura de screenshots reais na `FC-032`.
+- FC-033 e FC-033A encerradas como DONE.
+- FC-031 encerrada como DONE.
+- nenhuma nova task READY aberta nesta sessao.
+- FC-032 permanece como PLANNED e e a candidata natural para a proxima READY.
 
-## Proximas opcoes apos o saneamento (opcoes candidatas)
-- executar a `FC-031` focando em `seed.ts`, agregadores de Dashboard e remoção de mocks visuais.
-- `FC-032` - Portfolio Visual Polish & Final Screenshots Capture (Bloqueada ate a conclusao da FC-031).
+## Proximas opcoes
+- promover `FC-032` a `READY` formalmente: Portfolio Visual Polish & Final Screenshots Capture.
+  - pre-condicoes satisfeitas: narrativa de negocio alinhada (FC-031), rotas corrigidas (FC-033), staging operacional e integrado.
 
 ## Recomendacao
-- o proximo executor deve seguir rigorosamente o escopo da `FC-031` definido em `backlog.md`.
-- a seed deve ser idempotente e os dados devem contar uma história coerente de gestão de fibra (João vs Maria).
-- garantir que o Dashboard reflita os totais desses dois clientes para uma demonstração realista.
+- o proximo executor pode abrir FC-032 como `READY` sem bloqueios tecnicos conhecidos.
+- o conteudo da pagina de Alerts (placeholder) pode ser tratado em FC-032 ou em task propria, mas nao deve misturar com screenshots.
+- nenhum secret, DATABASE_URL, DIRECT_URL ou AUTH_SECRET deve ser registrado no repositorio.
