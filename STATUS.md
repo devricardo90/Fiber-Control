@@ -1,15 +1,25 @@
 # STATUS - Fiber Control
 
 ## Estado atual
-Projeto com governanca central estabelecida, arquitetura backend definida, trilha de auditoria transversal implementada, persistencia Prisma formalizada, autenticacao/autorizacao base formalmente encerradas, fundacao frontend operacional fechada, oito superficies de negocio reabertas com consolidacao minima, reconciliacao documental de `DONE` fechada pela `FC-020`, escopo MVP publico formalizado pela `FC-021`, bloqueio tecnico da validacao local removido pela `FC-026`, reexecucao formal della `FC-022` encerrada com baseline local do MVP validado, `FC-023` formalmente encerrada como `DONE`, `FC-024` fechada como pacote publico de portfolio, `FC-025A` formalmente encerrada como `DONE` com staging publicado em Neon + Render + Vercel, `FC-027` formalmente encerrada como `DONE` com runbook versionado de reprodutibilidade do staging atual, `FC-028` formalmente encerrada como `DONE` com polish incremental do README publico e do demo flow do projeto, `FC-029` formalmente encerrada como `DONE` com checklist visual de GitHub, estrutura de screenshots e preparo documental para evidencias visuais reais, `FC-030A` formalmente encerrada como `DONE` apos smoke tecnico do Staging Web, `FC-031` formalmente encerrada como `DONE` com seed de narrativa de negocio alinhado (Joao Silva e Maria Oliveira) e dados coerentes em Dashboard/Customers/Payments/Alerts, `FC-033` formalmente encerrada como `DONE` com correcao do bug de navegacao que redirecionava Customers e Alerts para Workspace, `FC-033A` formalmente encerrada como `DONE` com smoke de staging pos-FC-033 registrado, `FC-034` formalmente encerrada como `DONE` com metrica de Overdue customers corrigida no Dashboard e tela de Alerts substituida por surface operacional real (commit 479cdc1), e `FC-034A` formalmente encerrada como `DONE` com smoke de staging pos-FC-034 registrado. A baseline oficial de staging permanece em Neon para banco, Render para API e Vercel para web. Nenhum PostgreSQL foi criado no Render e nenhum secret real foi registrado no repositorio.
+Projeto com governanca central estabelecida, arquitetura backend definida, trilha de auditoria transversal implementada, persistencia Prisma formalizada, autenticacao/autorizacao base formalmente encerradas, fundacao frontend operacional fechada, oito superficies de negocio reabertas com consolidacao minima, reconciliacao documental de `DONE` fechada pela `FC-020`, escopo MVP publico formalizado pela `FC-021`, bloqueio tecnico da validacao local removido pela `FC-026`, reexecucao formal della `FC-022` encerrada com baseline local do MVP validado, `FC-023` formalmente encerrada como `DONE`, `FC-024` fechada como pacote publico de portfolio, `FC-025A` formalmente encerrada como `DONE` com staging publicado em Neon + Render + Vercel, `FC-027` formalmente encerrada como `DONE` com runbook versionado de reprodutibilidade do staging atual, `FC-028` formalmente encerrada como `DONE` com polish incremental do README publico e do demo flow do projeto, `FC-029` formalmente encerrada como `DONE` com checklist visual de GitHub, estrutura de screenshots e preparo documental para evidencias visuais reais, `FC-030A` formalmente encerrada como `DONE` apos smoke tecnico do Staging Web, `FC-031` formalmente encerrada como `DONE` com seed de narrativa de negocio alinhado (Joao Silva e Maria Oliveira) e dados coerentes em Dashboard/Customers/Payments/Alerts, `FC-033` formalmente encerrada como `DONE` com correcao do bug de navegacao que redirecionava Customers e Alerts para Workspace, `FC-033A` formalmente encerrada como `DONE` com smoke de staging pos-FC-033 registrado, `FC-034` formalmente encerrada como `DONE` com metrica de Overdue customers corrigida no Dashboard e tela de Alerts substituida por surface operacional real (commit 479cdc1), `FC-034A` formalmente encerrada como `DONE` com smoke de staging pos-FC-034 registrado, e `FC-035` formalmente encerrada como `DONE` com backend estabelecido como unica fonte de verdade para contagem de clientes inadimplentes. A baseline oficial de staging permanece em Neon para banco, Render para API e Vercel para web. Nenhum PostgreSQL foi criado no Render e nenhum secret real foi registrado no repositorio.
+
+## Fotografia oficial apos FC-035
+- `FC-035` esta em `DONE`.
+- regra de negocio consolidada: cliente e operacionalmente inadimplente quando `customer.status === OVERDUE` OU a data de referencia e posterior ao vencimento + graceDays. O backend (`alerts.service.ts`) e a unica fonte de verdade; o frontend consome `summary.overdueCustomers` diretamente.
+- `overdueFromAlerts` removido de DashboardScreen e AlertsScreen; ambas voltam a consumir `data.summary.overdueCustomers` retornado pelo backend.
+- `buildCustomerAlerts` atualizado com union rule `isAccountOverdue || isDateOverdue`; branches de `cutoff_soon` e `pending_payment` preservados sem alteracao.
+- novo caso de regressao adicionado em `src/tests/alerts.spec.ts`: cliente com `status === OVERDUE` e data de referencia antes do grace limit retorna `overdue_customer` com `daysLate = 0`.
+- validacao local: `src/tests/alerts.spec.ts` 4/4 PASS no banco de testes `127.0.0.1:5442`; tsc PASS; lint PASS; git diff --check sem erros.
+- nenhum seed, migration, DB, env, package ou deploy foi executado.
+- nota Docker: docker compose up -d falhou inicialmente por porta 5440 ocupada, mas o banco de teste em 5442 estava operacional para os testes.
 
 ## Fotografia oficial apos FC-034A
 - `FC-034A` esta em `DONE`.
-- `FC-034` corrigiu a metrica "Overdue customers" no Dashboard: o card agora conta clientes unicos com `customer.status === "overdue"` ou `type === "overdue_customer"` nos alert items, mostrando 1 (Maria Oliveira) de forma consistente com Payments e Alerts.
+- `FC-034` corrigiu a metrica "Overdue customers" no Dashboard: o card contava clientes unicos com `customer.status === "overdue"` ou `type === "overdue_customer"` nos alert items, mostrando 1 (Maria Oliveira) de forma consistente com Payments e Alerts.
 - `FC-034` substituiu a tela de Alerts (que exibia `PlaceholderPage` com linguagem de fundacao) por surface operacional real: summary cards com dados ao vivo, lista de alertas com severidade, cliente, mensagem, saldo em aberto e regiao.
-- logica identica de `overdueFromAlerts` aplicada em Dashboard e AlertsScreen para garantir consistencia entre as duas superficies.
+- `FC-035` removeu a logica `overdueFromAlerts` do frontend e delegou a contagem definitivamente ao backend.
 - smoke de staging pos-FC-034 confirmado: Dashboard exibe Overdue customers = 1; Alerts abre /alerts com surface operacional; Maria Oliveira aparece com alerta de saldo em aberto; Customers e Payments preservados.
-- commit 479cdc1 esta em origin/main; nenhum seed, migration, DB, env ou deploy manual foi executado.
+- commit 479cdc1 esta em origin/main; FC-035 aguarda commit pos-aprovacao do Trigger.
 
 ## Fotografia oficial apos FC-033A
 - `FC-033A` esta em `DONE`.
@@ -81,6 +91,7 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - `FC-033A` - registro do smoke de staging pos-FC-033 com evidencias de Customers e Alerts.
 - `FC-034` - correcao da metrica Overdue customers no Dashboard e substituicao da tela de Alerts por surface operacional real.
 - `FC-034A` - registro do smoke de staging pos-FC-034 com evidencias de Dashboard e Alerts alinhados.
+- `FC-035` - alinhamento da regra de dominio de inadimplencia: backend como unica fonte de verdade; union rule no alerts.service.ts; overdueFromAlerts removido do frontend; regressao adicionada em alerts.spec.ts.
 
 ## Tasks em aberto
 - `FC-025` - `PARKED` - Production Growth Backlog
@@ -109,6 +120,7 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - `FC-030A` validou tecnicamente a integração Web -> API -> Neon em Staging.
 
 ## Validacoes mais recentes
+- `FC-035` - union rule `isAccountOverdue || isDateOverdue` em `buildCustomerAlerts`; `overdueFromAlerts` removido de DashboardScreen e AlertsScreen; `src/tests/alerts.spec.ts` 4/4 PASS em `127.0.0.1:5442`; tsc PASS; lint PASS; git diff --check sem erros: PASS local.
 - `FC-034A` - smoke de staging pos-FC-034 registrado; Dashboard Overdue customers = 1 (PASS); Alerts surface operacional sem placeholder (PASS); Maria Oliveira aparece com alerta de saldo em aberto (PASS); Customers e Payments preservados (PASS): PASS documental.
 - `FC-034` - metrica overdueFromAlerts aplicada em Dashboard e AlertsScreen; PlaceholderPage removida; surface operacional de Alerts com dados ao vivo; tsc, lint e build PASS; commit 479cdc1 em origin/main: PASS.
 - `FC-033A` - smoke de staging pos-FC-033 registrado; Customers PASS (exibe Joao Silva Telecom e Maria Oliveira); Alerts PASS (abre /alerts sem redirect); Workspace preservado; caveat de placeholder de Alerts documentado como melhoria futura: PASS documental.

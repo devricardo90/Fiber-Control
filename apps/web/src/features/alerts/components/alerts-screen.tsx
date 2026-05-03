@@ -18,11 +18,6 @@ export function AlertsScreen() {
 
   const data = alertsQuery.data;
   const alerts = data?.alerts ?? [];
-  const overdueFromAlerts = new Set(
-    alerts
-      .filter((a) => a.type === "overdue_customer" || a.customer.status === "overdue")
-      .map((a) => a.customer.id)
-  ).size;
 
   return (
     <div className="space-y-5">
@@ -34,7 +29,7 @@ export function AlertsScreen() {
 
       <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         <SummaryCard label="Total alerts" value={String(data?.summary.totalAlerts ?? 0)} />
-        <SummaryCard label="Overdue customers" value={String(overdueFromAlerts)} />
+        <SummaryCard label="Overdue customers" value={String(data?.summary.overdueCustomers ?? 0)} />
         <SummaryCard label="Pending payment" value={String(data?.summary.pendingPayments ?? 0)} />
         <SummaryCard label="Cutoff soon" value={String(data?.summary.customersReachingCutoff ?? 0)} />
       </section>
@@ -86,11 +81,11 @@ export function AlertsScreen() {
 
 function SummaryCard({ label, value }: { label: string; value: string }) {
   return (
-    <Panel>
+    <Panel className="border-t-4 border-t-[var(--fc-primary)]">
       <p className="text-xs font-medium uppercase tracking-[0.08em] text-[var(--fc-text-muted)]">
         {label}
       </p>
-      <p className="mt-3 text-2xl font-semibold text-[var(--fc-text)]">{value}</p>
+      <p className="mt-3 text-3xl font-bold tracking-tight text-[var(--fc-primary)]">{value}</p>
     </Panel>
   );
 }

@@ -82,14 +82,17 @@ function buildCustomerAlerts(customer: CustomerRecord, anchorDate: Date): AlertO
     }
   };
 
-  if (anchorDate > graceLimitDate) {
+  const isAccountOverdue = customer.status === "OVERDUE";
+  const isDateOverdue = anchorDate > graceLimitDate;
+
+  if (isAccountOverdue || isDateOverdue) {
     return [
       {
         type: "overdue_customer",
         severity: "high",
         code: "CUSTOMER_OVERDUE",
         message: `${customer.fullName} is overdue for ${baseAlert.payment.referenceMonth}`,
-        daysLate: daysPastGrace,
+        daysLate: isDateOverdue ? daysPastGrace : 0,
         ...baseAlert
       }
     ];

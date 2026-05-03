@@ -46,11 +46,6 @@ export function DashboardScreen() {
   const topRegions = overview?.regions.regions.slice(0, 4) ?? [];
   const topAlerts = overview?.alerts.alerts.slice(0, 4) ?? [];
   const annualTrend = overview?.annualSummary.monthlyBreakdown.slice(-4) ?? [];
-  const overdueFromAlerts = new Set(
-    (overview?.alerts.alerts ?? [])
-      .filter((a) => a.type === "overdue_customer" || a.customer.status === "overdue")
-      .map((a) => a.customer.id)
-  ).size;
 
   return (
     <div className="space-y-5">
@@ -85,7 +80,7 @@ export function DashboardScreen() {
         />
         <SummaryCard
           label="Overdue customers"
-          value={String(overdueFromAlerts)}
+          value={String(overview?.alerts.summary.overdueCustomers ?? 0)}
         />
       </section>
 
@@ -226,11 +221,11 @@ export function DashboardScreen() {
 
 function SummaryCard({ label, value }: { label: string; value: string }) {
   return (
-    <Panel>
+    <Panel className="border-t-4 border-t-[var(--fc-primary)]">
       <p className="text-xs font-medium uppercase tracking-[0.08em] text-[var(--fc-text-muted)]">
         {label}
       </p>
-      <p className="mt-3 text-2xl font-semibold text-[var(--fc-text)]">{value}</p>
+      <p className="mt-3 text-3xl font-bold tracking-tight text-[var(--fc-primary)]">{value}</p>
     </Panel>
   );
 }

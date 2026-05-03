@@ -103,6 +103,49 @@ describe("Alerts routes", () => {
     )).toBe(true);
   });
 
+  it("should return overdue_customer alert when customer.status is OVERDUE but referenceDate is before the grace limit", async () => {
+    const region = await prisma.region.create({
+      data: {
+        name: "West Zone",
+        code: "WZ"
+      }
+    });
+
+    const statusOverdueCustomer = await prisma.customer.create({
+      data: {
+        fullName: "Camila Ferraz",
+        monthlyFee: 110,
+        dueDay: 10,
+        graceDays: 5,
+        cutoffDays: 10,
+        status: "OVERDUE",
+        regionId: region.id
+      }
+    });
+
+    await prisma.payment.create({
+      data: {
+        customerId: statusOverdueCustomer.id,
+        referenceMonth: "2026-03",
+        expectedAmount: 110,
+        receivedAmount: 0,
+        status: "PENDING"
+      }
+    });
+
+    // referenceDate is 2026-03-08 — before grace limit (dueDay 10 + graceDays 5 = 2026-03-15)
+    // isDateOverdue = false, isAccountOverdue = true → overdue_customer with daysLate = 0
+    const response = await request(app.server).get("/alerts/overview?referenceDate=2026-03-08");
+
+    expect(response.status).toBe(200);
+    expect(response.body.data.summary.overdueCustomers).toBe(1);
+    expect(response.body.data.summary.totalAlerts).toBe(1);
+    const alert = response.body.data.alerts[0];
+    expect(alert.type).toBe("overdue_customer");
+    expect(alert.customer.fullName).toBe("Camila Ferraz");
+    expect(alert.daysLate).toBe(0);
+  });
+
   it("should reject invalid reference date", async () => {
     const response = await request(app.server).get("/alerts/overview?referenceDate=2026-03-99");
 

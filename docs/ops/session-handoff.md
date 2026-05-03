@@ -4,28 +4,32 @@
 2026-05-03
 
 ## Estado atual
-- `FC-034A` foi concluida como `DONE`, encerrando o ciclo de correcao de metricas e surface de Alerts.
-- `FC-034` corrigiu a metrica "Overdue customers" no Dashboard e substituiu a tela de Alerts (PlaceholderPage) por surface operacional real com dados ao vivo; commit 479cdc1 esta em origin/main.
-- logica `overdueFromAlerts` aplicada identicamente em DashboardScreen e AlertsScreen: conta clientes unicos com `customer.status === "overdue"` OR `type === "overdue_customer"`.
-- smoke de staging pos-FC-034 confirmado: Dashboard Overdue customers = 1; Alerts operacional sem placeholder; Maria Oliveira aparece com alerta de saldo em aberto; Customers e Payments preservados.
-- nenhum seed, migration, DB, env ou deploy foi executado nesta sessao.
+- `FC-035` foi concluída tecnicamente e aguarda aprovação formal de commit.
+- backend estabelecido como única fonte de verdade para a métrica de clientes inadimplentes (`overdueCustomers`).
+- regra de negócio consolidada: cliente é operacionalmente inadimplente quando `customer.status === OVERDUE` OU a data de referência é posterior ao vencimento + graceDays.
+- `overdueFromAlerts` removido de DashboardScreen e AlertsScreen; ambas voltam a consumir `data.summary.overdueCustomers` retornado pelo backend.
+- `buildCustomerAlerts` atualizado com union rule `isAccountOverdue || isDateOverdue`; branches de `cutoff_soon` e `pending_payment` preservados.
+- validação local: `src/tests/alerts.spec.ts` 4/4 PASS; tsc PASS; lint PASS.
+- nota Docker: docker compose up -d falhou inicialmente por porta 5440 ocupada, mas o banco de teste em 5442 estava operacional para os testes.
+- nenhum seed, migration, DB, env, package ou deploy foi executado nesta sessão.
 
-## Arquivos alterados (FC-034A)
+## Arquivos alterados (FC-035)
+- `apps/api/src/modules/alerts/alerts.service.ts`
+- `apps/api/src/tests/alerts.spec.ts`
+- `apps/web/src/features/alerts/components/alerts-screen.tsx`
+- `apps/web/src/features/dashboard/components/dashboard-screen.tsx`
 - `STATUS.md`
 - `backlog.md`
 - `docs/ops/execution-log.md`
 - `docs/ops/session-handoff.md`
 
-## Decisao tomada
-- FC-034 e FC-034A encerradas como DONE.
-- nenhuma nova task READY aberta nesta sessao.
-- FC-032 permanece como PLANNED e e a candidata natural para a proxima READY.
+## Decisão tomada
+- FC-035 encerrada como DONE no backlog e status.
+- polimento visual da FC-032 foi preparado mas revertido para manter o foco na FC-035 conforme instrução.
 
-## Proximas opcoes
-- promover `FC-032` a `READY` formalmente: Portfolio Visual Polish & Final Screenshots Capture.
-  - pre-condicoes satisfeitas: narrativa de negocio alinhada (FC-031), rotas corrigidas (FC-033), metricas e Alerts operacionais (FC-034), staging validado end-to-end.
+## Próximas opções
+- após FC-035 Local/Remote DONE, o próximo passo é a validação/documentação de staging para a própria FC-035 ou um novo Discussion Gate.
+- nenhuma nova task foi promovida para READY.
 
-## Recomendacao
-- o proximo executor pode abrir FC-032 como `READY` sem bloqueios tecnicos conhecidos.
-- lifecycle actions de Alerts permanecem fora de escopo e devem ser tratadas em task propria, nao misturadas com screenshots.
-- nenhum secret, DATABASE_URL, DIRECT_URL ou AUTH_SECRET deve ser registrado no repositorio.
+## Recomendação
+- manter a disciplina de não registrar secrets ou URLs reais no repositório.

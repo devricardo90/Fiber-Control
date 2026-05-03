@@ -69,6 +69,7 @@
 - *(vazio no momento)*
 
 ## DONE
+- `FC-035` - DONE em 2026-05-03: alinhamento da regra de dominio de inadimplencia; backend como unica fonte de verdade; union rule no alerts.service.ts; overdueFromAlerts removido do frontend; regressao adicionada em alerts.spec.ts.
 - `FC-034A` - DONE em 2026-05-03: smoke de staging pos-FC-034 registrado; Dashboard Overdue customers = 1 PASS; Alerts surface operacional sem placeholder PASS; Maria Oliveira com alerta de saldo em aberto PASS; Customers e Payments preservados.
 - `FC-034` - DONE em 2026-05-03: metrica overdueFromAlerts aplicada em Dashboard e AlertsScreen; PlaceholderPage de Alerts substituida por surface operacional real com dados ao vivo; commit 479cdc1 em origin/main.
 - `FC-033A` - DONE em 2026-05-03: smoke de staging pos-FC-033 registrado; Customers e Alerts confirmados com PASS no staging; caveat do placeholder de Alerts documentado como melhoria futura.
