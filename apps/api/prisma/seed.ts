@@ -24,10 +24,9 @@ const currentYear = now.getUTCFullYear();
 const currentMonth = now.getUTCMonth();
 
 async function main() {
+  // Admin users preservation
   const admin = await prisma.user.upsert({
-    where: {
-      email: "admin@fibercontrol.local"
-    },
+    where: { email: "admin@fibercontrol.local" },
     update: {
       fullName: "Fiber Control Admin",
       passwordHash: hashPassword("Admin@123456"),
@@ -44,9 +43,7 @@ async function main() {
   });
 
   await prisma.user.upsert({
-    where: {
-      email: "operator@fibercontrol.local"
-    },
+    where: { email: "operator@fibercontrol.local" },
     update: {
       fullName: "Fiber Control Operator",
       passwordHash: hashPassword("Operator@123456"),
@@ -63,9 +60,7 @@ async function main() {
   });
 
   const localAccessAdmin = await prisma.user.upsert({
-    where: {
-      email: "acesso@fibercontrol.local"
-    },
+    where: { email: "acesso@fibercontrol.local" },
     update: {
       fullName: "Fiber Control Local Access",
       passwordHash: hashPassword("Fiber@123456"),
@@ -81,356 +76,222 @@ async function main() {
     }
   });
 
+  // Base configurations
   await prisma.taxConfig.upsert({
-    where: {
-      singletonKey: "default"
-    },
+    where: { singletonKey: "default" },
     update: {
       regimeLabel: "Simples Nacional",
       estimatedRate: "6.50",
       dueDay: 20,
-      notes: "Seed padrao para ambiente local"
+      notes: "Configuracao fiscal padrao para operacao fibra"
     },
     create: {
       singletonKey: "default",
       regimeLabel: "Simples Nacional",
       estimatedRate: "6.50",
       dueDay: 20,
-      notes: "Seed padrao para ambiente local"
+      notes: "Configuracao fiscal padrao para operacao fibra"
     }
   });
 
   const northRegion = await prisma.region.upsert({
-    where: {
-      code: "NORTH"
-    },
-    update: {
-      name: "North Route",
-      description: "Rota seed para clientes do setor norte"
-    },
-    create: {
-      name: "North Route",
-      code: "NORTH",
-      description: "Rota seed para clientes do setor norte"
-    }
+    where: { code: "NORTH" },
+    update: { name: "Zona Norte - Santa Rosa", description: "Setor de expansao norte" },
+    create: { name: "Zona Norte - Santa Rosa", code: "NORTH", description: "Setor de expansao norte" }
   });
 
   const centerRegion = await prisma.region.upsert({
-    where: {
-      code: "CENTER"
-    },
-    update: {
-      name: "Central Route",
-      description: "Rota seed para clientes da area central"
-    },
-    create: {
-      name: "Central Route",
-      code: "CENTER",
-      description: "Rota seed para clientes da area central"
-    }
+    where: { code: "CENTER" },
+    update: { name: "Centro Historico", description: "Area central de alta densidade" },
+    create: { name: "Centro Historico", code: "CENTER", description: "Area central de alta densidade" }
   });
 
-  const southRegion = await prisma.region.upsert({
-    where: {
-      code: "SOUTH"
-    },
+  // Business Narrative: João Silva (Active, Paid)
+  const joaoSilva = await prisma.customer.upsert({
+    where: { documentId: "SEED-0001" },
     update: {
-      name: "South Route",
-      description: "Rota seed para clientes do setor sul"
-    },
-    create: {
-      name: "South Route",
-      code: "SOUTH",
-      description: "Rota seed para clientes do setor sul"
-    }
-  });
-
-  const activeCustomer = await prisma.customer.upsert({
-    where: {
-      documentId: "SEED-0001"
-    },
-    update: {
-      fullName: "Ana Martins",
-      phone: "+55 11 99999-1001",
-      email: "ana.martins@example.com",
-      addressLine: "Rua das Flores",
-      addressNumber: "120",
+      fullName: "João Silva Telecom",
+      phone: "+55 11 98888-0001",
+      email: "joao.silva@demo.fiber.local",
+      addressLine: "Rua das Palmeiras",
+      addressNumber: "450",
       neighborhood: "Centro",
       city: "Santa Rosa",
       state: "RS",
       postalCode: "98900-000",
-      notes: "Cliente seed com pagamento em dia",
+      notes: "Cliente corporativo - Plano 300MB Fibra",
       status: "ACTIVE",
-      monthlyFee: "120.00",
-      dueDay: 28,
+      monthlyFee: "150.00",
+      dueDay: 10,
       graceDays: 2,
       cutoffDays: 5,
-      serviceStartDate: new Date(Date.UTC(currentYear, currentMonth - 5, 5)),
-      regionId: northRegion.id
+      serviceStartDate: new Date(Date.UTC(currentYear, currentMonth - 6, 10)),
+      regionId: centerRegion.id
     },
     create: {
-      fullName: "Ana Martins",
+      fullName: "João Silva Telecom",
       documentId: "SEED-0001",
-      phone: "+55 11 99999-1001",
-      email: "ana.martins@example.com",
-      addressLine: "Rua das Flores",
-      addressNumber: "120",
+      phone: "+55 11 98888-0001",
+      email: "joao.silva@demo.fiber.local",
+      addressLine: "Rua das Palmeiras",
+      addressNumber: "450",
       neighborhood: "Centro",
       city: "Santa Rosa",
       state: "RS",
       postalCode: "98900-000",
-      notes: "Cliente seed com pagamento em dia",
+      notes: "Cliente corporativo - Plano 300MB Fibra",
       status: "ACTIVE",
-      monthlyFee: "120.00",
-      dueDay: 28,
+      monthlyFee: "150.00",
+      dueDay: 10,
       graceDays: 2,
       cutoffDays: 5,
-      serviceStartDate: new Date(Date.UTC(currentYear, currentMonth - 5, 5)),
+      serviceStartDate: new Date(Date.UTC(currentYear, currentMonth - 6, 10)),
+      regionId: centerRegion.id
+    }
+  });
+
+  // Business Narrative: Maria Oliveira (Overdue, Inadimplente)
+  const mariaOliveira = await prisma.customer.upsert({
+    where: { documentId: "SEED-0002" },
+    update: {
+      fullName: "Maria Oliveira",
+      phone: "+55 11 97777-0002",
+      email: "maria.oliveira@demo.fiber.local",
+      addressLine: "Avenida das Industrias",
+      addressNumber: "1200",
+      neighborhood: "Distrito Industrial",
+      city: "Santa Rosa",
+      state: "RS",
+      postalCode: "98910-000",
+      notes: "Cliente residencial - Plano 100MB Fibra",
+      status: "OVERDUE",
+      monthlyFee: "99.90",
+      dueDay: 5,
+      graceDays: 2,
+      cutoffDays: 5,
+      serviceStartDate: new Date(Date.UTC(currentYear, currentMonth - 3, 5)),
+      regionId: northRegion.id
+    },
+    create: {
+      fullName: "Maria Oliveira",
+      documentId: "SEED-0002",
+      phone: "+55 11 97777-0002",
+      email: "maria.oliveira@demo.fiber.local",
+      addressLine: "Avenida das Industrias",
+      addressNumber: "1200",
+      neighborhood: "Distrito Industrial",
+      city: "Santa Rosa",
+      state: "RS",
+      postalCode: "98910-000",
+      notes: "Cliente residencial - Plano 100MB Fibra",
+      status: "OVERDUE",
+      monthlyFee: "99.90",
+      dueDay: 5,
+      graceDays: 2,
+      cutoffDays: 5,
+      serviceStartDate: new Date(Date.UTC(currentYear, currentMonth - 3, 5)),
       regionId: northRegion.id
     }
   });
 
-  const overdueCustomer = await prisma.customer.upsert({
+  // Payments for current month
+  const joaoPayment = await prisma.payment.upsert({
     where: {
-      documentId: "SEED-0002"
-    },
-    update: {
-      fullName: "Bruno Alves",
-      phone: "+55 11 99999-1002",
-      email: "bruno.alves@example.com",
-      addressLine: "Avenida do Campo",
-      addressNumber: "88",
-      neighborhood: "Interior",
-      city: "Santa Rosa",
-      state: "RS",
-      postalCode: "98910-000",
-      notes: "Cliente seed com pagamento parcial e status overdue",
-      status: "OVERDUE",
-      monthlyFee: "95.00",
-      dueDay: 15,
-      graceDays: 2,
-      cutoffDays: 5,
-      serviceStartDate: new Date(Date.UTC(currentYear, currentMonth - 8, 12)),
-      regionId: centerRegion.id
-    },
-    create: {
-      fullName: "Bruno Alves",
-      documentId: "SEED-0002",
-      phone: "+55 11 99999-1002",
-      email: "bruno.alves@example.com",
-      addressLine: "Avenida do Campo",
-      addressNumber: "88",
-      neighborhood: "Interior",
-      city: "Santa Rosa",
-      state: "RS",
-      postalCode: "98910-000",
-      notes: "Cliente seed com pagamento parcial e status overdue",
-      status: "OVERDUE",
-      monthlyFee: "95.00",
-      dueDay: 15,
-      graceDays: 2,
-      cutoffDays: 5,
-      serviceStartDate: new Date(Date.UTC(currentYear, currentMonth - 8, 12)),
-      regionId: centerRegion.id
-    }
-  });
-
-  const suspendedCustomer = await prisma.customer.upsert({
-    where: {
-      documentId: "SEED-0003"
-    },
-    update: {
-      fullName: "Carla Souza",
-      phone: "+55 11 99999-1003",
-      email: "carla.souza@example.com",
-      addressLine: "Estrada Velha",
-      addressNumber: "410",
-      neighborhood: "Zona Rural",
-      city: "Santa Rosa",
-      state: "RS",
-      postalCode: "98920-000",
-      notes: "Cliente seed sem pagamento e status suspended",
-      status: "SUSPENDED",
-      monthlyFee: "150.00",
-      dueDay: 10,
-      graceDays: 2,
-      cutoffDays: 5,
-      serviceStartDate: new Date(Date.UTC(currentYear, currentMonth - 10, 20)),
-      regionId: southRegion.id
-    },
-    create: {
-      fullName: "Carla Souza",
-      documentId: "SEED-0003",
-      phone: "+55 11 99999-1003",
-      email: "carla.souza@example.com",
-      addressLine: "Estrada Velha",
-      addressNumber: "410",
-      neighborhood: "Zona Rural",
-      city: "Santa Rosa",
-      state: "RS",
-      postalCode: "98920-000",
-      notes: "Cliente seed sem pagamento e status suspended",
-      status: "SUSPENDED",
-      monthlyFee: "150.00",
-      dueDay: 10,
-      graceDays: 2,
-      cutoffDays: 5,
-      serviceStartDate: new Date(Date.UTC(currentYear, currentMonth - 10, 20)),
-      regionId: southRegion.id
-    }
-  });
-
-  const activePayment = await prisma.payment.upsert({
-    where: {
-      customerId_referenceMonth: {
-        customerId: activeCustomer.id,
-        referenceMonth: currentReferenceMonth
-      }
-    },
-    update: {
-      expectedAmount: "120.00",
-      receivedAmount: "120.00",
-      status: "PAID",
-      paidAt: new Date(Date.UTC(currentYear, currentMonth, 7)),
-      notes: "Mensalidade seed recebida integralmente"
-    },
-    create: {
-      customerId: activeCustomer.id,
-      referenceMonth: currentReferenceMonth,
-      expectedAmount: "120.00",
-      receivedAmount: "120.00",
-      status: "PAID",
-      paidAt: new Date(Date.UTC(currentYear, currentMonth, 7)),
-      notes: "Mensalidade seed recebida integralmente"
-    }
-  });
-
-  const overduePayment = await prisma.payment.upsert({
-    where: {
-      customerId_referenceMonth: {
-        customerId: overdueCustomer.id,
-        referenceMonth: currentReferenceMonth
-      }
-    },
-    update: {
-      expectedAmount: "95.00",
-      receivedAmount: "40.00",
-      status: "PARTIAL",
-      paidAt: new Date(Date.UTC(currentYear, currentMonth, 16)),
-      notes: "Pagamento seed parcial"
-    },
-    create: {
-      customerId: overdueCustomer.id,
-      referenceMonth: currentReferenceMonth,
-      expectedAmount: "95.00",
-      receivedAmount: "40.00",
-      status: "PARTIAL",
-      paidAt: new Date(Date.UTC(currentYear, currentMonth, 16)),
-      notes: "Pagamento seed parcial"
-    }
-  });
-
-  await prisma.payment.upsert({
-    where: {
-      customerId_referenceMonth: {
-        customerId: suspendedCustomer.id,
-        referenceMonth: currentReferenceMonth
-      }
+      customerId_referenceMonth: { customerId: joaoSilva.id, referenceMonth: currentReferenceMonth }
     },
     update: {
       expectedAmount: "150.00",
-      receivedAmount: "0.00",
-      status: "PENDING",
-      paidAt: null,
-      notes: "Pagamento seed pendente"
+      receivedAmount: "150.00",
+      status: "PAID",
+      paidAt: new Date(Date.UTC(currentYear, currentMonth, 10)),
+      notes: "Fatura paga integralmente via Pix"
     },
     create: {
-      customerId: suspendedCustomer.id,
+      customerId: joaoSilva.id,
       referenceMonth: currentReferenceMonth,
       expectedAmount: "150.00",
-      receivedAmount: "0.00",
-      status: "PENDING",
-      paidAt: null,
-      notes: "Pagamento seed pendente"
+      receivedAmount: "150.00",
+      status: "PAID",
+      paidAt: new Date(Date.UTC(currentYear, currentMonth, 10)),
+      notes: "Fatura paga integralmente via Pix"
     }
   });
 
+  // Maria's payment is pending/partial to show in Dashboard alerts
   await prisma.payment.upsert({
     where: {
-      customerId_referenceMonth: {
-        customerId: activeCustomer.id,
-        referenceMonth: previousReferenceMonth
-      }
+      customerId_referenceMonth: { customerId: mariaOliveira.id, referenceMonth: currentReferenceMonth }
     },
     update: {
-      expectedAmount: "120.00",
-      receivedAmount: "120.00",
-      status: "PAID",
-      paidAt: new Date(Date.UTC(currentYear, currentMonth - 1, 6)),
-      notes: "Historico seed do mes anterior"
+      expectedAmount: "99.90",
+      receivedAmount: "0.00",
+      status: "PENDING",
+      paidAt: null,
+      notes: "Fatura em atraso - Aguardando pagamento"
     },
     create: {
-      customerId: activeCustomer.id,
+      customerId: mariaOliveira.id,
+      referenceMonth: currentReferenceMonth,
+      expectedAmount: "99.90",
+      receivedAmount: "0.00",
+      status: "PENDING",
+      paidAt: null,
+      notes: "Fatura em atraso - Aguardando pagamento"
+    }
+  });
+
+  // Previous month history
+  await prisma.payment.upsert({
+    where: {
+      customerId_referenceMonth: { customerId: joaoSilva.id, referenceMonth: previousReferenceMonth }
+    },
+    update: {
+      expectedAmount: "150.00",
+      receivedAmount: "150.00",
+      status: "PAID",
+      paidAt: new Date(Date.UTC(currentYear, currentMonth - 1, 10))
+    },
+    create: {
+      customerId: joaoSilva.id,
       referenceMonth: previousReferenceMonth,
-      expectedAmount: "120.00",
-      receivedAmount: "120.00",
+      expectedAmount: "150.00",
+      receivedAmount: "150.00",
       status: "PAID",
-      paidAt: new Date(Date.UTC(currentYear, currentMonth - 1, 6)),
-      notes: "Historico seed do mes anterior"
+      paidAt: new Date(Date.UTC(currentYear, currentMonth - 1, 10))
     }
   });
 
+  // Bank reconciliation evidence
   await upsertBankEntry({
-    amount: "120.00",
-    occurredAt: new Date(Date.UTC(currentYear, currentMonth, 7, 13, 0, 0)),
-    description: "Transferencia seed conciliada de Ana Martins",
-    paymentId: activePayment.id,
-    referenceCode: "SEED-BANK-0001",
+    amount: "150.00",
+    occurredAt: new Date(Date.UTC(currentYear, currentMonth, 10, 14, 30, 0)),
+    description: "PIX RECEBIDO - JOAO SILVA TELECOM",
+    paymentId: joaoPayment.id,
+    referenceCode: "BANK-JOAO-001",
     source: "bank_import",
     status: "MATCHED"
   });
 
-  await upsertBankEntry({
-    amount: "40.00",
-    occurredAt: new Date(Date.UTC(currentYear, currentMonth, 16, 10, 30, 0)),
-    description: "Transferencia seed conciliada parcial de Bruno Alves",
-    paymentId: overduePayment.id,
-    referenceCode: "SEED-BANK-0002",
-    source: "bank_import",
-    status: "MATCHED"
-  });
-
-  await upsertBankEntry({
-    amount: "55.00",
-    occurredAt: new Date(Date.UTC(currentYear, currentMonth, 18, 9, 15, 0)),
-    description: "Entrada seed ainda nao conciliada",
-    paymentId: null,
-    referenceCode: "SEED-BANK-0003",
-    source: "bank_import",
-    status: "UNMATCHED"
-  });
-
+  // Alerts narrative
   await upsertFiscalReminder({
-    title: "[Seed] DAS Simples Nacional",
-    description: "Lembrete fiscal seed para pagamento recorrente",
+    title: "Vencimento DAS Simples Nacional",
+    description: "Imposto mensal sobre faturamento de telecom",
     dueDate: new Date(Date.UTC(currentYear, currentMonth, 20)),
-    reminderDate: new Date(Date.UTC(currentYear, currentMonth, 18)),
+    reminderDate: new Date(Date.UTC(currentYear, currentMonth, 15)),
     severity: "HIGH"
   });
 
   await upsertFiscalReminder({
-    title: "[Seed] Fechamento financeiro mensal",
-    description: "Checklist seed para conferencia do caixa e conciliacao",
-    dueDate: new Date(Date.UTC(currentYear, currentMonth, 25)),
-    reminderDate: new Date(Date.UTC(currentYear, currentMonth, 23)),
+    title: "Conferência de Notas Fiscais",
+    description: "Revisar notas fiscais emitidas para o periodo",
+    dueDate: new Date(Date.UTC(currentYear, currentMonth, 28)),
+    reminderDate: new Date(Date.UTC(currentYear, currentMonth, 25)),
     severity: "MEDIUM"
   });
 
-  console.log("Seed concluido com sucesso.");
-  console.log(`Admin: ${admin.email} / Admin@123456`);
-  console.log(`Local access admin: ${localAccessAdmin.email} / Fiber@123456`);
-  console.log("Operator: operator@fibercontrol.local / Operator@123456");
-  console.log(`Reference month seeded: ${currentReferenceMonth}`);
+  console.log("Demo seed concluido com sucesso.");
+  console.log(`Admin Staging: ${admin.email} / Admin@123456`);
+  console.log(`Local Access: ${localAccessAdmin.email} / Fiber@123456`);
 }
 
 async function upsertBankEntry(input: {
@@ -443,23 +304,14 @@ async function upsertBankEntry(input: {
   status: "MATCHED" | "UNMATCHED";
 }) {
   const existingEntry = await prisma.bankEntry.findFirst({
-    where: {
-      referenceCode: input.referenceCode
-    }
+    where: { referenceCode: input.referenceCode }
   });
 
   if (existingEntry) {
-    return prisma.bankEntry.update({
-      where: {
-        id: existingEntry.id
-      },
-      data: input
-    });
+    return prisma.bankEntry.update({ where: { id: existingEntry.id }, data: input });
   }
 
-  return prisma.bankEntry.create({
-    data: input
-  });
+  return prisma.bankEntry.create({ data: input });
 }
 
 async function upsertFiscalReminder(input: {
@@ -470,24 +322,14 @@ async function upsertFiscalReminder(input: {
   severity: "LOW" | "MEDIUM" | "HIGH";
 }) {
   const existingReminder = await prisma.fiscalReminder.findFirst({
-    where: {
-      title: input.title,
-      dueDate: input.dueDate
-    }
+    where: { title: input.title, dueDate: input.dueDate }
   });
 
   if (existingReminder) {
-    return prisma.fiscalReminder.update({
-      where: {
-        id: existingReminder.id
-      },
-      data: input
-    });
+    return prisma.fiscalReminder.update({ where: { id: existingReminder.id }, data: input });
   }
 
-  return prisma.fiscalReminder.create({
-    data: input
-  });
+  return prisma.fiscalReminder.create({ data: input });
 }
 
 function formatReferenceMonth(date: Date) {

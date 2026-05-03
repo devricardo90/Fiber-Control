@@ -27,125 +27,53 @@
 
 ---
 
-## Sequencia estrategica FC-020 a FC-025
+## Sequencia estrategica FC-020 a FC-031
 - `FC-020` - Governance / Documentation - `DONE`
-  - **Objetivo**: regularizar a divergencia entre `backlog.md`, `STATUS.md`, `execution-log.md` e `docs/ops/done/*`.
-  - **Observacao**: concluida em 2026-04-24 e preservada como `DONE` para nao falsificar o historico.
 - `FC-021` - MVP Scope Definition for Deploy - `DONE`
-  - **Tipo**: Product / Planning
-  - **Prioridade**: P0
-  - **Objetivo**: definir o escopo minimo vital do MVP publico, separando claramente o que entra no MVP deployavel, o que fica fora do MVP e o que sera backlog de crescimento pos-producao.
 - `FC-022` - MVP Local Validation and Deploy Readiness - `DONE`
-  - **Tipo**: Engineering / Validation
-  - **Prioridade**: P0
-  - **Objetivo**: validar localmente build, testes, env vars, CORS, auth, health checks e fluxos minimos do MVP antes de qualquer deploy.
-  - **Observacao**: reexecutada com sucesso em 2026-04-24 apos a `FC-026`; baseline local validado e `FC-023` liberada para `READY`.
 - `FC-023` - Staging Deployment Baseline - `DONE`
-  - **Tipo**: Deploy / Infrastructure
-  - **Prioridade**: P0
-  - **Objetivo**: publicar web, API e banco em ambiente acessivel para validacao real.
-  - **Observacao**: `FC-023A` concluiu a baseline documental e `FC-023B` fechou a validacao operacional/documental. O banco Neon foi criado manualmente, o `Manual External Operations Gate` foi validado pelo humano, a divergencia de Node foi resolvida em `v24.15.0`, Prisma `7` ficou consolidado com `DIRECT_URL` via `apps/api/prisma.config.ts` e o runtime permaneceu em `DATABASE_URL` pooled do Neon. Nenhum secret real foi registrado no repositorio e nenhum codigo de produto precisou ser alterado para este fechamento.
 - `FC-024` - Public GitHub README and Recruiter Evidence Pack - `DONE`
-  - **Tipo**: Documentation / Portfolio
-  - **Prioridade**: P1
-  - **Objetivo**: criar README profissional em ingles, demo flow, arquitetura, status do projeto, roadmap e evidencia para recrutadores.
-  - **Observacao**: concluida em 2026-04-24 com `README.md` reescrito em ingles, evidence pack criado em `docs/project/recruiter-evidence-pack.md` e narrativa publica alinhada ao MVP real, sem alegar deploy publico inexistente.
 - `FC-025A` - Manual Staging Provisioning - `DONE`
-  - **Tipo**: Deploy / Operations
-  - **Prioridade**: P0
-  - **Objetivo**: provisionar manualmente os recursos minimos de staging em provedores externos, seguindo a baseline oficial com Neon como banco de staging, depois API no Render e depois web na Vercel.
-  - **Observacao**: concluida em 2026-04-24 com Neon mantido como banco oficial, API publicada em `https://app-fiber-control-api-staging.onrender.com`, web publicada em `https://app-fiber-control-web-staging.vercel.app`, `CORS_ORIGIN` alinhado a URL real da web, `NEXT_PUBLIC_API_URL` e `NEXT_PUBLIC_APP_URL` apontando para as URLs publicas corretas e smoke manual completo em PASS. Render PostgreSQL nao foi criado.
 - `FC-027` - Staging Reproducibility and Provider Runbook - `DONE`
-  - **Tipo**: Operations / Documentation
-  - **Prioridade**: P0
-  - **Objetivo**: consolidar um runbook versionado para recriar, operar, redeployar e validar o staging atual sem depender de memoria tacita.
-  - **Observacao**: concluida em 2026-04-24 com `docs/ops/staging-runbook.md` criado para consolidar Neon, Render API, Vercel Web, contrato de env vars por nomes/placeholders, diferenca entre `DATABASE_URL` pooled e `DIRECT_URL` direct, smoke manual oficial e troubleshooting. Nenhum secret real foi registrado.
 - `FC-028` - Public README and Demo Presentation Polish - `DONE`
-  - **Tipo**: Documentation / Portfolio
-  - **Prioridade**: P1
-  - **Objetivo**: fortalecer a apresentacao publica do App Fiber Control em ingles para GitHub, portfolio, LinkedIn e avaliacao tecnica, sem inflar escopo nem prometer capacidades inexistentes.
-  - **Escopo**: revisar e melhorar `README.md` em ingles, explicando problema de produto, escopo MVP, staging publico atual, arquitetura, split API/Web, baseline Neon -> Render -> Vercel, fluxos principais, auth flow, limitacoes reais, roadmap, URLs publicas, demo flow, technical highlights e disciplina operacional; atualizar `docs/project/recruiter-evidence-pack.md` apenas se isso reforcar a coerencia publica.
-  - **Fora de escopo**: alterar codigo funcional, UI de produto, providers, env vars, banco, novas features ou qualquer promessa falsa sobre estado de producao.
-  - **Criterios de aceite**:
-    - `README.md` em ingles, claro, profissional e coerente com o MVP real
-    - URLs publicas de web staging, API docs e API health registradas
-    - demo flow de register, login, authenticated user check e uso basico documentado
-    - arquitetura, split API/Web e baseline Neon -> Render -> Vercel explicados
-    - limitacoes reais e roadmap registrados sem enfraquecer o projeto
-    - nenhum secret real no diff
-  - **Validacao obrigatoria**:
-    - revisao manual do diff documental
-    - `git diff --check`
-    - busca por padroes sensiveis para confirmar ausencia de secrets reais
-  - **Impacto documental**:
-    - `README.md`
-    - `docs/project/recruiter-evidence-pack.md` se aplicavel
-    - `backlog.md`
-    - `STATUS.md`
-    - `docs/ops/session-handoff.md`
-    - `docs/ops/execution-log.md`
-  - **Observacao**: concluida em 2026-04-24 com `README.md` polido incrementalmente para refletir problema de produto, staging publico real, demo flow, arquitetura, split API/Web, deployment Neon -> Render -> Vercel, auth flow, disciplina operacional, smoke validado, limitacoes e roadmap, sem registrar secrets e sem inflar o MVP.
 - `FC-029` - GitHub Portfolio Polish and Screenshots - `DONE`
-  - **Tipo**: Documentation / Portfolio
-  - **Prioridade**: P1
-  - **Objetivo**: preparar o projeto para apresentacao visual no GitHub e portfolio, adicionando estrutura de screenshots, orientacao visual e checklist de polish do repositorio sem inventar evidencias inexistentes.
-  - **Escopo**: criar ou organizar uma estrutura para screenshots, definir as telas a capturar, preparar secoes visuais como `Product Preview`, `Screenshots`, `Live Demo` e `Demo Evidence`, atualizar `README.md` e `docs/project/recruiter-evidence-pack.md` se necessario, criar checklist de GitHub polish com descricao curta, topics sugeridos, social preview image, screenshots necessarios e links publicos, e documentar placeholders/checklist quando a captura real depender de acao manual do usuario.
-  - **Fora de escopo**: alterar codigo funcional, UI/UX de produto, providers, env vars, deploy, banco, novas features, registro de secrets ou reabertura da `FC-025`.
-  - **Criterios de aceite**:
-    - estrutura documental clara para screenshots criada ou organizada
-    - telas prioritarias de captura definidas com checklist objetivo
-    - `README.md` preparado para imagens e evidencias visuais sem inventar screenshots
-    - orientacao de GitHub polish registrada com links publicos reais
-    - dependencia de captura manual explicitada quando aplicavel
-    - nenhum secret real no diff
-  - **Validacao obrigatoria**:
-    - revisao manual do diff documental
-    - `git diff --check`
-    - busca por padroes sensiveis para confirmar ausencia de secrets reais
-  - **Impacto documental**:
-    - `README.md`
-    - `docs/project/recruiter-evidence-pack.md`
-    - `docs/project/github-polish-checklist.md`
-    - `docs/assets/screenshots/` ou estrutura equivalente
-    - `backlog.md`
-    - `STATUS.md`
-    - `docs/ops/session-handoff.md`
-    - `docs/ops/execution-log.md`
-  - **Observacao**: concluida em 2026-04-24 com checklist visual criado em `docs/project/github-polish-checklist.md`, estrutura `docs/assets/screenshots/` preparada, `README.md` ajustado para evidencias visuais sem inventar screenshots e dependencia de captura manual registrada explicitamente.
-- `FC-025` - Production Growth Backlog - `PARKED`
-  - **Tipo**: Product / Growth
-  - **Prioridade**: P2
-  - **Objetivo**: registrar evolucao futura pos-MVP, sem contaminar o escopo minimo atual.
-- `FC-026` - API Test Isolation and Local MVP Recovery - `DONE`
-  - **Tipo**: Engineering / Quality
+- `FC-030A` - Manual Staging Web Smoke & Portfolio Evidence Readiness - `DONE`
+- `FC-031` - Staging Demo Data and Business Narrative Alignment - `READY`
+  - **Tipo**: Product / Engineering
   - **Prioridade**: P0
-  - **Objetivo**: isolar a suite da API no banco oficial de testes, restaurar a previsibilidade da seed local e corrigir as regresses reais de `payments` e `fiscal-reminders` que bloquearam a `FC-022`.
-  - **Observacao**: concluida em 2026-04-24 com `vitest` carregando `.env.test`, suite da API em PASS e login seed local restaurado.
-
-## Corretivo executado apos o bloqueio inicial da FC-022
-- `FC-026` foi a correcao minima obrigatoria antes da reexecucao da `FC-022`.
-- a execucao da `FC-026` nao alterou a estrategia MVP; apenas removeu o bloqueio tecnico que impedia staging/deploy com baseline profissional.
+  - **Objetivo**: Transformar o staging de uma prova tecnica em uma demonstracao compreensivel de valor de negocio para gestao de empresa de fibra.
+  - **Escopo**:
+    - Atualizar seed.ts com João Silva (em dia) e Maria Oliveira (inadimplente)
+    - Criar pagamentos e alertas coerentes
+    - Garantir seed idempotente
+    - Ajustar agregadores do Dashboard se necessario
+    - Verificar Dashboard, Customers, Payments, Alerts e Finance
+    - Remover linguage de mock/placeholder visivel
+  - **Fora de escopo**:
+    - novas funcionalidades, novo schema, migrations, alteracao de auth, deploy ou gate de pagamento real.
+  - **Criterios de aceite**:
+    - Seed demo realista e idempotente.
+    - Dashboard mostra narrativa clara de negócio.
+    - Customers/Payments/Alerts mostram registros coerentes.
+    - Experiencia principal sem "mock" ou "placeholder".
+  - **Validacao obrigatoria**:
+    - git status, git diff, lint/build local, evidencia visual dos dados.
 
 ---
 
 ## READY
-- *(vazio no momento)*
+- `FC-031` - Staging Demo Data and Business Narrative Alignment
+
 ## TODO
 - `FC-025` - Production Growth Backlog
   - **Status de planejamento**: `PARKED`
   - **Tipo**: Product / Growth
   - **Prioridade**: P2
   - **Objetivo**: registrar evolucao futura pos-MVP, sem contaminar o escopo minimo atual.
-  - **Escopo**: backlog de crescimento apos deploy e publicacao do MVP.
-  - **Fora de escopo**: qualquer entrega do ciclo MVP atual.
-  - **Criterios de aceite**:
-    - backlog pos-MVP claramente separado do escopo minimo atual
-  - **Validacao obrigatoria**:
-    - depende de MVP definido e publicado
-  - **Impacto documental**:
-    - `backlog.md`
-    - `STATUS.md`
-    - `docs/ops/session-handoff.md`
+- `FC-032` - Portfolio Visual Polish & Final Screenshots Capture
+  - **Status de planejamento**: `PLANNED`
+  - **Prioridade**: P1
+  - **Objetivo**: Capturar evidencias visuais reais apos o alinhamento da narrativa na FC-031.
 
 ---
 
@@ -157,71 +85,33 @@
 
 ## DONE
 - `FC-030A` - DONE em 2026-05-03: smoke técnico validado; Web e API integradas via CORS e conectadas ao Neon; fluxo visual de Dashboard bloqueado por falta de credenciais validas no Staging; projeto pronto para evidência visual apenas após criação manual de usuário no Neon.
-- `FC-029` - DONE com checklist visual criado em `docs/project/github-polish-checklist.md`, estrutura `docs/assets/screenshots/` preparada, `README.md` ajustado para `Product Preview` e `Demo Evidence` sem inventar screenshots, `docs/project/recruiter-evidence-pack.md` alinhado ao fluxo visual e dependencia de captura manual explicitada sem registrar secrets
-- `FC-028` - DONE com `README.md` polido incrementalmente em ingles para refletir problema de produto, escopo MVP, staging publico real, demo flow, arquitetura, split API/Web, deployment Neon -> Render -> Vercel, auth flow, disciplina operacional, smoke validado, limitacoes reais e roadmap, com `docs/project/recruiter-evidence-pack.md` alinhado e sem registrar secrets reais
-- `FC-027` - DONE com `docs/ops/staging-runbook.md` criado e completo para reprodutibilidade do staging atual em Neon, Render API e Vercel Web, incluindo URLs publicas, contrato de env vars por nomes/placeholders, diferenca entre `DATABASE_URL` pooled e `DIRECT_URL` direct, configuracao esperada de provider, smoke manual oficial, troubleshooting e criterio de staging saudavel, sem registrar secrets reais
-- `FC-025A` - DONE with staging minimo publicado seguindo a baseline oficial Neon -> Render API -> Vercel Web: API em `https://app-fiber-control-api-staging.onrender.com`, web em `https://app-fiber-control-web-staging.vercel.app`, `GET /health`, `/docs`, `/openapi.json`, `POST /auth/register`, `POST /auth/login` e `GET /auth/me` em PASS, `CORS_ORIGIN` alinhado a URL real da web e sem criacao de Render PostgreSQL
-- `FC-024` - DONE com `README.md` reescrito em ingles e `docs/project/recruiter-evidence-pack.md` criado para refletir o MVP real, a baseline tecnica validada, os limites deliberados do projeto e a trilha de evidencias para GitHub e recrutadores, sem inflar escopo nem alegar deploy publico inexistente
-- `FC-023` - DONE com baseline de staging fechada documentalmente e validacoes manuais confirmadas pelo humano: Node `v24.15.0`, npm `11.12.1`, pnpm `10.33.0`, `pnpm.cmd install`, `pnpm.cmd prisma generate`, `pnpm.cmd prisma migrate deploy`, `pnpm.cmd build`, `docker compose up -d` e `pnpm.cmd test` em PASS; `Manual External Operations Gate` do Neon validado; Prisma `7` consolidado com `DIRECT_URL` via `apps/api/prisma.config.ts` e runtime mantido em `DATABASE_URL` pooled do Neon, sem registrar secrets reais
-- `FC-022` - DONE com reexecucao formal da validacao local do MVP: `prisma:generate`, `lint`, `build`, `prisma:migrate:deploy` e `test` em `apps/api` ficaram em PASS no banco oficial de testes `127.0.0.1:5442`, o banco dev `127.0.0.1:5440` permaneceu intacto apos a suite, o login seed `acesso@fibercontrol.local` voltou a passar junto com `GET /auth/me`, CORS e as rotas/pontos minimos do MVP responderam corretamente, e `FC-023` foi liberada para `READY`
+- `FC-029` - DONE com checklist visual criado em `docs/project/github-polish-checklist.md`
+- `FC-028` - DONE com `README.md` polido incrementalmente em ingles
+- `FC-027` - DONE com `docs/ops/staging-runbook.md` criado
+- `FC-025A` - DONE with staging minimo publicado
+- `FC-024` - DONE com `README.md` reescrito em ingles
+- `FC-023` - DONE com baseline de staging fechada documentalmente
+- `FC-022` - DONE com reexecucao formal da validacao local do MVP
+- `FC-020` - DONE com reconciliacao documental das evidencias de `DONE`
+- `FC-021` - DONE com escopo MVP publico formalizado em `docs/product/mvp-scope.md`
+- `FC-026` - DONE com isolamento da suite da API no banco oficial de testes
 - `FC-001`
 - `FC-002`
-- `FC-003` - DONE com fotografia tecnica registrada: `pnpm.cmd prisma:generate`, `lint` e `build` em PASS; `pnpm.cmd test` em FAIL por incoerencia do banco de testes em `127.0.0.1:5440`, com ausencia de `public.audit_events`
-- `FC-004` - DONE com persistencia Prisma formalizada: `5440` reservado para dev, `5442` oficializado para test, 7 migrations aplicadas em `fiber_control_test`; `test` em FAIL residual por regra funcional
-- `FC-004A` - DONE com regressoes residuais zeradas: `pnpm.cmd prisma:generate`, `lint`, `build` e `test` em PASS
-- `FC-005` - DONE com autenticacao/autorizacao base formalizadas: `prisma generate`, `lint`, `build`, `auth.spec.ts` e `test` em PASS
-- `FC-006` - DONE com limitacao ambiental documentada: `pnpm.cmd test` bloqueado por PostgreSQL indisponivel em `127.0.0.1:5440`
-- `FC-007` - DONE com fundacao frontend operacional formalizada: `pnpm.cmd install`, `lint` e `build` em PASS; shell ativo reduzido a `workspace`, `patterns` e `settings`, com rotas legadas de negocio neutralizadas por redirect
-- `FC-008` - DONE com alinhamento do login local ao ambiente real: `prisma generate`, `prisma migrate deploy`, `prisma seed`, `lint`, `build` e `test` em PASS; `acesso@fibercontrol.local` validado no banco ativo `127.0.0.1:5440` e login operacional confirmado em `http://localhost:3001/auth/login`
-- `FC-009` - DONE com consolidacao minima da superficie `Customers`: `customers-list-screen.tsx` e `customer-create-screen.tsx` migrados para as primitives da fundacao ativa, `/customers` e `/customers/new` reabertos, `lint` e `build` em PASS; detail/edit mantidos neutralizados
-- `FC-010` - DONE com consolidacao minima da superficie `Payments`: `payments-list-screen.tsx` e `register-payment-screen.tsx` alinhados as primitives da fundacao ativa, `/payments` e `/payments/new` reabertos, `lint` em PASS e `build` em PASS fora do sandbox; reconciliacao mantida fora de escopo
-- `FC-011` - DONE com consolidacao minima da superficie `Alerts`: `alerts-screen.tsx` alinhada ao contrato real `GET /alerts/overview`, `/alerts` reaberta, `lint` em PASS e `build` em PASS fora do sandbox; lifecycle actions mantidas fora de escopo
-- `FC-012` - DONE com consolidacao minima da superficie `Finance`: `finance-overview-screen.tsx` alinhada ao contrato real `GET /finance/overview`, `/finance` reaberta, `lint` em PASS e `build` em PASS fora do sandbox; reports e fiscal settings mantidos fora de escopo
-- `FC-013` - DONE com consolidacao minima da superficie `Reports`: `reports-screen.tsx` alinhada aos contratos reais `GET /reports/monthly-revenue`, `GET /reports/annual-summary`, `GET /reports/overdue` e `GET /reports/regions`, `/reports` reaberta, `lint` em PASS e `build` em PASS fora do sandbox; rotas detalhadas mantidas fora de escopo
-- `FC-014` - DONE com consolidacao minima da superficie `Regions`: `regions-screen.tsx` alinhada aos contratos reais `GET /regions` e `GET /regions/performance`, `/regions` reaberta, `lint` em PASS e `build` em PASS fora do sandbox; route planning e regional report drilldown mantidos fora de escopo
-- `FC-015` - DONE com consolidacao minima da superficie `Dashboard`: `dashboard-screen.tsx` alinhada aos contratos reais de `finance`, `alerts`, `reports` e `regions`, `/dashboard` reaberta, `lint` em PASS e `build` em PASS fora do sandbox; route preview e analytics avancado mantidos fora de escopo
-- `FC-016` - DONE com consolidacao minima da superficie `Routes`: `routes-screen.tsx` alinhada a linguagem operacional da FC-007, `/routes` reaberta, `lint` em PASS e `build` em PASS fora do sandbox; route planning, live maps e operacao de campo mantidos fora de escopo
-- `FC-017` - DONE com checkpoint de governanca e saneamento do worktree: publicacao de `FC-015` e `FC-016` validada em `main`, Named Localhost Convention confirmada como governanca enxuta e worktree remanescente preservado em snapshot seguro fora da arvore ativa; nenhuma nova `READY` foi aberta
-- `FC-018` - DONE com auditoria do snapshot residual pos-`FC-017`: bloco de `apps/api` classificado como mudanca futura relevante, deriva local de `Customers`/`Alerts` classificada para descarte ou task propria e ruido documental isolado; `main` permaneceu limpo e o snapshot seguro foi mantido sem reaplicacao
-- `FC-019` - DONE com operacionalizacao minima da Named Localhost Convention no ambiente local: `web.fiber-control.localhost` e `api.fiber-control.localhost` validados com boot local, `APP_URL`, `NEXT_PUBLIC_APP_URL`, `NEXT_PUBLIC_API_URL` e `CORS_ORIGIN` alinhados, login e CORS confirmados em host nomeado e fallback documentado para `localhost:porta`
-- `FC-020` - DONE com reconciliacao documental das evidencias de `DONE`: arquivos ausentes em `docs/ops/done/` criados para `FC-001`, `FC-002`, `FC-003`, `FC-004`, `FC-004A`, `FC-005`, `FC-006`, `FC-008`, `FC-009` e `FC-011`; backlog, `STATUS.md`, `execution-log.md` e `session-handoff.md` alinhados sem abrir nova feature
-- `FC-021` - DONE com escopo MVP publico formalizado em `docs/product/mvp-scope.md`: MVP IN/OUT definido, fluxos minimos de demonstracao registrados, evidencias requeridas para `FC-022` listadas, riscos de pre-deploy documentados e backlog pos-MVP isolado sem promover `FC-022` a `READY`
-- `FC-026` - DONE com isolamento da suite da API no banco oficial de testes e recuperacao do baseline local: `vitest.config.ts` passou a carregar `.env.test`, `payments.spec.ts` e `fiscal-reminders.spec.ts` ficaram deterministicas em relacao a data, `prisma:generate`, `lint`, `build` e `test` em `apps/api` ficaram em PASS, e o login seed `acesso@fibercontrol.local` voltou a ser validado apos `prisma seed`
-
----
-
-## O que falta no ciclo atual
-- preparar o deploy minimo com base no MVP definido, sem abrir backlog enterprise
-- publicar uma baseline funcional em ambiente acessivel
-- produzir documentacao profissional de portfolio para GitHub e recrutadores
-- manter o crescimento pos-producao separado do ciclo MVP
-
-## Riscos atuais
-- `127.0.0.1:5440` agora voltou a refletir o baseline local de desenvolvimento com seed e migration atuais, mas continua sendo ambiente de dev e nao pode ser usado como base de testes
-- a divergencia anterior entre Node `24.x` declarado e Node `v22.21.1` validado foi resolvida no baseline manual de `FC-023` com Node `v24.15.0`
-- `apps/web` ainda nao possui suite automatizada dedicada; staging continua dependente de smoke manual mais build/lint
-- sem task dedicada por modulo, qualquer reabertura de tela de negocio em `apps/web` pode reintroduzir deriva visual e estrutural fora da fundacao operacional
-- `customers/[id]` e `customers/[id]/edit` continuam scaffold-only e permanecem neutralizados ate task propria
-- a reconciliacao permanece fora de escopo dentro do ciclo de `Payments` e nao deve vazar para a task seguinte sem `READY` propria
-- lifecycle de `Alerts` permanece fora de escopo dentro do ciclo atual e nao deve ser reaberto sem task propria
-- relatorios detalhados e configuracoes fiscais permanecem fora de escopo dentro do ciclo de `Finance`
-- relatorios detalhados e drilldown por cliente permanecem fora de escopo dentro do ciclo de `Reports`
-- route planning e operacao de campo permanecem fora de escopo dentro do ciclo de `Regions`
-- route preview e analytics avancado permanecem fora de escopo dentro do ciclo de `Dashboard`
-- route planning, live maps e operacao de campo permanecem fora de escopo dentro do ciclo de `Routes`
-- sem reconciliacao documental, o projeto corria risco de tratar `DONE` como encerramento sem arquivo formal; esse risco foi saneado pela `FC-020`, mas a proxima frente continua dependente de decisao de governanca
-- sem escopo MVP formal, o projeto corre risco de derivar para backlog enterprise e contaminar o objetivo de portfolio/deploy minimo
-## Proxima task oficial
-nenhuma `READY` oficial no momento
-
-## Saneamento documental
-- `FC-020` abriu e fechou no mesmo ciclo para reconciliar a evidencia formal de `DONE`
-- `FC-021` fechou o recorte MVP publico sem abrir deploy nem promover a etapa seguinte
-- `FC-022` foi reexecutada sobre o baseline corrigido pela `FC-026`, consolidou a evidencia local do MVP e liberou `FC-023` para `READY`
-- `FC-026` removeu o bloqueio tecnico que impedia a conclusao da `FC-022`
-- `FC-023` fechou a baseline de staging com evidencia manual completa e liberou `FC-024` como `READY`
-- `FC-024` fechou o pacote publico de portfolio e nao deixou nova `READY` aberta automaticamente
-- `FC-025A` foi encerrada como `DONE` apos publicar staging real com Neon, Render e Vercel, preservando `FC-025` como backlog `PARKED`
-- `FC-027` foi encerrada como `DONE` apos consolidar o runbook versionado do staging real sem reabrir deploy nem alterar providers
-- `FC-028` foi encerrada como `DONE` apos polir a apresentacao publica do projeto em ingles, reforcando README, links de staging, demo flow, arquitetura, baseline de deploy e disciplina operacional sem abrir nova feature
-- `FC-029` foi encerrada como `DONE` apos estruturar screenshots, polish visual de GitHub e checklist de evidencia visual sem inventar assets inexistentes
+- `FC-003` - DONE
+- `FC-004` - DONE
+- `FC-004A` - DONE
+- `FC-005` - DONE
+- `FC-006` - DONE
+- `FC-007` - DONE
+- `FC-008` - DONE
+- `FC-009` - DONE
+- `FC-010` - DONE
+- `FC-011` - DONE
+- `FC-012` - DONE
+- `FC-013` - DONE
+- `FC-014` - DONE
+- `FC-015` - DONE
+- `FC-016` - DONE
+- `FC-017` - DONE
+- `FC-018` - DONE
+- `FC-019` - DONE

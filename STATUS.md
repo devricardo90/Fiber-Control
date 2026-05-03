@@ -1,7 +1,7 @@
 # STATUS - Fiber Control
 
 ## Estado atual
-Projeto com governanca central estabelecida, arquitetura backend definida, trilha de auditoria transversal implementada, persistencia Prisma formalizada, autenticacao/autorizacao base formalmente encerradas, fundacao frontend operacional fechada, oito superficies de negocio reabertas com consolidacao minima, reconciliacao documental de `DONE` fechada pela `FC-020`, escopo MVP publico formalizado pela `FC-021`, bloqueio tecnico da validacao local removido pela `FC-026`, reexecucao formal della `FC-022` encerrada com baseline local do MVP validado, `FC-023` formalmente encerrada como `DONE`, `FC-024` fechada como pacote publico de portfolio, `FC-025A` formalmente encerrada como `DONE` com staging publicado em Neon + Render + Vercel, `FC-027` formalmente encerrada como `DONE` com runbook versionado de reprodutibilidade do staging atual, `FC-028` formalmente encerrada como `DONE` com polish incremental do README publico e do demo flow do projeto, e `FC-029` formalmente encerrada como `DONE` com checklist visual de GitHub, estrutura de screenshots e preparo documental para evidencias visuais reais, e `FC-030A` formalmente encerrada como `DONE` apos smoke tecnico do Staging Web. O projeto encontra-se em estado `IDLE` com a infraestrutura de staging operacionalmente integrada, mas com fluxo visual de Dashboard dependente de credenciais reais. A baseline oficial de staging permanece em Neon para banco, Render para API e Vercel para web. Nenhum PostgreSQL foi criado no Render e nenhum secret real foi registrado no repositorio.
+Projeto com governanca central estabelecida, arquitetura backend definida, trilha de auditoria transversal implementada, persistencia Prisma formalizada, autenticacao/autorizacao base formalmente encerradas, fundacao frontend operacional fechada, oito superficies de negocio reabertas com consolidacao minima, reconciliacao documental de `DONE` fechada pela `FC-020`, escopo MVP publico formalizado pela `FC-021`, bloqueio tecnico da validacao local removido pela `FC-026`, reexecucao formal della `FC-022` encerrada com baseline local do MVP validado, `FC-023` formalmente encerrada como `DONE`, `FC-024` fechada como pacote publico de portfolio, `FC-025A` formalmente encerrada como `DONE` com staging publicado em Neon + Render + Vercel, `FC-027` formalmente encerrada como `DONE` com runbook versionado de reprodutibilidade do staging atual, `FC-028` formalmente encerrada como `DONE` com polish incremental do README publico e do demo flow do projeto, `FC-029` formalmente encerrada como `DONE` com checklist visual de GitHub, estrutura de screenshots e preparo documental para evidencias visuais reais, e `FC-030A` formalmente encerrada como `DONE` apos smoke tecnico do Staging Web. O projeto saiu do estado `IDLE` e entrou em `READY` para a `FC-031`, focada no alinhamento da narrativa de negócio e dados de demonstração. A baseline oficial de staging permanece em Neon para banco, Render para API e Vercel para web. Nenhum PostgreSQL foi criado no Render e nenhum secret real foi registrado no repositorio.
 
 ## Fotografia oficial apos FC-030A
 - `FC-030A` esta em `DONE` (Status: PASS WITH NOTES).
@@ -61,12 +61,14 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - `FC-029` - checklist visual e estrutura de screenshots preparados sem inventar evidencias visuais
 - `FC-022` - validacao local/manual do MVP reexecutada com baseline corrigido e readiness de staging liberada
 - `FC-026` - isolamento da suite da API no banco oficial de testes e recuperacao do baseline local
+- `FC-030A` - smoke técnico do Staging Web e prontidão de evidência técnica.
 
 ## Tasks em aberto
 - `FC-025` - `PARKED` - Production Growth Backlog
+- `FC-031` - `READY` - Staging Demo Data and Business Narrative Alignment
 
 ## Proximas tasks planejadas
-- `FC-025` - `PARKED` - Production Growth Backlog
+- `FC-032` - Portfolio Visual Polish & Final Screenshots Capture
 
 ## Encadeamento formal
 - `FC-006` foi executada antes de `FC-003` a `FC-005` because era a unica `READY` oficial e tratava um risco critico de dominio e auditoria.
@@ -82,12 +84,14 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - `FC-013` reabriu apenas a overview de `Reports` e manteve rotas detalhadas e drilldown por cliente fora de escopo.
 - `FC-014` reabriu apenas a overview de `Regions` e manteve route planning e regional report drilldown fora de escopo.
 - `FC-015` reabriu apenas a overview de `Dashboard` e manteve route preview e analytics avancado fora de escopo.
-- `FC-016` reabriu apenas a overview de `Routes` e manteve route planning, live map e operacao de campo fora de escopo.
+- `FC-016` reabriu apenas a overview de `Routes` e manteve route planning, live maps e operacao de campo fora de escopo.
 - `FC-017` confirmou a coerencia do estado publicado e removeu o risco operacional de seguir trabalhando sobre worktree contaminado.
 - `FC-018` classificou o snapshot residual sem reintroduzir mudancas soltas na arvore ativa.
 - `FC-019` fechou a lacuna entre o protocolo e o runtime local, validando web e api em host nomeado.
+- `FC-030A` validou tecnicamente a integração Web -> API -> Neon em Staging.
 
 ## Validacoes mais recentes
+- `FC-030A` - smoke tecnico validado; integracao Neon/Render/Vercel OK; fluxo visual bloqueado por credenciais: PASS WITH NOTES.
 - `FC-029` - `docs/project/github-polish-checklist.md` criado com screenshots necessarios, ordem sugerida, descricao curta do repositorio, topics, social preview image, links publicos, evidencias recomendadas e cuidados com dados sensiveis: PASS documental
 - `FC-029` - estrutura `docs/assets/screenshots/` criada para receber capturas reais posteriormente: PASS documental
 - `FC-029` - `README.md` preparado para evidencia visual real com `Product Preview` e `Demo Evidence`, sem inventar screenshots: PASS documental
@@ -173,64 +177,6 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - `FC-021` - evidencias requeridas antes de `FC-022` registradas: PASS documental
 - `FC-021` - riscos pre-`FC-022` registrados: PASS documental
 - `FC-021` - backlog, `STATUS.md`, `docs/ops/execution-log.md`, `docs/ops/session-handoff.md` e `docs/ops/done/FC-021.done.md` alinhados: PASS documental
-- reorganizacao estrategica do backlog para MVP deployavel e portfolio profissional: PASS documental
-- preservacao de `FC-020` como `DONE` sem regressao artificial de historico: PASS documental
-- `FC-021` foi aberta como `READY` apos o saneamento e encerrada documentalmente nesta execucao: PASS documental
-- `FC-020` - divergencia entre `backlog.md`, `STATUS.md`, `docs/ops/execution-log.md` e `docs/ops/done/*` validada: PASS
-- `FC-020` - arquivos ausentes de `docs/ops/done/` criados para `FC-001`, `FC-002`, `FC-003`, `FC-004`, `FC-004A`, `FC-005`, `FC-006`, `FC-008`, `FC-009` e `FC-011`: PASS
-- `FC-020` - `backlog.md`, `STATUS.md`, `docs/ops/execution-log.md` e `docs/ops/session-handoff.md` alinhados apos reconciliacao: PASS
-- `FC-020` - codigo de produto preservado sem nova feature: PASS
-- `FC-019` - env local de `apps/web` e `apps/api` alinhado a `web.fiber-control.localhost` e `api.fiber-control.localhost`: PASS
-- `FC-019` - `APP_URL`, `NEXT_PUBLIC_APP_URL`, `NEXT_PUBLIC_API_URL` e `CORS_ORIGIN` coerentes entre si: PASS
-- `FC-019` - `pnpm.cmd lint` em `apps/web`: PASS
-- `FC-019` - `pnpm.cmd build` em `apps/web`: PASS fora do sandbox
-- `FC-019` - `pnpm.cmd lint` em `apps/api`: PASS
-- `FC-019` - `pnpm.cmd build` em `apps/api`: PASS
-- `FC-019` - abertura de `http://web.fiber-control.localhost:3000/login`: PASS
-- `FC-019` - `GET http://api.fiber-control.localhost:3001/health`: PASS
-- `FC-019` - preflight CORS em `api.fiber-control.localhost:3001`: PASS
-- `FC-019` - `POST /auth/login` em host nomeado: PASS
-- `FC-019` - `GET /auth/me` em host nomeado com token valido: PASS
-- `FC-019` - testes de `apps/web`: N/A, nao existe suite dedicada nesta fotografia
-- `FC-018` - auditoria do snapshot residual `stash@{0}`: PASS
-- `FC-018` - bloco de `apps/api` classificado como mudanca futura relevante: PASS
-- `FC-018` - deriva local de `Customers` e `Alerts` classificada para descarte ou task propria: PASS
-- `FC-018` - ruido documental e material retroativo isolados para nao contaminar a proxima task: PASS
-- `FC-018` - `main` mantido limpo apos a triagem: PASS
-- `FC-017` - checkpoint de governanca em `backlog.md`, `STATUS.md`, `AGENTS.md`, `docs/rules/protocol-rick.md` e `docs/ops/decisions.md`: PASS
-- `FC-017` - `FC-015` e `FC-016` refletidas corretamente na governanca publicada: PASS
-- `FC-017` - Named Localhost Convention registrada de forma enxuta e correta: PASS
-- `FC-017` - worktree remanescente preservado em snapshot seguro antes da limpeza: PASS
-- `FC-017` - arvore ativa saneada para proxima execucao: PASS
-- `FC-016` - auditoria da superficie Routes existente antes de editar: PASS
-- `FC-016` - consolidacao de `routes-screen.tsx` sem redesign completo: PASS
-- `FC-016` - reabertura controlada de `/routes` com overview operacional minima: PASS
-- `FC-016` - `pnpm.cmd lint` em `apps/web`: PASS
-- `FC-016` - `pnpm.cmd build` em `apps/web`: PASS fora do sandbox
-- `FC-016` - testes de `apps/web`: N/A, nao existe suite dedicada nesta fotografia
-- `FC-015` - auditoria da superficie Dashboard existente antes de editar: PASS
-- `FC-015` - consolidacao de `dashboard-screen.tsx` sem redesign completo: PASS
-- `FC-015` - reabertura controlada de `/dashboard` com overview agregada dos contratos reais: PASS
-- `FC-015` - `pnpm.cmd lint` em `apps/web`: PASS
-- `FC-015` - `pnpm.cmd build` em `apps/web`: PASS fora do sandbox
-- `FC-015` - testes de `apps/web`: N/A, nao existe suite dedicada nesta fotografia
-- `FC-014` - auditoria da superficie Regions existente antes de editar: PASS
-- `FC-014` - consolidacao de `regions-screen.tsx` sem redesign completo: PASS
-- `FC-014` - reabertura controlada de `/regions` com overview agregada dos contratos reais: PASS
-- `FC-014` - `pnpm.cmd lint` em `apps/web`: PASS
-- `FC-014` - `pnpm.cmd build` em `apps/web`: PASS fora do sandbox
-- `FC-014` - testes de `apps/web`: N/A, nao existe suite dedicada nesta fotografia
-- `FC-013` - auditoria da superficie Reports existente antes de editar: PASS
-- `FC-013` - consolidacao de `reports-screen.tsx` sem redesign completo: PASS
-- `FC-013` - reabertura controlada de `/reports` com overview agregada dos contratos reais: PASS
-- `FC-013` - `pnpm.cmd lint` em `apps/web`: PASS
-- `FC-013` - `pnpm.cmd build` em `apps/web`: PASS fora do sandbox
-- `FC-013` - testes de `apps/web`: N/A, nao existe suite dedicada nesta fotografia
-- `FC-012` - auditoria da superficie Finance existente antes de editar: PASS
-- `FC-012` - consolidacao de `finance-overview-screen.tsx` sem redesign completo: PASS
-- `FC-012` - `pnpm.cmd lint` em `apps/web`: PASS
-- `FC-012` - `pnpm.cmd build` em `apps/web`: PASS fora do sandbox
-- `FC-012` - testes de `apps/web`: N/A, nao existe suite dedicada nesta fotografia
 
 ## Limites e bloqueios reais
 - o banco de teste oficial segue em `127.0.0.1:5442`; `127.0.0.1:5440` foi saneado apenas como desenvolvimento local e nao deve ser usado para testes
@@ -255,9 +201,9 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - o gate manual do Neon depende de operacao externa humana por desenho, mas a evidencia requerida foi registrada e validada nesta execucao
 
 ## Proxima READY oficial
-nenhuma `READY` oficial no momento
+`FC-031` - Staging Demo Data and Business Narrative Alignment
 
 ## Justificativa da proxima READY
 - `FC-030A` validou a integracao tecnica do staging.
-- capturas de screenshots permanecem dependentes de acesso manual ao Dashboard (atualmente bloqueado).
+- `FC-031` desbloqueará o valor visual do projeto, alinhando os dados do banco com uma narrativa de negócio real para screenshots de portfólio.
 - `FC-025` continua isolada como backlog de crescimento pos-MVP e permanece `PARKED`.

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { useState } from "react";
@@ -68,9 +68,6 @@ export function RegionsScreen() {
 
   const overview = regionsQuery.data;
   const regions = overview?.performance.regions ?? [];
-  const topRegions = [...regions]
-    .sort((left, right) => right.outstandingAmount - left.outstandingAmount)
-    .slice(0, 5);
 
   return (
     <div className="space-y-5">
@@ -109,10 +106,10 @@ export function RegionsScreen() {
         />
       </section>
 
-      <section className="grid gap-4 xl:grid-cols-[1.65fr_0.95fr]">
+      <section>
         <Panel
           title="Regional baseline"
-          description="Overview only in FC-014. Route planning and regional report drilldown stay outside this task."
+          description="Aggregate metrics and collection performance across regional network."
           headerAction={
             <label className="flex flex-col gap-2">
               <span className="text-xs font-medium uppercase tracking-[0.08em] text-[var(--fc-text-muted)]">
@@ -173,63 +170,6 @@ export function RegionsScreen() {
               />
             </div>
           )}
-        </Panel>
-
-        <Panel title="FC-014 boundary" description="Controlled reopening for regions overview only.">
-          <div className="space-y-3">
-            <BoundaryRow
-              title="Overview route"
-              description="`/regions` is reopened with the real contracts `GET /regions` and `GET /regions/performance`."
-              label="Reopened"
-              tone="success"
-            />
-            <BoundaryRow
-              title="Route planning"
-              description="Field routing and route operations remain outside FC-014."
-              label="Out of scope"
-              tone="warning"
-            />
-            <BoundaryRow
-              title="Regional report drilldown"
-              description="`/reports/regions` remains separate and is not reopened here."
-              label="Out of scope"
-              tone="warning"
-            />
-          </div>
-
-          <div className="mt-4 rounded-md border border-[var(--fc-border)] bg-[var(--fc-surface-muted)] p-3">
-            <p className="text-xs font-medium uppercase tracking-[0.08em] text-[var(--fc-text-muted)]">
-              Highest outstanding regions
-            </p>
-            {topRegions.length === 0 ? (
-              <p className="mt-2 text-sm text-[var(--fc-text-soft)]">
-                No regional exposure found in the current dataset.
-              </p>
-            ) : (
-              <div className="mt-2 space-y-2">
-                {topRegions.slice(0, 3).map((region) => (
-                  <div
-                    key={region.regionId}
-                    className="rounded-md border border-[var(--fc-border)] bg-[var(--fc-surface)] p-3"
-                  >
-                    <div className="flex items-center justify-between gap-3">
-                      <strong className="text-sm text-[var(--fc-text)]">{region.regionName}</strong>
-                      <StatusChip
-                        label={`${region.collectionRate.toFixed(2)}%`}
-                        tone={getCollectionTone(region.collectionRate)}
-                      />
-                    </div>
-                    <p className="mt-2 text-sm text-[var(--fc-text-soft)]">
-                      {region.customerCount} customers | {region.overdueCustomers} overdue
-                    </p>
-                    <p className="mt-2 text-sm font-medium text-[var(--fc-text)]">
-                      {formatCurrency(region.outstandingAmount)}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
         </Panel>
       </section>
     </div>
@@ -319,28 +259,6 @@ function TableCard({
   );
 }
 
-function BoundaryRow({
-  description,
-  label,
-  title,
-  tone
-}: {
-  title: string;
-  description: string;
-  label: string;
-  tone: "success" | "warning";
-}) {
-  return (
-    <div className="rounded-md border border-[var(--fc-border)] bg-[var(--fc-surface-muted)] p-3">
-      <div className="flex items-center justify-between gap-3">
-        <strong className="text-sm text-[var(--fc-text)]">{title}</strong>
-        <StatusChip label={label} tone={tone} />
-      </div>
-      <p className="mt-2 text-sm text-[var(--fc-text-soft)]">{description}</p>
-    </div>
-  );
-}
-
 function formatCurrency(value: number) {
   return new Intl.NumberFormat("pt-BR", {
     style: "currency",
@@ -361,18 +279,6 @@ function formatRate(regions?: RegionPerformanceItem[]) {
   }
 
   return `${((received / expected) * 100).toFixed(2)}%`;
-}
-
-function getCollectionTone(rate: number): "success" | "warning" | "danger" {
-  if (rate >= 85) {
-    return "success";
-  }
-
-  if (rate >= 60) {
-    return "warning";
-  }
-
-  return "danger";
 }
 
 function getCurrentReferenceMonth() {

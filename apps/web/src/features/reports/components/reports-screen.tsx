@@ -111,7 +111,6 @@ export function ReportsScreen() {
   const overview = reportsQuery.data;
   const topRegions = overview?.regions.regions.slice(0, 4) ?? [];
   const highlightedPayments = overview?.monthlyRevenue.payments.slice(0, 5) ?? [];
-  const overdueCustomers = overview?.overdue.customers.slice(0, 5) ?? [];
 
   return (
     <div className="space-y-5">
@@ -150,10 +149,10 @@ export function ReportsScreen() {
         />
       </section>
 
-      <section className="grid gap-4 xl:grid-cols-[1.65fr_0.95fr]">
+      <section>
         <Panel
           title="Reporting baseline"
-          description="Overview only in FC-013. Detailed report routes stay outside this task."
+          description="Aggregate metrics and regional performance reports."
           headerAction={
             <label className="flex flex-col gap-2">
               <span className="text-xs font-medium uppercase tracking-[0.08em] text-[var(--fc-text-muted)]">
@@ -226,73 +225,6 @@ export function ReportsScreen() {
               </div>
             </div>
           )}
-        </Panel>
-
-        <Panel title="FC-013 boundary" description="Controlled reopening for reports overview only.">
-          <div className="space-y-3">
-            <BoundaryRow
-              title="Overview route"
-              description="`/reports` is reopened by aggregating stable contracts from the reports module."
-              label="Reopened"
-              tone="success"
-            />
-            <BoundaryRow
-              title="Detailed reports"
-              description="`/reports/monthly-revenue`, `/reports/overdue` and `/reports/regions` remain outside FC-013."
-              label="Out of scope"
-              tone="warning"
-            />
-            <BoundaryRow
-              title="Customer drilldown"
-              description="`GET /reports/customers/:id` remains available only as backend contract for now."
-              label="Out of scope"
-              tone="warning"
-            />
-          </div>
-
-          <div className="mt-4 rounded-md border border-[var(--fc-border)] bg-[var(--fc-surface-muted)] p-3">
-            <p className="text-xs font-medium uppercase tracking-[0.08em] text-[var(--fc-text-muted)]">
-              Current annual baseline
-            </p>
-            <p className="mt-2 text-sm text-[var(--fc-text)]">
-              {overview?.annualSummary.year ?? referenceMonth.slice(0, 4)}
-            </p>
-            <p className="mt-1 text-sm text-[var(--fc-text-soft)]">
-              This surface stays overview-only in FC-013.
-            </p>
-          </div>
-
-          <div className="mt-4 rounded-md border border-[var(--fc-border)] bg-[var(--fc-surface-muted)] p-3">
-            <p className="text-xs font-medium uppercase tracking-[0.08em] text-[var(--fc-text-muted)]">
-              Highest exposure
-            </p>
-            {overdueCustomers.length === 0 ? (
-              <p className="mt-2 text-sm text-[var(--fc-text-soft)]">No overdue customers in the current dataset.</p>
-            ) : (
-              <div className="mt-2 space-y-2">
-                {overdueCustomers.slice(0, 3).map((customer) => (
-                  <div
-                    key={customer.id}
-                    className="rounded-md border border-[var(--fc-border)] bg-[var(--fc-surface)] p-3"
-                  >
-                    <div className="flex items-center justify-between gap-3">
-                      <strong className="text-sm text-[var(--fc-text)]">{customer.fullName}</strong>
-                      <StatusChip
-                        label={formatCustomerStatus(customer.status)}
-                        tone={getCustomerStatusTone(customer.status)}
-                      />
-                    </div>
-                    <p className="mt-2 text-sm text-[var(--fc-text-soft)]">
-                      {customer.regionName ?? "No region"} | {customer.latestReferenceMonth ?? "No reference"}
-                    </p>
-                    <p className="mt-2 text-sm font-medium text-[var(--fc-text)]">
-                      {formatCurrency(customer.outstandingAmount)}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
         </Panel>
       </section>
     </div>
@@ -382,28 +314,6 @@ function TableCard({
   );
 }
 
-function BoundaryRow({
-  description,
-  label,
-  title,
-  tone
-}: {
-  title: string;
-  description: string;
-  label: string;
-  tone: "success" | "warning";
-}) {
-  return (
-    <div className="rounded-md border border-[var(--fc-border)] bg-[var(--fc-surface-muted)] p-3">
-      <div className="flex items-center justify-between gap-3">
-        <strong className="text-sm text-[var(--fc-text)]">{title}</strong>
-        <StatusChip label={label} tone={tone} />
-      </div>
-      <p className="mt-2 text-sm text-[var(--fc-text-soft)]">{description}</p>
-    </div>
-  );
-}
-
 function formatCurrency(value: number) {
   return new Intl.NumberFormat("pt-BR", {
     style: "currency",
@@ -413,20 +323,6 @@ function formatCurrency(value: number) {
 
 function formatPaymentStatus(status: MonthlyRevenueReport["payments"][number]["status"]) {
   return status.charAt(0).toUpperCase() + status.slice(1);
-}
-
-function formatCustomerStatus(status: OverdueReport["customers"][number]["status"]) {
-  return status.charAt(0).toUpperCase() + status.slice(1);
-}
-
-function getCustomerStatusTone(
-  status: OverdueReport["customers"][number]["status"]
-): "warning" | "danger" {
-  if (status === "suspended") {
-    return "warning";
-  }
-
-  return "danger";
 }
 
 function getCurrentReferenceMonth() {

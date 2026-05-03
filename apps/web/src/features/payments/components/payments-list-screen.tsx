@@ -77,10 +77,10 @@ export function PaymentsListScreen() {
         ))}
       </section>
 
-      <section className="grid gap-4 xl:grid-cols-[1.65fr_0.95fr]">
+      <section>
         <Panel
           title="Payment ledger"
-          description="Search by customer or reference month. Detail flow remains outside FC-010."
+          description="Search by customer or reference month."
           headerAction={
             <div className="w-full max-w-xs">
               <label className="flex flex-col gap-2">
@@ -193,29 +193,6 @@ export function PaymentsListScreen() {
             </table>
           </div>
         </Panel>
-
-        <Panel title="FC-010 boundary" description="Controlled reopening for payments list and create.">
-          <div className="space-y-3">
-            <BoundaryRow
-              title="List route"
-              description="`/payments` is active again with dense ledger reading."
-              label="Reopened"
-              tone="success"
-            />
-            <BoundaryRow
-              title="Create route"
-              description="`/payments/new` is active again with the first registration flow."
-              label="Reopened"
-              tone="success"
-            />
-            <BoundaryRow
-              title="Reconciliation"
-              description="Bank matching remains outside this task and stays in its own module."
-              label="Out of scope"
-              tone="warning"
-            />
-          </div>
-        </Panel>
       </section>
     </div>
   );
@@ -281,26 +258,4 @@ function getPaymentTone(status: PaymentRecord["status"]): "success" | "warning" 
   }
 
   return "neutral";
-}
-
-function BoundaryRow({
-  description,
-  label,
-  title,
-  tone
-}: {
-  title: string;
-  description: string;
-  label: string;
-  tone: "success" | "warning";
-}) {
-  return (
-    <div className="rounded-md border border-[var(--fc-border)] bg-[var(--fc-surface-muted)] p-3">
-      <div className="flex items-center justify-between gap-3">
-        <strong className="text-sm text-[var(--fc-text)]">{title}</strong>
-        <StatusChip label={label} tone={tone} />
-      </div>
-      <p className="mt-2 text-sm text-[var(--fc-text-soft)]">{description}</p>
-    </div>
-  );
 }

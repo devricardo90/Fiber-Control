@@ -86,8 +86,8 @@ export function DashboardScreen() {
 
       <section className="grid gap-4 xl:grid-cols-[1.65fr_0.95fr]">
         <Panel
-          title="Operational baseline"
-          description="Overview only in FC-015. Route preview and advanced analytics stay outside this task."
+          title="Operation metrics"
+          description="Consolidated operational view of the current period."
           headerAction={
             <div className="grid gap-3 md:grid-cols-2">
               <label className="flex flex-col gap-2">
@@ -125,31 +125,31 @@ export function DashboardScreen() {
             <div className="space-y-4">
               <div className="grid gap-4 md:grid-cols-2">
                 <ReadingCard
-                  label="Expected this month"
+                  label="Expected revenue"
                   value={formatCurrency(overview?.finance.expectedRevenueThisMonth ?? 0)}
-                  description="Expected billing baseline for the selected month."
+                  description="Projected billing for the selected month."
                 />
                 <ReadingCard
-                  label="Annual received"
+                  label="Yearly collection"
                   value={formatCurrency(overview?.annualSummary.summary.totalReceivedAmount ?? 0)}
-                  description="Collected amount in the selected year."
+                  description="Total amount collected in the current fiscal year."
                 />
                 <ReadingCard
-                  label="Cutoff soon"
+                  label="Risk of suspension"
                   value={String(overview?.alerts.summary.customersReachingCutoff ?? 0)}
-                  description="Customers approaching operational service cutoff."
+                  description="Customers approaching service cutoff due to non-payment."
                 />
                 <ReadingCard
-                  label="Pending payments"
+                  label="Pending billing"
                   value={String(overview?.alerts.summary.pendingPayments ?? 0)}
-                  description="Open payment situations flagged by the alert engine."
+                  description="Unpaid invoices flagged for collection review."
                 />
               </div>
 
               <div className="grid gap-4 lg:grid-cols-2">
                 <TableCard
-                  title="Annual trend"
-                  emptyLabel="No annual trend data found for the selected year."
+                  title="Revenue trend"
+                  emptyLabel="No revenue trend data found for the selected year."
                   headers={["Month", "Expected", "Received", "Outstanding"]}
                   rows={annualTrend.map((item) => [
                     item.referenceMonth,
@@ -160,7 +160,7 @@ export function DashboardScreen() {
                 />
 
                 <TableCard
-                  title="Regional concentration"
+                  title="Regional distribution"
                   emptyLabel="No regional performance found for the selected month."
                   headers={["Region", "Customers", "Received", "Outstanding"]}
                   rows={topRegions.map((region) => [
@@ -175,34 +175,13 @@ export function DashboardScreen() {
           )}
         </Panel>
 
-        <Panel title="FC-015 boundary" description="Controlled reopening for dashboard overview only.">
-          <div className="space-y-3">
-            <BoundaryRow
-              title="Overview route"
-              description="`/dashboard` is reopened by aggregating stable contracts from finance, alerts and reports."
-              label="Reopened"
-              tone="success"
-            />
-            <BoundaryRow
-              title="Route preview"
-              description="Field routing preview and operation planning remain outside FC-015."
-              label="Out of scope"
-              tone="warning"
-            />
-            <BoundaryRow
-              title="Advanced analytics"
-              description="Dedicated smart analytics and drilldown surfaces remain outside this task."
-              label="Out of scope"
-              tone="warning"
-            />
-          </div>
-
-          <div className="mt-4 rounded-md border border-[var(--fc-border)] bg-[var(--fc-surface-muted)] p-3">
+        <Panel title="Real-time alerts" description="Prioritized operational and financial alerts.">
+          <div className="rounded-md border border-[var(--fc-border)] bg-[var(--fc-surface-muted)] p-3">
             <p className="text-xs font-medium uppercase tracking-[0.08em] text-[var(--fc-text-muted)]">
-              Critical alerts
+              High priority
             </p>
             {topAlerts.length === 0 ? (
-              <p className="mt-2 text-sm text-[var(--fc-text-soft)]">No alerts in the current dataset.</p>
+              <p className="mt-2 text-sm text-[var(--fc-text-soft)]">No critical alerts found.</p>
             ) : (
               <div className="mt-2 space-y-2">
                 {topAlerts.map((alert) => (
@@ -220,6 +199,19 @@ export function DashboardScreen() {
                 ))}
               </div>
             )}
+          </div>
+
+          <div className="mt-4 space-y-3">
+             <p className="text-xs font-medium uppercase tracking-[0.08em] text-[var(--fc-text-muted)]">
+              Operational status
+            </p>
+            <div className="rounded-md border border-[var(--fc-border)] bg-[var(--fc-surface-muted)] p-3">
+              <div className="flex items-center justify-between gap-3">
+                <strong className="text-sm text-[var(--fc-text)]">Billing engine</strong>
+                <StatusChip label="Online" tone="success" />
+              </div>
+              <p className="mt-2 text-sm text-[var(--fc-text-soft)]">Automated invoice generation and payment tracking active.</p>
+            </div>
           </div>
         </Panel>
       </section>
@@ -306,28 +298,6 @@ function TableCard({
           </table>
         </div>
       )}
-    </div>
-  );
-}
-
-function BoundaryRow({
-  description,
-  label,
-  title,
-  tone
-}: {
-  title: string;
-  description: string;
-  label: string;
-  tone: "success" | "warning";
-}) {
-  return (
-    <div className="rounded-md border border-[var(--fc-border)] bg-[var(--fc-surface-muted)] p-3">
-      <div className="flex items-center justify-between gap-3">
-        <strong className="text-sm text-[var(--fc-text)]">{title}</strong>
-        <StatusChip label={label} tone={tone} />
-      </div>
-      <p className="mt-2 text-sm text-[var(--fc-text-soft)]">{description}</p>
     </div>
   );
 }

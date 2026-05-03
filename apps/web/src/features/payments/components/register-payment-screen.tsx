@@ -92,7 +92,7 @@ export function RegisterPaymentScreen() {
       <PageHeader
         title="Register payment"
         description="Register a monthly payment with customer, reference month and received amount."
-        badge={<StatusChip label="FC-010 active surface" tone="success" />}
+        badge={<StatusChip label="New record" tone="success" />}
         actions={
           <Link href="/payments">
             <FoundationButton variant="secondary">Back to list</FoundationButton>
@@ -102,7 +102,7 @@ export function RegisterPaymentScreen() {
 
       <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
         <section className="grid gap-4 xl:grid-cols-[1.5fr_1fr]">
-          <Panel title="Payment payload" description="Keep the first registration flow direct and operational.">
+          <Panel title="Payment details" description="Register payment details for the selected customer.">
             <div className="grid gap-4 md:grid-cols-2">
               <FieldWithError error={form.formState.errors.customerId?.message}>
                 <label className="flex flex-col gap-2">
@@ -152,29 +152,8 @@ export function RegisterPaymentScreen() {
             </div>
           </Panel>
 
-          <Panel title="Current reading" description="Immediate context before submitting the payment.">
-            <div className="space-y-3">
-              <BoundaryRow
-                title="List route"
-                description="`/payments` is reopened in this task."
-                label="Reopened"
-                tone="success"
-              />
-              <BoundaryRow
-                title="Create route"
-                description="`/payments/new` is reopened in this task."
-                label="Reopened"
-                tone="success"
-              />
-              <BoundaryRow
-                title="Reconciliation"
-                description="Bank matching remains outside FC-010."
-                label="Out of scope"
-                tone="warning"
-              />
-            </div>
-
-            <div className="mt-4 rounded-md border border-[var(--fc-border)] bg-[var(--fc-surface-muted)] p-3">
+          <Panel title="Customer overview" description="Immediate context before submitting the payment.">
+            <div className="rounded-md border border-[var(--fc-border)] bg-[var(--fc-surface-muted)] p-3">
               <p className="text-xs font-medium uppercase tracking-[0.08em] text-[var(--fc-text-muted)]">
                 Selected customer
               </p>
@@ -245,28 +224,6 @@ function TextareaWithError({
     <FieldWithError error={error}>
       <TextareaField {...props} />
     </FieldWithError>
-  );
-}
-
-function BoundaryRow({
-  description,
-  label,
-  title,
-  tone
-}: {
-  title: string;
-  description: string;
-  label: string;
-  tone: "success" | "warning";
-}) {
-  return (
-    <div className="rounded-md border border-[var(--fc-border)] bg-[var(--fc-surface-muted)] p-3">
-      <div className="flex items-center justify-between gap-3">
-        <strong className="text-sm text-[var(--fc-text)]">{title}</strong>
-        <StatusChip label={label} tone={tone} />
-      </div>
-      <p className="mt-2 text-sm text-[var(--fc-text-soft)]">{description}</p>
-    </div>
   );
 }
 

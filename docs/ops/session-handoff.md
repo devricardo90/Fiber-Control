@@ -5,26 +5,26 @@
 
 ## Estado atual
 - `FC-030A` foi concluida com `PASS WITH NOTES`, confirmando que o staging esta operacional e integrado tecnicamente.
-- o projeto voltou ao estado `IDLE`, sem nenhuma task em `READY`.
-- a infraestrutura Vercel -> Render -> Neon foi validada via status codes e headers (CORS).
-- o fluxo visual autenticado (Dashboard) permanece bloqueado por falta de credenciais validas no Neon Staging.
+- o projeto saiu do estado `IDLE` e agora possui a `FC-031` em `READY`.
+- o objetivo da `FC-031` e alinhar os dados de demonstração (seed) com uma narrativa de negócio real (João e Maria) para permitir screenshots de portfólio.
+- a infraestrutura Vercel -> Render -> Neon continua sendo a baseline oficial de staging.
 
 ## Arquivos alterados
 - `STATUS.md`
 - `backlog.md`
 - `docs/ops/execution-log.md`
 - `docs/ops/session-handoff.md`
-- `docs/ops/done/FC-030A.done.md`
 
 ## Decisao tomada
-- encerrar `FC-030A` como `DONE`.
+- abrir `FC-031` como unica task `READY`.
 - manter `FC-025` como `PARKED`.
-- o projeto esta tecnicamente pronto para staging, mas screenshots dependem de acesso real.
+- preparar o terreno para a captura de screenshots reais na `FC-032`.
 
 ## Proximas opcoes apos o saneamento (opcoes candidatas)
-- `FC-031` - Staging Access Recovery & Dashboard Visual Smoke (Opcao candidata para recuperar acesso autenticado).
+- executar a `FC-031` focando em `seed.ts`, agregadores de Dashboard e remoção de mocks visuais.
 - `FC-032` - Portfolio Visual Polish & Final Screenshots Capture (Bloqueada ate a conclusao da FC-031).
 
 ## Recomendacao
-- o proximo executor deve focar em estabelecer acesso autenticado real no Staging (via Neon ou reset de senha) antes de prosseguir com capturas.
-- as screenshots so devem ser capturadas apos o desbloqueio do acesso ao Dashboard e validacao do smoke visual.
+- o proximo executor deve seguir rigorosamente o escopo da `FC-031` definido em `backlog.md`.
+- a seed deve ser idempotente e os dados devem contar uma história coerente de gestão de fibra (João vs Maria).
+- garantir que o Dashboard reflita os totais desses dois clientes para uma demonstração realista.

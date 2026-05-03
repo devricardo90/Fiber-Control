@@ -72,10 +72,10 @@ export function FinanceOverviewScreen() {
         />
       </section>
 
-      <section className="grid gap-4 xl:grid-cols-[1.65fr_0.95fr]">
+      <section>
         <Panel
           title="Financial baseline"
-          description="Overview only in FC-012. Reports and fiscal settings stay outside this task."
+          description="High-level summary of financial health and collection performance."
           headerAction={
             <label className="flex flex-col gap-2">
               <span className="text-xs font-medium uppercase tracking-[0.08em] text-[var(--fc-text-muted)]">
@@ -121,41 +121,6 @@ export function FinanceOverviewScreen() {
             </div>
           )}
         </Panel>
-
-        <Panel title="FC-012 boundary" description="Controlled reopening for finance overview only.">
-          <div className="space-y-3">
-            <BoundaryRow
-              title="Overview route"
-              description="`/finance` is reopened with the real overview contract `GET /finance/overview`."
-              label="Reopened"
-              tone="success"
-            />
-            <BoundaryRow
-              title="Reports"
-              description="Detailed reports remain outside FC-012."
-              label="Out of scope"
-              tone="warning"
-            />
-            <BoundaryRow
-              title="Fiscal settings"
-              description="Tax and fiscal configuration remain outside this task."
-              label="Out of scope"
-              tone="warning"
-            />
-          </div>
-
-          <div className="mt-4 rounded-md border border-[var(--fc-border)] bg-[var(--fc-surface-muted)] p-3">
-            <p className="text-xs font-medium uppercase tracking-[0.08em] text-[var(--fc-text-muted)]">
-              Current reference
-            </p>
-            <p className="mt-2 text-sm text-[var(--fc-text)]">
-              {overview?.referenceMonth ?? referenceMonth}
-            </p>
-            <p className="mt-1 text-sm text-[var(--fc-text-soft)]">
-              This surface stays overview-only in FC-012.
-            </p>
-          </div>
-        </Panel>
       </section>
     </div>
   );
@@ -187,28 +152,6 @@ function ReadingCard({
         {label}
       </p>
       <p className="mt-2 text-xl font-semibold text-[var(--fc-text)]">{value}</p>
-      <p className="mt-2 text-sm text-[var(--fc-text-soft)]">{description}</p>
-    </div>
-  );
-}
-
-function BoundaryRow({
-  description,
-  label,
-  title,
-  tone
-}: {
-  title: string;
-  description: string;
-  label: string;
-  tone: "success" | "warning";
-}) {
-  return (
-    <div className="rounded-md border border-[var(--fc-border)] bg-[var(--fc-surface-muted)] p-3">
-      <div className="flex items-center justify-between gap-3">
-        <strong className="text-sm text-[var(--fc-text)]">{title}</strong>
-        <StatusChip label={label} tone={tone} />
-      </div>
       <p className="mt-2 text-sm text-[var(--fc-text-soft)]">{description}</p>
     </div>
   );

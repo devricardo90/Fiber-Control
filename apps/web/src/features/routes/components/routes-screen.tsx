@@ -18,8 +18,8 @@ export function RoutesScreen() {
     <div className="space-y-5">
       <PageHeader
         title="Routes"
-        description="Operational overview of route load, dispatch readiness and blocked follow-up before any planning workflow is reopened."
-        badge={<StatusChip label="Overview only" tone="info" />}
+        description="Operational overview of route load, dispatch readiness and blocked follow-up."
+        badge={<StatusChip label="Overview" tone="info" />}
         actions={
           <Link href="/regions">
             <FoundationButton variant="secondary">Open regions</FoundationButton>
@@ -33,10 +33,10 @@ export function RoutesScreen() {
         ))}
       </section>
 
-      <section className="grid gap-4 xl:grid-cols-[1.65fr_0.95fr]">
+      <section>
         <Panel
           title="Dispatch baseline"
-          description="Overview only in FC-016. Route planning, live maps and field operation stay outside this task."
+          description="Operational queue for dispatch review and readiness tracking."
         >
           <div className="grid gap-4 md:grid-cols-3">
             <ReadingCard
@@ -100,47 +100,6 @@ export function RoutesScreen() {
             </table>
           </div>
         </Panel>
-
-        <Panel title="FC-016 boundary" description="Controlled reopening for routes overview only.">
-          <div className="space-y-3">
-            <BoundaryRow
-              title="Overview route"
-              description="`/routes` is reopened as a compact operational queue and dispatch review surface."
-              label="Reopened"
-              tone="success"
-            />
-            <BoundaryRow
-              title="Route planning"
-              description="Planning workflow, optimization and route creation remain outside FC-016."
-              label="Out of scope"
-              tone="warning"
-            />
-            <BoundaryRow
-              title="Map and live tracking"
-              description="Interactive maps, telemetry and field operation stay closed until dedicated contracts exist."
-              label="Out of scope"
-              tone="warning"
-            />
-          </div>
-
-          <div className="mt-4 space-y-3 rounded-md border border-[var(--fc-border)] bg-[var(--fc-surface-muted)] p-3">
-            <p className="text-xs font-medium uppercase tracking-[0.08em] text-[var(--fc-text-muted)]">
-              Operational notes
-            </p>
-            {routeAttention.map((item) => (
-              <div
-                key={item.title}
-                className="rounded-md border border-[var(--fc-border)] bg-[var(--fc-surface)] p-3"
-              >
-                <div className="flex items-center justify-between gap-3">
-                  <strong className="text-sm text-[var(--fc-text)]">{item.title}</strong>
-                  <StatusChip label={item.tone === "warning" ? "Control" : "Ready"} tone={item.tone} />
-                </div>
-                <p className="mt-2 text-sm text-[var(--fc-text-soft)]">{item.description}</p>
-              </div>
-            ))}
-          </div>
-        </Panel>
       </section>
     </div>
   );
@@ -172,28 +131,6 @@ function ReadingCard({
         {label}
       </p>
       <p className="mt-2 text-xl font-semibold text-[var(--fc-text)]">{value}</p>
-      <p className="mt-2 text-sm text-[var(--fc-text-soft)]">{description}</p>
-    </div>
-  );
-}
-
-function BoundaryRow({
-  description,
-  label,
-  title,
-  tone
-}: {
-  title: string;
-  description: string;
-  label: string;
-  tone: "success" | "warning";
-}) {
-  return (
-    <div className="rounded-md border border-[var(--fc-border)] bg-[var(--fc-surface-muted)] p-3">
-      <div className="flex items-center justify-between gap-3">
-        <strong className="text-sm text-[var(--fc-text)]">{title}</strong>
-        <StatusChip label={label} tone={tone} />
-      </div>
       <p className="mt-2 text-sm text-[var(--fc-text-soft)]">{description}</p>
     </div>
   );
