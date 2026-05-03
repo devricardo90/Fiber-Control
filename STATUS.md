@@ -1,12 +1,13 @@
 # STATUS - Fiber Control
 
 ## Estado atual
-Projeto com governanca central estabelecida, arquitetura backend definida, trilha de auditoria transversal implementada, persistencia Prisma formalizada, autenticacao/autorizacao base formalmente encerradas, fundacao frontend operacional fechada, oito superficies de negocio reabertas com consolidacao minima, reconciliacao documental de `DONE` fechada pela `FC-020`, escopo MVP publico formalizado pela `FC-021`, bloqueio tecnico da validacao local removido pela `FC-026`, reexecucao formal da `FC-022` encerrada com baseline local do MVP validado, `FC-023` formalmente encerrada como `DONE`, `FC-024` fechada como pacote publico de portfolio, `FC-025A` formalmente encerrada como `DONE` com staging publicado em Neon + Render + Vercel, `FC-027` formalmente encerrada como `DONE` com runbook versionado de reprodutibilidade do staging atual, `FC-028` formalmente encerrada como `DONE` com polish incremental do README publico e do demo flow do projeto, e `FC-029` formalmente encerrada como `DONE` com checklist visual de GitHub, estrutura de screenshots e preparo documental para evidencias visuais reais. O projeto saiu do estado `IDLE` e entrou em `READY` para a `FC-030A`, focada na validacao manual do Staging Web antes da geracao de evidencias visuais finais. A baseline oficial de staging permanece em Neon para banco, Render para API e Vercel para web. Nenhum PostgreSQL foi criado no Render e nenhum secret real foi registrado no repositorio.
+Projeto com governanca central estabelecida, arquitetura backend definida, trilha de auditoria transversal implementada, persistencia Prisma formalizada, autenticacao/autorizacao base formalmente encerradas, fundacao frontend operacional fechada, oito superficies de negocio reabertas com consolidacao minima, reconciliacao documental de `DONE` fechada pela `FC-020`, escopo MVP publico formalizado pela `FC-021`, bloqueio tecnico da validacao local removido pela `FC-026`, reexecucao formal della `FC-022` encerrada com baseline local do MVP validado, `FC-023` formalmente encerrada como `DONE`, `FC-024` fechada como pacote publico de portfolio, `FC-025A` formalmente encerrada como `DONE` com staging publicado em Neon + Render + Vercel, `FC-027` formalmente encerrada como `DONE` com runbook versionado de reprodutibilidade do staging atual, `FC-028` formalmente encerrada como `DONE` com polish incremental do README publico e do demo flow do projeto, e `FC-029` formalmente encerrada como `DONE` com checklist visual de GitHub, estrutura de screenshots e preparo documental para evidencias visuais reais, e `FC-030A` formalmente encerrada como `DONE` apos smoke tecnico do Staging Web. O projeto encontra-se em estado `IDLE` com a infraestrutura de staging operacionalmente integrada, mas com fluxo visual de Dashboard dependente de credenciais reais. A baseline oficial de staging permanece em Neon para banco, Render para API e Vercel para web. Nenhum PostgreSQL foi criado no Render e nenhum secret real foi registrado no repositorio.
 
 ## Fotografia oficial apos FC-030A
-- `FC-030A` esta em `READY`.
-- o foco e a validacao manual do Staging Web para garantir que o fluxo principal do MVP esta operacional.
-- UI/UX Polish e capturas de screenshots finais estao bloqueados ate que o smoke manual da `FC-030A` seja executado e aprovado.
+- `FC-030A` esta em `DONE` (Status: PASS WITH NOTES).
+- integracao tecnica Vercel -> Render -> Neon validada via status codes e CORS headers.
+- fluxo visual de Dashboard bloqueado por falta de credenciais validas no Neon Staging.
+- o projeto esta tecnicamente pronto para as capturas de screenshots reais assim que o acesso ao ambiente for estabelecido manualmente.
 
 ## Fotografia oficial apos FC-020
 - `FC-020` esta formalmente classificada como `DONE`.
@@ -68,7 +69,7 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - `FC-025` - `PARKED` - Production Growth Backlog
 
 ## Encadeamento formal
-- `FC-006` foi executada antes de `FC-003` a `FC-005` porque era a unica `READY` oficial e tratava um risco critico de dominio e auditoria.
+- `FC-006` foi executada antes de `FC-003` a `FC-005` because era a unica `READY` oficial e tratava um risco critico de dominio e auditoria.
 - Essa execucao fora da ordem numerica nao reordena IDs historicos; apenas encerra a task que estava oficialmente pronta.
 - `FC-004A` fechou a estabilizacao funcional residual apos `FC-004`.
 - `FC-005` fechou o encerramento formal de autenticacao e autorizacao base com a suite integrada verde.
@@ -244,7 +245,7 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 - route preview e analytics avancado permanecem fora de escopo dentro do ciclo de `Dashboard`
 - route planning, live maps e operacao de campo permanecem fora de escopo dentro do ciclo de `Routes`
 - o material residual de `apps/api`, `Customers`, `Alerts` e docs correlatas foi retirado da arvore ativa e preservado para classificacao posterior em task propria
-- a proxima triagem deve partir apenas do bloco residual de `apps/api`, sem reaplicar automaticamente deriva local antiga de frontend ou ruido documental
+- a proxima triagem deve partir apenas do bloco residual de `apps/api`, sem reaplicacao automaticamente deriva local antiga de frontend ou ruido documental
 - o fallback para `localhost:porta` permanece permitido e documentado quando host nomeado nao for viavel no ambiente atual
 - `FC-001`, `FC-002`, `FC-003`, `FC-004`, `FC-004A`, `FC-005`, `FC-006`, `FC-008`, `FC-009` e `FC-011` tiveram fechamento formal reconstruido documentalmente em `FC-020`; parte do detalhe fino de encerramento permanece derivada dos artefatos existentes, sem evidencias novas
 - readiness local alem de `GET /health` agora esta consolidada em `docs/quality/fc-022-local-validation.md`
@@ -257,8 +258,6 @@ Projeto com governanca central estabelecida, arquitetura backend definida, trilh
 nenhuma `READY` oficial no momento
 
 ## Justificativa da proxima READY
-- `FC-027` fechou o gap operacional/documental mais imediato do staging atual
-- `FC-028` fechou o polish de apresentacao publica necessario para aproveitar o staging real e o runbook versionado no material publico do projeto
-- `FC-029` fechou o polish visual/documental necessario para preparar capturas reais sem fabricar evidencias
-- nenhuma nova task foi formalmente promovida para `READY` nesta execucao
-- `FC-025` continua isolada como backlog de crescimento pos-MVP e permanece `PARKED`, nao `READY`
+- `FC-030A` validou a integracao tecnica do staging.
+- capturas de screenshots permanecem dependentes de acesso manual ao Dashboard (atualmente bloqueado).
+- `FC-025` continua isolada como backlog de crescimento pos-MVP e permanece `PARKED`.

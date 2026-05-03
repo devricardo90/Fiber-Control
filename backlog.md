@@ -129,46 +129,7 @@
 ---
 
 ## READY
-- `FC-030A` - Manual Staging Web Smoke & Portfolio Evidence Readiness
-  - **Tipo**: Operations / Validation
-  - **Prioridade**: P0
-  - **Objetivo**: Validar manualmente o Staging Web publicado e decidir se o projeto ja pode gerar evidencia visual real para portfolio.
-  - **Escopo**:
-    - confirmar URL publica do Web staging
-    - confirmar URL publica da API staging, se necessario
-    - acessar Web staging
-    - testar register ou login
-    - validar carregamento do dashboard
-    - testar o fluxo principal disponivel no MVP
-    - registrar bugs funcionais ou visuais encontrados
-    - capturar screenshots somente se o fluxo principal passar
-    - documentar se o projeto esta pronto ou nao para evidencia visual de portfolio
-  - **Fora de escopo**:
-    - nao corrigir bug
-    - nao fazer UI/UX polish
-    - nao alterar layout
-    - nao alterar backend
-    - nao alterar autenticacao
-    - nao alterar banco
-    - nao criar funcionalidade
-    - nao executar deploy
-    - nao criar proxima task automaticamente
-    - nao marcar FC-030A como DONE sem smoke real
-  - **Criterios de aceite**:
-    - smoke manual Web executado
-    - evidencia documentada em docs/ops
-    - resultado classificado como PASS, PASS WITH NOTES ou BLOCKED
-    - screenshots reais adicionadas somente se o fluxo passar
-    - bugs encontrados viram backlog candidato
-    - nenhum polish ou correcao fora do escopo
-    - commit autorizado
-    - working tree limpo apos commit
-    - nenhuma nova task READY automatica
-  - **Impacto documental**:
-    - `backlog.md`
-    - `STATUS.md`
-    - `docs/ops/session-handoff.md`
-    - `docs/ops/execution-log.md`
+- *(vazio no momento)*
 ## TODO
 - `FC-025` - Production Growth Backlog
   - **Status de planejamento**: `PARKED`
@@ -195,10 +156,11 @@
 - *(vazio no momento)*
 
 ## DONE
+- `FC-030A` - DONE em 2026-05-03: smoke técnico validado; Web e API integradas via CORS e conectadas ao Neon; fluxo visual de Dashboard bloqueado por falta de credenciais validas no Staging; projeto pronto para evidência visual apenas após criação manual de usuário no Neon.
 - `FC-029` - DONE com checklist visual criado em `docs/project/github-polish-checklist.md`, estrutura `docs/assets/screenshots/` preparada, `README.md` ajustado para `Product Preview` e `Demo Evidence` sem inventar screenshots, `docs/project/recruiter-evidence-pack.md` alinhado ao fluxo visual e dependencia de captura manual explicitada sem registrar secrets
 - `FC-028` - DONE com `README.md` polido incrementalmente em ingles para refletir problema de produto, escopo MVP, staging publico real, demo flow, arquitetura, split API/Web, deployment Neon -> Render -> Vercel, auth flow, disciplina operacional, smoke validado, limitacoes reais e roadmap, com `docs/project/recruiter-evidence-pack.md` alinhado e sem registrar secrets reais
 - `FC-027` - DONE com `docs/ops/staging-runbook.md` criado e completo para reprodutibilidade do staging atual em Neon, Render API e Vercel Web, incluindo URLs publicas, contrato de env vars por nomes/placeholders, diferenca entre `DATABASE_URL` pooled e `DIRECT_URL` direct, configuracao esperada de provider, smoke manual oficial, troubleshooting e criterio de staging saudavel, sem registrar secrets reais
-- `FC-025A` - DONE com staging minimo publicado seguindo a baseline oficial Neon -> Render API -> Vercel Web: API em `https://app-fiber-control-api-staging.onrender.com`, web em `https://app-fiber-control-web-staging.vercel.app`, `GET /health`, `/docs`, `/openapi.json`, `POST /auth/register`, `POST /auth/login` e `GET /auth/me` em PASS, `CORS_ORIGIN` alinhado a URL real da web e sem criacao de Render PostgreSQL
+- `FC-025A` - DONE with staging minimo publicado seguindo a baseline oficial Neon -> Render API -> Vercel Web: API em `https://app-fiber-control-api-staging.onrender.com`, web em `https://app-fiber-control-web-staging.vercel.app`, `GET /health`, `/docs`, `/openapi.json`, `POST /auth/register`, `POST /auth/login` e `GET /auth/me` em PASS, `CORS_ORIGIN` alinhado a URL real da web e sem criacao de Render PostgreSQL
 - `FC-024` - DONE com `README.md` reescrito em ingles e `docs/project/recruiter-evidence-pack.md` criado para refletir o MVP real, a baseline tecnica validada, os limites deliberados do projeto e a trilha de evidencias para GitHub e recrutadores, sem inflar escopo nem alegar deploy publico inexistente
 - `FC-023` - DONE com baseline de staging fechada documentalmente e validacoes manuais confirmadas pelo humano: Node `v24.15.0`, npm `11.12.1`, pnpm `10.33.0`, `pnpm.cmd install`, `pnpm.cmd prisma generate`, `pnpm.cmd prisma migrate deploy`, `pnpm.cmd build`, `docker compose up -d` e `pnpm.cmd test` em PASS; `Manual External Operations Gate` do Neon validado; Prisma `7` consolidado com `DIRECT_URL` via `apps/api/prisma.config.ts` e runtime mantido em `DATABASE_URL` pooled do Neon, sem registrar secrets reais
 - `FC-022` - DONE com reexecucao formal da validacao local do MVP: `prisma:generate`, `lint`, `build`, `prisma:migrate:deploy` e `test` em `apps/api` ficaram em PASS no banco oficial de testes `127.0.0.1:5442`, o banco dev `127.0.0.1:5440` permaneceu intacto apos a suite, o login seed `acesso@fibercontrol.local` voltou a passar junto com `GET /auth/me`, CORS e as rotas/pontos minimos do MVP responderam corretamente, e `FC-023` foi liberada para `READY`

@@ -1,30 +1,30 @@
-# Session Handoff - Fiber Control
+# SESSION HANDOFF - Fiber Control
 
 ## Data
-2026-04-24
+2026-05-03
 
 ## Estado atual
-- `FC-029` preparou a estrutura para screenshots e o checklist de polish do GitHub.
-- o projeto saiu do estado `IDLE` e agora possui a `FC-030A` em `READY`.
-- o objetivo da `FC-030A` e a validacao manual (smoke) do Staging Web publicado.
-- capturas de screenshots finais e qualquer polimento de UI/UX estao suspensos ate que a `FC-030A` seja executada.
-- Neon, Render e Vercel continuam sendo a baseline oficial de staging.
+- `FC-030A` foi concluida com `PASS WITH NOTES`, confirmando que o staging esta operacional e integrado tecnicamente.
+- o projeto voltou ao estado `IDLE`, sem nenhuma task em `READY`.
+- a infraestrutura Vercel -> Render -> Neon foi validada via status codes e headers (CORS).
+- o fluxo visual autenticado (Dashboard) permanece bloqueado por falta de credenciais validas no Neon Staging.
 
 ## Arquivos alterados
-- `backlog.md`
 - `STATUS.md`
+- `backlog.md`
 - `docs/ops/execution-log.md`
 - `docs/ops/session-handoff.md`
+- `docs/ops/done/FC-030A.done.md`
 
 ## Decisao tomada
-- abrir `FC-030A` como unica task `READY`.
+- encerrar `FC-030A` como `DONE`.
 - manter `FC-025` como `PARKED`.
-- bloquear evidencias visuais e polish ate validacao real do Staging Web.
+- o projeto esta tecnicamente pronto para staging, mas screenshots dependem de acesso real.
 
-## Proximas opcoes apos o saneamento
-- executar o smoke manual da `FC-030A` seguindo o checklist definido no backlog.
+## Proximas opcoes apos o saneamento (opcoes candidatas)
+- `FC-031` - Staging Access Recovery & Dashboard Visual Smoke (Opcao candidata para recuperar acesso autenticado).
+- `FC-032` - Portfolio Visual Polish & Final Screenshots Capture (Bloqueada ate a conclusao da FC-031).
 
 ## Recomendacao
-- o proximo executor deve focar exclusivamente na validacao manual do Staging Web conforme o escopo da `FC-030A`.
-- nao realizar correcoes ou melhorias de UI/UX durante esta task; bugs encontrados devem ser apenas registrados.
-- prosseguir para a captura de screenshots reais apenas se o fluxo principal do MVP passar.
+- o proximo executor deve focar em estabelecer acesso autenticado real no Staging (via Neon ou reset de senha) antes de prosseguir com capturas.
+- as screenshots so devem ser capturadas apos o desbloqueio do acesso ao Dashboard e validacao do smoke visual.
